@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-elo
+          elo 420
         </a>
       </header>
     </div>
