@@ -3,23 +3,24 @@ import {useState, useEffect} from "react";
 import '../styles/Main.css';
 
 function Main() {
-    const [name, setName] = useState('Julia')
 
-    useEffect(() => {
-        console.log('dupa')
-    }, [name])
     return (
-        <div className="test">
-            <Link to={"/login"}>
-                Strona główna<br/>
-                {name}<br/>
-
-            </Link>
-                <button onClick={()=>setName("Przeenek")}>
-
-                </button>
+        <div className="main">
+            <div className="nav">
+                <Link to={"/login"} className="link">
+                    Zaloguj się
+                </Link>
+                <Link to={"/register"} className="link">
+                        Rejestracja
+                </Link>
+                <Link to={"/advertisment"} className="link">
+                    Dodaj ogłoszenie
+                </Link>
+            </div>
         </div>
-    );
+
+
+        );
 }
 
 export default Main;
