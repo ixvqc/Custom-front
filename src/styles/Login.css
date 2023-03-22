@@ -1,3 +1,105 @@
-.test{
-    background-color: #282c34;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+
+}
+
+
+.background-login{
+    font-family: 'Poppins',sans-serif;
+    scroll-behavior: smooth;
+    position: center;
+    min-height: 100vh;
+    background: url(/src/assets/img/backgroundLogin.png);
+    background-size: cover;
+    background-position: center;
+}
+
+
+.logo{
+    width: 5vw;
+    height: 6vh;
+    margin-left: 7vw;
+    margin-top: 7vh;
+}
+.custom{
+    font-size: 2.2vw;
+    font-style: italic;
+    font-weight: bolder;
+    margin-left: 5.6vw;
+}
+.custom-color{
+    text-decoration: none;
+    color: #FDCF28;
+}
+.login-text{
+    margin-left: 17vw;
+    margin-top: 10vh;
+    font-size: 2.2vw;
+    font-style: italic;
+    font-weight: bolder;
+}
+
+
+
+.email-container {
+    margin-left: 10vw;
+    margin-top: 5vh;
+}
+input[type="email"] {
+    padding: 20px;
+    width: 500px;
+    margin-bottom: 20px;
+}
+.email-input{
+    font-size: 1.2vw;
+}
+.password-container {
+    margin-left: 10vw;
+    margin-top: 2vh;
+}
+input[type="password"] {
+    padding: 20px;
+    width: 500px;
+    margin-bottom: 20px;
+}
+.password-input{
+    font-size: 1.2vw;
+}
+
+
+
+.button-login {
+    background-color: #FDCF28;
+    color: black;
+    margin-left: 10vw;
+    padding: 23px 57px;
+    font-size: 23px;
+    font-style: italic;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.button:hover {
+    background-color: yellow;
+}
+
+.text-no-password{
+    color: #FDCF28;
+    font-size: 1.1vw;
+    font-style: italic;
+    margin-left: 3vw;
+}
+
+.for-register{
+    margin-left: 10vw;
+    margin-top: 4vh;
+    color: #FDCF28;
+    font-size: 1.1vw;
+    font-style: italic;
+
 }
