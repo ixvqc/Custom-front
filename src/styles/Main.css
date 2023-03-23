@@ -28,3 +28,10 @@
 .link{
     padding-left: 10px ;
 }
+
+.image_background{
+    background-image: url("background.jpg");
+}
+.filters{
+
+}

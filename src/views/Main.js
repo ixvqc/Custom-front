@@ -31,6 +31,11 @@ function Main() {
             </button>
 
             </div>
+            <div className="image_background">
+                <div className="filters">
+
+                </div>
+            </div>
         </div>
 
 
