@@ -31,9 +31,18 @@ function Main() {
             </button>
 
             </div>
+
             <div className="image_background">
                 <div className="filters">
 
+                    <input
+                        type="brand"
+                        className="car_brand"
+                        placeholder="Dowolna marka"/>
+                    <input
+                        type="model"
+                        className="car_model"
+                        placeholder="Dowolny model"/>
                 </div>
             </div>
         </div>

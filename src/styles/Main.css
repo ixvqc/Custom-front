@@ -27,11 +27,45 @@
 }
 .link{
     padding-left: 10px ;
+    text-decoration: none;
+    color:black;
+    font-style: italic;
+
+
 }
 
 .image_background{
-    background-image: url("background.jpg");
+    background-image: url(/src/assets/img/background2.jpg);
+    width:100%;
+    height: 450px;
+    background-size: cover;
+    background-position: center;
+
+
 }
 .filters{
+    height:300px;
+    width: 500px;
+    background-color: white;
+    opacity: 0.7;
+    margin-left: 80px;
+    margin-top: 60px;
+}
+
+.car_brand{
+    margin-left: 30px;
+    margin-top: 70px;
+    font-size: 17px;
+    background-color: white;
+    border: 0.5px solid gray;
+
+}
+
+.car_model{
+    margin-left: 20px;
+    margin-top: 70px;
+    font-size: 17px;
+    background-color: white;
+    border: 0.5px solid gray;
 
 }
