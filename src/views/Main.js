@@ -2,7 +2,17 @@ import {Link} from "react-router-dom";
 import {useState, useEffect} from "react";
 import '../styles/Main.css';
 
+
+
+
 function Main() {
+
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleHover = () => {
+        setIsHovered(!isHovered);
+    };
+    const buttonColor = isHovered ? '#fdd852' : '#FDCF28';
 
     return (
         <div className="main">
@@ -13,9 +23,13 @@ function Main() {
                 <Link to={"/register"} className="link">
                         Rejestracja
                 </Link>
-                <Link to={"/advertisment"} className="link">
-                    Dodaj ogłoszenie
-                </Link>
+                <button className="add-adv"
+                onMouseEnter={handleHover}
+                onMouseLeave={handleHover}
+                style={{ backgroundColor: buttonColor }}>
+               Dodaj ogłoszenie +
+            </button>
+
             </div>
         </div>
 

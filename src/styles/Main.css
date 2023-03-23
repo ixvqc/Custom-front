@@ -5,12 +5,25 @@
     background-color: white;
 }
 .nav{
-    background-color: antiquewhite;
-    height: 20%;
+    height: 70px;
     width: 100%;
     text-align: right;
-    white-space: pre-wrap;
+    border-bottom: 1px solid gray;
 
+}
+.add-adv{
+    background-color: #FDCF28;
+    color: black;
+    margin-left: 2vw;
+    margin-top: 0.5vw;
+    margin-right:1vw;
+    padding: 19px 30px 19px 25px ;
+    font-size: 17px;
+    font-style: italic;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 .link{
     padding-left: 10px ;

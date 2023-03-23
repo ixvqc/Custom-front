@@ -2,7 +2,7 @@
 
 function Advertisment() {
     return (
-        <div className="App">
+        <div className="adv">
             Dodaj ogłoszenie
         </div>
     );
