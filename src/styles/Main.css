@@ -5,10 +5,12 @@
     background-color: white;
 }
 .nav{
-    height: 70px;
+    height: 6%;
     width: 100%;
     text-align: right;
     border-bottom: 1px solid gray;
+    position:fixed;
+    background-color: white;
 
 }
 .add-adv{
@@ -18,12 +20,14 @@
     margin-top: 0.5vw;
     margin-right:1vw;
     padding: 19px 30px 19px 25px ;
-    font-size: 17px;
+    font-size: 20px;
     font-style: italic;
     border: none;
     border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+
+
 }
 .link{
     padding-left: 10px ;
@@ -37,35 +41,151 @@
 .image_background{
     background-image: url(/src/assets/img/background2.jpg);
     width:100%;
-    height: 450px;
+    height: 40vh;
     background-size: cover;
     background-position: center;
 
 
 }
 .filters{
+    position: absolute;
     height:300px;
-    width: 500px;
-    background-color: white;
-    opacity: 0.7;
-    margin-left: 80px;
-    margin-top: 60px;
-}
+    width: 550px;
+    background-color: rgba(255,255,255,0.7);
+    margin-left: 70px;
+    margin-top: 80px;
 
-.car_brand{
+}
+.choice{
+    border-bottom: 1px solid gray;
+    height:24%;
+    width:100%;
+
+}
+.choices_logo{
+    height:50px;
+    width:50px;
+    margin-left: 36px;
+    padding-left: 16px;
+
+}
+.choices_key{
+    height:37px;
+    width:37px;
+    margin-left: 57px;
+}
+.choices_moto{
+    height:50px;
+    width:50px;
+    margin-left: 57px;
+}
+.text_choices{
+    font-style: italic;
     margin-left: 30px;
-    margin-top: 70px;
+    padding-left: 10px;
+}
+
+
+.car_information{
+    margin-left: 20px;
+    margin-top: 40px;
     font-size: 17px;
     background-color: white;
     border: 0.5px solid gray;
+    width: 230px;
+    font-style: italic;
+
 
 }
 
-.car_model{
+.car_year{
     margin-left: 20px;
-    margin-top: 70px;
+    margin-top: 20px;
     font-size: 17px;
-    background-color: white;
     border: 0.5px solid gray;
+    width:100px;
+    color:black;
+    font-style: italic;
+
+}
+.car_price {
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 17px;
+    color: white;
+    border: 0.5px solid gray;
+    width: 100px;
+    font-style: italic;
+
+
+}
+.input{
+    position: absolute;
+    font-style: italic;
+    margin-top: 10px;
+
+}
+
+.radio{
+    padding-left: 30px;
+    font-size: 20px;
+
+}
+.search{
+    text-decoration: none;
+    color:black;
+    font-style: italic;
+    margin-top: 70px;
+    margin-left: 60px;
+    background-color: #FDCF28;
+    margin-right:1vw;
+    font-size: 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 200px;
+    height: 40px;
+
+
+}
+.detailed_search{
+    padding-left: 10px ;
+    color:black;
+    font-style: italic;
+    margin-top: 70px;
+    margin-left: 20px;
+
+}
+.popular_offert{
+    margin-left: 70px;
+    margin-top:20px;
+    font-size: 30px;
+    position: absolute;
+    color:gray;
+
+}
+.offer_main{
+    margin-left:100px;
+    margin-top:150px;
+    position: absolute;
+
+
+}
+
+.car1{
+    height: 267px;
+    width:400px;
+    padding-left: 20px;
+    margin-bottom: 100px;
+
+
+
+}
+
+.name_car{
+    position: absolute;
+    margin-top:280px;
+    margin-left:-400px;
 
 }
