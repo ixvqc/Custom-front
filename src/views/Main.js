@@ -127,7 +127,7 @@ function Main() {
                     <a className="cars">
                         <img src={car3} className="car1"/>
                         <text className="name_car">
-                            Nissan
+                            Nissan +
                         </text>
                     </a>
 
