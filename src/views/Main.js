@@ -59,27 +59,27 @@ function Main() {
                     </div>
 
                     <input
-                        type="brand"
+                        type="text"
                         className="car_information"
                         placeholder="Dowolna marka"/>
                     <input
-                        type="model"
+                        type="text"
                         className="car_information"
                         placeholder="Dowolny model"/>
                     <input
-                        type="year_since"
+                        type="text"
                         className="car_year"
                         placeholder="Rok od"/>
                     <input
-                        type="year_to"
+                        type="text"
                         className="car_year"
                         placeholder="Rok do"/>
                     <input
-                        type="price_since"
+                        type="text"
                         className="car_price"
                         placeholder="Cena od"/>
                     <input
-                        type="price_to"
+                        type="text"
                         className="car_price"
                         placeholder="Cena do"/>
 
@@ -111,32 +111,122 @@ function Main() {
             <div className="offer_main">
                 <article className="cars_homepage">
                     <a className="cars">
-                        <img src={car1} className="car1"/>
+                        <img src={car1} className="car_size"/>
                         <text className="name_car">
-                            Mustang
+                            Volvo ▪
+                        </text>
+                        <text className="price_add">
+                            130 000
+                        </text>
+                        <text className="year_add">
+                            2022 ▪
+                        </text>
+                        <text className="mileage_add">
+                            193 tys ▪
+                        </text>
+                        <text className="fuel_add">
+                            benzyna
+                        </text>
+
+                    </a>
+
+                    <a className="cars">
+                        <img src={car2} className="car_size"/>
+                        <text className="name_car">
+                            Skoda ▪
+                        </text>
+                        <text className="price_add">
+                            130 000
+                        </text>
+                        <text className="year_add">
+                            2022 ▪
+                        </text>
+                        <text className="mileage_add">
+                            193 tys ▪
+                        </text>
+                        <text className="fuel_add">
+                            benzyna
                         </text>
                     </a>
 
                     <a className="cars">
-                        <img src={car2} className="car1"/>
+                        <img src={car3} className="car_size"/>
                         <text className="name_car">
-                            Skoda
+                            Nissan ▪
+                        </text>
+                        <text className="price_add">
+                            130 000
+                        </text>
+                        <text className="year_add">
+                            2022 ▪
+                        </text>
+                        <text className="mileage_add">
+                            193 tys ▪
+                        </text>
+                        <text className="fuel_add">
+                            benzyna
+                        </text>
+                    </a>
+
+                        <a className="cars">
+
+                        <img src={car1} className="car_size"/>
+                        <text className="name_car">
+                            Mustang ▪
+                        </text>
+                        <text className="price_add">
+                            130 000
+                        </text>
+                        <text className="year_add">
+                            2022 ▪
+                        </text>
+                        <text className="mileage_add">
+                            193 tys ▪
+                        </text>
+                        <text className="fuel_add">
+                            benzyna
                         </text>
                     </a>
 
                     <a className="cars">
-                        <img src={car3} className="car1"/>
+                        <img src={car2} className="car_size"/>
                         <text className="name_car">
-                            Nissan +
+                            Hyundai ▪
+                        </text>
+                        <text className="price_add">
+                            130 000
+                        </text>
+                        <text className="year_add">
+                            2022 ▪
+                        </text>
+                        <text className="mileage_add">
+                            193 tys ▪
+                        </text>
+                        <text className="fuel_add">
+                            benzyna
+                        </text>
+                    </a>
+
+                    <a className="cars">
+                        <img src={car3} className="car_size"/>
+                        <text className="name_car">
+                            Mitsubishi ▪
+                        </text>
+                        <text className="price_add">
+                            130 000
+                        </text>
+                        <text className="year_add">
+                            2022 ▪
+                        </text>
+                        <text className="mileage_add">
+                            193 tys ▪
+                        </text>
+                        <text className="fuel_add">
+                            benzyna
                         </text>
                     </a>
 
                 </article>
-
-
-
-
-
 
             </div>
         </div>

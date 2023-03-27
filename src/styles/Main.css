@@ -5,7 +5,7 @@
     background-color: white;
 }
 .nav{
-    height: 6%;
+    height: 10%;
     width: 100%;
     text-align: right;
     border-bottom: 1px solid gray;
@@ -27,7 +27,6 @@
     cursor: pointer;
     transition: background-color 0.2s ease;
 
-
 }
 .link{
     padding-left: 10px ;
@@ -41,7 +40,7 @@
 .image_background{
     background-image: url(/src/assets/img/background2.jpg);
     width:100%;
-    height: 40vh;
+    height: 60vh;
     background-size: cover;
     background-position: center;
 
@@ -53,7 +52,7 @@
     width: 550px;
     background-color: rgba(255,255,255,0.7);
     margin-left: 70px;
-    margin-top: 80px;
+    margin-top: 15vh;
 
 }
 .choice{
@@ -173,7 +172,7 @@
 
 }
 
-.car1{
+.car_size{
     height: 267px;
     width:400px;
     padding-left: 20px;
@@ -187,5 +186,35 @@
     position: absolute;
     margin-top:280px;
     margin-left:-400px;
+    font-weight: bold;
+    font-size: 22px;
 
 }
+ .price_add{
+     color: #fdd852;
+     position: absolute;
+     margin-top:35vh;
+     margin-left: -18vw;
+     font-size: 22px;
+     font-weight: bold;
+
+ }
+ .year_add{
+     position: absolute;
+     margin-top:310px;
+     margin-left:-400px;
+     font-size: 18px;
+ }
+ .mileage_add{
+     position: absolute;
+     margin-top:310px;
+     margin-left:-335px;
+     font-size: 18px;
+ }
+ .fuel_add{
+     position: absolute;
+     margin-top:310px;
+     margin-left:-250px;
+     font-size: 18px;
+ }
+
