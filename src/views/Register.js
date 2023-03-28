@@ -2,8 +2,18 @@ import {Link} from "react-router-dom";
 import {useState, useEffect} from "react";
 import '../styles/Register.css';
 import logo from '../assets/img/logo.png';
+import axios from 'axios';
+
+function App(){
+
+}
 
 function Register() {
+
+    const handleClick = async () => {
+        const result = await axios('/Register');
+        console.log(result.data);
+    };
 
     const [name, setName] = useState('Hubert')
     const [isHovered, setIsHovered] = useState(false);
@@ -31,7 +41,6 @@ function Register() {
             <div className="login-text">
                 Zaloguj się
             </div>
-
             <div className="email-container">
 
                 <input
@@ -77,10 +86,13 @@ function Register() {
             <button className="button-login"
                     onMouseEnter={handleHover}
                     onMouseLeave={handleHover}
+                    onClick = {handleClick}
                    style={{ backgroundColor: buttonColor}}>
 
                 Zarejestruj się
             </button>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
             <a  className="text-no-password1">
