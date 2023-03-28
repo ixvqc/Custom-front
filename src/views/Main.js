@@ -18,6 +18,7 @@ function Main() {
     };
     const buttonColor = isHovered ? '#fdd852' : '#FDCF28';
 
+
     return (
         <div className="main">
             <div className="nav">
@@ -115,16 +116,16 @@ function Main() {
                         <text className="name_car">
                             Volvo ▪
                         </text>
-                        <text className="price_add">
+                        <text className="price_ad">
                             130 000
                         </text>
-                        <text className="year_add">
+                        <text className="year_ad">
                             2022 ▪
                         </text>
-                        <text className="mileage_add">
+                        <text className="mileage_ad">
                             193 tys ▪
                         </text>
-                        <text className="fuel_add">
+                        <text className="fuel_ad">
                             benzyna
                         </text>
 
@@ -135,16 +136,16 @@ function Main() {
                         <text className="name_car">
                             Skoda ▪
                         </text>
-                        <text className="price_add">
+                        <text className="price_ad">
                             130 000
                         </text>
-                        <text className="year_add">
+                        <text className="year_ad">
                             2022 ▪
                         </text>
-                        <text className="mileage_add">
+                        <text className="mileage_ad">
                             193 tys ▪
                         </text>
-                        <text className="fuel_add">
+                        <text className="fuel_ad">
                             benzyna
                         </text>
                     </a>
@@ -154,16 +155,16 @@ function Main() {
                         <text className="name_car">
                             Nissan ▪
                         </text>
-                        <text className="price_add">
+                        <text className="price_ad">
                             130 000
                         </text>
-                        <text className="year_add">
+                        <text className="year_ad">
                             2022 ▪
                         </text>
-                        <text className="mileage_add">
+                        <text className="mileage_ad">
                             193 tys ▪
                         </text>
-                        <text className="fuel_add">
+                        <text className="fuel_ad">
                             benzyna
                         </text>
                     </a>
@@ -174,16 +175,16 @@ function Main() {
                         <text className="name_car">
                             Mustang ▪
                         </text>
-                        <text className="price_add">
+                        <text className="price_ad">
                             130 000
                         </text>
-                        <text className="year_add">
+                        <text className="year_ad">
                             2022 ▪
                         </text>
-                        <text className="mileage_add">
+                        <text className="mileage_ad">
                             193 tys ▪
                         </text>
-                        <text className="fuel_add">
+                        <text className="fuel_ad">
                             benzyna
                         </text>
                     </a>
@@ -193,16 +194,16 @@ function Main() {
                         <text className="name_car">
                             Hyundai ▪
                         </text>
-                        <text className="price_add">
+                        <text className="price_ad">
                             130 000
                         </text>
-                        <text className="year_add">
+                        <text className="year_ad">
                             2022 ▪
                         </text>
-                        <text className="mileage_add">
+                        <text className="mileage_ad">
                             193 tys ▪
                         </text>
-                        <text className="fuel_add">
+                        <text className="fuel_ad">
                             benzyna
                         </text>
                     </a>
@@ -212,16 +213,16 @@ function Main() {
                         <text className="name_car">
                             Mitsubishi ▪
                         </text>
-                        <text className="price_add">
+                        <text className="price_ad">
                             130 000
                         </text>
-                        <text className="year_add">
+                        <text className="year_ad">
                             2022 ▪
                         </text>
-                        <text className="mileage_add">
+                        <text className="mileage_ad">
                             193 tys ▪
                         </text>
-                        <text className="fuel_add">
+                        <text className="fuel_ad">
                             benzyna
                         </text>
                     </a>

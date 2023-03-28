@@ -8,31 +8,36 @@
     height: 10%;
     width: 100%;
     text-align: right;
-    border-bottom: 1px solid gray;
+    box-shadow: 2px 2px 4px gray;
     position:fixed;
     background-color: white;
-
+    top:0;
+    opacity:1;
 }
 .add-adv{
     background-color: #FDCF28;
     color: black;
     margin-left: 2vw;
-    margin-top: 0.5vw;
+    margin-top: 2vh;
     margin-right:1vw;
     padding: 19px 30px 19px 25px ;
     font-size: 20px;
     font-style: italic;
     border: none;
-    border-radius: 20px;
+    border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    box-shadow: 2px 2px 4px gray;
+
+
 
 }
 .link{
-    padding-left: 10px ;
+    padding-left: 1vw ;
     text-decoration: none;
     color:black;
     font-style: italic;
+
 
 
 }
@@ -47,12 +52,13 @@
 
 }
 .filters{
-    position: absolute;
-    height:300px;
-    width: 550px;
+    height:36vh;
+    width: 38vw;
     background-color: rgba(255,255,255,0.7);
-    margin-left: 70px;
-    margin-top: 15vh;
+    margin-left: 6vw;
+    margin-top: 10vh;
+padding-top:10vh;
+
 
 }
 .choice{
@@ -60,39 +66,43 @@
     height:24%;
     width:100%;
 
+
 }
 .choices_logo{
-    height:50px;
-    width:50px;
+    height:5vh;
+    width:4vw;
     margin-left: 36px;
     padding-left: 16px;
 
 }
 .choices_key{
-    height:37px;
-    width:37px;
+    height:4.2vh;
+    width:3.3vw;
     margin-left: 57px;
 }
 .choices_moto{
-    height:50px;
-    width:50px;
+    height:5vh;
+    width:4vw;
     margin-left: 57px;
 }
 .text_choices{
     font-style: italic;
-    margin-left: 30px;
-    padding-left: 10px;
+    margin-left: 2vw;
+    padding-left:1.2vw;
 }
 
 
 .car_information{
     margin-left: 20px;
-    margin-top: 40px;
-    font-size: 17px;
+    margin-top: 3vh;
+    font-size: 15px;
     background-color: white;
     border: 0.5px solid gray;
-    width: 230px;
+    width: 16vw;
+    height:4.1vh;
     font-style: italic;
+    border-radius: 8px;
+    box-shadow: 1.5px 1.5px 3px gray;
 
 
 }
@@ -100,33 +110,43 @@
 .car_year{
     margin-left: 20px;
     margin-top: 20px;
-    font-size: 17px;
+    font-size: 15px;
     border: 0.5px solid gray;
-    width:100px;
+    width:7.2vw;
+    height:4.1vh;
     color:black;
     font-style: italic;
+    border-radius: 8px;
+    box-shadow: 1.5px 1.5px 3px gray;
+
+
 
 }
 .car_price {
-    margin-left: 20px;
+    margin-left: 1.5vw;
     margin-top: 20px;
-    font-size: 17px;
-    color: white;
-    border: 0.5px solid gray;
-    width: 100px;
+    font-size: 15px;
+    color: black;
+    border: 0.7px solid gray;
+    width: 7.2vw;
     font-style: italic;
+    height:4.1vh;
+    border-radius: 8px;
+    box-shadow: 1.5px 1.5px 3px blue;
+
+
 
 
 }
 .input{
-    position: absolute;
+    position: static;
     font-style: italic;
     margin-top: 10px;
 
 }
 
 .radio{
-    padding-left: 30px;
+    padding-left: 20px;
     font-size: 20px;
 
 }
@@ -134,17 +154,18 @@
     text-decoration: none;
     color:black;
     font-style: italic;
-    margin-top: 70px;
+    margin-top: 40px;
     margin-left: 60px;
     background-color: #FDCF28;
     margin-right:1vw;
     font-size: 20px;
     border: none;
-    border-radius: 20px;
+    border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.2s ease;
     width: 200px;
     height: 40px;
+    box-shadow: 2px 2px 4px gray;
 
 
 }
@@ -152,7 +173,7 @@
     padding-left: 10px ;
     color:black;
     font-style: italic;
-    margin-top: 70px;
+    margin-top: 50px;
     margin-left: 20px;
 
 }
@@ -173,48 +194,47 @@
 }
 
 .car_size{
-    height: 267px;
-    width:400px;
-    padding-left: 20px;
-    margin-bottom: 100px;
-
-
+    height: 32vh;
+    width: 28vw;
+    padding-left: 3vh;
+    margin-bottom: 13vh;
 
 }
 
 .name_car{
     position: absolute;
-    margin-top:280px;
-    margin-left:-400px;
+    margin-top:34.5vh;
+    margin-left:-28vw;
     font-weight: bold;
     font-size: 22px;
 
 }
- .price_add{
+
+ .price_ad{
      color: #fdd852;
      position: absolute;
-     margin-top:35vh;
+     margin-top:34.5vh;
      margin-left: -18vw;
      font-size: 22px;
      font-weight: bold;
 
  }
- .year_add{
+ .year_ad{
      position: absolute;
-     margin-top:310px;
-     margin-left:-400px;
+     margin-top:38vh;
+     margin-left:-28vw;
      font-size: 18px;
  }
- .mileage_add{
+ .mileage_ad{
      position: absolute;
-     margin-top:310px;
-     margin-left:-335px;
+     margin-top:38vh;
+     margin-left:-23vw;
      font-size: 18px;
  }
- .fuel_add{
+ .fuel_ad{
      position: absolute;
-     margin-top:310px;
-     margin-left:-250px;
+     margin-top:38vh;
+     margin-left:-17vw;
      font-size: 18px;
  }
 
