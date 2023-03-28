@@ -1,0 +1,111 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+
+
+
+
+}
+.logo{
+    margin-left: 8vw;
+    margin-top: 10vh;
+    height: 6vh;
+    width: 5vw;
+
+}
+.tlo-Register {
+    background: url(/src/assets/img/tlo.png);
+    margin-top: 0;
+    scroll-behavior: smooth;
+    min-width: 100%;
+    position: center;
+    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+    background-size: cover;
+    background-position: center;
+
+}
+.custom-color{
+    margin-left: 5vw;
+    margin-top: 10vh;
+    font-size: 45px;
+font-weight: bolder;
+    font-style: italic;
+    color: #FDCF28;
+    text-decoration: none;
+}
+
+.login-text{
+    margin-left: 11vw;
+    margin-top: 10vh;
+    font-size: 150%;
+
+}
+
+.email-container{
+    margin-left: 5vw;
+
+}
+ .email-input{
+     margin-top: 2vh;
+     padding: 1.5vh 3vw;
+     font-size: 120%;
+
+
+ }
+input::placeholder {
+    color: black;
+}
+.username-container{
+    margin-left: 5vw;
+
+}
+.username-input{
+    margin-top: 2vh;
+    padding: 1.5vh 3vw;
+    font-size: 120%;
+
+
+}
+.password-container{
+    margin-left: 5vw;
+
+}
+.password-input{
+    margin-top: 2vh;
+    padding: 1.5vh 3vw;
+    font-size: 120%;
+
+
+}
+.repassword-container{
+    margin-left: 5vw;
+
+}
+.repassword-input{
+    margin-top: 2vh;
+    padding: 1.5vh 3vw;
+    font-size: 120%;
+
+
+}
+
+.button-login{
+    margin-left: 5vw;
+    margin-top: 5vh;
+    padding: 2vh 3vw;
+    border-radius: 15px;
+    border: none;
+
+
+}
+.text-no-password1{
+margin-left: 1vw;
+
+}
+.text-no-password{
+    color: #FDCF28;
+
+}
