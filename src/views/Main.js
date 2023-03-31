@@ -9,6 +9,7 @@ import car2 from "../assets/img/car2.jpg";
 import car3 from "../assets/img/car3.jpg";
 
 
+
 function Main() {
 
     const [isHovered, setIsHovered] = useState(false);
@@ -26,12 +27,12 @@ function Main() {
                     Zaloguj się
                 </Link>
                 <Link to={"/register"} className="link">
-                        Rejestracja
+                    Rejestracja
                 </Link>
                 <button className="add-adv"
-                onMouseEnter={handleHover}
-                onMouseLeave={handleHover}
-                style={{ backgroundColor: buttonColor }}>
+                        onMouseEnter={handleHover}
+                        onMouseLeave={handleHover}
+                        style={{ backgroundColor: buttonColor }}>
                     <Link to={"/login"} className="link">Dodaj ogłoszenie + </Link>
                 </button>
 
@@ -48,15 +49,15 @@ function Main() {
                         <text className="text_choices">Inne </text>
                     </div>
                     <div className="input">
-               <label className="radio">
-                    <input type="radio"  value="new" name="criteria_is.new" /> Nowe
-               </label>
-               <label className="radio">
-                    <input type="radio" value="used" name="criteria_is.new" /> Używane
-               </label>
-               <label className="radio">
-                    <input type="radio" value="all_car" name="criteria_is.new" defaultChecked={true}/> Wszystkie
-               </label><br/>
+                        <label className="radio">
+                            <input type="radio"  value="new" name="criteria_is.new" /> Nowe
+                        </label>
+                        <label className="radio">
+                            <input type="radio" value="used" name="criteria_is.new" /> Używane
+                        </label>
+                        <label className="radio">
+                            <input type="radio" value="all_car" name="criteria_is.new" defaultChecked={true}/> Wszystkie
+                        </label><br/>
                     </div>
 
                     <input
@@ -169,7 +170,7 @@ function Main() {
                         </text>
                     </a>
 
-                        <a className="cars">
+                    <a className="cars">
 
                         <img src={car1} className="car_size"/>
                         <text className="name_car">
@@ -233,7 +234,7 @@ function Main() {
         </div>
 
 
-        );
+    );
 }
 
 export default Main;

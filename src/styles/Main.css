@@ -57,7 +57,7 @@
     background-color: rgba(255,255,255,0.7);
     margin-left: 6vw;
     margin-top: 10vh;
-padding-top:10vh;
+    padding-top:10vh;
 
 
 }
@@ -210,31 +210,31 @@ padding-top:10vh;
 
 }
 
- .price_ad{
-     color: #fdd852;
-     position: absolute;
-     margin-top:34.5vh;
-     margin-left: -18vw;
-     font-size: 22px;
-     font-weight: bold;
+.price_ad{
+    color: #fdd852;
+    position: absolute;
+    margin-top:34.5vh;
+    margin-left: -18vw;
+    font-size: 22px;
+    font-weight: bold;
 
- }
- .year_ad{
-     position: absolute;
-     margin-top:38vh;
-     margin-left:-28vw;
-     font-size: 18px;
- }
- .mileage_ad{
-     position: absolute;
-     margin-top:38vh;
-     margin-left:-23vw;
-     font-size: 18px;
- }
- .fuel_ad{
-     position: absolute;
-     margin-top:38vh;
-     margin-left:-17vw;
-     font-size: 18px;
- }
+}
+.year_ad{
+    position: absolute;
+    margin-top:38vh;
+    margin-left:-28vw;
+    font-size: 18px;
+}
+.mileage_ad{
+    position: absolute;
+    margin-top:38vh;
+    margin-left:-23vw;
+    font-size: 18px;
+}
+.fuel_ad{
+    position: absolute;
+    margin-top:38vh;
+    margin-left:-17vw;
+    font-size: 18px;
+}
 
