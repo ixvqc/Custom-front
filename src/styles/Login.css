@@ -1,11 +1,3 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
-
-}
-
 
 .background-login{
     font-family: 'Poppins',sans-serif;
@@ -46,7 +38,7 @@
 
 .email-container {
     margin-left: 10vw;
-    margin-top: 5vh;
+    margin-top: 2vh;
 }
 input[type="email"] {
     padding: 20px;
@@ -58,7 +50,6 @@ input[type="email"] {
 }
 .password-container {
     margin-left: 10vw;
-    margin-top: 2vh;
 }
 input[type="password"] {
     padding: 20px;
@@ -92,11 +83,11 @@ input[type="password"] {
     color: #FDCF28;
     font-size: 1.1vw;
     font-style: italic;
-    margin-left: 3vw;
+    margin-left: 2.3vw;
 }
 
 .for-register{
-    margin-left: 10vw;
+    margin-left: 6vw;
     margin-top: 4vh;
     color: #FDCF28;
     font-size: 1.1vw;

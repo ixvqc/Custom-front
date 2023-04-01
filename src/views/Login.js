@@ -32,36 +32,39 @@ function Login() {
                 Zaloguj się
             </div>
 
-            <div className="email-container">
 
-                <input
-                    style={{border: '2px solid rgba(0, 0, 0, 0.31)'}}
-                    type="email"
-                    className="email-input"
-                    placeholder="Podaj maila"
-                />
-            </div>
+            <form>
+                <div className="email-container">
 
-            <div className="password-container">
+                    <input
+                        style={{border: '2px solid rgba(0, 0, 0, 0.31)'}}
+                        type="email"
+                        className="email-input"
+                        placeholder="Email"
+                    />
+                </div>
 
-                <input
-                    style={{border: '2px solid rgba(0, 0, 0, 0.31)'}}
-                    type="password"
-                    className="password-input"
-                    placeholder="Podaj hasło"
-                />
-            </div>
+                <div className="password-container">
 
-            <button className="button-login"
-                    onMouseEnter={handleHover}
-                    onMouseLeave={handleHover}
-                    style={{ backgroundColor: buttonColor }}>
-                Zaloguj się
-            </button>
+                    <input
+                        style={{border: '2px solid rgba(0, 0, 0, 0.31)'}}
+                        type="password"
+                        className="password-input"
+                        placeholder="Hasło"
+                    />
+                </div>
 
-            <a href="http://localhost:3000" className="text-no-password">
-                Nie pamiętam hasła
-            </a>
+                <button className="button-login"
+                        onMouseEnter={handleHover}
+                        onMouseLeave={handleHover}
+                        style={{ backgroundColor: buttonColor }}>
+                    Zaloguj się
+                </button>
+
+                <a href="http://localhost:3000" className="text-no-password">
+                    Nie pamiętam hasła
+                </a>
+            </form>
 
 
             <div className="for-register">
