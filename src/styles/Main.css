@@ -48,31 +48,34 @@
     height: 60vh;
     background-size: cover;
     background-position: center;
+    margin-top: 10vh;
+    padding-top:3vh;
 
 
 }
 .filters{
-    height:36vh;
+    height:50vh;
     width: 38vw;
     background-color: rgba(255,255,255,0.7);
     margin-left: 6vw;
-    margin-top: 10vh;
-    padding-top:10vh;
 
 
 }
-.choice{
+.filter_line{
     border-bottom: 1px solid gray;
     height:24%;
     width:100%;
+    margin-bottom: 3vh;
+    margin-top:2vh;
 
 
 }
 .choices_logo{
     height:5vh;
     width:4vw;
-    margin-left: 36px;
+    margin-left: 38px;
     padding-left: 16px;
+    margin-top: 3vh;
 
 }
 .choices_key{
@@ -83,12 +86,12 @@
 .choices_moto{
     height:5vh;
     width:4vw;
-    margin-left: 57px;
+    margin-left: 62px;
 }
 .text_choices{
     font-style: italic;
     margin-left: 2vw;
-    padding-left:1.2vw;
+    padding-left:1vw;
 }
 
 

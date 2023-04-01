@@ -40,7 +40,7 @@ function Main() {
 
             <div className="image_background">
                 <div className="filters">
-                    <div className="choice">
+                    <div className="filter_line">
                         <img src={auto} className="choices_logo"/>
                         <img src={moto} className="choices_moto"/>
                         <img src={key} className="choices_key"/><br/>
