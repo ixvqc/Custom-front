@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import {useState, useEffect} from "react";
 import '../styles/Login.css';
-import logo from '../assets/img/logo.png';
+import logo from '../assets/img/logov2.png';
 
 function Login() {
 
@@ -23,9 +23,8 @@ function Login() {
 
             <nav className="logo-container">
                 <a href="http://localhost:3000">
-                    <img src={logo} alt="Main.js Logo" className="logo" />
+                    <img src={logo} alt="Main.js Logo" className="logo_login" />
                 </a>
-                <div className="custom"><a href="http://localhost:3000" className="custom-color" >Custom</a></div>
             </nav>
 
             <div className="login-text">

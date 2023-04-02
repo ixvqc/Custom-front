@@ -11,13 +11,15 @@ import logo from "../assets/img/logov2.png";
 
 
 function Main() {
-
+//BUTTON ADD OFFERT
     const [isHovered, setIsHovered] = useState(false);
 
     const handleHover = () => {
         setIsHovered(!isHovered);
     };
     const buttonColor = isHovered ? '#fdd852' : '#FDCF28';
+
+//CHANGE TYPE OF SEARCH  osobowe,motocykle,inne
 
 
     return (

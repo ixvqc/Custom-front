@@ -62,6 +62,7 @@
     background-position: center;
     margin-top: 10vh;
     padding-top:3vh;
+    margin-bottom: 10vh;
 
 
 }
@@ -85,7 +86,7 @@
 .choices_logo{
     height:5vh;
     width:4vw;
-    margin-left: 38px;
+    margin-left: 2.7vw;
     padding-left: 16px;
     margin-top: 3vh;
 
@@ -102,7 +103,7 @@
 }
 .text_choices{
     font-style: italic;
-    margin-left: 2vw;
+    margin-left: 2.4vw;
     padding-left:1vw;
 }
 
@@ -116,7 +117,7 @@
     width: 16vw;
     height:4.1vh;
     font-style: italic;
-    border-radius: 8px;
+    border-radius: 4px;
     box-shadow: 1.5px 1.5px 3px gray;
 
 
@@ -131,7 +132,7 @@
     height:4.1vh;
     color:black;
     font-style: italic;
-    border-radius: 8px;
+    border-radius: 4px;
     box-shadow: 1.5px 1.5px 3px gray;
 
 
@@ -146,7 +147,7 @@
     width: 7.2vw;
     font-style: italic;
     height:4.1vh;
-    border-radius: 8px;
+    border-radius: 4px;
     box-shadow: 1.5px 1.5px 3px gray;
 
 
@@ -194,16 +195,13 @@
 }
 .popular_offert{
     margin-left: 70px;
-    margin-top:20px;
     font-size: 30px;
-    position: absolute;
     color:gray;
 
 }
 .offer_main{
     margin-left:100px;
-    margin-top:150px;
-    position: absolute;
+    margin-top: 10vh;
 
 
 }
