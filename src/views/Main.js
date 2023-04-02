@@ -7,7 +7,7 @@ import moto from "../assets/img/motorbike.png";
 import car1 from "../assets/img/car1.jpg";
 import car2 from "../assets/img/car2.jpg";
 import car3 from "../assets/img/car3.jpg";
-
+import logo from "../assets/img/logov2.png";
 
 
 function Main() {
@@ -23,7 +23,12 @@ function Main() {
     return (
         <div className="main">
             <div className="nav">
-                <Link to={"/login"} className="link">
+
+            <div className="logo_div">
+                    <img src={logo} className="logo_main"/>
+
+                </div>
+            <Link to={"/login"} className="link">
                     Zaloguj się
                 </Link>
                 <Link to={"/register"} className="link">

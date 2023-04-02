@@ -5,7 +5,7 @@
     background-color: white;
 }
 .nav{
-    height: 10%;
+    height: 13%;
     width: 100%;
     text-align: right;
     box-shadow: 2px 2px 4px gray;
@@ -13,6 +13,18 @@
     background-color: white;
     top:0;
     opacity:1;
+
+}
+.logo_div{
+    height: 10%;
+    width: 10%;
+}
+
+.logo_main{
+    position:fixed;
+    height:13vh;
+    width: 10vw;
+    margin-bottom:3vh;
 }
 .add-adv{
     background-color: #FDCF28;
