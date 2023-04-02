@@ -8,9 +8,28 @@ import car1 from "../assets/img/car1.jpg";
 import car2 from "../assets/img/car2.jpg";
 import car3 from "../assets/img/car3.jpg";
 import logo from "../assets/img/logov2.png";
+import axios from "axios";
 
 
-function Main() {
+function Main(props) {
+
+
+    function logMeOut() {
+        axios({
+            method: "POST",
+            url:"/logout",
+        })
+            .then((response) => {
+                props.token()
+            }).catch((error) => {
+            if (error.response) {
+                console.log(error.response)
+                console.log(error.response.status)
+                console.log(error.response.headers)
+            }
+        })}
+
+
 //BUTTON ADD OFFERT
     const [isHovered, setIsHovered] = useState(false);
 
@@ -23,13 +42,20 @@ function Main() {
 
 
     return (
+
         <div className="main">
+
             <div className="nav">
 
             <div className="logo_div">
                     <img src={logo} className="logo_main"/>
 
-                </div>
+            </div>
+
+                <button onClick={logMeOut}>
+                    Logout
+                </button>
+
             <Link to={"/login"} className="link">
                     Zaloguj się
                 </Link>
