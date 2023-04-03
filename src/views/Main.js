@@ -9,6 +9,7 @@ import car2 from "../assets/img/car2.jpg";
 import car3 from "../assets/img/car3.jpg";
 import logo from "../assets/img/logov2.png";
 import axios from "axios";
+import CarCard  from "../components/CarCard";
 
 
 function Main(props) {
@@ -47,7 +48,7 @@ function Main(props) {
 
             <div className="nav">
 
-            <div className="logo_div">
+            <div className="logo-div">
                     <img src={logo} className="logo_main"/>
 
             </div>
@@ -71,51 +72,51 @@ function Main(props) {
 
             </div>
 
-            <div className="image_background">
+            <div className="image-background">
                 <div className="filters">
-                    <div className="filter_line">
-                        <img src={auto} className="choices_logo"/>
-                        <img src={moto} className="choices_moto"/>
-                        <img src={key} className="choices_key"/><br/>
-                        <text className="text_choices"> Osobowe</text>
-                        <text className="text_choices">Motocykle </text>
-                        <text className="text_choices">Inne </text>
+                    <div className="filters-line">
+                        <img src={auto} className="choices-logo"/>
+                        <img src={moto} className="choices-moto"/>
+                        <img src={key} className="choices-key"/><br/>
+                        <text className="text-choices"> Osobowe</text>
+                        <text className="text-choices">Motocykle </text>
+                        <text className="text-choices">Inne </text>
                     </div>
                     <div className="input">
                         <label className="radio">
-                            <input type="radio"  value="new" name="criteria_is.new" /> Nowe
+                            <input type="radio"  value="new" name="criteria-is.new" /> Nowe
                         </label>
                         <label className="radio">
-                            <input type="radio" value="used" name="criteria_is.new" /> Używane
+                            <input type="radio" value="used" name="criteria-is.new" /> Używane
                         </label>
                         <label className="radio">
-                            <input type="radio" value="all_car" name="criteria_is.new" defaultChecked={true}/> Wszystkie
+                            <input type="radio" value="all-cars" name="criteria-is.new" defaultChecked={true}/> Wszystkie
                         </label><br/>
                     </div>
 
                     <input
                         type="text"
-                        className="car_information"
+                        className="car-information"
                         placeholder="Dowolna marka"/>
                     <input
                         type="text"
-                        className="car_information"
+                        className="car-information"
                         placeholder="Dowolny model"/>
                     <input
                         type="text"
-                        className="car_year"
+                        className="car-year"
                         placeholder="Rok od"/>
                     <input
                         type="text"
-                        className="car_year"
+                        className="car-year"
                         placeholder="Rok do"/>
                     <input
                         type="text"
-                        className="car_price"
+                        className="car-price"
                         placeholder="Cena od"/>
                     <input
                         type="text"
-                        className="car_price"
+                        className="car-price"
                         placeholder="Cena do"/>
 
                     <div className="input">
@@ -129,7 +130,7 @@ function Main(props) {
                             <input type="radio" value="all_type" name="fuel_type" defaultChecked={true}/> Wszystkie
                         </label><br/>
                     </div>
-                    <Link to={"/login"} className="detailed_search">
+                    <Link to={"/login"} className="detailed-search">
                         Szczegółowe wyszukiwanie
                     </Link>
                     <button className="search"
@@ -140,128 +141,83 @@ function Main(props) {
                     </button>
                 </div>
             </div>
-            <text className="popular_offert">Najpopularniejsze oferty </text>
+            <text className="popular-offers-text">Najpopularniejsze oferty </text>
 
 
-            <div className="offer_main">
-                <article className="cars_homepage">
-                    <a className="cars">
-                        <img src={car1} className="car_size"/>
-                        <text className="name_car">
-                            Volvo ▪
-                        </text>
-                        <text className="price_ad">
-                            130 000
-                        </text>
-                        <text className="year_ad">
-                            2022 ▪
-                        </text>
-                        <text className="mileage_ad">
-                            193 tys ▪
-                        </text>
-                        <text className="fuel_ad">
-                            benzyna
-                        </text>
+            <div className="popular-offers-homepage">
+                  <CarCard
+                    ImageCar={car1}
+                    CarBrand={"Volvo"}
+                    CarPrice={"132 382 zł"}
+                    ProductionDate={"2012"}
+                    CarMileage={"193 tys"}
+                    FuelType={"diesel"}
 
-                    </a>
+                  />
+                <CarCard
+                    ImageCar={car1}
+                    CarBrand={"Volvo"}
+                    CarPrice={"132 382 zł"}
+                    ProductionDate={"2012"}
+                    CarMileage={"193 tys"}
+                    FuelType={"diesel"}
 
-                    <a className="cars">
-                        <img src={car2} className="car_size"/>
-                        <text className="name_car">
-                            Skoda ▪
-                        </text>
-                        <text className="price_ad">
-                            130 000
-                        </text>
-                        <text className="year_ad">
-                            2022 ▪
-                        </text>
-                        <text className="mileage_ad">
-                            193 tys ▪
-                        </text>
-                        <text className="fuel_ad">
-                            benzyna
-                        </text>
-                    </a>
+                />
+                <CarCard
+                    ImageCar={car1}
+                    CarBrand={"Volvo"}
+                    CarPrice={"132 382 zł"}
+                    ProductionDate={"2012"}
+                    CarMileage={"193 tys"}
+                    FuelType={"diesel"}
 
-                    <a className="cars">
-                        <img src={car3} className="car_size"/>
-                        <text className="name_car">
-                            Nissan ▪
-                        </text>
-                        <text className="price_ad">
-                            130 000
-                        </text>
-                        <text className="year_ad">
-                            2022 ▪
-                        </text>
-                        <text className="mileage_ad">
-                            193 tys ▪
-                        </text>
-                        <text className="fuel_ad">
-                            benzyna
-                        </text>
-                    </a>
+                />
+                <CarCard
+                    ImageCar={car1}
+                    CarBrand={"Volvo"}
+                    CarPrice={"132 382 zł"}
+                    ProductionDate={"2012"}
+                    CarMileage={"193 tys"}
+                    FuelType={"diesel"}
 
-                    <a className="cars">
+                />
+                <CarCard
+                    ImageCar={car1}
+                    CarBrand={"Volvo"}
+                    CarPrice={"132 382 zł"}
+                    ProductionDate={"2012"}
+                    CarMileage={"193 tys"}
+                    FuelType={"diesel"}
 
-                        <img src={car1} className="car_size"/>
-                        <text className="name_car">
-                            Mustang ▪
-                        </text>
-                        <text className="price_ad">
-                            130 000
-                        </text>
-                        <text className="year_ad">
-                            2022 ▪
-                        </text>
-                        <text className="mileage_ad">
-                            193 tys ▪
-                        </text>
-                        <text className="fuel_ad">
-                            benzyna
-                        </text>
-                    </a>
+                />
+                <CarCard
+                    ImageCar={car1}
+                    CarBrand={"Volvo"}
+                    CarPrice={"132 382 zł"}
+                    ProductionDate={"2012"}
+                    CarMileage={"193 tys"}
+                    FuelType={"diesel"}
 
-                    <a className="cars">
-                        <img src={car2} className="car_size"/>
-                        <text className="name_car">
-                            Hyundai ▪
-                        </text>
-                        <text className="price_ad">
-                            130 000
-                        </text>
-                        <text className="year_ad">
-                            2022 ▪
-                        </text>
-                        <text className="mileage_ad">
-                            193 tys ▪
-                        </text>
-                        <text className="fuel_ad">
-                            benzyna
-                        </text>
-                    </a>
+                />
 
-                    <a className="cars">
-                        <img src={car3} className="car_size"/>
-                        <text className="name_car">
-                            Mitsubishi ▪
-                        </text>
-                        <text className="price_ad">
-                            130 000
-                        </text>
-                        <text className="year_ad">
-                            2022 ▪
-                        </text>
-                        <text className="mileage_ad">
-                            193 tys ▪
-                        </text>
-                        <text className="fuel_ad">
-                            benzyna
-                        </text>
-                    </a>
+                    {/*{*/}
+                    {/*    data.forEach((i) => {*/}
+                    {/*        return (*/}
+                    {/*            <CarCard*/}
+                    {/*                ImageCar={i.image}*/}
+                    {/*                CarBrand={i.name}*/}
+                    {/*                CarPrice={i.price}*/}
+                    {/*                ProductionDate={"2012"}*/}
+                    {/*                CarMileage={"193 tys"}*/}
+                    {/*                FuelType={"diesel"}*/}
 
-                </article>
+                    {/*            />*/}
+                    {/*        )*/}
+                    {/*    })*/}
+                    {/*}*/}
+
+
+
 
             </div>
         </div>
