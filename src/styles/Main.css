@@ -42,7 +42,9 @@
     box-shadow: 2px 2px 4px gray;
 
 
-
+}
+.add-adv:hover{
+    background-color: blue;
 }
 .link{
     padding-left: 1vw ;
