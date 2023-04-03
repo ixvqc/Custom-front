@@ -15,7 +15,7 @@
     opacity:1;
 
 }
-.logo_div{
+.logo-div{
     height: 10%;
     width: 10%;
 }
@@ -56,7 +56,7 @@
 
 }
 
-.image_background{
+.image-background{
     background-image: url(/src/assets/img/background2.jpg);
     width:100%;
     height: 60vh;
@@ -76,7 +76,7 @@
 
 
 }
-.filter_line{
+.filters-line{
     border-bottom: 1px solid gray;
     height:24%;
     width:100%;
@@ -85,7 +85,7 @@
 
 
 }
-.choices_logo{
+.choices-logo{
     height:5vh;
     width:4vw;
     margin-left: 2.7vw;
@@ -93,24 +93,24 @@
     margin-top: 3vh;
 
 }
-.choices_key{
+.choices-key{
     height:4.2vh;
     width:3.3vw;
     margin-left: 57px;
 }
-.choices_moto{
+.choices-moto{
     height:5vh;
     width:4vw;
     margin-left: 62px;
 }
-.text_choices{
+.text-choices{
     font-style: italic;
     margin-left: 2.4vw;
     padding-left:1vw;
 }
 
 
-.car_information{
+.car-information{
     margin-left: 20px;
     margin-top: 3vh;
     font-size: 15px;
@@ -125,7 +125,7 @@
 
 }
 
-.car_year{
+.car-year{
     margin-left: 20px;
     margin-top: 20px;
     font-size: 15px;
@@ -140,7 +140,7 @@
 
 
 }
-.car_price {
+.car-price {
     margin-left: 1.5vw;
     margin-top: 20px;
     font-size: 15px;
@@ -187,7 +187,7 @@
 
 
 }
-.detailed_search{
+.detailed-search{
     padding-left: 10px ;
     color:black;
     font-style: italic;
@@ -195,61 +195,95 @@
     margin-left: 20px;
 
 }
-.popular_offert{
+.popular-offers-text{
     margin-left: 70px;
     font-size: 30px;
     color:gray;
 
 }
-.offer_main{
-    margin-left:100px;
-    margin-top: 10vh;
+
+.popular-offers-main{
+    width:28vw;
+    height:50vh;
+    margin-bottom: 100px;
+    margin-top:10vh;
+
+
+
+
+}
+.popular-offers-homepage{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+}
+.first-line-main{
+    width:100%;
+    display:flex;
+    flex-direction: row;
+}
+.second-line-main{
+    width:100%;
+    margin-top:2vh;
 
 
 }
 
-.car_size{
+.car-size{
     height: 32vh;
     width: 28vw;
-    padding-left: 3vh;
-    margin-bottom: 13vh;
-
+    margin-bottom:2vh;
 }
 
-.name_car{
-    position: absolute;
-    margin-top:34.5vh;
-    margin-left:-28vw;
+.Car-brand-main{
     font-weight: bold;
     font-size: 22px;
+    margin-top:3vh;
+    margin-left:1vw;
+    width:30%;
 
 }
 
-.price_ad{
+.Car-price-main{
     color: #fdd852;
-    position: absolute;
-    margin-top:34.5vh;
-    margin-left: -18vw;
     font-size: 22px;
     font-weight: bold;
+    margin-top:3vh;
+    margin-left:1vw;
+    width:30%;
+
 
 }
-.year_ad{
-    position: absolute;
-    margin-top:38vh;
-    margin-left:-28vw;
+.Car-production-date-main{
+
     font-size: 18px;
+    margin-top:3vh;
+    margin-left:1vw;
+
+
 }
-.mileage_ad{
-    position: absolute;
-    margin-top:38vh;
-    margin-left:-23vw;
+.Car-mileage-main{
+
     font-size: 18px;
+    margin-top:3vh;
+    margin-left:1vw;
+
+
 }
-.fuel_ad{
-    position: absolute;
-    margin-top:38vh;
-    margin-left:-17vw;
+.Fuel-type-main{
+
     font-size: 18px;
+    margin-top:3vh;
+    margin-left:1vw;
+
 }
 
+
+.Car-add_main{
+    height:40vh;
+    margin-top:3vh;
+    margin-left:1vw;
+
+}
