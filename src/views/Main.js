@@ -32,12 +32,12 @@ function Main(props) {
 
 
 //BUTTON ADD OFFERT
-    const [isHovered, setIsHovered] = useState(false);
-
-    const handleHover = () => {
-        setIsHovered(!isHovered);
-    };
-    const buttonColor = isHovered ? '#fdd852' : '#FDCF28';
+//     const [isHovered, setIsHovered] = useState(false);
+//
+//     const handleHover = () => {
+//         setIsHovered(!isHovered);
+//     };
+//     const buttonColor = isHovered ? '#fdd852' : '#FDCF28';
 
 //CHANGE TYPE OF SEARCH  osobowe,motocykle,inne
 
@@ -49,7 +49,7 @@ function Main(props) {
             <div className="nav">
 
             <div className="logo-div">
-                    <img src={logo} className="logo_main"/>
+                    <img src={logo} className="logo-main"/>
 
             </div>
 
@@ -64,9 +64,10 @@ function Main(props) {
                     Rejestracja
                 </Link>
                 <button className="add-adv"
-                        onMouseEnter={handleHover}
-                        onMouseLeave={handleHover}
-                        style={{ backgroundColor: buttonColor }}>
+                        // onMouseEnter={handleHover}
+                        // onMouseLeave={handleHover}
+                        // style={{ backgroundColor: buttonColor }}
+                    >
                     <Link to={"/login"} className="link">Dodaj ogłoszenie + </Link>
                 </button>
 
@@ -134,9 +135,10 @@ function Main(props) {
                         Szczegółowe wyszukiwanie
                     </Link>
                     <button className="search"
-                            onMouseEnter={handleHover}
-                            onMouseLeave={handleHover}
-                            style={{ backgroundColor: buttonColor }}>
+                            // onMouseEnter={handleHover}
+                            // onMouseLeave={handleHover}
+                            // style={{ backgroundColor: buttonColor }}
+                    >
                         <Link to={"/login"} className="link">Szukaj</Link>
                     </button>
                 </div>

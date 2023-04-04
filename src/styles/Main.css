@@ -20,7 +20,7 @@
     width: 10%;
 }
 
-.logo_main{
+.logo-main{
     position:fixed;
     height:13vh;
     width: 10vw;
@@ -44,8 +44,9 @@
 
 }
 .add-adv:hover{
-    background-color: blue;
+    background-color: #fdd852;
 }
+
 .link{
     padding-left: 1vw ;
     text-decoration: none;
@@ -187,6 +188,11 @@
 
 
 }
+
+.search:hover{
+    background-color: #fdd852;
+}
+
 .detailed-search{
     padding-left: 10px ;
     color:black;
