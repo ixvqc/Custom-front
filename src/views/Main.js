@@ -53,9 +53,9 @@ function Main(props) {
 
             </div>
 
-                <button onClick={logMeOut}>
-                    Logout
-                </button>
+                {/*<button onClick={logMeOut}>*/}
+                {/*    Logout*/}
+                {/*</button>*/}
 
             <Link to={"/login"} className="link">
                     Zaloguj się
@@ -143,22 +143,44 @@ function Main(props) {
                     </button>
                 </div>
             </div>
-            <text className="popular-offers-text">Najpopularniejsze oferty </text>
+            <div className="popular-offers-text-div">
+                <text className="popular-offers-text">Najpopularniejsze oferty </text>
+
+            </div>
+
 
 
             <div className="popular-offers-homepage">
                   <CarCard
                     ImageCar={car1}
                     CarBrand={"Volvo"}
-                    CarPrice={"132 382 zł"}
-                    ProductionDate={"2012"}
+                    CarPrice={"99 876 zł"}
+                    ProductionDate={"2023"}
                     CarMileage={"193 tys"}
                     FuelType={"diesel"}
 
                   />
                 <CarCard
-                    ImageCar={car1}
-                    CarBrand={"Volvo"}
+                    ImageCar={car2}
+                    CarBrand={"Mitshubishi"}
+                    CarPrice={"51 999 zł"}
+                    ProductionDate={"2011"}
+                    CarMileage={"193 tys"}
+                    FuelType={"benzyna"}
+
+                />
+                <CarCard
+                    ImageCar={car3}
+                    CarBrand={"Hyundai"}
+                    CarPrice={"132 382 zł"}
+                    ProductionDate={"2021"}
+                    CarMileage={"23 tys"}
+                    FuelType={"diesel"}
+
+                />
+                <CarCard
+                    ImageCar={car3}
+                    CarBrand={"Opel"}
                     CarPrice={"132 382 zł"}
                     ProductionDate={"2012"}
                     CarMileage={"193 tys"}
@@ -167,7 +189,7 @@ function Main(props) {
                 />
                 <CarCard
                     ImageCar={car1}
-                    CarBrand={"Volvo"}
+                    CarBrand={"Mazda"}
                     CarPrice={"132 382 zł"}
                     ProductionDate={"2012"}
                     CarMileage={"193 tys"}
@@ -175,26 +197,8 @@ function Main(props) {
 
                 />
                 <CarCard
-                    ImageCar={car1}
-                    CarBrand={"Volvo"}
-                    CarPrice={"132 382 zł"}
-                    ProductionDate={"2012"}
-                    CarMileage={"193 tys"}
-                    FuelType={"diesel"}
-
-                />
-                <CarCard
-                    ImageCar={car1}
-                    CarBrand={"Volvo"}
-                    CarPrice={"132 382 zł"}
-                    ProductionDate={"2012"}
-                    CarMileage={"193 tys"}
-                    FuelType={"diesel"}
-
-                />
-                <CarCard
-                    ImageCar={car1}
-                    CarBrand={"Volvo"}
+                    ImageCar={car2}
+                    CarBrand={"Fiat"}
                     CarPrice={"132 382 zł"}
                     ProductionDate={"2012"}
                     CarMileage={"193 tys"}
