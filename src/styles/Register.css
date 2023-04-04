@@ -74,6 +74,13 @@ input::placeholder {
 
 
 }
+
+.password-bar-register{
+    height: 0.9vh;
+    width: 24vw;
+    margin-top:1vh;
+}
+
 .repassword-container{
     margin-left: 5vw;
 

@@ -3,8 +3,12 @@ import {useState, useEffect} from "react";
 import '../styles/Register.css';
 import logo from '../assets/img/logov2.png';
 import axios from "axios";
+import PasswordStrengthBar from 'react-password-strength-bar';
+import Notiflix from 'notiflix';
+
 
 function Register(props) {
+
 
     const [registerForm, setregisterForm] = useState({
         email: "",
@@ -15,6 +19,7 @@ function Register(props) {
 
     const [name, setName] = useState('Hubert')
     const [isHovered, setIsHovered] = useState(false);
+    const [PasswordIsOk, setPasswordIsOk] = useState(true)
 
     function handleClick (event)  {
         axios({
@@ -56,12 +61,33 @@ function Register(props) {
         setIsHovered(!isHovered);
     };
 
+    const validatePasswords = () => {
+        if(registerForm.password === registerForm.repassword){
+            handleClick()
+            Notiflix.Notify.success('Konto zostało utworzone');
+        }
+
+    };
+
     const buttonColor = isHovered ? '#fdd852' : '#FDCF28';
 
 
     useEffect(() => {
-        console.log('dupa')
-    }, [name])
+        console.log('xxx')
+        let  passw=  /.[a-z](?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,})|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))/;
+        if(registerForm.password.match(passw) && (registerForm.password === registerForm.repassword)){
+            setPasswordIsOk(false)
+        }
+        else {
+            setPasswordIsOk(true)
+
+        }
+
+
+
+
+    }, [registerForm.password,registerForm.repassword])
+
     return (
         <div className="tlo-Register">
 
@@ -105,7 +131,6 @@ function Register(props) {
             </div>
 
             <div className="password-container">
-
                 <input
                     onChange={handleChange}
                     style={{border: '2px solid rgba(0, 0, 0, 0.31)'}}
@@ -115,6 +140,12 @@ function Register(props) {
                     className="password-input"
                     placeholder="Podaj hasło"
                 />
+
+               {registerForm.password.length > 0 && (
+                    <PasswordStrengthBar password={registerForm.password} className="password-bar-register"/>
+                    )
+                }
+
             </div>
             <div className="repassword-container">
 
@@ -122,19 +153,21 @@ function Register(props) {
                     onChange={handleChange}
                     style={{border: '2px solid rgba(0, 0, 0, 0.31)'}}
                     name="repassword"
-                    type="repassword"
+                    type="password"
                     text={registerForm.repassword}
                     className="repassword-input"
                     placeholder="Powtórz hasło"
 
                 />
+
             </div>
 
 
             <button className="button-register"
                     onMouseEnter={handleHover}
+                    disabled={PasswordIsOk}
                     onMouseLeave={handleHover}
-                    onClick={handleClick}
+                    onClick={()=>{validatePasswords()}}
                     style={{ backgroundColor: buttonColor}}>
 
                 Zarejestruj się
