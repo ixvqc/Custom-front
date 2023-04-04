@@ -144,7 +144,7 @@ function Main(props) {
                 </div>
             </div>
             <div className="popular-offers-text-div">
-                <text className="popular-offers-text">Najpopularniejsze oferty </text>
+                <text className="popular-offers-text">Najpopularniejsze   oferty </text>
 
             </div>
 
