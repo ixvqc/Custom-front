@@ -4,16 +4,31 @@ import '../styles/Main.css';
 import auto from "../assets/img/car.png";
 import key from "../assets/img/car-key.png";
 import moto from "../assets/img/motorbike.png";
+import autoHighlights from "../assets/img/carHighlights.png";
+import keyHighlights from "../assets/img/car-keyHighlights.png";
+import motoHighlights from "../assets/img/motorbikeHighlights.png";
 import car1 from "../assets/img/car1.jpg";
 import car2 from "../assets/img/car2.jpg";
 import car3 from "../assets/img/car3.jpg";
 import logo from "../assets/img/logov2.png";
 import axios from "axios";
 import CarCard  from "../components/CarCard";
-
+import SearchFormCars from "../components/SearchFormCars";
+import SearchFormMotorcycles from "../components/SearchFormMotorcycles";
+import SearchFormOther from "../components/SearchFormOther";
 
 function Main(props) {
 
+
+    const [carsOff, setcarsOff] = useState(false);
+    const [motorOff, setmotorsOff] = useState(true);
+    const [otherOff, setothersOff] = useState(true);
+
+    const [carsHighlights, setcarsHighlights] = useState(auto);
+
+    function toggleCarHighligh() {
+        carsHighlights(autoHighlights);
+    }
 
     function logMeOut() {
         axios({
@@ -76,71 +91,18 @@ function Main(props) {
             <div className="image-background">
                 <div className="filters">
                     <div className="filters-line">
-                        <img src={auto} className="choices-logo"/>
-                        <img src={moto} className="choices-moto"/>
-                        <img src={key} className="choices-key"/><br/>
+                        <img src={auto} onClick={() => setcarsOff(s => !s)} className="choices-logo"/>
+                        <img src={moto} onClick={() => setmotorsOff(s => !s)} className="choices-moto"/>
+                        <img src={key} onClick={() => setothersOff(s => !s)} className="choices-key"/><br/>
                         <text className="text-choices"> Osobowe</text>
                         <text className="text-choices">Motocykle </text>
                         <text className="text-choices">Inne </text>
                     </div>
-                    <div className="input">
-                        <label className="radio">
-                            <input type="radio"  value="new" name="criteria-is.new" /> Nowe
-                        </label>
-                        <label className="radio">
-                            <input type="radio" value="used" name="criteria-is.new" /> Używane
-                        </label>
-                        <label className="radio">
-                            <input type="radio" value="all-cars" name="criteria-is.new" defaultChecked={true}/> Wszystkie
-                        </label><br/>
-                    </div>
 
-                    <input
-                        type="text"
-                        className="car-information"
-                        placeholder="Dowolna marka"/>
-                    <input
-                        type="text"
-                        className="car-information"
-                        placeholder="Dowolny model"/>
-                    <input
-                        type="text"
-                        className="car-year"
-                        placeholder="Rok od"/>
-                    <input
-                        type="text"
-                        className="car-year"
-                        placeholder="Rok do"/>
-                    <input
-                        type="text"
-                        className="car-price"
-                        placeholder="Cena od"/>
-                    <input
-                        type="text"
-                        className="car-price"
-                        placeholder="Cena do"/>
+                        {!carsOff ? <SearchFormCars /> : null}
+                        {!motorOff ? <SearchFormMotorcycles /> : null}
+                        {!otherOff ? <SearchFormOther /> : null}
 
-                    <div className="input">
-                        <label className="radio">
-                            <input type="radio"  value="fuel" name="fuel_type" /> Benzyna
-                        </label>
-                        <label className="radio">
-                            <input type="radio" value="diesel" name="fuel_type" /> Diesel
-                        </label>
-                        <label className="radio">
-                            <input type="radio" value="all_type" name="fuel_type" defaultChecked={true}/> Wszystkie
-                        </label><br/>
-                    </div>
-                    <Link to={"/login"} className="detailed-search">
-                        Szczegółowe wyszukiwanie
-                    </Link>
-                    <button className="search"
-                            // onMouseEnter={handleHover}
-                            // onMouseLeave={handleHover}
-                            // style={{ backgroundColor: buttonColor }}
-                    >
-                        <Link to={"/login"} className="link">Szukaj</Link>
-                    </button>
                 </div>
             </div>
             <div className="popular-offers-text-div">
