@@ -69,7 +69,7 @@ function Login(props) {
                 Zaloguj się
             </div>
         <form className="login-form">
-            <div className="email-container">
+            <div className="email-container-login">
 
                 <input
                     onChange={handleChange}
@@ -77,13 +77,13 @@ function Login(props) {
                     type="email"
                     text={loginForm.email}
                     name="email"
-                    className="email-input"
+                    className="email-input-login"
                     placeholder="Podaj maila"
                     value={loginForm.email}
                 />
             </div>
 
-            <div className="password-container">
+            <div className="password-container-login">
 
                 <input
                     onChange={handleChange}
@@ -91,7 +91,7 @@ function Login(props) {
                     type="password"
                     text={loginForm.password}
                     name="password"
-                    className="password-input"
+                    className="password-input-login"
                     placeholder="Podaj hasło"
                     value={loginForm.password}
                 />
@@ -106,16 +106,21 @@ function Login(props) {
             </button>
 
 
-            <a href="http://localhost:3000" className="text-no-password">
+            <a href="http://localhost:3000" className="text-no-password-login">
                 Nie pamiętam hasła
             </a>
-
-        </form>
-            <div className="for-register">
-                <a href="http://localhost:3000/register" className="text-no-password">
-                    Nie masz jeszcze konta? Zarejestruj się
+            <div className="for-register-login">
+                <a className="text-register-login">
+                Nie masz jeszcze konta?
+                </a>
+                <a href="http://localhost:3000/register" className="text-toregister-login">
+                    Zarejestruj się
                 </a>
             </div>
+
+
+        </form>
+
         </div>
 
     );

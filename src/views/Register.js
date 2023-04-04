@@ -131,7 +131,7 @@ function Register(props) {
             </div>
 
 
-            <button className="button-login"
+            <button className="button-register"
                     onMouseEnter={handleHover}
                     onMouseLeave={handleHover}
                     onClick={handleClick}
