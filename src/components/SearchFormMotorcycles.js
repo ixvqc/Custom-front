@@ -24,7 +24,7 @@ function SearchFormMotorcycles() {
                 <br />
             </div>
 
-            <input type="text" className="car-information" placeholder="Dowolna marka" />
+            <input type="text" className="car-information" placeholder="Dowolna motor" />
             <input type="text" className="car-information" placeholder="Dowolny model" />
             <input type="text" className="car-year" placeholder="Rok od" />
             <input type="text" className="car-year" placeholder="Rok do" />

@@ -16,19 +16,45 @@ import CarCard  from "../components/CarCard";
 import SearchFormCars from "../components/SearchFormCars";
 import SearchFormMotorcycles from "../components/SearchFormMotorcycles";
 import SearchFormOther from "../components/SearchFormOther";
+import { CSSTransition } from 'react-transition-group';
+
 
 function Main(props) {
 
 
-    const [carsOff, setcarsOff] = useState(false);
-    const [motorOff, setmotorsOff] = useState(true);
-    const [otherOff, setothersOff] = useState(true);
+    const [carsOff, setCarsOff] = useState(false);
+    const [motorOff, setMotorOff] = useState(true);
+    const [otherOff, setOtherOff] = useState(true);
 
-    const [carsHighlights, setcarsHighlights] = useState(auto);
+    useEffect(() => {
+        hideCarsClick();
+    }, []);
 
-    function toggleCarHighligh() {
-        carsHighlights(autoHighlights);
-    }
+    const hideCarsClick = () => {
+        setCarsOff(true);
+        setMotorOff(false);
+        setOtherOff(false);
+    };
+
+    const hideMotorClick = () => {
+        setCarsOff(false);
+        setMotorOff(true);
+        setOtherOff(false);
+    };
+
+    const hideOtherClick = () => {
+        setCarsOff(false);
+        setMotorOff(false);
+        setOtherOff(true);
+    };
+
+
+
+  //  const [carsHighlights, setcarsHighlights] = useState(auto);
+
+    // function toggleCarHighligh() {
+    //     carsHighlights(autoHighlights);
+    // }
 
     function logMeOut() {
         axios({
@@ -91,17 +117,43 @@ function Main(props) {
             <div className="image-background">
                 <div className="filters">
                     <div className="filters-line">
-                        <img src={auto} onClick={() => setcarsOff(s => !s)} className="choices-logo"/>
-                        <img src={moto} onClick={() => setmotorsOff(s => !s)} className="choices-moto"/>
-                        <img src={key} onClick={() => setothersOff(s => !s)} className="choices-key"/><br/>
-                        <text className="text-choices"> Osobowe</text>
-                        <text className="text-choices">Motocykle </text>
-                        <text className="text-choices">Inne </text>
+                        <img src={auto} onClick={hideCarsClick} className="choices-logo"/>
+                        <img src={moto} onClick={hideMotorClick} className="choices-moto"/>
+                        <img src={key} onClick={hideOtherClick} className="choices-key"/><br />
+                        <text className="text-choices">Osobowe</text>
+                        <text className="text-choices">Motocykle</text>
+                        <text className="text-choices">Inne</text>
                     </div>
 
-                        {!carsOff ? <SearchFormCars /> : null}
-                        {!motorOff ? <SearchFormMotorcycles /> : null}
-                        {!otherOff ? <SearchFormOther /> : null}
+                    <CSSTransition
+                        in={carsOff}
+                        appear={true}
+                        timeout={500}
+                        classNames="fade-main"
+                        unmountOnExit
+                    >
+                        <SearchFormCars />
+                    </CSSTransition>
+
+                    <CSSTransition
+                        in={motorOff}
+                        appear={true}
+                        timeout={500}
+                        classNames="fade-main"
+                        unmountOnExit
+                    >
+                        <SearchFormMotorcycles />
+                    </CSSTransition>
+
+                    <CSSTransition
+                        in={otherOff}
+                        appear={true}
+                        timeout={500}
+                        classNames="fade-main"
+                        unmountOnExit
+                    >
+                        <SearchFormOther />
+                    </CSSTransition>
 
                 </div>
             </div>
