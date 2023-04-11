@@ -17,7 +17,6 @@ import SearchFormCars from "../components/SearchFormCars";
 import SearchFormMotorcycles from "../components/SearchFormMotorcycles";
 import SearchFormOther from "../components/SearchFormOther";
 import { CSSTransition } from 'react-transition-group';
-import CarCard from "../components/CarCard";
 
 
 export default function Main(props) {
@@ -256,65 +255,6 @@ export default function Main(props) {
                     >
                         <SearchFormOther />
                     </CSSTransition>
-                    <input
-                        name="marka"
-                        type="text"
-                        className="car-information"
-                        onChange={handleChange}
-                        placeholder="Dowolna marka"/>
-                    <input
-                        name="model"
-                        type="text"
-                        className="car-information"
-                        onChange={handleChange}
-                        placeholder="Dowolny model"/>
-                    <input
-                        name="rokOd"
-                        type="text"
-                        className="car-year"
-                        onChange={handleChange}
-                        placeholder="Rok od"/>
-                    <input
-                        name="rokDo"
-                        type="text"
-                        className="car-year"
-                        onChange={handleChange}
-                        placeholder="Rok do"/>
-                    <input
-                        name="cenaOd"
-                        type="text"
-                        className="car-price"
-                        onChange={handleChange}
-                        placeholder="Cena od"/>
-                    <input
-                        name="cenaDo"
-                        type="text"
-                        className="car-price"
-                        onChange={handleChange}
-                        placeholder="Cena do"/>
-
-                    <div className="input">
-                        <label className="radio">
-                            <input type="radio"  onChange={handleChange} value="Benzyna" name="fuel_type" /> Benzyna
-                        </label>
-                        <label className="radio">
-                            <input type="radio"  onChange={handleChange} value="diesel" name="fuel_type" /> Diesel
-                        </label>
-                        <label className="radio">
-                            <input type="radio"  onChange={handleChange} value="%" name="fuel_type" defaultChecked={true}/> Wszystkie
-                        </label><br/>
-                    </div>
-                    {/*<Link to={"/login"} className="detailed-search">*/}
-                    {/*    Szczegółowe wyszukiwanie*/}
-                    {/*</Link>*/}
-                    <button className="search"
-                            onClick = {popUpOffer}
-                        // onMouseEnter={handleHover}
-                        // onMouseLeave={handleHover}
-                        // style={{ backgroundColor: buttonColor }
-                    >
-                        Szukaj
-                    </button>
 
                 </div>
             </div>
