@@ -17,7 +17,6 @@ import SearchFormCars from "../components/SearchFormCars";
 import SearchFormMotorcycles from "../components/SearchFormMotorcycles";
 import SearchFormOther from "../components/SearchFormOther";
 import { CSSTransition } from 'react-transition-group';
-import CarCard from "../components/CarCard";
 
 
 export default function Main(props) {
