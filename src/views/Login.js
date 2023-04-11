@@ -28,7 +28,7 @@ function Login(props) {
                 console.log(error.response.status)
                 console.log(error.response.headers)
             }
-        })
+            })
 
         setloginForm(({
             email: "",

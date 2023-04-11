@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import '../styles/Main.css';
 import auto from "../assets/img/car.png";
 import key from "../assets/img/car-key.png";
@@ -9,10 +9,31 @@ import car2 from "../assets/img/car2.jpg";
 import car3 from "../assets/img/car3.jpg";
 import logo from "../assets/img/logov2.png";
 import axios from "axios";
-import CarCard  from "../components/CarCard";
+import CarCard from "../components/CarCard";
 
 
-function Main(props) {
+export default function Main(props) {
+
+
+
+
+
+    const [registerForm, setregisterForm] = useState({
+        marka: "",
+        model: "",
+        rokOd: "",
+        rokDo: "",
+        cenaOd: "",
+        cenaDo: "",
+        fuel_type: ""
+    })
+
+
+    function handleChange(event) {
+        const {value, name} = event.target
+        setregisterForm(prevNote => ({
+            ...prevNote, [name]: value})
+        )}
 
 
     function logMeOut() {
@@ -29,6 +50,80 @@ function Main(props) {
                 console.log(error.response.headers)
             }
         })}
+
+
+    const [marka, setMarka] = React.useState(null);
+    const [cena, setCena] = React.useState(null);
+    const [rok, setRok] = React.useState(null);
+    const [przebieg, setPrzebieg] = React.useState(null);
+    const [paliwo, setPaliwo] = React.useState(null);
+    const [image, setImage] = React.useState(null);
+
+    const [isActive, setIsActive] = useState(false);
+    function popUpOffer(event) {
+        axios({
+            method: "POST",
+            url:"/offerData",
+            data:{
+                marka: registerForm.marka,
+                model: registerForm.model,
+                rokOd: registerForm.rokOd,
+                rokDo: registerForm.rokDo,
+                cenaOd: registerForm.cenaOd,
+                cenaDo: registerForm.cenaDo,
+                fuel_type: registerForm.fuel_type
+            }
+        })
+            .then((response) => {
+                sessionStorage.setItem("brand", response.data.brand)
+                setMarka(sessionStorage.getItem("brand") )
+                sessionStorage.setItem("year", response.data.year)
+                setRok(sessionStorage.getItem("year"))
+                sessionStorage.setItem("mileage", response.data.mileage)
+                setPrzebieg(sessionStorage.getItem("mileage")/1000 + " tys")
+                sessionStorage.setItem("fuel_type", response.data.fuel_type)
+                setPaliwo(sessionStorage.getItem("fuel_type"))
+                sessionStorage.setItem("price", response.data.price)
+                setCena(sessionStorage.getItem("price") + " zł")
+                let imageURL;
+                imageURL = URL.createObjectURL(response.data.fimag)
+                sessionStorage.setItem("image", imageURL)
+                setImage(sessionStorage.getItem("image"))
+            }).catch((error) => {
+            if (error.response) {
+                console.log(error.response)
+                console.log(error.response.status)
+                console.log(error.response.headers)
+            }
+            })
+        event.preventDefault()
+
+        sessionStorage.setItem("offerImage", 'https://www.willow-car-sales.co.uk/wp-content/uploads/2019/11/placeholder-image-1.jpg');
+        var offerImage = sessionStorage.getItem("offerImage")
+        setImage(offerImage)
+        setIsActive(true)
+    }
+
+
+
+
+    const offerData = async (event) => {
+        // try {
+        //     const res = await axios.get("/offerData")
+        //     console.log(res);
+        // }
+        // catch (error){
+        //     console.log(error)
+        // }
+        //document.getElementById("place-to-add-offer").style.display = "inline-block"
+    };
+
+    useEffect(() => {
+        offerData();
+    },[]);
+    // function popUpOffer() {
+    //     //document.getElementById("place-to-add-offer").style.display = "inline-block"
+    // }
 
 
 //BUTTON ADD OFFERT
@@ -48,31 +143,32 @@ function Main(props) {
 
             <div className="nav">
 
-            <div className="logo-div">
+                <div className="logo-div">
                     <img src={logo} className="logo-main"/>
 
-            </div>
+                </div>
 
                 {/*<button onClick={logMeOut}>*/}
                 {/*    Logout*/}
                 {/*</button>*/}
 
-            <Link to={"/login"} className="link">
+                <Link to={"/login"} className="link">
                     Zaloguj się
                 </Link>
                 <Link to={"/register"} className="link">
                     Rejestracja
                 </Link>
                 <button className="add-adv"
-                        // onMouseEnter={handleHover}
-                        // onMouseLeave={handleHover}
-                        // style={{ backgroundColor: buttonColor }}
-                    >
+                    // onMouseEnter={handleHover}
+                    // onMouseLeave={handleHover}
+                    // style={{ backgroundColor: buttonColor }}
+                >
                     <Link to={"/login"} className="link">Dodaj ogłoszenie + </Link>
                 </button>
 
             </div>
 
+            <form>
             <div className="image-background">
                 <div className="filters">
                     <div className="filters-line">
@@ -96,52 +192,76 @@ function Main(props) {
                     </div>
 
                     <input
+                        name="marka"
                         type="text"
                         className="car-information"
+                        onChange={handleChange}
                         placeholder="Dowolna marka"/>
                     <input
+                        name="model"
                         type="text"
                         className="car-information"
+                        onChange={handleChange}
                         placeholder="Dowolny model"/>
                     <input
+                        name="rokOd"
                         type="text"
                         className="car-year"
+                        onChange={handleChange}
                         placeholder="Rok od"/>
                     <input
+                        name="rokDo"
                         type="text"
                         className="car-year"
+                        onChange={handleChange}
                         placeholder="Rok do"/>
                     <input
+                        name="cenaOd"
                         type="text"
                         className="car-price"
+                        onChange={handleChange}
                         placeholder="Cena od"/>
                     <input
+                        name="cenaDo"
                         type="text"
                         className="car-price"
+                        onChange={handleChange}
                         placeholder="Cena do"/>
 
                     <div className="input">
                         <label className="radio">
-                            <input type="radio"  value="fuel" name="fuel_type" /> Benzyna
+                            <input type="radio"  onChange={handleChange} value="Benzyna" name="fuel_type" /> Benzyna
                         </label>
                         <label className="radio">
-                            <input type="radio" value="diesel" name="fuel_type" /> Diesel
+                            <input type="radio"  onChange={handleChange} value="diesel" name="fuel_type" /> Diesel
                         </label>
                         <label className="radio">
-                            <input type="radio" value="all_type" name="fuel_type" defaultChecked={true}/> Wszystkie
+                            <input type="radio"  onChange={handleChange} value="%" name="fuel_type" defaultChecked={true}/> Wszystkie
                         </label><br/>
                     </div>
-                    <Link to={"/login"} className="detailed-search">
-                        Szczegółowe wyszukiwanie
-                    </Link>
+                    {/*<Link to={"/login"} className="detailed-search">*/}
+                    {/*    Szczegółowe wyszukiwanie*/}
+                    {/*</Link>*/}
                     <button className="search"
-                            // onMouseEnter={handleHover}
-                            // onMouseLeave={handleHover}
-                            // style={{ backgroundColor: buttonColor }}
+                            onClick = {popUpOffer}
+                        // onMouseEnter={handleHover}
+                        // onMouseLeave={handleHover}
+                        // style={{ backgroundColor: buttonColor }
                     >
-                        <Link to={"/login"} className="link">Szukaj</Link>
+                        Szukaj
                     </button>
                 </div>
+            </div>
+            </form>
+            <div style={{display : !isActive ? 'none' : "inline-block"}} className="popular-offers-text-div" id="place-to-add-offer">
+                <CarCard id = "offerCard"
+                    ImageCar={image}
+                    CarBrand={marka}
+                    CarPrice={cena}
+                    ProductionDate={rok}
+                    CarMileage={przebieg}
+                    FuelType={paliwo}
+                    />
             </div>
             <div className="popular-offers-text-div">
                 <text className="popular-offers-text">Najpopularniejsze oferty </text>
@@ -151,7 +271,7 @@ function Main(props) {
 
 
             <div className="popular-offers-homepage">
-                  <CarCard
+                <CarCard
                     ImageCar={car1}
                     CarBrand={"Volvo"}
                     CarPrice={"99 876 zł"}
@@ -159,7 +279,7 @@ function Main(props) {
                     CarMileage={"193 tys"}
                     FuelType={"diesel"}
 
-                  />
+                />
                 <CarCard
                     ImageCar={car2}
                     CarBrand={"Mitshubishi"}
@@ -206,21 +326,21 @@ function Main(props) {
 
                 />
 
-                    {/*{*/}
-                    {/*    data.forEach((i) => {*/}
-                    {/*        return (*/}
-                    {/*            <CarCard*/}
-                    {/*                ImageCar={i.image}*/}
-                    {/*                CarBrand={i.name}*/}
-                    {/*                CarPrice={i.price}*/}
-                    {/*                ProductionDate={"2012"}*/}
-                    {/*                CarMileage={"193 tys"}*/}
-                    {/*                FuelType={"diesel"}*/}
+                {/*{*/}
+                {/*    data.forEach((i) => {*/}
+                {/*        return (*/}
+                {/*            <CarCard*/}
+                {/*                ImageCar={i.image}*/}
+                {/*                CarBrand={i.name}*/}
+                {/*                CarPrice={i.price}*/}
+                {/*                ProductionDate={"2012"}*/}
+                {/*                CarMileage={"193 tys"}*/}
+                {/*                FuelType={"diesel"}*/}
 
-                    {/*            />*/}
-                    {/*        )*/}
-                    {/*    })*/}
-                    {/*}*/}
+                {/*            />*/}
+                {/*        )*/}
+                {/*    })*/}
+                {/*}*/}
 
 
 
@@ -231,5 +351,3 @@ function Main(props) {
 
     );
 }
-
-export default Main;
