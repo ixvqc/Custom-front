@@ -20,6 +20,7 @@
 .logo-div{
     height: 10%;
     width: 10%;
+
 }
 
 .logo-main{
@@ -297,4 +298,22 @@
     margin-top:3vh;
     margin-left:1vw;
 
+}
+
+.fade-main-enter {
+    opacity: 0;
+}
+
+.fade-main-enter-active {
+    opacity: 0;
+    transition: opacity 400ms linear 400ms;
+}
+
+.fade-main-exit {
+    opacity: 0;
+}
+
+.fade-main-exit-active {
+    opacity: 0;
+    transition: opacity 0ms ease-in;
 }
