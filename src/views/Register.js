@@ -80,7 +80,6 @@ function Register(props) {
             if (registerForm.password.match(passw) && (registerForm.password === registerForm.repassword)) {
                 setPasswordIsOk(false)
 
-
             } else {
                 setPasswordIsOk(true)
 
