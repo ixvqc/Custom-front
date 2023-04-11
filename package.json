@@ -13,6 +13,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
+    "react-password-checklist": "^1.4.3",
     "react-password-strength-bar": "^0.4.1",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",

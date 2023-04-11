@@ -4,6 +4,8 @@
     margin-top: 10vh;
     height: 13vh;
     width: 10vw;
+    filter:blur(3px);
+
 
 }
 .tlo-Register {
@@ -13,85 +15,104 @@
     min-width: 100%;
     position: center;
     min-height: 100vh;
-    font-family: "Poppins", sans-serif;
     background-size: cover;
     background-position: center;
+    font-family: Arial, Helvetica, sans-serif;
 
 }
-.custom-color{
-    margin-left: 5vw;
-    margin-top: 10vh;
-    font-size: 45px;
-    font-weight: bolder;
-    font-style: italic;
-    color: #FDCF28;
-    text-decoration: none;
+.register-background{
+    box-shadow: 6px 5px  35px gray;
+    width:70%;
+    height:60vh;
+    position:fixed;
+    margin-left:15%;
+
 }
 
-.login-text{
+.register-text{
     margin-left: 11vw;
     margin-top: 10vh;
     font-size: 150%;
 
 }
 
-.email-container{
+
+.email-container-register{
     margin-left: 5vw;
 
 }
- .email-input{
+ .email-input-register{
      margin-top: 2vh;
      padding: 1.5vh 3vw;
      width: 18vw;
      font-size: 120%;
+    border: 2px solid rgba(0, 0, 0, 0.10);
 
 
  }
-input::placeholder {
-    color: black;
+.email-input-register:focus{
+    outline-color:gray;
 }
-.username-container{
+
+
+.username-container-register{
     margin-left: 5vw;
 
 }
-.username-input{
+.username-input-register{
     margin-top: 2vh;
     padding: 1.5vh 3vw;
     width: 18vw;
     font-size: 120%;
-
+    border: 2px solid rgba(0, 0, 0, 0.10);
 
 }
+.username-input-register:focus{
+    outline-color:gray;
+}
+
 .password-container{
     margin-left: 5vw;
 
 }
-.password-input{
+.password-input-register{
     margin-top: 2vh;
     padding: 1.5vh 3vw;
     width: 18vw;
     font-size: 120%;
+    border: 2px solid rgba(0, 0, 0, 0.10);
+
 
 
 }
+.password-input-register:focus{
+    outline-color:gray;
 
+}
 .password-bar-register{
     height: 0.9vh;
     width: 24vw;
-    margin-top:1vh;
+    margin-top:1.2vh;
+    margin-bottom:1vh;
 }
 
 .repassword-container{
     margin-left: 5vw;
 
 }
-.repassword-input{
+.repassword-input-register{
     margin-top: 2vh;
     padding: 1.5vh 3vw;
     width: 18vw;
     font-size: 120%;
+    border: 2px solid rgba(0, 0, 0, 0.10);
+
 }
 
+.repassword-input-register:focus{
+    outline-color:gray;
+
+}
 .button-register{
     margin-left: 5vw;
     margin-top: 5vh;
