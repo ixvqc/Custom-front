@@ -122,7 +122,7 @@ function Register(props) {
                     onChange={handleChange}
                     style={{border: '2px solid rgba(0, 0, 0, 0.31)'}}
                     name="repassword"
-                    type="repassword"
+                    type="password"
                     text={registerForm.repassword}
                     className="repassword-input"
                     placeholder="Powtórz hasło"

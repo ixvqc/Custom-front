@@ -21,6 +21,10 @@ import { CSSTransition } from 'react-transition-group';
 
 function Main(props) {
 
+    const [imageSrc, setImageSrc] = useState(auto);
+    function handleClick(src) {
+        setImageSrc(src);
+    }
 
     const [carsOff, setCarsOff] = useState(false);
     const [motorOff, setMotorOff] = useState(true);
@@ -117,13 +121,14 @@ function Main(props) {
             <div className="image-background">
                 <div className="filters">
                     <div className="filters-line">
-                        <img src={auto} onClick={hideCarsClick} className="choices-logo"/>
-                        <img src={moto} onClick={hideMotorClick} className="choices-moto"/>
-                        <img src={key} onClick={hideOtherClick} className="choices-key"/><br />
+                        <img src={imageSrc === auto ? autoHighlights : auto} onClick={() => { handleClick(auto); hideCarsClick(); }} className="choices-logo"/>
+                        <img src={imageSrc === moto ? motoHighlights : moto} onClick={() => { handleClick(moto); hideMotorClick();}} className="choices-moto"/>
+                        <img src={imageSrc === key ? keyHighlights : key} onClick={() => { handleClick(key); hideOtherClick(); }} className="choices-key"/><br />
                         <text className="text-choices">Osobowe</text>
                         <text className="text-choices">Motocykle</text>
                         <text className="text-choices">Inne</text>
                     </div>
+
 
                     <CSSTransition
                         in={carsOff}
