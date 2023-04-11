@@ -1,10 +1,13 @@
 from flask import Flask, render_template, jsonify, request
+from io import BytesIO
 from flask_cors import CORS
+from bs4 import UnicodeDammit
 from flask_sqlalchemy import SQLAlchemy
 import oracledb as odb
 import json
 from datetime import datetime, timedelta
 import random as rng
+import base64
 from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
                                unset_jwt_cookies, jwt_required, JWTManager
 
@@ -136,6 +139,113 @@ def refresh_expiring_jwts(response):
     except (RuntimeError, KeyError):
         # Case where there is not a valid JWT. Just return the original respone
         return response
+
+
+
+@app.route("/offerData", methods = ['GET','POST'])
+def offerData():
+    marka = request.json.get("marka", None)
+    model = request.json.get("model", None)
+    rokOd = request.json.get("rokOd", None)
+    rokDo = request.json.get("rokDo", None)
+    cenaOd = request.json.get("cenaOd", None)
+    cenaDo = request.json.get("cenaDo", None)
+    paliwo = request.json.get("fuel_type", None)
+
+    print('sprawdzenie')
+    if len(marka) == 0:
+        marka = '%'
+    print(marka)
+
+    if len(model) == 0:
+        model = '%'
+    print(model)
+
+    if len(rokOd) == 0:
+        rokOd = 1
+    print(rokOd)
+
+    if len(rokDo) == 0:
+        rokDo = 3000
+    print(rokDo)
+
+    if len(cenaOd) == 0:
+        cenaOd = '1'
+    print(cenaOd)
+
+
+    if len(cenaDo) == 0:
+        cenaDo = '999999999'
+    print(cenaDo)
+
+    if len(paliwo) == 0:
+        paliwo = '%'
+    print(paliwo)
+
+
+
+    connection = odb.connect(user="s101230", password="s101230", dsn="217.173.198.135:1521/tpdb")
+    cur = connection.cursor()
+
+    # retrieve the last expert ID
+
+    query = "SELECT PRICE FROM OFFER INNER JOIN VEHICLE ON OFFER.VEHICLE_VEHICLE_ID = VEHICLE.VEHICLE_ID WHERE VEHICLE.BRAND LIKE :markastr AND VEHICLE.MODEL LIKE :modelstr AND VEHICLE.FUEL_TYPE LIKE :paliwostr AND extract(YEAR from vehicle.prod_date) BETWEEN :rok1 and :rok2 AND OFFER.PRICE BETWEEN :cena1 and :cena2"
+    cur.execute(query, markastr = marka, modelstr = model, paliwostr = paliwo, rok1 = rokOd, rok2 = rokDo, cena1 = cenaOd, cena2 = cenaDo)
+    result = cur.fetchall()
+    print("Result po query: ", result)
+
+    i = 0
+    while i:
+        if len(result[i][0]) > 0:
+            return
+        i = i + 1
+        print('I in loop', i)
+
+    print('I out of loop', i)
+
+    i = 0
+    x = i
+
+    price = result[x][0]
+
+
+
+    query = "SELECT BRAND, PROD_DATE, MILEAGE, FUEL_TYPE, IMAGE FROM VEHICLE INNER JOIN OFFER ON VEHICLE.OFFER_OFFER_ID = OFFER.OFFER_ID WHERE VEHICLE.BRAND LIKE :markastr AND VEHICLE.MODEL LIKE :modelstr AND VEHICLE.FUEL_TYPE LIKE :paliwostr AND extract(YEAR from vehicle.prod_date) BETWEEN :rok1 and :rok2 AND OFFER.PRICE BETWEEN :cena1 and :cena2"
+    cur.execute(query, markastr = marka, modelstr = model, paliwostr = paliwo, rok1 = rokOd, rok2 = rokDo, cena1 = cenaOd, cena2 = cenaDo)
+    result = cur.fetchall()
+
+    print("===================================================")
+    print("Dlugosc: ", len(result))
+
+    imageBLOB = result[x][4]
+
+    fimag = str(imageBLOB.read())
+    #print(fimag)
+
+
+    print(result)
+
+    if len(result) == 0:
+        print("Result to Null")
+        return {"msg": "Nie ma takiego pojazdu"}, 401
+
+    if result[x][0] != "":
+        brand = result[x][0]
+        year = result[x][1].year
+        mileage = int(result[x][2])
+        fuel_type = result[x][3]
+        print(brand)
+        print(year)
+        print(price)
+        response = {"brand" : brand,"year" : year, "mileage" : mileage, "fuel_type" : fuel_type, "price" : price, "fimag" : fimag}
+
+    else:
+        print("Zły" + marka)
+        return {"msg": "Złe dane"}, 401
+
+
+    return response
+
 
 
 if __name__ == "__main__":
