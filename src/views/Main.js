@@ -236,13 +236,14 @@ export default function Main(props) {
                         <div>
                             <div className="input">
                                 <label className="radio">
-                                    <input type="radio" value="new" name="criteria-is.new" /> Nowe
+                                    <input onChange={handleChange} type="radio" value="new" name="criteria-is.new" /> Nowe
                                 </label>
                                 <label className="radio">
-                                    <input type="radio" value="used" name="criteria-is.new" /> Używane
+                                    <input onChange={handleChange} type="radio" value="used" name="criteria-is.new" /> Używane
                                 </label>
                                 <label className="radio">
                                     <input
+                                        onChange={handleChange}
                                         type="radio"
                                         value="all-cars"
                                         name="criteria-is.new"
@@ -253,24 +254,25 @@ export default function Main(props) {
                                 <br />
                             </div>
 
-                            <input type="text" className="car-information" placeholder="Dowolna auto" />
-                            <input type="text" className="car-information" placeholder="Dowolny model" />
-                            <input type="text" className="car-year" placeholder="Rok od" />
-                            <input type="text" className="car-year" placeholder="Rok do" />
-                            <input type="text" className="car-price" placeholder="Cena od" />
-                            <input type="text" className="car-price" placeholder="Cena do" />
+                            <input onChange={handleChange} type="text" className="car-information" placeholder="Dowolne auto" name = "marka"/>
+                            <input onChange={handleChange} type="text" className="car-information" placeholder="Dowolny model" name = "model"/>
+                            <input onChange={handleChange} type="text" className="car-year" placeholder="Rok od" />
+                            <input onChange={handleChange} type="text" className="car-year" placeholder="Rok do" />
+                            <input onChange={handleChange} type="text" className="car-price" placeholder="Cena od" />
+                            <input onChange={handleChange} type="text" className="car-price" placeholder="Cena do" />
 
                             <div className="input">
                                 <label className="radio">
-                                    <input type="radio" value="fuel" name="fuel_type" /> Benzyna
+                                    <input onChange={handleChange} type="radio" value="fuel" name="fuel_type" /> Benzyna
                                 </label>
                                 <label className="radio">
-                                    <input type="radio" value="diesel" name="fuel_type" /> Diesel
+                                    <input onChange={handleChange} type="radio" value="diesel" name="fuel_type" /> Diesel
                                 </label>
                                 <label className="radio">
                                     <input
+                                        onChange={handleChange}
                                         type="radio"
-                                        value="all_type"
+                                        value="%"
                                         name="fuel_type"
                                         defaultChecked={true}
                                     />{" "}
@@ -282,10 +284,8 @@ export default function Main(props) {
                             <Link to={"/login"} className="detailed-search">
                                 Szczegółowe wyszukiwanie
                             </Link>
-                            <button className="search">
-                                <Link to={"/login"} className="link">
+                            <button className="search" onClick={popUpOffer}>
                                     Szukaj
-                                </Link>
                             </button>
                         </div>
                     </CSSTransition>
