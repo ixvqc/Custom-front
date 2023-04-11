@@ -15,16 +15,24 @@
     margin-top: 10vh;
     height: 13vh;
     width: 10vw;
+    filter:blur(3px);
+
 }
 
 .login-text{
-    margin-left: 17vw;
+    margin-left: 11vw;
     margin-top: 10vh;
-    font-size: 2.2vw;
-    font-style: italic;
-    font-weight: bolder;
+    font-size: 150%;
 }
 
+.login-background{
+    box-shadow: 6px 5px  35px gray;
+    width:70%;
+    height:55vh;
+    position:fixed;
+    margin-left:15%;
+
+}
 
 
 .email-container-login {

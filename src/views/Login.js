@@ -64,6 +64,7 @@ function Login(props) {
                     <img src={logo} alt="Main.js Logo" className="logo_login" />
                 </a>
             </nav>
+            <div className="login-background">
 
             <div className="login-text">
                 Zaloguj się
@@ -121,6 +122,7 @@ function Login(props) {
 
         </form>
 
+        </div>
         </div>
 
     );
