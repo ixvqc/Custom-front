@@ -217,9 +217,9 @@ def offerData():
     print("===================================================")
     print("Dlugosc: ", len(result))
 
-    imageBLOB = result[x][4]
+    #imageBLOB = result[x][4]
 
-    fimag = str(imageBLOB.read())
+   # fimag = str(imageBLOB.read())
     #print(fimag)
 
 
@@ -237,7 +237,7 @@ def offerData():
         print(brand)
         print(year)
         print(price)
-        response = {"brand" : brand,"year" : year, "mileage" : mileage, "fuel_type" : fuel_type, "price" : price, "fimag" : fimag}
+        response = {"brand" : brand,"year" : year, "mileage" : mileage, "fuel_type" : fuel_type, "price" : price}
 
     else:
         print("Zły" + marka)

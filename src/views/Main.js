@@ -107,7 +107,7 @@ export default function Main(props) {
     const [isActive, setIsActive] = useState(false);
     function popUpOffer(event) {
         axios({
-            method: "POST",
+            method: "GET",
             url:"/offerData",
             data:{
                 marka: registerForm.marka,
@@ -143,7 +143,7 @@ export default function Main(props) {
             })
         event.preventDefault()
 
-        sessionStorage.setItem("offerImage", 'https://www.willow-car-sales.co.uk/wp-content/uploads/2019/11/placeholder-image-1.jpg');
+        sessionStorage.setItem("offerImage", 'https://www.wyborkierowcow.pl/wp-content/uploads/2022/09/bmw-serii-3-e36-cennik-1.jpg');
         var offerImage = sessionStorage.getItem("offerImage")
         setImage(offerImage)
         setIsActive(true)
