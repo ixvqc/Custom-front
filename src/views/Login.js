@@ -3,8 +3,31 @@ import {useState, useEffect} from "react";
 import '../styles/Login.css';
 import logo from '../assets/img/logov2.png';
 import axios from "axios";
+import React, { useRef } from "react";
+import {firestore} from "../firebase";
+import {addDoc,collection} from "@firebase/firestore";
+
 
 function Login(props) {
+
+    const messageRef = useRef();
+    const ref = collection(firestore,"messages");
+
+    const handleSave = async(e)=>{
+        e.preventDefault();
+        console.log(messageRef.current.value);
+
+        let data = {
+            message:messageRef.current.value,
+        }
+
+        try{
+            addDoc(ref,data);
+        }catch (e){
+            console.log(e);
+        }
+
+    }
 
     const [loginForm, setloginForm] = useState({
         email: "",
@@ -121,7 +144,11 @@ function Login(props) {
 
 
         </form>
-
+                <form onSubmit={handleSave}>
+                    <label>Tu cos</label>
+                    <input type="text" ref={messageRef} />
+                    <button type="submit" >Send</button>
+                </form>
         </div>
         </div>
 
