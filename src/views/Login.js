@@ -6,28 +6,56 @@ import axios from "axios";
 import React, { useRef } from "react";
 import {firestore} from "../firebase";
 import {addDoc,collection} from "@firebase/firestore";
-
+import {storage} from "../firebase";
+import {ref, uploadBytes, listAll,getDownloadURL} from "firebase/storage";
+import { v4 } from "uuid";
 
 function Login(props) {
 
-    const messageRef = useRef();
-    const ref = collection(firestore,"messages");
 
+    const [imageUpload, setImageUpload] = useState(null);
+    const [imageList, setImageList] = useState([]);
+
+    const  imageListRef = ref(storage, "images/")
+    const  uploadImage = () => {
+        if (imageUpload == null)return;
+        const imageRef = ref(storage, `images/${imageUpload.name}`);
+        uploadBytes(imageRef, imageUpload).then((snaphsot)=>{
+            getDownloadURL(snaphsot.ref).then((url)=>{
+                setImageList((prev) => [...prev, url]);
+            });
+        });
+    };
+
+    useEffect(() => {
+        listAll(imageListRef).then((response)=>{
+            response.items.forEach((item) =>{
+                getDownloadURL(item).then((url)=>{
+                    setImageList((prev)=>[...prev,url]);
+                });
+            })
+        })
+    }, []);
+
+    const messageRef = useRef();
+    const refFirestore= collection(firestore,"Client");
     const handleSave = async(e)=>{
         e.preventDefault();
         console.log(messageRef.current.value);
 
         let data = {
-            message:messageRef.current.value,
+            Name:messageRef.current.value,
         }
 
         try{
-            addDoc(ref,data);
+            addDoc(refFirestore,data);
         }catch (e){
             console.log(e);
         }
 
     }
+
+
 
     const [loginForm, setloginForm] = useState({
         email: "",
@@ -149,6 +177,14 @@ function Login(props) {
                     <input type="text" ref={messageRef} />
                     <button type="submit" >Send</button>
                 </form>
+                <input type="file" onChange={(event) => {
+                    setImageUpload(event.target.files[0]);
+                }}/>
+                <button onClick={uploadImage} > Upload Image </button>
+
+                {imageList.map((url)=>{
+                    return <img src={url} className="TestFirebase"/>
+                })}
         </div>
         </div>
 
