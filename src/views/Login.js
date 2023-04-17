@@ -9,6 +9,8 @@ import {addDoc,collection} from "@firebase/firestore";
 import {storage} from "../firebase";
 import {ref, uploadBytes, listAll,getDownloadURL} from "firebase/storage";
 import { v4 } from "uuid";
+import SignIn  from "../components/SignIn";
+import ChatBox from "../components/ChatBox";
 
 function Login(props) {
 
@@ -172,19 +174,22 @@ function Login(props) {
 
 
         </form>
-                <form onSubmit={handleSave}>
-                    <label>Tu cos</label>
-                    <input type="text" ref={messageRef} />
-                    <button type="submit" >Send</button>
-                </form>
-                <input type="file" onChange={(event) => {
-                    setImageUpload(event.target.files[0]);
-                }}/>
-                <button onClick={uploadImage} > Upload Image </button>
+                {/*<form onSubmit={handleSave}>*/}
+                {/*    <label>Tu cos</label>*/}
+                {/*    <input type="text" ref={messageRef} />*/}
+                {/*    <button type="submit" >Send</button>*/}
+                {/*</form>*/}
+                {/*<input type="file" onChange={(event) => {*/}
+                {/*    setImageUpload(event.target.files[0]);*/}
+                {/*}}/>*/}
+                {/*<button onClick={uploadImage} > Upload Image </button>*/}
 
-                {imageList.map((url)=>{
-                    return <img src={url} className="TestFirebase"/>
-                })}
+                {/*{imageList.map((url)=>{*/}
+                {/*    return <img src={url} className="TestFirebase"/>*/}
+                {/*})}*/}
+
+
+                    <SignIn />
         </div>
         </div>
 
