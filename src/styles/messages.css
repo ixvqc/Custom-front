@@ -78,11 +78,11 @@
     text-decoration: none;
     color:black;
 }
+
 .windows-messages{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top:10vh ;
 }
 .Left-window-messages{
     height:74vh;
@@ -99,6 +99,8 @@
     background-color: rgba(182, 182, 182, 0.29);
     flex-direction: row;
     display: flex;
+
+
 
 }
 .sell-or-buy-messages{
