@@ -9,6 +9,8 @@ import {addDoc,collection} from "@firebase/firestore";
 import {storage} from "../firebase";
 import {ref, uploadBytes, listAll,getDownloadURL} from "firebase/storage";
 import { v4 } from "uuid";
+import SignIn  from "../components/SignIn";
+import ChatBox from "../components/ChatBox";
 
 function Login(props) {
 
@@ -79,7 +81,7 @@ function Login(props) {
                 console.log(error.response.status)
                 console.log(error.response.headers)
             }
-            })
+        })
 
         setloginForm(({
             email: "",
@@ -117,75 +119,78 @@ function Login(props) {
             </nav>
             <div className="login-background">
 
-            <div className="login-text">
-                Zaloguj się
-            </div>
-        <form className="login-form">
-            <div className="email-container-login">
+                <div className="login-text">
+                    Zaloguj się
+                </div>
+                <form className="login-form">
+                    <div className="email-container-login">
 
-                <input
-                    onChange={handleChange}
-                    style={{border: '2px solid rgba(0, 0, 0, 0.31)'}}
-                    type="email"
-                    text={loginForm.email}
-                    name="email"
-                    className="email-input-login"
-                    placeholder="Podaj maila"
-                    value={loginForm.email}
-                />
-            </div>
+                        <input
+                            onChange={handleChange}
+                            style={{border: '2px solid rgba(0, 0, 0, 0.31)'}}
+                            type="email"
+                            text={loginForm.email}
+                            name="email"
+                            className="email-input-login"
+                            placeholder="Podaj maila"
+                            value={loginForm.email}
+                        />
+                    </div>
 
-            <div className="password-container-login">
+                    <div className="password-container-login">
 
-                <input
-                    onChange={handleChange}
-                    style={{border: '2px solid rgba(0, 0, 0, 0.31)'}}
-                    type="password"
-                    text={loginForm.password}
-                    name="password"
-                    className="password-input-login"
-                    placeholder="Podaj hasło"
-                    value={loginForm.password}
-                />
-            </div>
+                        <input
+                            onChange={handleChange}
+                            style={{border: '2px solid rgba(0, 0, 0, 0.31)'}}
+                            type="password"
+                            text={loginForm.password}
+                            name="password"
+                            className="password-input-login"
+                            placeholder="Podaj hasło"
+                            value={loginForm.password}
+                        />
+                    </div>
 
-            <button className="button-login"
-                    onMouseEnter={handleHover}
-                    onMouseLeave={handleHover}
-                    onClick={logMeIn}
-                    style={{ backgroundColor: buttonColor }}>
-                Zaloguj się
-            </button>
-
-
-            <a href="http://localhost:3000" className="text-no-password-login">
-                Nie pamiętam hasła
-            </a>
-            <div className="for-register-login">
-                <a className="text-register-login">
-                Nie masz jeszcze konta?
-                </a>
-                <a href="http://localhost:3000/register" className="text-toregister-login">
-                    Zarejestruj się
-                </a>
-            </div>
+                    <button className="button-login"
+                            onMouseEnter={handleHover}
+                            onMouseLeave={handleHover}
+                            onClick={logMeIn}
+                            style={{ backgroundColor: buttonColor }}>
+                        Zaloguj się
+                    </button>
 
 
-        </form>
-                <form onSubmit={handleSave}>
-                    <label>Tu cos</label>
-                    <input type="text" ref={messageRef} />
-                    <button type="submit" >Send</button>
+                    <a href="http://localhost:3000" className="text-no-password-login">
+                        Nie pamiętam hasła
+                    </a>
+                    <div className="for-register-login">
+                        <a className="text-register-login">
+                            Nie masz jeszcze konta?
+                        </a>
+                        <a href="http://localhost:3000/register" className="text-toregister-login">
+                            Zarejestruj się
+                        </a>
+                    </div>
+
+
                 </form>
-                <input type="file" onChange={(event) => {
-                    setImageUpload(event.target.files[0]);
-                }}/>
-                <button onClick={uploadImage} > Upload Image </button>
+                {/*<form onSubmit={handleSave}>*/}
+                {/*    <label>Tu cos</label>*/}
+                {/*    <input type="text" ref={messageRef} />*/}
+                {/*    <button type="submit" >Send</button>*/}
+                {/*</form>*/}
+                {/*<input type="file" onChange={(event) => {*/}
+                {/*    setImageUpload(event.target.files[0]);*/}
+                {/*}}/>*/}
+                {/*<button onClick={uploadImage} > Upload Image </button>*/}
 
-                {imageList.map((url)=>{
-                    return <img src={url} className="TestFirebase"/>
-                })}
-        </div>
+                {/*{imageList.map((url)=>{*/}
+                {/*    return <img src={url} className="TestFirebase"/>*/}
+                {/*})}*/}
+
+
+                <SignIn />
+            </div>
         </div>
 
     );
