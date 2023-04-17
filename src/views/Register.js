@@ -6,55 +6,87 @@ import axios from "axios";
 import Notiflix from 'notiflix';
 import PasswordChecklist from "react-password-checklist"
 
+import React, { useReducer } from 'react';
 
 function Register(props) {
 
 
-    const [registerForm, setregisterForm] = useState({
+    const [registerForm, setregisterForm] = useReducer(
+        (state, newState) => ({...state, ...newState}),
+        {
         email: "",
         username: "",
         password: "",
         repassword: ""
-    })
-        const [name, setName] = useState('Hubert')
+        },
+        );
+
+    const { email, password } = registerForm;
+
+    const handleInputChange = (e) => {
+        registerForm({
+            [e.target.name]: e.target.value,
+        });
+    };
+    //
+    // const handleSignIn = (e) => {
+    //     e.preventDefault();
+    //     auth
+    //         .signInWithEmailAndPassword(email, password)
+    //         .catch((error) =>
+    //             alert(`Your email or password is incorrect, please check your data, ${error}`),
+    //         );
+    // };
+    // const handleSignUp = (e) => {
+    //     e.preventDefault();
+    //     auth
+    //         .createUserWithEmailAndPassword(email, password)
+    //         .catch((error) => alert(`Email is already in use, sign in or use other email, ${error}`));
+    // };
+    //
+
+    const [name, setName] = useState('Hubert')
         const [isHovered, setIsHovered] = useState(false);
         const [PasswordIsOk, setPasswordIsOk] = useState(true)
 
 
-        function handleClick(event) {
-            axios({
-                method: "POST",
-                url: "/testowanko",
-                data: {
-                    email: registerForm.email,
-                    username: registerForm.username,
-                    password: registerForm.password,
-                    repassword: registerForm.repassword
-                }
-            })
-                .then((response) => {
-                    props.setToken(response.data.access_token)
-                    Notiflix.Notify.success('Konto zostało utworzone');
 
-                }).catch((error) => {
-                    Notiflix.Notify.failure('Konto nie zostało utworzone');
-                    if (error.response) {
-                        console.log(error.response)
-                        console.log(error.response.status)
-                        console.log(error.response.headers)
-                    }
-            })
-
-            setregisterForm(({
-                email: "",
-                username: "",
-                password: "",
-                repassword: ""
-            }))
-
-            event.preventDefault()
-
-        }
+        //
+        //
+        // function handleClick(event) {
+        //     axios({
+        //         method: "POST",
+        //         url: "/testowanko",
+        //         data: {
+        //             email: registerForm.email,
+        //             username: registerForm.username,
+        //             password: registerForm.password,
+        //             repassword: registerForm.repassword
+        //         }
+        //     })
+        //         .then((response) => {
+        //             props.setToken(response.data.access_token)
+        //             Notiflix.Notify.success('Konto zostało utworzone');
+        //
+        //         }).catch((error) => {
+        //             Notiflix.Notify.failure('Konto nie zostało utworzone');
+        //             if (error.response) {
+        //                 console.log(error.response)
+        //                 console.log(error.response.status)
+        //                 console.log(error.response.headers)
+        //             }
+        //     })
+        //
+        //     setregisterForm(({
+        //         email: "",
+        //         username: "",
+        //         password: "",
+        //         repassword: ""
+        //     }))
+        //
+        //     event.preventDefault()
+        //
+        // }
 
         function handleChange(event) {
             const {value, name} = event.target
@@ -108,12 +140,14 @@ function Register(props) {
                     <div className="email-container-register">
 
                         <input
-                            onChange={handleChange}
                             name="email"
                             type="email"
                             text={registerForm.email}
                             className="email-input-register"
                             placeholder="E-Mail"
+                            required
+                            onChange={handleInputChange}
+                            value={email}
 
                         />
                     </div>
@@ -126,6 +160,8 @@ function Register(props) {
                             text={registerForm.username}
                             className="username-input-register"
                             placeholder="Nazwa Użytkownika"
+                            required
+
 
                         />
                     </div>
@@ -133,12 +169,15 @@ function Register(props) {
                     <div className="password-container">
                         <input
 
-                            onChange={handleChange}
                             name="password"
                             type="password"
                             text={registerForm.password}
                             className="password-input-register"
                             placeholder="Podaj hasło"
+                            required
+                            onChange={handleInputChange}
+                            value={password}
+
                         />
 
                         { registerForm.password.length > 0 &&
@@ -167,6 +206,8 @@ function Register(props) {
                             text={registerForm.repassword}
                             className="repassword-input-register"
                             placeholder="Powtórz hasło"
+                            required
+
 
                         />
 
@@ -177,7 +218,7 @@ function Register(props) {
                             onMouseEnter={handleHover}
                             disabled={PasswordIsOk}
                             onMouseLeave={handleHover}
-                            onClick={handleClick}
+                            // onClick={}
                             style={{backgroundColor: buttonColor}}>
 
                         Zarejestruj się

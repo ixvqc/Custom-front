@@ -203,6 +203,9 @@ export default function Main(props) {
                 <Link to={"/register"} className="link">
                     Rejestracja
                 </Link>
+                <Link to={"/messages"} className="link">
+                    wiadomości
+                </Link>
                 <button className="add-adv"
                     // onMouseEnter={handleHover}
                     // onMouseLeave={handleHover}

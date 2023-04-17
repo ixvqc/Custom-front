@@ -1,0 +1,206 @@
+.main-messages{
+    width: 100%;
+    height:100%;
+    margin: 0;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.nav-bar-messages{
+    height: 13vh;
+    width: 100%;
+    box-shadow: 2px 2px 4px gray;
+    background-color: white;
+    display: flex;
+
+}
+
+.logo-messages-img{
+    width: 10vw;
+}
+
+.logo-messages{
+    width: 30%;
+}
+
+.observed-nav-messages{
+    flex-direction: row;
+    margin-left:40vw;
+    border-left: 1px solid gray;
+    height:100%;
+    width:30%;
+
+}
+
+.username-nav-messages{
+    border-left: 1px solid gray;
+    height:100%;
+    width:20%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.user-messages{
+    font-size: 23px;
+
+}
+
+.button-add-adv-messages{
+    flex-direction: row;
+    border-left: 1px solid gray;
+    height:100%;
+    width:30%;
+    justify-content: center;
+    display: flex;
+
+}
+.add-adv-button{
+    background-color: #FDCF28;
+    color: black;
+    height:8vh;
+    width:16vw;
+    margin-left: 1vw;
+    margin-top:2vh;
+    font-size: 23px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    box-shadow: 2px 2px 4px gray;
+
+
+}
+.add-adv-button:hover{
+    background-color: #fdd852;
+}
+
+.link-messages{
+    padding-left: 1vw ;
+    text-decoration: none;
+    color:black;
+}
+.windows-messages{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:10vh ;
+}
+.Left-window-messages{
+    height:77vh;
+    width:25vw;
+    background-color: rgba(182, 182, 182, 0.29);
+    flex-direction: row;
+    margin-right: 5vw;
+    display: flex;
+
+}
+.right-window-messages{
+    height: 78vh;
+    width:60vw;
+    background-color: rgba(182, 182, 182, 0.29);
+    flex-direction: row;
+    display: flex;
+
+}
+.sell-or-buy-messages{
+    border-bottom: 1px solid gray;
+    height:10vh;
+    width:100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+}
+.buy-button{
+    background-color: #FDCF28;
+    color: black;
+    height:4vh;
+    width:9vw;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+    box-shadow: 2px 2px 4px gray;
+
+
+}
+.sell-button{
+    background-color: #cecece;
+    color: black;
+    height:4vh;
+    width: 9vw;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+    box-shadow: 2px 2px 4px gray;
+    margin-left:4vw;
+}
+
+.adv-panel-messages{
+    border-bottom: 1px solid gray;
+    height:13vh;
+    width:100%;
+    align-items: center;
+    display: flex;
+    box-shadow: 2px 2px 4px gray;
+    background-color: #dad9d9;
+
+}
+.car-photo-messages{
+    width:6vw;
+    margin-left:2vw;
+
+}
+.active-button{
+    background-color: #c0c0c0;
+    color: black;
+    height:3vh;
+    width: 8vw;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+    box-shadow: 2px 2px 4px gray;
+    margin-left:1vw;
+    margin-bottom: 2vh;
+
+}
+.price-adv-messages{
+    font-size: 18px;
+    margin-left:1vw;
+
+}
+.active-price-messages{
+    display:flex;
+    flex-direction: column;
+}
+.name-adv-messages{
+    margin-left: 2vw;
+    margin-top:-4vh;
+    font-size: 20px;
+
+}
+
+.username-photo-messages{
+    display:flex;
+    flex-direction: column;
+    height:100%;
+}
+
+.user-photo-messages{
+    height:5vh;
+    width:4vw;
+    margin-left:14vw;
+    margin-bottom: 1vh;
+    margin-top: 2vh;
+
+}
+
+.username-messages{
+    font-size: 20px;
+    margin-left:12.5vw;
+
+}
