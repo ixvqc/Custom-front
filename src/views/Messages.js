@@ -9,12 +9,23 @@ import car3 from "../assets/img/car3.jpg";
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import user from "../assets/img/user.png";
+import userphoto from "../assets/img/user.png";
+import Chat  from "../components/ChatBox";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from '../firebase'
+import SignIn from '../components/SignIn';
+
 
 
 function Messages() {
+    const [user] = useAuthState(auth)
+
+
     return (
     <div className="main-messages">
+
+
+
         <div className="nav-bar-messages">
 
             <div className="logo-messages">
@@ -46,7 +57,11 @@ function Messages() {
                     </button>
                 </div>
             </div>
+
+
             <div className="right-window-messages">
+
+
                 <div className="adv-panel-messages">
                     <img src={car3} className="car-photo-messages"/>
 
@@ -59,9 +74,19 @@ function Messages() {
                     <text className="name-adv-messages">Skoda fabia nówka sztuka </text>
 
                     <div className="username-photo-messages">
-                        <img src={user} className="user-photo-messages"/>
+                        <img src={userphoto} className="user-photo-messages"/>
                         <text className="username-messages">Jan Nowak </text>
                     </div>
+                </div>
+
+                <div className="messages-window">
+
+                    <>
+                        {user ? <Chat /> : <SignIn />}
+                    </>
+
+
+
                 </div>
             </div>
 
