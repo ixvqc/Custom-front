@@ -85,7 +85,7 @@
     align-items: center;
 }
 .Left-window-messages{
-    height:74vh;
+    height:75vh;
     width:25vw;
     background-color: rgba(182, 182, 182, 0.29);
     flex-direction: row;
@@ -94,7 +94,7 @@
 
 }
 .right-window-messages{
-    height: 74vh;
+    height: 75vh;
     width:60vw;
     background-color: rgba(182, 182, 182, 0.29);
     flex-direction: row;
@@ -146,6 +146,7 @@
     background-color: rgba(182, 182, 182, 0.29);
     flex-direction: column;
     display: flex;
+    margin-top:4vh;
 }
 
 
@@ -208,8 +209,8 @@
 }
 
 .user-photo-messages{
-    height:5vh;
-    width:4vw;
+    height:4vh;
+    width:3vw;
     margin-bottom: 1vh;
 
 }
@@ -227,7 +228,6 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 0 10px;
-    margin-bottom: 10px;
     box-shadow: 2px 2px 4px gray;
 
 }
@@ -237,6 +237,7 @@
     border-radius: 50%;
     height: 30px;
     margin-top: -10px;
+
 }
 
 .p-msg{
@@ -255,6 +256,8 @@
     border-radius: 3000px;
     box-shadow: 0 0 10px rgb(164, 164, 164);
     align-items: center;
+
+
 }
 
 .sent {
@@ -268,22 +271,22 @@
 }
 
 .received {
-    border: 1px solid lightgray;
+    border: 1px solid rgba(182, 182, 182, 0.29);
     background-color: #FAFAFA;
-    border-top-left-radius: 1000px;
-    float: left;
+    float: right;
+
 }
 
 .sendMsg {
     display: flex;
-    width: 59vw;
+    width: 60vw;
     bottom: 0;
-    z-index: 1;
-    padding: 10px;
-    padding-bottom: 30px;
     background-color: rgb(217, 217, 217);
-    height: 7vh;
-
+    height: 8vh;
+    position: fixed;
+    margin-bottom:2vh;
+    justify-content: center;
+    align-items: center;
 }
 
 .msgs {
@@ -304,7 +307,6 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.1s ease;
-    margin-bottom: 2vh;
 }
 
 
@@ -312,5 +314,42 @@
     display: flex;
     flex-direction: column;
     overflow: scroll;
+    height:60vh;
+
 }
+
+
+.input-container-msg {
+    position: relative;
+    margin: 50px auto;
+    width: 200px;
+
+}
+
+.input-container-msg input[type="text"] {
+    font-size: 20px;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    padding: 5px 0;
+    background-color: transparent;
+    outline: none;
+}
+
+.input-container-msg .label-msg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #ccc;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.input-container-msg input[type="text"]:focus ~ .label-msg,
+.input-container-msg input[type="text"]:valid ~ .label-msg {
+    top: -20px;
+    font-size: 16px;
+    color: #333;
+}
+
 

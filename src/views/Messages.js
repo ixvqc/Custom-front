@@ -14,11 +14,18 @@ import Chat  from "../components/ChatBox";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from '../firebase'
 import SignIn from '../components/SignIn';
+import Cookies from "universal-cookie";
 
-
+const cookies = new Cookies();
 
 function Messages() {
     const [user] = useAuthState(auth)
+    const [isAuth, setIsAuth] = useState(cookies.get("auth-token"));
+    const [isInChat, setIsInChat] = useState(null);
+    const [room, setRoom] = useState("");
+
+
+
 
 
     return (
@@ -47,21 +54,23 @@ function Messages() {
 
         <div className="windows-messages">
             <div className="Left-window-messages">
-                <div className="sell-or-buy-messages">
-                    <button className="buy-button">
-                        <Link to={"/login"} className="link-messages">Kupuję </Link>
-                    </button>
 
-                    <button className="sell-button">
-                        <Link to={"/login"} className="link-messages">Sprzedaje </Link>
-                    </button>
+                <div className="input-container-msg">
+                    <input type="text" id="input-msg" required=""/>
+                        <label htmlFor="input-msg" className="label-msg">Wyszukaj  ogłoszenie</label>
                 </div>
+                <input onChange={(e) => setRoom(e.target.value)} />
+                <button
+                    onClick={() => {
+                        setIsInChat(true);
+                    }}
+                >
+                    Enter Chat
+                </button>
+
+
             </div>
-
-
             <div className="right-window-messages">
-
-
                 <div className="adv-panel-messages">
                     <img src={car3} className="car-photo-messages"/>
 

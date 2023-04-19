@@ -23,7 +23,7 @@
 .register-background{
     box-shadow: 6px 5px  35px gray;
     width:70%;
-    height:65vh;
+    height:70vh;
     position:fixed;
     margin-left:15%;
 
@@ -75,7 +75,8 @@
 
 .password-container{
     margin-left: 5vw;
-
+    align-items: center;
+    justify-content: center;
 }
 .password-input-register{
     margin-top: 2vh;
@@ -83,8 +84,9 @@
     width: 18vw;
     font-size: 120%;
     border: 2px solid rgba(0, 0, 0, 0.10);
-
-
+    align-items: center;
+    justify-content: center;
+    margin-bottom:1vh;
 
 }
 .password-input-register:focus{
@@ -98,39 +100,41 @@
     margin-bottom:1vh;
 }
 
-.repassword-container{
-    margin-left: 5vw;
-
-}
-.repassword-input-register{
-    margin-top: 2vh;
-    padding: 1.5vh 3vw;
-    width: 18vw;
-    font-size: 120%;
-    border: 2px solid rgba(0, 0, 0, 0.10);
-
-}
-
-.repassword-input-register:focus{
-    outline-color:gray;
-
-}
 .button-register{
     margin-left: 5vw;
-    margin-top: 5vh;
     padding: 2vh 3vw;
-    border-radius: 20px;
-    font-size: 20px;
+    border-radius: 18px;
+    font-size: 18px;
     border: none;
+    background-color: #FDCF28;
 
 
 }
 .text-no-password1{
-margin-left: 1vw;
+margin-left: 19vw;
+margin-top: -4vh;
 
 }
 .text-no-password{
     color: #FDCF28;
-    margin-left: 0.6vw;
+
+
+}
+.Add-avatar-register{
+    align-items: center;
+    justify-content: center;
+    margin-left: 3vw;
+    margin-top: 2vh;
+    margin-bottom: 3vh;
+    padding: 1.5vh 3vw;
+    width: 20vw;
+    height:3vh;
+
+}
+.button-add-avatar-register{
+    font-size: 20px;
+    border: none;
+    padding: 0.8vh 1.4vw;
+    border-radius: 18px;
 
 }

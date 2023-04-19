@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { db, auth } from '../firebase'
 import SendMessage from './SendMessage'
-import { collection, query,limit, orderBy, onSnapshot} from "firebase/firestore";
+import { collection, query,limit, orderBy, onSnapshot,serverTimestamp,where,addDoc} from "firebase/firestore";
 import '../styles/messages.css';
 
 
+
 function Chat() {
+    const [newMessage, setNewMessage] = useState("");
     const [messages, setMessages] = useState([])
+    const messagesRef = collection(db, "messages");
     const { userID } = auth.currentUser
-    const scroll = useRef();
+    const [room, setRoom] = useState("");
 
 
     useEffect(() => {
@@ -17,6 +20,13 @@ function Chat() {
             orderBy("createdAt"),
             limit(50)
         );
+
+        const queryMessages = query(
+            messagesRef,
+            where("room", "==", room),
+            orderBy("createdAt")
+        );
+
         const data = onSnapshot(q, (QuerySnapshot) => {
             let messages = [];
             QuerySnapshot.forEach((doc) => {
@@ -25,6 +35,7 @@ function Chat() {
             setMessages(messages)
 
         });
+
         return () => data;
 
     }, []);
@@ -43,7 +54,7 @@ function Chat() {
                 {messages && messages.map((message, id, uid, photoURL) =>
                     <div>
                         <div key={id} className={`msg ${userID === auth.currentUser.uid ? 'sent' : 'received'}`}>
-                            <img  className="avatar" src={message.photoURL} />
+                            {/*<img  className="avatar" src={message.photoURL} />*/}
                             <p className="p-msg">{message.text}</p>
 
                         </div>
@@ -52,8 +63,7 @@ function Chat() {
             </div>
 
 
-            <span ref={scroll}></span>
-            <SendMessage scroll={scroll} />
+            <SendMessage />
 
         </div>
     )
