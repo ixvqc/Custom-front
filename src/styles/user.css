@@ -1,0 +1,32 @@
+.tlo-user{
+
+    margin-top: -10vh;
+    scroll-behavior: smooth;
+
+
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.obraz{
+    background: url(/src/assets/img/tlo-user2.png);
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 90px;
+}
+.logo-container{
+    margin-top: 30vh;
+    position: relative;
+}
+
+
+.logo_user{
+    margin-left: 1vw;
+    margin-top: 1vh;
+    height: 17vh;
+    width: 12vw;
+
+}
+
+
