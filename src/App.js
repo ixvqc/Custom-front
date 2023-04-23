@@ -5,6 +5,7 @@ import Login from './views/Login'
 import Register from "./views/Register";
 import Profile from "./views/Profile";
 import Messages from "./views/Messages";
+import Search from './views/Search'
 import useToken from './useToken'
 import { auth } from "./firebase";
 import ChatBox from './components/ChatBox';
@@ -30,6 +31,7 @@ function App() {
             <Route path="/Register" element = {<Register/>}/>
             <Route path="/Profile" element = {<Profile/>}/>
             <Route path="/Messages" element = {<Messages/>}/>
+            <Route path="/Search" element = {<Search/>}/>
 
 
         </Routes>

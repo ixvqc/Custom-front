@@ -1,0 +1,164 @@
+
+.background-search{
+    font-family: 'Poppins',sans-serif;
+    scroll-behavior: smooth;
+    min-height: 100vh;
+    background: url(/src/assets/img/backgroundLogin.png);
+    background-size: cover;
+    background-position: center;
+}
+
+
+.logo_search{
+    margin-left: 8vw;
+    margin-top: 10vh;
+    height: 13vh;
+    width: 10vw;
+    filter:blur(2px);
+
+}
+
+.car-info{
+    margin-left: 20px;
+    margin-top: 3vh;
+    font-size: 15px;
+    background-color: white;
+    border: 0.5px solid gray;
+    width: 16vw;
+    height:4.1vh;
+    border-radius: 4px;
+    box-shadow: 1.5px 1.5px 3px gray;
+}
+
+.nav{
+    height: 13%;
+    width: 100%;
+    text-align: right;
+    box-shadow: 2px 2px 4px gray;
+    position:fixed;
+    background-color: white;
+    top:0;
+    opacity:1;
+    font-size: 22px;
+
+}
+
+.search-text{
+    margin-left: 2%;
+    margin-top: 2%;
+    font-size: 150%;
+}
+
+.search-background{
+    box-shadow: 6px 5px  35px gray;
+    width:70%;
+    height:60vh;
+    position:fixed;
+    top:15%;
+    margin-left:15%;
+
+}
+
+
+.email-container-search {
+    margin-left: 5vw;
+    margin-top: 2vh;
+}
+
+.email-input-search{
+    padding: 1.5vh 3vw;
+    width: 18vw;
+    font-size: 120%;
+}
+.password-container-search {
+    margin-left: 5vw;
+}
+
+.password-input-search{
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    width: 18vw;
+    padding: 1.5vh 3vw;
+    font-size: 120%;
+}
+
+.button-search {
+    background-color: #FDCF28;
+    color: black;
+    margin-left: 5vw;
+    padding: 2vh 3vw;
+    font-size: 20px;
+    font-style: italic;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.button:hover {
+    background-color: yellow;
+}
+
+.text-no-password-search{
+    color: #FDCF28;
+    font-size: 1.1vw;
+    font-style: italic;
+    margin-left: 2.3vw;
+}
+.text-register-search{
+    color: black;
+    font-size: 1.1vw;
+    font-style: italic;
+    margin-left: 4vw;
+}
+.text-toregister-search{
+    color: #FDCF28;
+    font-size: 1.1vw;
+    font-style: italic;
+    margin-left: 0.5vw;
+}
+
+.for-register-search{
+    margin-left: 4vw;
+    margin-top: 3vh;
+    color: #FDCF28;
+    font-size: 1.1vw;
+    font-style: italic;
+
+}
+
+.TestFirebase{
+    width: 100px;
+
+}
+
+
+.button-google {
+    max-width: 320px;
+    display: flex;
+    padding: 0.5rem 1.4rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    gap: 0.75rem;
+    color: rgb(65, 63, 63);
+    background-color: #fff;
+    cursor: pointer;
+    transition: all .6s ease;
+    margin-left:8vw;
+    margin-top:3vh;
+}
+
+.button-google svg {
+    height: 24px;
+}
+
+.button-google:hover {
+    transform: scale(1.02);
+}
