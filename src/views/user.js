@@ -1,9 +1,20 @@
+import {useNavigate,Link} from "react-router-dom";
 import {useState, useEffect} from "react";
+import '../styles/Register.css';
+import logo from '../assets/img/logov2.png';
+import Notiflix from 'notiflix';
+import PasswordChecklist from "react-password-checklist"
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db, storage } from "../firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
+import React, { useReducer } from 'react';
+
 import '../styles/user.css';
 
 
-import React, { useReducer } from 'react';
-import logo from "../assets/img/logov2.png";
+
+
 import Profile from "./Profile";
 // const User = () => {
 //     const [err, setErr] = useState(false);
