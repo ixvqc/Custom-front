@@ -10,10 +10,11 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import userphoto from "../assets/img/user.png";
-import Chat  from "../components/ChatBox";
+import Chat  from "../components/Chat";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from '../firebase'
-import SignIn from '../components/SignIn';
+import Sidebar from '../components/Sidebar';
+
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
@@ -53,51 +54,12 @@ function Messages() {
         </div>
 
         <div className="windows-messages">
-            <div className="Left-window-messages">
-
-                <div className="input-container-msg">
-                    <input type="text" id="input-msg" required=""/>
-                        <label htmlFor="input-msg" className="label-msg">Wyszukaj  ogłoszenie</label>
-                </div>
-                <input onChange={(e) => setRoom(e.target.value)} />
-                <button
-                    onClick={() => {
-                        setIsInChat(true);
-                    }}
-                >
-                    Enter Chat
-                </button>
+              <div className="container-msg">
+                  <Sidebar/>
+                  <Chat/>
+              </div>
 
 
-            </div>
-            <div className="right-window-messages">
-                <div className="adv-panel-messages">
-                    <img src={car3} className="car-photo-messages"/>
-
-                    <div className="active-price-messages">
-                        <button className="active-button">
-                            Aktywne
-                        </button>
-                        <text className="price-adv-messages">2450 zł </text>
-                    </div>
-                    <text className="name-adv-messages">Skoda fabia nówka sztuka </text>
-
-                    <div className="username-photo-messages">
-                        <img src={userphoto} className="user-photo-messages"/>
-                        <text className="username-messages">Jan Nowak </text>
-                    </div>
-                </div>
-
-                <div className="messages-window">
-
-                    <>
-                        {user ? <Chat /> : <SignIn />}
-                    </>
-
-
-
-                </div>
-            </div>
 
         </div>
 

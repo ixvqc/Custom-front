@@ -1,7 +1,4 @@
 .main-messages{
-    width: 100%;
-    height:100%;
-    margin: 0;
     background-color: white;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -79,277 +76,155 @@
     color:black;
 }
 
+
+
+
+
 .windows-messages{
     display: flex;
     justify-content: center;
     align-items: center;
+    height:100vh;
 }
-.Left-window-messages{
-    height:75vh;
-    width:25vw;
-    background-color: rgba(182, 182, 182, 0.29);
-    flex-direction: row;
-    margin-right: 5vw;
+.container-msg{
+    border:1px solid black;
+    border-radius:10px;
+    width:65%;
+    height:80vh;
     display: flex;
+    overflow: hidden;
+}
+.sidebar{
+    flex:1;
+    border-right:1px solid black;
+}
+
+.chat-messages {
+    flex: 2;
 
 }
-.right-window-messages{
-    height: 75vh;
-    width:60vw;
-    background-color: rgba(182, 182, 182, 0.29);
-    flex-direction: row;
+
+.navbar-msg {
     display: flex;
-
-
-
-}
-.sell-or-buy-messages{
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(237, 237, 237, 0.4);
     border-bottom: 1px solid gray;
-    height:10vh;
-    width:100%;
-    justify-content: center;
-    align-items: center;
+    height: 100px;
+    padding: 10px;
+}
+.logo-auta{
+    font-weight: bold;
+}
+.user-msg{
     display: flex;
-
-}
-.buy-button{
-    background-color: #FDCF28;
-    color: black;
-    height:4vh;
-    width:9vw;
-    font-size: 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.1s ease;
-    box-shadow: 2px 2px 4px gray;
-
-
-}
-.sell-button{
-    background-color: #cecece;
-    color: black;
-    height:4vh;
-    width: 9vw;
-    font-size: 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.1s ease;
-    box-shadow: 2px 2px 4px gray;
-    margin-left:4vw;
-}
-
-.right-window-messages{
-    height: 78vh;
-    width:60vw;
-    background-color: rgba(182, 182, 182, 0.29);
-    flex-direction: column;
-    display: flex;
-    margin-top:4vh;
-}
-
-
-.adv-panel-messages {
-    border-bottom: 1px solid gray;
-    height: 13vh;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    box-shadow: 2px 2px 4px gray;
-    background-color: #dad9d9;
-    justify-content: center;
+    gap: 10px;
+    padding:10px;
     align-items: center;
 }
-
-.car-photo-messages{
-    width:6vw;
-
-}
-.active-button{
-    background-color: #c0c0c0;
-    color: black;
-    height:3vh;
-    width: 8vw;
-    font-size: 18px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.1s ease;
-    box-shadow: 2px 2px 4px gray;
-    margin-left:1vw;
-    margin-bottom: 2vh;
-
-}
-.price-adv-messages{
-    font-size: 18px;
-    margin-left:1vw;
-
-}
-.active-price-messages{
-    display:flex;
-    flex-direction: column;
-}
-
-
-.name-adv-messages{
-    font-size: 20px;
-    margin-left:1vw;
-    margin-top:-4vh;
-
-}
-
-.username-photo-messages{
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-left:15vw;
-
-}
-
-.user-photo-messages{
-    height:4vh;
-    width:3vw;
-    margin-bottom: 1vh;
-
-}
-
-.username-messages{
-    font-size: 20px;
-
-}
-
-
-
-.input-text-msg{
-    width: 80%;
-    height: 5vh;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 0 10px;
-    box-shadow: 2px 2px 4px gray;
-
-}
-
-
-.avatar {
+.user-msg img{
+    height:24px;
+    width:24px;
+    object-fit: cover;
     border-radius: 50%;
-    height: 30px;
-    margin-top: -10px;
-
+}
+.user-msg button{
+    background-color: antiquewhite;
+    color:black;
+    border:none;
+    font-size: 10px;
+    cursor:pointer;
 }
 
-.p-msg{
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 15px;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    overflow-wrap: break-word;
+.search-msg{
+    border-bottom:1px solid #888888;
 }
-
-.msg {
-    display: flex;
-    padding: 10px 10px 0 20px;
-    margin: 20px;
-    border-radius: 3000px;
-    box-shadow: 0 0 10px rgb(164, 164, 164);
-    align-items: center;
-
-
+.SearchForm-msg{
+    padding:10px;
 }
-
-.sent {
-    background-color: #464d6c;
-    color: #ffffff;
-    border-top-right-radius: 1000px;
-    flex-direction: row-reverse;
-    padding: 20px 20px 0 10px;
-    text-align: end;
-    float: right;
-}
-
-.received {
-    border: 1px solid rgba(182, 182, 182, 0.29);
-    background-color: #FAFAFA;
-    float: right;
-
-}
-
-.sendMsg {
-    display: flex;
-    width: 60vw;
-    bottom: 0;
-    background-color: rgb(217, 217, 217);
-    height: 8vh;
-    position: fixed;
-    margin-bottom:2vh;
-    justify-content: center;
-    align-items: center;
-}
-
-.msgs {
-    margin: 110px 0;
-    display: flex;
-    flex-direction: column;
-}
-.button-send-msg{
-    height:5vh;
-    width:6vw;
-    margin-right:2vw;
-    margin-left:2vw;
-    box-shadow: 2px 2px 4px gray;
-    background-color: #ffd31e;
-    color: black;
-    font-size: 18px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.1s ease;
-}
-
-
-.messages-window{
-    display: flex;
-    flex-direction: column;
-    overflow: scroll;
-    height:60vh;
-
-}
-
-
-.input-container-msg {
-    position: relative;
-    margin: 50px auto;
-    width: 200px;
-
-}
-
-.input-container-msg input[type="text"] {
-    font-size: 20px;
-    width: 100%;
-    border: none;
-    border-bottom: 2px solid #ccc;
-    padding: 5px 0;
+.SearchForm-msg input{
     background-color: transparent;
+    border:none;
     outline: none;
+
 }
-
-.input-container-msg .label-msg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: #ccc;
-    transition: all 0.3s ease;
-    pointer-events: none;
+.SearchForm-msg::placeholder {
+    color:lightblue;
 }
+.UserChat-msg{
+    display: flex;
+    gap: 10px;
+    padding:10px;
+    align-items: center;
 
-.input-container-msg input[type="text"]:focus ~ .label-msg,
-.input-container-msg input[type="text"]:valid ~ .label-msg {
-    top: -20px;
-    font-size: 16px;
-    color: #333;
 }
+.UserChat-msg:hover{
+    background-color: #ffd31e;
 
+}
+.UserChat-msg img {
+    width:50px;
+    height:50px;
+    border-radius: 50%;
+    object-fit: cover;
 
+}
+.UserChatInfo span{
+    font-size: 18px;
+    font-weight: 500;
+}
+.UserChatInfo p{
+    font-size: 14px;
+}
+.ChatInfo{
+    height:100px;
+    background-color: #dad9d9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:10px;
+    border-bottom:1px solid gray ;
+}
+.ChatIcons{
+    display: flex;
+    gap: 10px;
+}
+.ChatIcons img{
+    height: 24px;
+    cursor: pointer;
+}
+.Messages-component{
+    background-color: #ffffff;
+    padding: 10px;
+    height:calc(100% - 210px);
+}
+.inputpanel-component{
+    height:50px;
+    background-color: #e5e5e5;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.inputpanel-component input{
+    width:100%;
+    border:none;
+    outline:none;
+    font-size: 18px;
+    background-color: #e5e5e5;
+}
+.inputpanel-component input::placeholder{
+    color: lightgray;
+}
+.send-button-inputpanel{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.send-button-inputpanel img{
+    height:24px;
+    cursor: pointer;
+}
+.send-button-inputpanel button {
+
+}

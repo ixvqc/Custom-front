@@ -67,7 +67,11 @@ const Login = () => {
                 />
             </div>
 
-            <button className="button-login">Zaloguj się</button>
+            <button className="button-login"
+
+            >
+                Zaloguj się
+            </button>
                 {err && <span>Coś poszło nie tak</span>}
 
 
