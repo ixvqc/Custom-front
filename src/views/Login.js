@@ -174,19 +174,20 @@ function Login(props) {
 
 
                 </form>
-                {/*<form onSubmit={handleSave}>*/}
-                {/*    <label>Tu cos</label>*/}
-                {/*    <input type="text" ref={messageRef} />*/}
-                {/*    <button type="submit" >Send</button>*/}
-                {/*</form>*/}
-                {/*<input type="file" onChange={(event) => {*/}
-                {/*    setImageUpload(event.target.files[0]);*/}
-                {/*}}/>*/}
-                {/*<button onClick={uploadImage} > Upload Image </button>*/}
 
-                {/*{imageList.map((url)=>{*/}
-                {/*    return <img src={url} className="TestFirebase"/>*/}
-                {/*})}*/}
+                <form onSubmit={handleSave}>
+                    <label>Tu cos</label>
+                    <input type="text" ref={messageRef} />
+                    <button type="submit" >Send</button>
+                </form>
+                <input type="file" onChange={(event) => {
+                    setImageUpload(event.target.files[0]);
+                }}/>
+                <button onClick={uploadImage} > Upload Image </button>
+
+                {imageList.map((url)=>{
+                    return <img src={url} className="TestFirebase"/>
+                })}
 
 
                 <SignIn />

@@ -5,9 +5,8 @@ import logo from '../assets/img/logov2.png';
 import axios from "axios";
 import React, { useRef } from "react";
 import {firestore} from "../firebase";
-import {addDoc,collection} from "@firebase/firestore";
+import {addDoc,collection,setDoc} from "@firebase/firestore";
 import {storage} from "../firebase";
-import {ref, uploadBytes, listAll,getDownloadURL} from "firebase/storage";
 import styled, { css } from 'styled-components';
 import Select from "react-select";
 import auto from "../assets/img/car.png";
@@ -17,6 +16,10 @@ import motoHighlights from "../assets/img/motorbikeHighlights.png";
 import key from "../assets/img/car-key.png";
 import keyHighlights from "../assets/img/car-keyHighlights.png";
 import { db, auth, app } from '../firebase'
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage";
+import { updateDoc, doc } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
+
 
 
 
@@ -25,6 +28,11 @@ import { db, auth, app } from '../firebase'
 
 
 const AddAnnouncement = () => {
+
+
+
+    const storage = getStorage();
+    const firestore = getFirestore();
 
     const [imageSrc, setImageSrc] = useState(auto);
     function handleClick(src) {
@@ -227,6 +235,9 @@ const AddAnnouncement = () => {
     const ColorRef = useRef();
     const DateRef = useRef();
     const DescRef = useRef();
+    const NameRef = useRef();
+    const PhoneRef = useRef();
+    const emailRef = useRef();
     const refFirestore= collection(firestore,"Announcement");
     const [selectedMarka, setSelectedMarka] = useState(null);
     const [selectedModel, setSelectedModel] = useState(null);
@@ -273,17 +284,60 @@ const AddAnnouncement = () => {
             DataPierwszejRejestracji: DateRef.current.value,
             KrajPochodzenia: selectedOriginCountry,
             Opis: DescRef.current.value,
+            Imie: NameRef.current.value,
+            NrTelefonu: PhoneRef.current.value,
+            Email: emailRef.current.value,
 
         };
 
         try {
             const docRef = await addDoc(refFirestore, formData);
+            // Upload images to Firebase Storage
+            for (let i = 0; i < selectedImages.length; i++) {
+                const imageFile = selectedImages[i];
+                const imageRef = storageRef(storage, `images/${docRef.id}/image_${i}.jpg`);
+                console.log(imageFile);
+
+                if (typeof imageFile === 'string' && imageFile.startsWith('blob:')) {
+                    const response = await fetch(imageFile);
+                    const blob = await response.blob();
+                    const file = new File([blob], `image_${i}.jpg`, { type: blob.type });
+                    await uploadBytes(imageRef, file);
+                    const imageUrl = await getDownloadURL(imageRef);
+                    await setDoc(doc(firestore, "Announcement", docRef.id), { images: { [i]: imageUrl } }, { merge: true });
+                } else {
+                    await uploadBytes(imageRef, imageFile);
+                    const imageUrl = await getDownloadURL(imageRef);
+                    await setDoc(doc(firestore, "Announcement", docRef.id), { images: { [i]: imageUrl } }, { merge: true });
+                }
+            }
             console.log('Dane zostały dodane do Firestore z ID: ', docRef.id);
         } catch (e) {
             console.error('Błąd dodawania danych do Firestore: ', e);
         }
     };
 
+
+    const [selectedImages, setSelectedImages] = useState([]);
+
+    const onSelectFile = (event) => {
+        const selectedFiles = event.target.files;
+        const selectedFilesArray = Array.from(selectedFiles);
+
+        const imagesArray = selectedFilesArray.map((file) => {
+            return URL.createObjectURL(file);
+        });
+
+        setSelectedImages((previousImages) => previousImages.concat(imagesArray));
+
+        // FOR BUG IN CHROME
+        event.target.value = "";
+    };
+
+    function deleteHandler(image) {
+        setSelectedImages(selectedImages.filter((e) => e !== image));
+        URL.revokeObjectURL(image);
+    }
 
 
     return (
@@ -527,16 +581,96 @@ const AddAnnouncement = () => {
                     </div>
 
                     <div className="technicaldataTitleAdd">
-                        Opis
+                        Zdjęcia
                     </div>
 
-                    <input type="file"  multiple />
+                    <section className="AddMultiImgSectionAdd">
+                        <label className="AddMultiImgLabelAdd">
+                            + Dodaj zdjęcia
+                            <br />
+                            <span>up to 10 images</span>
+                            <input
+                                type="file"
+                                className="AddMultiImgInputAdd"
+                                name="images"
+                                onChange={onSelectFile}
+                                multiple
+                                accept="image/png , image/jpeg, image/webp"
+                            />
+                        </label>
+                        <br />
+
+                        <input type="file" multiple className="AddMultiImgInputAdd" />
+
+                        {selectedImages.length > 0 &&
+                            (selectedImages.length > 10 ? (
+                                <p className="AddMultiImgErrorAdd">
+                                    You can't upload more than 10 images! <br />
+                                    <span>
+                                         please delete <b> {selectedImages.length - 10} </b> of them{" "}
+                                    </span>
+                                </p>
+                            ) : (
+                                <button
+                                    className="AddMultiImgUploadBtnAdd"
+                                    onClick={() => {
+                                        console.log(selectedImages);
+                                    }}
+                                >
+                                    UPLOAD {selectedImages.length} IMAGE
+                                    {selectedImages.length === 1 ? "" : "S"}
+                                </button>
+                            ))}
+
+                        <div className="AddMultiImgDivImagesAdd">
+                            {selectedImages &&
+                                selectedImages.map((image, index) => {
+                                    return (
+                                        <div key={image} className="AddMultiImgButtonImgAdd">
+                                            <img src={image} height="200" alt="upload" className="AddMultiImgImgAdd" />
+                                            <button onClick={() => deleteHandler(image)}>
+                                                delete image
+                                            </button>
+                                        </div>
+                                    );
+                                })}
+                        </div>
+                    </section>
+
+                    <div className="technicaldataTitleAdd">
+                        Dane kontaktowe
+                    </div>
+
+                    <div className="ProdYearAdd">
+                        <input required="" type="text" className="inputAvAddPrice" ref={NameRef}/>
+                        <span className="highlightAvAddPrice"></span>
+                        <span className="barAvAddPrice"></span>
+                        <label className="labelAvAddPrice" >Imie</label>
+                    </div>
+
+                    <div className="MileageAdd">
+                        <input required="" type="number" className="inputAvAddPrice" ref={PhoneRef}/>
+                        <span className="highlightAvAddPrice"></span>
+                        <span className="barAvAddPrice"></span>
+                        <label className="labelAvAddPrice" >Nr telefonu</label>
+                    </div>
+
+                    <div className="VinAdd">
+                        <input required="" type="text" className="inputAvAddPrice" ref={emailRef}/>
+                        <span className="highlightAvAddPrice"></span>
+                        <span className="barAvAddPrice"></span>
+                        <label className="labelAvAddPrice" >Email</label>
+                    </div>
+
+
+                    <div className="technicaldataTitleAdd">
+                        Akt rzeczoznawcy
+                    </div>
 
 
                     <button className="button-AddAdvAdd" type="submit" >
                         Dodaj ogłoszenie
                     </button>
-
 
 
                 </form>
