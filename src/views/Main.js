@@ -208,7 +208,7 @@ export default function Main(props) {
                     // onMouseLeave={handleHover}
                     // style={{ backgroundColor: buttonColor }}
                 >
-                    <Link to={"/login"} className="link">Dodaj ogłoszenie + </Link>
+                    <Link to={"/AddAnnouncement"} className="link">Dodaj ogłoszenie + </Link>
                 </button>
 
             </div>
@@ -235,13 +235,13 @@ export default function Main(props) {
                     >
                         <div>
                             <div className="input">
-                                <label className="radio">
+                                <label className="radioMain">
                                     <input onChange={handleChange} type="radio" value="new" name="criteria-is.new" /> Nowe
                                 </label>
-                                <label className="radio">
+                                <label className="radioMain">
                                     <input onChange={handleChange} type="radio" value="used" name="criteria-is.new" /> Używane
                                 </label>
-                                <label className="radio">
+                                <label className="radioMain">
                                     <input
                                         onChange={handleChange}
                                         type="radio"
@@ -262,13 +262,13 @@ export default function Main(props) {
                             <input onChange={handleChange} type="text" className="car-price" placeholder="Cena do" />
 
                             <div className="input">
-                                <label className="radio">
+                                <label className="radioMain">
                                     <input onChange={handleChange} type="radio" value="fuel" name="fuel_type" /> Benzyna
                                 </label>
-                                <label className="radio">
+                                <label className="radioMain">
                                     <input onChange={handleChange} type="radio" value="diesel" name="fuel_type" /> Diesel
                                 </label>
-                                <label className="radio">
+                                <label className="radioMain">
                                     <input
                                         onChange={handleChange}
                                         type="radio"
@@ -299,13 +299,13 @@ export default function Main(props) {
                     >
                         <div>
                             <div className="input">
-                                <label className="radio">
+                                <label className="radioMain">
                                     <input type="radio" value="new" name="criteria-is.new" /> Nowe
                                 </label>
-                                <label className="radio">
+                                <label className="radioMain">
                                     <input type="radio" value="used" name="criteria-is.new" /> Używane
                                 </label>
-                                <label className="radio">
+                                <label className="radioMain">
                                     <input
                                         type="radio"
                                         value="all-cars"
@@ -325,13 +325,13 @@ export default function Main(props) {
                             <input type="text" className="car-price" placeholder="Cena do" />
 
                             <div className="input">
-                                <label className="radio">
+                                <label className="radioMain">
                                     <input type="radio" value="fuel" name="fuel_type" /> Benzyna
                                 </label>
-                                <label className="radio">
+                                <label className="radioMain">
                                     <input type="radio" value="diesel" name="fuel_type" /> Diesel
                                 </label>
-                                <label className="radio">
+                                <label className="radioMain">
                                     <input
                                         type="radio"
                                         value="all_type"
@@ -363,13 +363,13 @@ export default function Main(props) {
                     >
                         <div>
                             <div className="input">
-                                <label className="radio">
+                                <label className="radioMain">
                                     <input type="radio" value="new" name="criteria-is.new" /> Nowe
                                 </label>
-                                <label className="radio">
+                                <label className="radioMain">
                                     <input type="radio" value="used" name="criteria-is.new" /> Używane
                                 </label>
-                                <label className="radio">
+                                <label className="radioMain">
                                     <input
                                         type="radio"
                                         value="all-cars"
@@ -389,13 +389,13 @@ export default function Main(props) {
                             <input type="text" className="car-price" placeholder="Cena do" />
 
                             <div className="input">
-                                <label className="radio">
+                                <label className="radioMain">
                                     <input type="radio" value="fuel" name="fuel_type" /> Benzyna
                                 </label>
-                                <label className="radio">
+                                <label className="radioMain">
                                     <input type="radio" value="diesel" name="fuel_type" /> Diesel
                                 </label>
-                                <label className="radio">
+                                <label className="radioMain">
                                     <input
                                         type="radio"
                                         value="all_type"
