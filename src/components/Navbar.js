@@ -1,16 +1,20 @@
-import React from "react";
 import '../styles/messages.css';
-import user from "../assets/img/user.png"
+import React, { useContext } from 'react'
+import {signOut} from "firebase/auth"
+import { auth } from '../firebase'
+import { AuthContext } from '../context/AuthContext'
 const NavBar = () => {
+    const {currentUser} = useContext(AuthContext)
+
     return(
-        <div className="navbar-msg">
-            <span className="logo-auta">Ford fiesta</span>
-            <div className="user-msg">
-                <img src={user} alt="" />
-                <span>John</span>
-                <button>logout</button>
-            </div>
-        </div>
-    )
+<div className='navbar-msg'>
+    <span className="logo-auta">Lama Chat</span>
+    <div className="user-msg">
+        <img src={currentUser.photoURL} alt="" />
+        <span>{currentUser.displayName}</span>
+    </div>
+</div>
+)
 }
+
 export default NavBar

@@ -197,6 +197,7 @@
     background-color: #ffffff;
     padding: 10px;
     height:calc(100% - 210px);
+    overflow: scroll;
 }
 .inputpanel-component{
     height:50px;
@@ -225,6 +226,57 @@
     height:24px;
     cursor: pointer;
 }
-.send-button-inputpanel button {
+.send-button-inputpanel button{
+    border:none;
+    padding:10px 15px;
+    background-color: #fdd852;
+}
+
+.MessageComponent{
+    display: flex;
+    gap:20px;
+    margin-bottom:20px;
+}
+.MessageComponent.owner{
+    flex-direction: row-reverse;
+
+}
+ .owner .messageContent{
+    align-items: flex-end;
+}
+
+.MessageComponent.owner p{
+    background-color: #FDCF28;
+    border-radius: 10px 0px 10px 10px;
+    max-width: max-content;
+}
+
+.messageInfo{
+    display: flex;
+    flex-direction: column;
+    color:gray;
+    font-weight: 300;
+}
+.messageInfo img{
+    width:40px;
+    height:40px;
+    border-radius: 50%;
+    object-fit:cover;
+}
+.messageContent{
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+
+}
+.messageContent p{
+    background-color: lightgray;
+    padding:10px;
+    border-radius: 0px 10px 10px 10px;
+
+}
+.messageContent img{
+    width:50%;
 
 }

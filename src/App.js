@@ -21,10 +21,23 @@ function App() {
     const { token, removeToken, setToken } = useToken();
     const [user] = useAuthState(auth)
     const [room, setRoom] = useState("");
+    const {currentUser} = useContext(AuthContext)
+    const ProtectedRoute = ({children}) => {
+        if(!currentUser){
+            return <Navigate to="/Login"/>
+        }
+        return children
+    };
 
     return (
 
         <Routes>
+            <Route index element={
+                <ProtectedRoute>
+                    <Main />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/" element = {<Main/>}/>
             <Route path="/login" element = {<Login/>}/>
             <Route path="/Register" element = {<Register/>}/>
