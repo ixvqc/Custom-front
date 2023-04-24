@@ -2,26 +2,37 @@ import {useNavigate,Link} from "react-router-dom";
 import {useState, useEffect} from "react";
 import '../styles/Search.css';
 import logo from '../assets/img/logov2.png';
-import axios from "axios";
 import React, { useRef } from "react";
-import {firestore} from "../firebase";
-import {addDoc,collection} from "@firebase/firestore";
-import {storage} from "../firebase";
-import {ref, uploadBytes, listAll,getDownloadURL} from "firebase/storage";
-import ChatBox from "../components/ChatBox";
+import { db } from "../firebase"
+import {getDocs, collection} from "@firebase/firestore";
 import {signInWithEmailAndPassword, signOut} from "firebase/auth";
 import { auth } from "../firebase";
-import auto from "../assets/img/car.png";
-import autoHighlights from "../assets/img/carHighlights.png";
-import moto from "../assets/img/motorbike.png";
-import motoHighlights from "../assets/img/motorbikeHighlights.png";
-import key from "../assets/img/car-key.png";
-import keyHighlights from "../assets/img/car-keyHighlights.png";
-import {CSSTransition} from "react-transition-group";
 
-const search = () => {
-    //const [err, setErr] = useState(false);
-    //const navigate = useNavigate();
+
+function Search()  {
+    const [carList,setCarList] = useState([]);
+    const carCollectionRef = collection(db, "Search-test");
+
+
+    useEffect(() => {
+    const getCarList = async () => {
+        try{
+            const data = await getDocs(carCollectionRef);
+            const filteredData = data.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id,
+            }));
+            console.log(filteredData);
+            setCarList(filteredData);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    getCarList();
+    },[]);
+
+
 
     return (
         <div className="background-search">
@@ -63,33 +74,22 @@ const search = () => {
                         <div className="search-text">
                             Wyszukaj ogłoszenie
                         </div>
-                                <div>
-                                    <div className="input">
-                                        <label className="radio">
-                                            <input type="radio" value="new" name="criteria-is.new"/> Nowe
-                                        </label>
-                                        <label className="radio">
-                                            <input type="radio" value="used" name="criteria-is.new"/> Używane
-                                        </label>
-                                        <label className="radio">
-                                            <input
-                                                type="radio"
-                                                value="all-cars"
-                                                name="criteria-is.new"
-                                                defaultChecked={true}
-                                            />{" "}
-                                            Wszystkie
-                                        </label>
-                                        <br/>
-                                    </div>
-
+                            <div className={"search-inputs"}>
                                     <input type="text" className={"car-info"} name="car-brand" placeholder="Dowolna marka"/>
                                     <input type="text" className={"car-info"} name="car-model" placeholder="Dowolny model"/>
-                                    <input type="text" className={"car-info"} name="car-year-from" placeholder="Rok od"/>
-                                    <input type="text" className={"car-info"} name="car-year-to" placeholder="Rok do"/>
-                                    <input type="text" className={"car-info"} name="car-price-from" placeholder="Cena od"/>
-                                    <input type="text" className={"car-info"} name="car-price-to" placeholder="Cena do"/>
+
+                                    <div className={"input-float"}>
+                                    <input type="number" className={"car-info"} id = "car-year-1" name="car-year-from" placeholder="Rok od"/>
+                                    <input type="number" className={"car-info"} id = "car-year-2" name="car-year-to" placeholder="Rok do"/>
+                                    </div>
+
+                                    <div className={"input-float"}>
+                                    <input type="number" className={"car-info"} id = "car-price-1" name="car-price-from" placeholder="Cena od"/>
+                                    <input type="number" className={"car-info"} id = "car-price-2" name="car-price-to" placeholder="Cena do"/>
+                                    </div>
+
                                     <input type="text" className={"car-info"} name="car-country" placeholder="Kraj pochodzenia"/>
+
                                     <select className={"car-info"} name="car-body">
                                         <option value="Dowolne">Dowolne nadwozie</option>
                                         <option value="Hatchback">Hatchback</option>
@@ -104,33 +104,72 @@ const search = () => {
                                         <option value="Pick-up">Pick-up</option>
                                     </select>
 
-                                    <input type="text" className={"car-info"} name="car-mileage-from" placeholder="Przebieg od"/>
-                                    <input type="text" className={"car-info"} name="car-mileage-to" placeholder="Przebieg do"/>
-
-                                    <div className="input">
-                                        <label className="radio">
-                                            <input type="radio" value="fuel" name="fuel_type"/> Benzyna
-                                        </label>
-                                        <label className="radio">
-                                            <input type="radio" value="diesel" name="fuel_type"/> Diesel
-                                        </label>
-                                        <label className="radio">
-                                            <input
-                                                type="radio"
-                                                value="all_type"
-                                                name="fuel_type"
-                                                defaultChecked={true}
-                                            />{" "}
-                                            Wszystkie
-                                        </label>
-                                        <br/>
+                                    <div className={"input-float"}>
+                                    <input type="number" className={"car-info"} id = "car-mileage-1" name="car-mileage-from" placeholder="Przebieg od"/>
+                                    <input type="number" className={"car-info"} id = "car-mileage-2" name="car-mileage-to" placeholder="Przebieg do"/>
                                     </div>
-                                    <button className="search">
+
+                                    <input type="text" className={"car-info"} name="car-localization" placeholder="Dowolna lokalizacja"/>
+                                    <input type="text" className={"car-info"} name="car-repairable" placeholder="Dowolny stan"/>
+                                    <input type="text" className={"car-info"} name="car-engine" placeholder="Dowolny silnik"/>
+                                    <input type="text" className={"car-info"} name="car-inventory" placeholder="Dowolne wyposażenie"/>
+
+                                    <select className={"car-info"} name="car-fuel">
+                                        <option value="Dowolne">Dowolne paliwo</option>
+                                        <option value="Benzyna">Hatchback</option>
+                                        <option value="Gaz">Sedan</option>
+                                        <option value="Elektryczne">Sedan</option>
+                                        <option value="Hybryda">Sedan</option>
+                                        <option value="Inne">Sedan</option>
+                                    </select>
+
+
+                                    <button className="search-button">
                                         <Link to={"/login"} className="link">
                                             Szukaj
                                         </Link>
                                     </button>
+
+                                    <div>
+                                        {carList.map((car) => (
+                                            <div className={"search-offer"}>
+                                                <div className={"search-offer-image"}>
+                                                    <img id = "car-image" src={car.Zdje}/>
+                                                </div>
+                                                <div className={"search-offer-data"}>
+                                                    <div>
+                                                        <h1>{car.Marka}</h1>
+                                                        <p>{car.Model}</p>
+                                                    </div>
+                                                    <div>
+                                                    <p>Kraj pochodzenia: {car.Kraj}</p>
+                                                    <p>Lokalizacja {car.Lokalizacja}</p>
+                                                    </div>
+                                                    <div>
+                                                    <p>Typ nadwozia: {car.Nadwozie}</p>
+                                                    <p>Paliwo: {car.Paliwo}</p>
+                                                    </div>
+                                                    <div>
+                                                    <p>Rok produkcji: {car.Rok}</p>
+                                                    <p>Cena: {car.Cena}</p>
+                                                    </div>
+                                                    <div>
+                                                    <p>Przebieg: {car.Przebieg}</p>
+                                                    <p>Stan pojazdu: {car.Stan}</p>
+                                                    </div>
+                                                    <div>
+                                                    <p>Silnik: {car.Silnik}</p>
+                                                    <p>Wyposażenie dodatkowe: {car.Wypo}</p>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        ))}
+                                    </div>
+
                                 </div>
+
                     </div>
                 </form>
             </div>
@@ -139,4 +178,4 @@ const search = () => {
     );
 }
 
-export default search;
+export default Search;

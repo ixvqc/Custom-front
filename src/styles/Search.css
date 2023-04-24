@@ -30,8 +30,102 @@
     box-shadow: 1.5px 1.5px 3px gray;
 }
 
+.search-background{
+    box-shadow: 6px 5px  35px gray;
+    width:70%;
+    top:15%;
+    margin-top: 12vh;
+    margin-left:15%;
+    display: flex;
+}
+
+.foreground{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.search-inputs{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#car-year-1{
+    margin-right: 0px;
+    width: 7.9vw;
+}
+
+#car-year-2{
+    margin-left: 0px;
+    width: 7.9vw;
+}
+
+#car-price-1{
+    margin-right: 0px;
+    width: 7.9vw;
+}
+
+#car-price-2{
+    margin-left: 0px;
+    width: 7.9vw;
+}
+
+#car-mileage-1{
+    margin-right: 0px;
+    width: 7.9vw;
+}
+
+#car-mileage-2{
+    margin-left: 0px;
+    width: 7.9vw;
+}
+
+.search-button{
+    text-decoration: none;
+    color:black;
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-bottom: 20px;
+    background-color: #FDCF28;
+    margin-right:1vw;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 200px;
+    height: 40px;
+    box-shadow: 2px 2px 4px gray;
+}
+
+.search-offer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.search-offer-image{
+    background-color: #3A7734;
+    margin-right: 5vw;
+}
+
+#car-image{
+    width: 30vw;
+}
+
+.search-offer-data{
+    background-color: #61dafb;
+    border: 2px outset rgba(194,194,194,0.72);
+    border-radius: 7px;
+    width: 30vw;
+}
+
 .nav{
-    height: 13%;
+    height: 13vh;
     width: 100%;
     text-align: right;
     box-shadow: 2px 2px 4px gray;
@@ -49,15 +143,8 @@
     font-size: 150%;
 }
 
-.search-background{
-    box-shadow: 6px 5px  35px gray;
-    width:70%;
-    height:60vh;
-    position:fixed;
-    top:15%;
-    margin-left:15%;
 
-}
+
 
 
 .email-container-search {
