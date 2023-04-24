@@ -6,9 +6,12 @@ import Notiflix from 'notiflix';
 import PasswordChecklist from "react-password-checklist"
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../firebase";
+import { getAuth,} from "firebase/auth";
+
+import 'firebase/auth';
 
 import { doc, setDoc } from "firebase/firestore";
-
+import firebase from 'firebase/app';
 
 import '../styles/Login.css';
 
@@ -19,7 +22,7 @@ import {addDoc,collection} from "@firebase/firestore";
 
 
 
-import '../styles/user.css';
+//import '../styles/user.css';
 
 import {
     ref,
@@ -31,10 +34,7 @@ import {
 
 
 
-function App() {
 
-
-}
 
 
 
@@ -43,6 +43,9 @@ function App() {
 function User(props) {
     const [imageUpload, setImageUpload] = useState(null);
     const [imageUrls, setImageUrls] = useState([]);
+    const { displayName } = auth.currentUser
+
+
 
     const imagesListRef = ref(storage, "images/");
     const uploadFile = () => {
@@ -66,6 +69,7 @@ function User(props) {
     }, []);
 
 
+
     return(
         <div className="mainuser">
 
@@ -84,15 +88,21 @@ function User(props) {
                         </div>
 
                         <div className="Usernamedisp-div">
-                        <button className="Usernamedisp">
-                        loremipsum
-                        </button>
+                            <button className="Usernamedisp">
+
+                                {displayName ? (
+                                    <p>Welcome, {displayName}!</p>
+                                ) : (
+                                    <p>{displayName}</p>
+                                )}
+
+                            </button>
                         </div>
                         <div className="ogloszenie-button-div">
                             <Link to="/AddAnnouncement">
-                        <button className="ogloszenie-button">
-                            Dodaj Ogłoszenie
-                        </button>
+                                <button className="ogloszenie-button">
+                                    Dodaj Ogłoszenie
+                                </button>
                             </Link>
                         </div>
 
@@ -111,9 +121,9 @@ function User(props) {
                         Ogłoszenia
                     </button>
                     <Link to="/messages">
-                    <button className="button3user">
-                        Wiadomości
-                    </button>
+                        <button className="button3user">
+                            Wiadomości
+                        </button>
                     </Link>
                     <button className="button4user">
                         Płatności
@@ -125,9 +135,9 @@ function User(props) {
                     Zmień Nazwę Użytkownika
                 </button>
                 <div>
-                <button className="passwordch-button">
-                    Zmień Hasło
-                </button>
+                    <button className="passwordch-button">
+                        Zmień Hasło
+                    </button>
                 </div>
                 <div>
                     <button className="emailch-button">
@@ -138,7 +148,7 @@ function User(props) {
                     <button className="infoch-button">
                         Zaktualizuj informacje
                     </button>
-                    
+
                 </div>
 
 
