@@ -1,11 +1,15 @@
-.main{
+.mainuser{
+
+
+
     width: 100%;
     height:100%;
     margin: 0;
     background-color: white;
     font-family: Arial, Helvetica, sans-serif;
 }
-.nav{
+.navuser{
+
     height: 13%;
     width: 100%;
     text-align: right;
@@ -17,18 +21,20 @@
     font-size: 22px;
 
 }
-.logo-div{
+.logo-divuser{
+
     height: 10%;
     width: 10%;
 }
 
-.logo-main{
+.logo-mainuser{
+
     position:fixed;
     height:13vh;
     width: 10vw;
     margin-bottom:3vh;
 }
-.image-background {
+.image-backgrounduser {
     background-image: url(/src/assets/img/tlo-user2.png);
     width: 100%;
     height: 40vh;
@@ -40,10 +46,9 @@
 }
 
 .button1user {
-
+    position: relative;
     margin-top: 10vh;
     margin-left: 15vw;
-    position: relative;
     background-color: rgb(253, 207, 40);
     border-radius: 5px;
     box-shadow: rgb(121, 104, 36) 0px 4px 0px 0px;
@@ -78,9 +83,8 @@
 }
 
 .button2user {
-
-    margin-left: 10vw;
     position: relative;
+    margin-left: 10vw;
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
     box-shadow: rgb(162, 162, 162) 0px 4px 0px 0px;
@@ -115,8 +119,8 @@
 }
 
 .button3user {
-    margin-left: 10vw;
     position: relative;
+    margin-left: 10vw;
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
     box-shadow: rgb(162, 162, 162) 0px 4px 0px 0px;
@@ -267,12 +271,10 @@
 }
 
 .ogloszenie-button {
-    margin-top: 2.9vh;
-    margin-left: 82vw;
+    margin-top: 3vh;
+margin-left: 2.5vw;
     position: relative;
     background-color: rgb(253, 207, 40);
-    
-
     padding: 0.8vh;
     background-repeat: no-repeat;
     box-sizing: border-box;
@@ -284,4 +286,58 @@
     transition: all .3s ease-in-out;
     z-index: 1;
     overflow: hidden;
+}
+
+.Usernamedisp {
+    margin-top: 3.4vh;
+    justify-content: center;
+    align-items: center;
+    width: 15vw;
+    height: 6vh;
+    padding: 1rem 2rem;
+    font-weight: 700;
+    background: rgb(255, 255, 255);
+    color: black;
+    border-radius: .5rem;
+    border-bottom: 2px solid #FCBD07;
+    border-right: 2px solid #FCBD07;
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    overflow: hidden;
+
+}
+.buttongroupus{
+    display: flex;
+
+
+}
+.ogloszenie-button-div{
+    flex-direction: row;
+    display: flex;
+}
+
+.Usernamedisp-div{
+    flex-direction: row;
+    display: flex;
+}
+
+.obserwowaneus {
+    margin-right: 2.5vw;
+    margin-left: 45vw;
+    margin-top: 3.4vh;
+    justify-content: center;
+    align-items: center;
+    width: 15vw;
+    height: 6vh;
+    padding: 1rem 2rem;
+    font-weight: 700;
+    background: rgb(255, 255, 255);
+    color: black;
+    border-radius: .5rem;
+    border-bottom: 2px solid #FCBD07;
+    border-right: 2px solid #FCBD07;
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    overflow: hidden;
+
 }

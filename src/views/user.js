@@ -1,93 +1,107 @@
+import React, { useState, useEffect } from 'react';
 import {useNavigate,Link} from "react-router-dom";
-import {useState, useEffect} from "react";
 import '../styles/Register.css';
 import logo from '../assets/img/logov2.png';
 import Notiflix from 'notiflix';
 import PasswordChecklist from "react-password-checklist"
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../firebase";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
 import { doc, setDoc } from "firebase/firestore";
-import React, { useReducer } from 'react';
+
+
+import '../styles/Login.css';
+
+import axios from "axios";
+
+import {firestore} from "../firebase";
+import {addDoc,collection} from "@firebase/firestore";
+
+
 
 import '../styles/user.css';
 
+import {
+    ref,
+    uploadBytes,
+    getDownloadURL,
+    listAll,
+    list,
+} from "firebase/storage";
 
 
 
-import Profile from "./Profile";
-// const User = () => {
-//     const [err, setErr] = useState(false);
-//     const [loading, setLoading] = useState(false);
-//     const navigate = useNavigate();
-//     const [password, setPassword] = useState("")
-//
-//     const handleSubmit = async (e) => {
-//         setLoading(true);
-//         e.preventDefault();
-//         const displayName = e.target[0].value;
-//         const email = e.target[1].value;
-//         const password = e.target[2].value;
-//         const file = e.target[3].files[0];
-//
-//         try {
-//             //Create user
-//             const res = await createUserWithEmailAndPassword(auth, email, password);
-//
-//             //Create a unique image name
-//             const date = new Date().getTime();
-//             const storageRef = ref(storage, `${displayName + date}`);
-//
-//             await uploadBytesResumable(storageRef, file).then(() => {
-//                 getDownloadURL(storageRef).then(async (downloadURL) => {
-//                     try {
-//                         //Update profile
-//                         await updateProfile(res.user, {
-//                             displayName,
-//                             photoURL: downloadURL,
-//                         });
-//                         //create user on firestore
-//                         await setDoc(doc(db, "users", res.user.uid), {
-//                             uid: res.user.uid,
-//                             displayName,
-//                             email,
-//                             photoURL: downloadURL,
-//                         });
-//
-//                         //create empty user chats on firestore
-//                         await setDoc(doc(db, "userChats", res.user.uid), {});
-//                         navigate("/");
-//                     } catch (err) {
-//                         console.log(err);
-//                         setErr(true);
-//                         setLoading(false);
-//                     }
-//                 });
-//             });
-//         } catch (err) {
-//             setErr(true);
-//             setLoading(false);
-//         }
-//     };
+function App() {
+
+
+}
+
+
+
+
+
 function User(props) {
+    const [imageUpload, setImageUpload] = useState(null);
+    const [imageUrls, setImageUrls] = useState([]);
+
+    const imagesListRef = ref(storage, "images/");
+    const uploadFile = () => {
+        if (imageUpload == null) return;
+        const imageRef = ref(storage, `images/${imageUpload.name}`);
+        uploadBytes(imageRef, imageUpload).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url) => {
+                setImageUrls((prev) => [...prev, url]);
+            });
+        });
+    };
+
+    useEffect(() => {
+        listAll(imagesListRef).then((response) => {
+            response.items.forEach((item) => {
+                getDownloadURL(item).then((url) => {
+                    setImageUrls((prev) => [...prev, url]);
+                });
+            });
+        });
+    }, []);
+
 
     return(
-        <div className="main">
+        <div className="mainuser">
 
-            <div className="nav">
+            <div className="navuser">
 
-                <div className="logo-div">
+                <div className="logo-divuser">
                     <a href="http://localhost:3000">
-                        <img src={logo} alt="Main.js Logo" className="logo-main" />
+                        <img src={logo} alt="Main.js Logo" className="logo-mainuser" />
                     </a>
-                    <div>
+
+                    <div className="buttongroupus">
+                        <div className="obserwowaneus-div">
+                            <button className="obserwowaneus">
+                                Obserwowane  ★
+                            </button>
+                        </div>
+
+                        <div className="Usernamedisp-div">
+                        <button className="Usernamedisp">
+                        loremipsum
+                        </button>
+                        </div>
+                        <div className="ogloszenie-button-div">
+                            <Link to="/AddAnnouncement">
                         <button className="ogloszenie-button">
                             Dodaj Ogłoszenie
                         </button>
+                            </Link>
+                        </div>
+
+
                     </div>
+
                 </div>
             </div>
-            <div className="image-background">
+            <div className="image-backgrounduser">
                 <div>
                     <button className="button1user">
                         Konto
@@ -96,11 +110,11 @@ function User(props) {
                     <button className="button2user">
                         Ogłoszenia
                     </button>
-
+                    <Link to="/messages">
                     <button className="button3user">
                         Wiadomości
                     </button>
-
+                    </Link>
                     <button className="button4user">
                         Płatności
                     </button>
@@ -126,9 +140,20 @@ function User(props) {
                     </button>
                     
                 </div>
-                <div className="Add-avatar-register">
-                    <button className="button-add-avatar-register">Dodaj zdjęcie</button>
-                </div>
+
+
+            </div>
+            <div className="App">
+                <input
+                    type="file"
+                    onChange={(event) => {
+                        setImageUpload(event.target.files[0]);
+                    }}
+                />
+                <button onClick={uploadFile}> Upload Image</button>
+                {imageUrls.map((url) => {
+                    return <img src={url} />;
+                })}
             </div>
 
         </div>
