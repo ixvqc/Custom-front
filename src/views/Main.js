@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState,useContext} from "react";
 import '../styles/Main.css';
 import auto from "../assets/img/car.png";
 import key from "../assets/img/car-key.png";
@@ -17,13 +17,15 @@ import SearchFormCars from "../components/SearchFormCars";
 import SearchFormMotorcycles from "../components/SearchFormMotorcycles";
 import SearchFormOther from "../components/SearchFormOther";
 import { CSSTransition } from 'react-transition-group';
+import {signOut} from "firebase/auth"
+import { auth } from '../firebase'
+import { AuthContext } from "../context/AuthContext";
 
 
-export default function Main(props) {
 
 
 
-
+export default function Main(props){
 
     const [registerForm, setregisterForm] = useState({
         marka: "",
@@ -35,14 +37,16 @@ export default function Main(props) {
         fuel_type: ""
     })
 
-
     function handleChange(event) {
         const {value, name} = event.target
         setregisterForm(prevNote => ({
-            ...prevNote, [name]: value})
-        )}
+                ...prevNote, [name]: value
+            })
+        )
+    }
 
     const [imageSrc, setImageSrc] = useState(auto);
+
     function handleClick(src) {
         setImageSrc(src);
     }
@@ -73,30 +77,6 @@ export default function Main(props) {
         setOtherOff(true);
     };
 
-
-
-  //  const [carsHighlights, setcarsHighlights] = useState(auto);
-
-    // function toggleCarHighligh() {
-    //     carsHighlights(autoHighlights);
-    // }
-
-    function logMeOut() {
-        axios({
-            method: "POST",
-            url:"/logout",
-        })
-            .then((response) => {
-                props.token()
-            }).catch((error) => {
-            if (error.response) {
-                console.log(error.response)
-                console.log(error.response.status)
-                console.log(error.response.headers)
-            }
-        })}
-
-
     const [marka, setMarka] = React.useState(null);
     const [cena, setCena] = React.useState(null);
     const [rok, setRok] = React.useState(null);
@@ -105,11 +85,12 @@ export default function Main(props) {
     const [image, setImage] = React.useState(null);
 
     const [isActive, setIsActive] = useState(false);
+
     function popUpOffer(event) {
         axios({
             method: "GET",
-            url:"/offerData",
-            data:{
+            url: "/offerData",
+            data: {
                 marka: registerForm.marka,
                 model: registerForm.model,
                 rokOd: registerForm.rokOd,
@@ -121,11 +102,11 @@ export default function Main(props) {
         })
             .then((response) => {
                 sessionStorage.setItem("brand", response.data.brand)
-                setMarka(sessionStorage.getItem("brand") )
+                setMarka(sessionStorage.getItem("brand"))
                 sessionStorage.setItem("year", response.data.year)
                 setRok(sessionStorage.getItem("year"))
                 sessionStorage.setItem("mileage", response.data.mileage)
-                setPrzebieg(sessionStorage.getItem("mileage")/1000 + " tys")
+                setPrzebieg(sessionStorage.getItem("mileage") / 1000 + " tys")
                 sessionStorage.setItem("fuel_type", response.data.fuel_type)
                 setPaliwo(sessionStorage.getItem("fuel_type"))
                 sessionStorage.setItem("price", response.data.price)
@@ -140,7 +121,7 @@ export default function Main(props) {
                 console.log(error.response.status)
                 console.log(error.response.headers)
             }
-            })
+        })
         event.preventDefault()
 
         sessionStorage.setItem("offerImage", 'https://www.wyborkierowcow.pl/wp-content/uploads/2022/09/bmw-serii-3-e36-cennik-1.jpg');
@@ -148,8 +129,6 @@ export default function Main(props) {
         setImage(offerImage)
         setIsActive(true)
     }
-
-
 
 
     const offerData = async (event) => {
@@ -165,22 +144,10 @@ export default function Main(props) {
 
     useEffect(() => {
         offerData();
-    },[]);
+    }, []);
     // function popUpOffer() {
     //     //document.getElementById("place-to-add-offer").style.display = "inline-block"
     // }
-
-
-//BUTTON ADD OFFERT
-//     const [isHovered, setIsHovered] = useState(false);
-//
-//     const handleHover = () => {
-//         setIsHovered(!isHovered);
-//     };
-//     const buttonColor = isHovered ? '#fdd852' : '#FDCF28';
-
-//CHANGE TYPE OF SEARCH  osobowe,motocykle,inne
-
 
     return (
 
@@ -193,10 +160,6 @@ export default function Main(props) {
 
                 </div>
 
-                {/*<button onClick={logMeOut}>*/}
-                {/*    Logout*/}
-                {/*</button>*/}
-
                 <Link to={"/login"} className="link">
                     Zaloguj się
                 </Link>
@@ -206,239 +169,258 @@ export default function Main(props) {
                 <Link to={"/messages"} className="link">
                     wiadomości
                 </Link>
+
+                <button onClick={() => signOut(auth)}>logout</button>
+
                 <button className="add-adv"
-                    // onMouseEnter={handleHover}
-                    // onMouseLeave={handleHover}
-                    // style={{ backgroundColor: buttonColor }}
                 >
-                    <Link to={"/login"} className="link">Dodaj ogłoszenie + </Link>
+                    <Link to={"/AddAnouncement"} className="link">Dodaj ogłoszenie + </Link>
                 </button>
 
             </div>
 
             <form>
-            <div className="image-background">
-                <div className="filters">
-                    <div className="filters-line">
-                        <img src={imageSrc === auto ? autoHighlights : auto} onClick={() => { handleClick(auto); hideCarsClick(); }} className="choices-logo"/>
-                        <img src={imageSrc === moto ? motoHighlights : moto} onClick={() => { handleClick(moto); hideMotorClick();}} className="choices-moto"/>
-                        <img src={imageSrc === key ? keyHighlights : key} onClick={() => { handleClick(key); hideOtherClick(); }} className="choices-key"/><br />
-                        <text className="text-choices">Osobowe</text>
-                        <text className="text-choices">Motocykle</text>
-                        <text className="text-choices">Inne</text>
+                <div className="image-background">
+                    <div className="filters">
+                        <div className="filters-line">
+                            <img src={imageSrc === auto ? autoHighlights : auto} onClick={() => {
+                                handleClick(auto);
+                                hideCarsClick();
+                            }} className="choices-logo"/>
+                            <img src={imageSrc === moto ? motoHighlights : moto} onClick={() => {
+                                handleClick(moto);
+                                hideMotorClick();
+                            }} className="choices-moto"/>
+                            <img src={imageSrc === key ? keyHighlights : key} onClick={() => {
+                                handleClick(key);
+                                hideOtherClick();
+                            }} className="choices-key"/><br/>
+                            <text className="text-choices">Osobowe</text>
+                            <text className="text-choices">Motocykle</text>
+                            <text className="text-choices">Inne</text>
+                        </div>
+
+
+                        <CSSTransition
+                            in={carsOff}
+                            appear={true}
+                            timeout={500}
+                            classNames="fade-main"
+                            unmountOnExit
+                        >
+                            <div>
+                                <div className="input">
+                                    <label className="radio">
+                                        <input onChange={handleChange} type="radio" value="new"
+                                               name="criteria-is.new"/> Nowe
+                                    </label>
+                                    <label className="radio">
+                                        <input onChange={handleChange} type="radio" value="used"
+                                               name="criteria-is.new"/> Używane
+                                    </label>
+                                    <label className="radio">
+                                        <input
+                                            onChange={handleChange}
+                                            type="radio"
+                                            value="all-cars"
+                                            name="criteria-is.new"
+                                            defaultChecked={true}
+                                        />{" "}
+                                        Wszystkie
+                                    </label>
+                                    <br/>
+                                </div>
+
+                                <input onChange={handleChange} type="text" className="car-information"
+                                       placeholder="Dowolne auto" name="marka"/>
+                                <input onChange={handleChange} type="text" className="car-information"
+                                       placeholder="Dowolny model" name="model"/>
+                                <input onChange={handleChange} type="text" className="car-year"
+                                       placeholder="Rok od"/>
+                                <input onChange={handleChange} type="text" className="car-year"
+                                       placeholder="Rok do"/>
+                                <input onChange={handleChange} type="text" className="car-price"
+                                       placeholder="Cena od"/>
+                                <input onChange={handleChange} type="text" className="car-price"
+                                       placeholder="Cena do"/>
+
+                                <div className="input">
+                                    <label className="radio">
+                                        <input onChange={handleChange} type="radio" value="fuel"
+                                               name="fuel_type"/> Benzyna
+                                    </label>
+                                    <label className="radio">
+                                        <input onChange={handleChange} type="radio" value="diesel"
+                                               name="fuel_type"/> Diesel
+                                    </label>
+                                    <label className="radio">
+                                        <input
+                                            onChange={handleChange}
+                                            type="radio"
+                                            value="%"
+                                            name="fuel_type"
+                                            defaultChecked={true}
+                                        />{" "}
+                                        Wszystkie
+                                    </label>
+                                    <br/>
+                                </div>
+
+                                <Link to={"/login"} className="detailed-search">
+                                    Szczegółowe wyszukiwanie
+                                </Link>
+                                <button className="search" onClick={popUpOffer}>
+                                    Szukaj
+                                </button>
+                            </div>
+                        </CSSTransition>
+
+                        <CSSTransition
+                            in={motorOff}
+                            appear={true}
+                            timeout={500}
+                            classNames="fade-main"
+                            unmountOnExit
+                        >
+                            <div>
+                                <div className="input">
+                                    <label className="radio">
+                                        <input type="radio" value="new" name="criteria-is.new"/> Nowe
+                                    </label>
+                                    <label className="radio">
+                                        <input type="radio" value="used" name="criteria-is.new"/> Używane
+                                    </label>
+                                    <label className="radio">
+                                        <input
+                                            type="radio"
+                                            value="all-cars"
+                                            name="criteria-is.new"
+                                            defaultChecked={true}
+                                        />{" "}
+                                        Wszystkie
+                                    </label>
+                                    <br/>
+                                </div>
+
+                                <input type="text" className="car-information" placeholder="Dowolna motor"/>
+                                <input type="text" className="car-information" placeholder="Dowolny model"/>
+                                <input type="text" className="car-year" placeholder="Rok od"/>
+                                <input type="text" className="car-year" placeholder="Rok do"/>
+                                <input type="text" className="car-price" placeholder="Cena od"/>
+                                <input type="text" className="car-price" placeholder="Cena do"/>
+
+                                <div className="input">
+                                    <label className="radio">
+                                        <input type="radio" value="fuel" name="fuel_type"/> Benzyna
+                                    </label>
+                                    <label className="radio">
+                                        <input type="radio" value="diesel" name="fuel_type"/> Diesel
+                                    </label>
+                                    <label className="radio">
+                                        <input
+                                            type="radio"
+                                            value="all_type"
+                                            name="fuel_type"
+                                            defaultChecked={true}
+                                        />{" "}
+                                        Wszystkie
+                                    </label>
+                                    <br/>
+                                </div>
+
+                                <Link to={"/login"} className="detailed-search">
+                                    Szczegółowe wyszukiwanie
+                                </Link>
+                                <button className="search">
+                                    <Link to={"/login"} className="link">
+                                        Szukaj
+                                    </Link>
+                                </button>
+                            </div>
+                        </CSSTransition>
+
+                        <CSSTransition
+                            in={otherOff}
+                            appear={true}
+                            timeout={500}
+                            classNames="fade-main"
+                            unmountOnExit
+                        >
+                            <div>
+                                <div className="input">
+                                    <label className="radio">
+                                        <input type="radio" value="new" name="criteria-is.new"/> Nowe
+                                    </label>
+                                    <label className="radio">
+                                        <input type="radio" value="used" name="criteria-is.new"/> Używane
+                                    </label>
+                                    <label className="radio">
+                                        <input
+                                            type="radio"
+                                            value="all-cars"
+                                            name="criteria-is.new"
+                                            defaultChecked={true}
+                                        />{" "}
+                                        Wszystkie
+                                    </label>
+                                    <br/>
+                                </div>
+
+                                <input type="text" className="car-information" placeholder="Dowolne inne cos"/>
+                                <input type="text" className="car-information" placeholder="Dowolny model"/>
+                                <input type="text" className="car-year" placeholder="Rok od"/>
+                                <input type="text" className="car-year" placeholder="Rok do"/>
+                                <input type="text" className="car-price" placeholder="Cena od"/>
+                                <input type="text" className="car-price" placeholder="Cena do"/>
+
+                                <div className="input">
+                                    <label className="radio">
+                                        <input type="radio" value="fuel" name="fuel_type"/> Benzyna
+                                    </label>
+                                    <label className="radio">
+                                        <input type="radio" value="diesel" name="fuel_type"/> Diesel
+                                    </label>
+                                    <label className="radio">
+                                        <input
+                                            type="radio"
+                                            value="all_type"
+                                            name="fuel_type"
+                                            defaultChecked={true}
+                                        />{" "}
+                                        Wszystkie
+                                    </label>
+                                    <br/>
+                                </div>
+
+                                <Link to={"/login"} className="detailed-search">
+                                    Szczegółowe wyszukiwanie
+                                </Link>
+                                <button className="search">
+                                    <Link to={"/login"} className="link">
+                                        Szukaj
+                                    </Link>
+                                </button>
+                            </div>
+                        </CSSTransition>
+
                     </div>
-
-
-                    <CSSTransition
-                        in={carsOff}
-                        appear={true}
-                        timeout={500}
-                        classNames="fade-main"
-                        unmountOnExit
-                    >
-                        <div>
-                            <div className="input">
-                                <label className="radio">
-                                    <input onChange={handleChange} type="radio" value="new" name="criteria-is.new" /> Nowe
-                                </label>
-                                <label className="radio">
-                                    <input onChange={handleChange} type="radio" value="used" name="criteria-is.new" /> Używane
-                                </label>
-                                <label className="radio">
-                                    <input
-                                        onChange={handleChange}
-                                        type="radio"
-                                        value="all-cars"
-                                        name="criteria-is.new"
-                                        defaultChecked={true}
-                                    />{" "}
-                                    Wszystkie
-                                </label>
-                                <br />
-                            </div>
-
-                            <input onChange={handleChange} type="text" className="car-information" placeholder="Dowolne auto" name = "marka"/>
-                            <input onChange={handleChange} type="text" className="car-information" placeholder="Dowolny model" name = "model"/>
-                            <input onChange={handleChange} type="text" className="car-year" placeholder="Rok od" />
-                            <input onChange={handleChange} type="text" className="car-year" placeholder="Rok do" />
-                            <input onChange={handleChange} type="text" className="car-price" placeholder="Cena od" />
-                            <input onChange={handleChange} type="text" className="car-price" placeholder="Cena do" />
-
-                            <div className="input">
-                                <label className="radio">
-                                    <input onChange={handleChange} type="radio" value="fuel" name="fuel_type" /> Benzyna
-                                </label>
-                                <label className="radio">
-                                    <input onChange={handleChange} type="radio" value="diesel" name="fuel_type" /> Diesel
-                                </label>
-                                <label className="radio">
-                                    <input
-                                        onChange={handleChange}
-                                        type="radio"
-                                        value="%"
-                                        name="fuel_type"
-                                        defaultChecked={true}
-                                    />{" "}
-                                    Wszystkie
-                                </label>
-                                <br />
-                            </div>
-
-                            <Link to={"/login"} className="detailed-search">
-                                Szczegółowe wyszukiwanie
-                            </Link>
-                            <button className="search" onClick={popUpOffer}>
-                                    Szukaj
-                            </button>
-                        </div>
-                    </CSSTransition>
-
-                    <CSSTransition
-                        in={motorOff}
-                        appear={true}
-                        timeout={500}
-                        classNames="fade-main"
-                        unmountOnExit
-                    >
-                        <div>
-                            <div className="input">
-                                <label className="radio">
-                                    <input type="radio" value="new" name="criteria-is.new" /> Nowe
-                                </label>
-                                <label className="radio">
-                                    <input type="radio" value="used" name="criteria-is.new" /> Używane
-                                </label>
-                                <label className="radio">
-                                    <input
-                                        type="radio"
-                                        value="all-cars"
-                                        name="criteria-is.new"
-                                        defaultChecked={true}
-                                    />{" "}
-                                    Wszystkie
-                                </label>
-                                <br />
-                            </div>
-
-                            <input type="text" className="car-information" placeholder="Dowolna motor" />
-                            <input type="text" className="car-information" placeholder="Dowolny model" />
-                            <input type="text" className="car-year" placeholder="Rok od" />
-                            <input type="text" className="car-year" placeholder="Rok do" />
-                            <input type="text" className="car-price" placeholder="Cena od" />
-                            <input type="text" className="car-price" placeholder="Cena do" />
-
-                            <div className="input">
-                                <label className="radio">
-                                    <input type="radio" value="fuel" name="fuel_type" /> Benzyna
-                                </label>
-                                <label className="radio">
-                                    <input type="radio" value="diesel" name="fuel_type" /> Diesel
-                                </label>
-                                <label className="radio">
-                                    <input
-                                        type="radio"
-                                        value="all_type"
-                                        name="fuel_type"
-                                        defaultChecked={true}
-                                    />{" "}
-                                    Wszystkie
-                                </label>
-                                <br />
-                            </div>
-
-                            <Link to={"/login"} className="detailed-search">
-                                Szczegółowe wyszukiwanie
-                            </Link>
-                            <button className="search">
-                                <Link to={"/login"} className="link">
-                                    Szukaj
-                                </Link>
-                            </button>
-                        </div>
-                    </CSSTransition>
-
-                    <CSSTransition
-                        in={otherOff}
-                        appear={true}
-                        timeout={500}
-                        classNames="fade-main"
-                        unmountOnExit
-                    >
-                        <div>
-                            <div className="input">
-                                <label className="radio">
-                                    <input type="radio" value="new" name="criteria-is.new" /> Nowe
-                                </label>
-                                <label className="radio">
-                                    <input type="radio" value="used" name="criteria-is.new" /> Używane
-                                </label>
-                                <label className="radio">
-                                    <input
-                                        type="radio"
-                                        value="all-cars"
-                                        name="criteria-is.new"
-                                        defaultChecked={true}
-                                    />{" "}
-                                    Wszystkie
-                                </label>
-                                <br />
-                            </div>
-
-                            <input type="text" className="car-information" placeholder="Dowolne inne cos" />
-                            <input type="text" className="car-information" placeholder="Dowolny model" />
-                            <input type="text" className="car-year" placeholder="Rok od" />
-                            <input type="text" className="car-year" placeholder="Rok do" />
-                            <input type="text" className="car-price" placeholder="Cena od" />
-                            <input type="text" className="car-price" placeholder="Cena do" />
-
-                            <div className="input">
-                                <label className="radio">
-                                    <input type="radio" value="fuel" name="fuel_type" /> Benzyna
-                                </label>
-                                <label className="radio">
-                                    <input type="radio" value="diesel" name="fuel_type" /> Diesel
-                                </label>
-                                <label className="radio">
-                                    <input
-                                        type="radio"
-                                        value="all_type"
-                                        name="fuel_type"
-                                        defaultChecked={true}
-                                    />{" "}
-                                    Wszystkie
-                                </label>
-                                <br />
-                            </div>
-
-                            <Link to={"/login"} className="detailed-search">
-                                Szczegółowe wyszukiwanie
-                            </Link>
-                            <button className="search">
-                                <Link to={"/login"} className="link">
-                                    Szukaj
-                                </Link>
-                            </button>
-                        </div>
-                    </CSSTransition>
-
                 </div>
-            </div>
             </form>
-            <div style={{display : !isActive ? 'none' : "inline-block"}} className="popular-offers-text-div" id="place-to-add-offer">
-                <CarCard id = "offerCard"
-                    ImageCar={image}
-                    CarBrand={marka}
-                    CarPrice={cena}
-                    ProductionDate={rok}
-                    CarMileage={przebieg}
-                    FuelType={paliwo}
-                    />
+            <div style={{display: !isActive ? 'none' : "inline-block"}} className="popular-offers-text-div"
+                 id="place-to-add-offer">
+                <CarCard id="offerCard"
+                         ImageCar={image}
+                         CarBrand={marka}
+                         CarPrice={cena}
+                         ProductionDate={rok}
+                         CarMileage={przebieg}
+                         FuelType={paliwo}
+                />
             </div>
             <div className="popular-offers-text-div">
-                <text className="popular-offers-text">Najpopularniejsze oferty </text>
+                <text className="popular-offers-text">Najpopularniejsze oferty</text>
 
             </div>
-
 
 
             <div className="popular-offers-homepage">
@@ -512,8 +494,6 @@ export default function Main(props) {
                 {/*        )*/}
                 {/*    })*/}
                 {/*}*/}
-
-
 
 
             </div>

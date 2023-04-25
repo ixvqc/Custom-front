@@ -1,7 +1,4 @@
 .main-messages{
-    width: 100%;
-    height:100%;
-    margin: 0;
     background-color: white;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -14,12 +11,15 @@
 
 }
 
-.logo-messages-img{
-    width: 10vw;
-}
-
 .logo-messages{
+    justify-content: center;
+    align-items: center;
+    display: flex;
     width: 30%;
+
+}
+.logo-messages img{
+    width:10vw;
 }
 
 .observed-nav-messages{
@@ -39,9 +39,13 @@
     align-items: center;
     display: flex;
 }
-.user-messages{
-    font-size: 23px;
-
+.username-nav-messages img{
+    height:60px;
+    padding:10px;
+    border-radius: 100%;
+}
+.username-nav-messages span{
+    font-size:23px;
 }
 
 .button-add-adv-messages{
@@ -78,129 +82,217 @@
     text-decoration: none;
     color:black;
 }
+
+
 .windows-messages{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top:10vh ;
+    height:100vh;
 }
-.Left-window-messages{
-    height:77vh;
-    width:25vw;
-    background-color: rgba(182, 182, 182, 0.29);
-    flex-direction: row;
-    margin-right: 5vw;
+.container-msg{
+
+    border-radius:10px;
+    width:65%;
+    height:80vh;
     display: flex;
+    overflow: hidden;
+}
+.sidebar{
+    flex:1;
+    border:1px solid black;
+    margin-right:50px;
+}
+
+.chat-messages {
+    flex: 2;
 
 }
-.right-window-messages{
-    height: 78vh;
-    width:60vw;
-    background-color: rgba(182, 182, 182, 0.29);
-    flex-direction: row;
-    display: flex;
 
-}
-.sell-or-buy-messages{
-    border-bottom: 1px solid gray;
-    height:10vh;
-    width:100%;
-    justify-content: center;
+.navbar-msg {
+    display: flex;
     align-items: center;
-    display: flex;
-
-}
-.buy-button{
-    background-color: #FDCF28;
-    color: black;
-    height:4vh;
-    width:9vw;
-    font-size: 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.1s ease;
-    box-shadow: 2px 2px 4px gray;
-
-
-}
-.sell-button{
-    background-color: #cecece;
-    color: black;
-    height:4vh;
-    width: 9vw;
-    font-size: 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.1s ease;
-    box-shadow: 2px 2px 4px gray;
-    margin-left:4vw;
-}
-
-.adv-panel-messages{
+    justify-content: space-between;
+    background-color: rgba(237, 237, 237, 0.4);
     border-bottom: 1px solid gray;
-    height:13vh;
-    width:100%;
-    align-items: center;
+    height: 100px;
+    padding: 10px;
+}
+.logo-auta{
+    font-weight: bold;
+}
+.user-msg{
     display: flex;
-    box-shadow: 2px 2px 4px gray;
+    gap: 10px;
+    padding:10px;
+    align-items: center;
+}
+.user-msg img{
+    height:24px;
+    width:24px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.user-msg button{
+    background-color: antiquewhite;
+    color:black;
+    border:none;
+    font-size: 10px;
+    cursor:pointer;
+}
+
+.search-msg{
+    border-bottom:1px solid #888888;
+}
+.SearchForm-msg{
+    padding:10px;
+}
+.SearchForm-msg input{
+    background-color: transparent;
+    border:none;
+    outline: none;
+
+}
+.SearchForm-msg::placeholder {
+    color:lightblue;
+}
+.UserChat-msg{
+    display: flex;
+    gap: 10px;
+    padding:10px;
+    align-items: center;
+
+}
+.UserChat-msg:hover{
+    background-color: #ffd31e;
+
+}
+.UserChat-msg img {
+    width:50px;
+    height:50px;
+    border-radius: 50%;
+    object-fit: cover;
+
+}
+.UserChatInfo span{
+    font-size: 18px;
+    font-weight: 500;
+}
+.UserChatInfo p{
+    font-size: 14px;
+}
+.ChatInfo{
+    height:100px;
     background-color: #dad9d9;
+    display: flex;
+    align-items: center;
+    padding:10px;
+    border-bottom:1px solid gray ;
+}
+.ChatInfo span{
+    font-size: 23px;
+    margin-left:3vw;
 
 }
-.car-photo-messages{
-    width:6vw;
-    margin-left:2vw;
-
+.ChatInfo img{
+    height:70px;
+    width:80px;
 }
-.active-button{
-    background-color: #c0c0c0;
-    color: black;
-    height:3vh;
-    width: 8vw;
-    font-size: 18px;
-    border: none;
-    border-radius: 5px;
+.ChatIcons{
+    display: flex;
+    gap: 10px;
+}
+.ChatIcons img{
+    height: 24px;
     cursor: pointer;
-    transition: background-color 0.1s ease;
-    box-shadow: 2px 2px 4px gray;
-    margin-left:1vw;
-    margin-bottom: 2vh;
+}
+.Messages-component{
+    background-color: #f0f0f0;
+    padding: 10px;
+    height:calc(100% - 210px);
+    overflow: scroll;
+
 
 }
-.price-adv-messages{
+.inputpanel-component{
+    height:50px;
+    background-color: #e5e5e5;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.inputpanel-component input{
+    width:100%;
+    border:none;
+    outline:none;
     font-size: 18px;
-    margin-left:1vw;
+    background-color: #e5e5e5;
+}
+.inputpanel-component input::placeholder{
+    color: lightgray;
+}
+.send-button-inputpanel{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.send-button-inputpanel img{
+    height:24px;
+    cursor: pointer;
+}
+.send-button-inputpanel button{
+    border:none;
+    padding:10px 15px;
+    background-color: #fdd852;
+    margin-left:2vw;
+}
+
+.MessageComponent{
+    display: flex;
+    gap:20px;
+    margin-bottom:20px;
+}
+.MessageComponent.owner{
+    flex-direction: row-reverse;
 
 }
-.active-price-messages{
-    display:flex;
+ .owner .messageContent{
+    align-items: flex-end;
+}
+
+.MessageComponent.owner p{
+    background-color: #FDCF28;
+    border-radius: 10px 0px 10px 10px;
+    max-width: max-content;
+}
+
+.messageInfo{
+    display: flex;
     flex-direction: column;
+    color:gray;
+    font-weight: 300;
 }
-.name-adv-messages{
-    margin-left: 2vw;
-    margin-top:-4vh;
-    font-size: 20px;
-
+.messageInfo img{
+    width:40px;
+    height:40px;
+    border-radius: 50%;
+    object-fit:cover;
 }
-
-.username-photo-messages{
-    display:flex;
+.messageContent{
+    max-width: 80%;
+    display: flex;
     flex-direction: column;
-    height:100%;
-}
-
-.user-photo-messages{
-    height:5vh;
-    width:4vw;
-    margin-left:14vw;
-    margin-bottom: 1vh;
-    margin-top: 2vh;
+    gap:10px;
 
 }
+.messageContent p{
+    background-color: lightgray;
+    padding:10px;
+    border-radius: 0px 10px 10px 10px;
 
-.username-messages{
-    font-size: 20px;
-    margin-left:12.5vw;
+}
+.messageContent img{
+    width:50%;
 
 }
