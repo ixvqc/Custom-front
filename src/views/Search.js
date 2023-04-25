@@ -4,14 +4,29 @@ import '../styles/Search.css';
 import logo from '../assets/img/logov2.png';
 import React, { useRef } from "react";
 import { db } from "../firebase"
-import {getDocs, collection} from "@firebase/firestore";
+import {getDocs, collection, doc, query, where, limit} from "@firebase/firestore";
 import {signInWithEmailAndPassword, signOut} from "firebase/auth";
 import { auth } from "../firebase";
+import {getWindowFromNode} from "@testing-library/dom/dist/helpers";
+
 
 
 function Search()  {
     const [carList,setCarList] = useState([]);
     const carCollectionRef = collection(db, "Search-test");
+    const [visibility, setVisibility] = useState(false)
+
+    const handleClick = () => {
+        setVisibility(!visibility);
+    }
+
+    // useEffect(() => {
+    //     const q = query(
+    //         carCollectionRef,
+    //         // where('Model', '=='
+    // }
+
+
 
 
     useEffect(() => {
@@ -124,13 +139,11 @@ function Search()  {
                                     </select>
 
 
-                                    <button className="search-button">
-                                        <Link to={"/login"} className="link">
+                                    <button className="search-button" type = "button" onClick={handleClick}>
                                             Szukaj
-                                        </Link>
                                     </button>
 
-                                    <div>
+                                    <div style ={{display: visibility ? 'block' : 'none'}}>
                                         {carList.map((car) => (
                                             <div className={"search-offer"}>
                                                 <div className={"search-offer-image"}>
@@ -142,24 +155,24 @@ function Search()  {
                                                         <p>{car.Model}</p>
                                                     </div>
                                                     <div>
-                                                    <p>Kraj pochodzenia: {car.Kraj}</p>
-                                                    <p>Lokalizacja {car.Lokalizacja}</p>
+                                                        <p>Kraj pochodzenia: {car.Kraj}</p>
+                                                        <p>Lokalizacja {car.Lokalizacja}</p>
                                                     </div>
                                                     <div>
-                                                    <p>Typ nadwozia: {car.Nadwozie}</p>
-                                                    <p>Paliwo: {car.Paliwo}</p>
+                                                        <p>Typ nadwozia: {car.Nadwozie}</p>
+                                                        <p>Paliwo: {car.Paliwo}</p>
                                                     </div>
                                                     <div>
-                                                    <p>Rok produkcji: {car.Rok}</p>
-                                                    <p>Cena: {car.Cena}</p>
+                                                        <p>Rok produkcji: {car.Rok}</p>
+                                                        <p>Cena: {car.Cena}</p>
                                                     </div>
                                                     <div>
-                                                    <p>Przebieg: {car.Przebieg}</p>
-                                                    <p>Stan pojazdu: {car.Stan}</p>
+                                                        <p>Przebieg: {car.Przebieg}</p>
+                                                        <p>Stan pojazdu: {car.Stan}</p>
                                                     </div>
                                                     <div>
-                                                    <p>Silnik: {car.Silnik}</p>
-                                                    <p>Wyposażenie dodatkowe: {car.Wypo}</p>
+                                                        <p>Silnik: {car.Silnik}</p>
+                                                        <p>Wyposażenie dodatkowe: {car.Wypos}</p>
                                                     </div>
                                                 </div>
 
