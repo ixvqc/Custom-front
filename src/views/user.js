@@ -1,28 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, {useContext,useState, useEffect} from 'react';
 import {useNavigate,Link} from "react-router-dom";
-import '../styles/Register.css';
+import '../styles/user.css';
 import logo from '../assets/img/logov2.png';
-import Notiflix from 'notiflix';
-import PasswordChecklist from "react-password-checklist"
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db, storage } from "../firebase";
-import { getAuth,} from "firebase/auth";
+
+import {auth, db, storage} from "../firebase";
+
+import { AuthContext } from '../context/AuthContext'
 
 import 'firebase/auth';
-
-import { doc, setDoc } from "firebase/firestore";
-import firebase from 'firebase/app';
-
-import '../styles/Login.css';
-
-import axios from "axios";
-
-import {firestore} from "../firebase";
-import {addDoc,collection} from "@firebase/firestore";
+import { getAuth, updateProfile } from "firebase/auth";
 
 
 
-//import '../styles/user.css';
+
 
 import {
     ref,
@@ -41,10 +31,33 @@ import {
 
 
 function User(props) {
+    // const auth = getAuth();
+    // updateProfile(auth.currentUser, {
+    //     displayName: "pablito2111", photoURL: "https://firebasestorage.googleapis.com/v0/b/custom-e30bd.appspot.com/o/hubertkox11682425193730?alt=media&token=e1bc5d83-9e21-412a-9548-9dacd00fd467"
+    // }).then(() => {
+    //     console.log("super")
+    // }).catch((error) => {
+    //     console.log("zle")
+    // });
+
+
+        function updateProfile() {
+        const auth = getAuth();
+        updateProfile(auth.currentUser, {
+        displayName: "marcin", photoURL: "https://firebasestorage.googleapis.com/v0/b/custom-e30bd.appspot.com/o/hubertkox11682425193730?alt=media&token=e1bc5d83-9e21-412a-9548-9dacd00fd467"
+    }).then(() => {
+        console.log("Profile updated successfully.");
+    }).catch((error) => {
+        console.log("Error updating profile:", error);
+    });
+    }
+
+
+
     const [imageUpload, setImageUpload] = useState(null);
     const [imageUrls, setImageUrls] = useState([]);
-    const { displayName } = auth.currentUser
-
+    // const {displayName} = auth.currentUser
+    const {currentUser} = useContext(AuthContext)
 
 
     const imagesListRef = ref(storage, "images/");
@@ -90,11 +103,7 @@ function User(props) {
                         <div className="Usernamedisp-div">
                             <button className="Usernamedisp">
 
-                                {displayName ? (
-                                    <p>Welcome, {displayName}!</p>
-                                ) : (
-                                    <p>{displayName}</p>
-                                )}
+                                <span>{currentUser.displayName}</span>
 
                             </button>
                         </div>
@@ -130,41 +139,35 @@ function User(props) {
                     </button>
                 </div>
             </div>
-            <div>
-                <button className="usernamech-button">
-                    Zmień Nazwę Użytkownika
-                </button>
-                <div>
-                    <button className="passwordch-button">
+            <div className="user">
+
+
+
+            </div>
+            <button onClick={updateProfile}>Update Profile</button>
+            <div className="cos">
+                <div className="button-container">
+                    <button className="usernamech-button" >
+
+                        Zmień Nazwę Użytkownika
+                    </button>
+                    <button className="passwordch-button" >
                         Zmień Hasło
                     </button>
-                </div>
-                <div>
                     <button className="emailch-button">
                         Zmień E-mail
                     </button>
-                </div>
-                <div>
                     <button className="infoch-button">
                         Zaktualizuj informacje
                     </button>
-
                 </div>
-
-
+                <div className="userphotouser">
+                    <img src={currentUser.photoURL} alt="" />
+                </div>
             </div>
-            <div className="App">
-                <input
-                    type="file"
-                    onChange={(event) => {
-                        setImageUpload(event.target.files[0]);
-                    }}
-                />
-                <button onClick={uploadFile}> Upload Image</button>
-                {imageUrls.map((url) => {
-                    return <img src={url} />;
-                })}
-            </div>
+<div>
+
+</div>
 
         </div>
 

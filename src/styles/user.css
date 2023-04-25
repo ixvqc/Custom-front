@@ -317,6 +317,9 @@ margin-left: 2.5vw;
 }
 
 .Usernamedisp-div{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     flex-direction: row;
     display: flex;
 }
@@ -339,5 +342,39 @@ margin-left: 2.5vw;
     border-top: 2px solid white;
     border-left: 2px solid white;
     overflow: hidden;
+
+}
+
+.userphotouser{
+/*background-color: blue;*/
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 40%;
+    height: 300px;
+
+}
+.userphotouser img{
+border: 1px solid black;
+
+    width: 30vh;
+    height: 30vh;
+}
+
+.cos{
+
+    display: flex;
+    Align-Items: center;
+    Justify-content: center;
+    Flex-direction: row;
+
+
+}
+
+.button-container{
+
+    flex-direction: column;
+width: 50%;
+
 
 }
