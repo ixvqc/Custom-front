@@ -311,6 +311,24 @@ const AddAnnouncement = () => {
                     await setDoc(doc(firestore, "Announcement", docRef.id), { images: { [i]: imageUrl } }, { merge: true });
                 }
             }
+            for (let i = 0; i < selectedImagesAkt.length; i++) {
+                const imageFileAkt = selectedImagesAkt[i];
+                const imageRefAkt = storageRef(storage, `act/${docRef.id}/image_${i}.jpg`);
+                console.log(imageFileAkt);
+
+                if (typeof imageFileAkt === 'string' && imageFileAkt.startsWith('blob:')) {
+                    const response = await fetch(imageFileAkt);
+                    const blob = await response.blob();
+                    const file = new File([blob], `image_${i}.jpg`, { type: blob.type });
+                    await uploadBytes(imageRefAkt, file);
+                    const imageUrl = await getDownloadURL(imageRefAkt);
+                    await setDoc(doc(firestore, "Announcement", docRef.id), { act: { [i]: imageUrl } }, { merge: true });
+                } else {
+                    await uploadBytes(imageRefAkt, imageFileAkt);
+                    const imageUrl = await getDownloadURL(imageRefAkt);
+                    await setDoc(doc(firestore, "Announcement", docRef.id), { act: { [i]: imageUrl } }, { merge: true });
+                }
+            }
             console.log('Dane zostały dodane do Firestore z ID: ', docRef.id);
         } catch (e) {
             console.error('Błąd dodawania danych do Firestore: ', e);
@@ -336,6 +354,29 @@ const AddAnnouncement = () => {
 
     function deleteHandler(image) {
         setSelectedImages(selectedImages.filter((e) => e !== image));
+        URL.revokeObjectURL(image);
+    }
+
+
+
+    const [selectedImagesAkt, setSelectedImagesAkt] = useState([]);
+
+    const onSelectFileAkt = (event) => {
+        const selectedFilesAkt = event.target.files;
+        const selectedFilesArrayAkt = Array.from(selectedFilesAkt);
+
+        const imagesArrayAkt = selectedFilesArrayAkt.map((file) => {
+            return URL.createObjectURL(file);
+        });
+
+        setSelectedImagesAkt((previousImagesAkt) => previousImagesAkt.concat(imagesArrayAkt));
+
+        // FOR BUG IN CHROME
+        event.target.value = "";
+    };
+
+    function deleteHandlerAkt(image) {
+        setSelectedImagesAkt(selectedImagesAkt.filter((e) => e !== image));
         URL.revokeObjectURL(image);
     }
 
@@ -588,7 +629,6 @@ const AddAnnouncement = () => {
                         <label className="AddMultiImgLabelAdd">
                             + Dodaj zdjęcia
                             <br />
-                            <span>up to 10 images</span>
                             <input
                                 type="file"
                                 className="AddMultiImgInputAdd"
@@ -602,25 +642,6 @@ const AddAnnouncement = () => {
 
                         <input type="file" multiple className="AddMultiImgInputAdd" />
 
-                        {selectedImages.length > 0 &&
-                            (selectedImages.length > 10 ? (
-                                <p className="AddMultiImgErrorAdd">
-                                    You can't upload more than 10 images! <br />
-                                    <span>
-                                         please delete <b> {selectedImages.length - 10} </b> of them{" "}
-                                    </span>
-                                </p>
-                            ) : (
-                                <button
-                                    className="AddMultiImgUploadBtnAdd"
-                                    onClick={() => {
-                                        console.log(selectedImages);
-                                    }}
-                                >
-                                    UPLOAD {selectedImages.length} IMAGE
-                                    {selectedImages.length === 1 ? "" : "S"}
-                                </button>
-                            ))}
 
                         <div className="AddMultiImgDivImagesAdd">
                             {selectedImages &&
@@ -667,6 +688,47 @@ const AddAnnouncement = () => {
                         Akt rzeczoznawcy
                     </div>
 
+                    <section className="AddMultiImgSectionAdd">
+                        <label className="AddMultiImgLabelAdd">
+                            + Dodaj plik
+                            <br />
+                            <span>png, jpeg, webp lub pdf</span>
+                            <input
+                                type="file"
+                                className="AddMultiImgInputAdd"
+                                name="images"
+                                onChange={onSelectFileAkt}
+                                multiple
+                                accept="image/png, image/jpeg, image/webp, application/pdf"
+                            />
+                        </label>
+                        <br />
+
+                        <input type="file" multiple className="AddMultiImgInputAdd" />
+
+
+                        <div className="AddMultiImgDivImagesAdd">
+                            {selectedImagesAkt &&
+                                selectedImagesAkt.map((imageAkt, index) => {
+                                    return (
+                                        <div key={imageAkt} className="AddMultiImgButtonImgAdd">
+                                            <img src={imageAkt} height="200" alt="upload" className="AddMultiImgImgAdd" />
+                                            <button onClick={() => deleteHandlerAkt(imageAkt)}>
+                                                delete image
+                                            </button>
+                                        </div>
+                                    );
+                                })}
+                        </div>
+                    </section>
+
+
+                    <div className="rulesAddAvd">
+                        <div className="rulesTextAddAvd">
+                            Polityka prywatności to dokument, który powinna posiadać każda strona internetowa. Zawiera ona informacje o tym, kto jest administratorem danych osobowych, jakie dane użytkowników strony internetowej podlegają gromadzeniu, jaki jest cel przetwarzania danych oraz przez jaki okres dane te będą przetwarzane. Ponadto informuje ona o plikach cookies oraz bezpieczeństwie zbieranych danych osobowych.
+                            Jeśli strona internetowa przewiduje również sprzedaż towarów lub usług, powinna ponadto zawierać regulamin sklepu internetowego. Ponadto zaleca się, aby strona posiadała również Ogólne warunki użytkowania strony internetowej.
+                        </div>
+                    </div>
 
                     <button className="button-AddAdvAdd" type="submit" >
                         Dodaj ogłoszenie

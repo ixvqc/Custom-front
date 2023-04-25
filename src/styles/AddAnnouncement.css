@@ -216,6 +216,7 @@
     color: black;
     margin-left: 12vw;
     margin-top: 5vh;
+    margin-bottom: 5vh;
     padding: 2vh 3vw;
     font-size: 20px;
     font-style: italic;
@@ -750,7 +751,7 @@
     background-color: green;
 }
 
-label:hover,
+.AddMultiImgLabelAdd:hover,
 .AddMultiImgUploadBtnAdd:hover {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
     rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
@@ -762,5 +763,24 @@ label:hover,
 
 .AddMultiImgErrorAdd span {
     color: red;
+}
+.rulesAddAvd{
+
+    display: flex;
+    width: 50vw;
+    height: 20vh;
+    margin-left: 10vw;
+    margin-top: 10vh;
+    border: 1px solid grey;
+}
+
+.rulesTextAddAvd{
+
+    ont-family: Arial, Helvetica, sans-serif;
+    text-justify: inter-word;
+    font-size: 1rem;
+    text-align: justify;
+    line-height: 1.4;
+
 }
 
