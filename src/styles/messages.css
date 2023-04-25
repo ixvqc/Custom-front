@@ -11,12 +11,15 @@
 
 }
 
-.logo-messages-img{
-    width: 10vw;
-}
-
 .logo-messages{
+    justify-content: center;
+    align-items: center;
+    display: flex;
     width: 30%;
+
+}
+.logo-messages img{
+    width:10vw;
 }
 
 .observed-nav-messages{
@@ -36,9 +39,13 @@
     align-items: center;
     display: flex;
 }
-.user-messages{
-    font-size: 23px;
-
+.username-nav-messages img{
+    height:60px;
+    padding:10px;
+    border-radius: 100%;
+}
+.username-nav-messages span{
+    font-size:23px;
 }
 
 .button-add-adv-messages{
@@ -178,9 +185,17 @@
     background-color: #dad9d9;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding:10px;
     border-bottom:1px solid gray ;
+}
+.ChatInfo span{
+    font-size: 23px;
+    margin-left:3vw;
+
+}
+.ChatInfo img{
+    height:70px;
+    width:80px;
 }
 .ChatIcons{
     display: flex;
@@ -227,6 +242,7 @@
     border:none;
     padding:10px 15px;
     background-color: #fdd852;
+    margin-left:2vw;
 }
 
 .MessageComponent{
