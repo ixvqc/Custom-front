@@ -20,19 +20,35 @@ function Search()  {
         setVisibility(!visibility);
     }
 
-    // useEffect(() => {
-    //     const q = query(
-    //         carCollectionRef,
-    //         // where('Model', '=='
-    // }
+    const [registerForm, setregisterForm] = useState({
+        marka: "",
+        model: "",
+        rokOd: "",
+        rokDo: "",
+        cenaOd: "",
+        cenaDo: "",
+        fuel_type: ""
+    })
 
+    function handleChange(event) {
+        const {value, name} = event.target
+        setregisterForm(prevNote => ({
+                ...prevNote, [name]: value
+            })
+        )
+    }
 
 
 
     useEffect(() => {
+
+        const q = query(
+            carCollectionRef,
+            where('Model', '==', 'RX8')
+        );
     const getCarList = async () => {
         try{
-            const data = await getDocs(carCollectionRef);
+            const data = await getDocs(q);
             const filteredData = data.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
