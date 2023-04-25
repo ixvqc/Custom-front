@@ -1,12 +1,12 @@
-import '../styles/messages.css';
 import { doc, onSnapshot } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import { db } from "../firebase";
+import '../styles/messages.css';
 
 const Chats = () => {
-    const [chats, setChats] = useState({}); // zainicjuj `chats` jako pusty obiekt zamiast pustej tablicy
+    const [chats, setChats] = useState([]);
 
     const { currentUser } = useContext(AuthContext);
     const { dispatch } = useContext(ChatContext);
@@ -14,7 +14,7 @@ const Chats = () => {
     useEffect(() => {
         const getChats = () => {
             const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
-                setChats(doc.data() || {}); // aktualizuj `chats` na pobrany obiekt lub pusty obiekt, jeśli brak danych
+                setChats(doc.data());
             });
 
             return () => {
@@ -29,7 +29,7 @@ const Chats = () => {
         dispatch({ type: "CHANGE_USER", payload: u });
     };
 
-    return(
+    return (
         <div className="chats-messages">
             {Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat) => (
                 <div
@@ -45,7 +45,7 @@ const Chats = () => {
                 </div>
             ))}
         </div>
-        );
-        };
+    );
+};
 
-export default Chats
+export default Chats;

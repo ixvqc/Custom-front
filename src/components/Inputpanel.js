@@ -1,8 +1,8 @@
-import React, {useContext,useState} from "react";
-import Img from "../assets/img/img.png"
-import Attach from "../assets/img/attach.png"
-import {AuthContext} from "../context/AuthContext";
-import {ChatContext} from "../context/ChatContext";
+import React, { useContext, useState } from "react";
+import Img from "../assets/img/img.png";
+import Attach from "../assets/img/attach.png";
+import { AuthContext } from "../context/AuthContext";
+import { ChatContext } from "../context/ChatContext";
 import {
     arrayUnion,
     doc,
@@ -13,6 +13,7 @@ import {
 import { db, storage } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import '../styles/messages.css';
 
 const InputPanel = () => {
     const [text, setText] = useState("");
@@ -73,26 +74,29 @@ const InputPanel = () => {
         setText("");
         setImg(null);
     };
-    return(
+    return (
         <div className="inputpanel-component">
-            <input type="text"
-                   placeholder="Napisz wiadomość"
-                   onChange={(e) => setText(e.target.value)}
-                   value={text}
+            <input
+                type="text"
+                placeholder="Type something..."
+                onChange={(e) => setText(e.target.value)}
+                value={text}
             />
             <div className="send-button-inputpanel">
-                <img src={Attach} alt=""/>
-                <input type="file"
-                       style={{display:"none"}}
-                       id="file"
-                       onChange={(e) => setImg(e.target.files[0])}
+                <img src={Attach} alt="" />
+                <input
+                    type="file"
+                    style={{ display: "none" }}
+                    id="file"
+                    onChange={(e) => setImg(e.target.files[0])}
                 />
                 <label htmlFor="file">
-                    <img src={Img} alt=""/>
+                    <img src={Img} alt="" />
                 </label>
-                <button onClick={handleSend}> Wyślij</button>
+                <button onClick={handleSend}>Send</button>
             </div>
         </div>
-    )
-}
-export default InputPanel
+    );
+};
+
+export default InputPanel;

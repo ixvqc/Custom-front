@@ -7,7 +7,6 @@ import Profile from "./views/Profile";
 import Messages from "./views/Messages";
 import useToken from './useToken'
 import { auth } from "./firebase";
-import ChatBox from './components/ChatBox';
 import SignIn from './components/SignIn';
 import { useAuthState } from 'react-firebase-hooks/auth'
 import React, { useState, useEffect } from "react";

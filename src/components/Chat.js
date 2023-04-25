@@ -1,25 +1,29 @@
 import React, { useContext } from "react";
-import '../styles/messages.css';
-import user from "../assets/img/user.png"
-import Messages from "./Messages";
-import InputPanel from "./Inputpanel";
+import Cam from "../assets/img/cam.png";
+import Add from "../assets/img/add.png";
+import More from "../assets/img/more.png";
+import Messages from "../components/Messages";
 import { ChatContext } from "../context/ChatContext";
+import InputPanel from "../components/Inputpanel";
+import '../styles/messages.css';
 
 const Chat = () => {
     const { data } = useContext(ChatContext);
-    return(
+
+    return (
         <div className="chat-messages">
             <div className="ChatInfo">
                 <span>{data.user?.displayName}</span>
                 <div className="ChatIcons">
-                    <img src={user}/>
+                    <img src={Cam} alt="" />
+                    <img src={Add} alt="" />
+                    <img src={More} alt="" />
                 </div>
             </div>
-            <Messages/>
+            <Messages />
             <InputPanel/>
         </div>
+    );
+};
 
-
-    )
-}
-export default Chat
+export default Chat;

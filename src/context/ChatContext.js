@@ -1,7 +1,7 @@
 import {
     createContext,
-        useContext,
-        useReducer,
+    useContext,
+    useReducer,
 } from "react";
 import { AuthContext } from "./AuthContext";
 
