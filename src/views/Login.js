@@ -2,16 +2,16 @@ import {useNavigate,Link} from "react-router-dom";
 import {useState, useEffect} from "react";
 import '../styles/Login.css';
 import logo from '../assets/img/logov2.png';
-import axios from "axios";
 import React, { useRef } from "react";
-import {firestore} from "../firebase";
+import {db, firestore} from "../firebase";
 import {addDoc,collection} from "@firebase/firestore";
 import {storage} from "../firebase";
-import {ref, uploadBytes, listAll,getDownloadURL} from "firebase/storage";
+import {ref, uploadBytes, listAll, getDownloadURL, uploadBytesResumable} from "firebase/storage";
 import SignIn  from "../components/SignIn";
-import ChatBox from "../components/ChatBox";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, updateProfile} from "firebase/auth";
 import { auth } from "../firebase";
+import {doc, setDoc} from "firebase/firestore";
+
 const Login = () => {
     const [err, setErr] = useState(false);
     const navigate = useNavigate();
@@ -67,7 +67,9 @@ const Login = () => {
                 />
             </div>
 
-            <button className="button-login">Zaloguj się</button>
+            <button className="button-login">
+                Zaloguj się
+            </button>
                 {err && <span>Coś poszło nie tak</span>}
 
 
@@ -78,9 +80,9 @@ const Login = () => {
                 <a className="text-register-login">
                 Nie masz jeszcze konta?
                 </a>
-                <a href="http://localhost:3000/register" className="text-toregister-login">
+                <Link to="/register" className="text-toregister-login">
                     Zarejestruj się
-                </a>
+                </Link>
             </div>
 
 
