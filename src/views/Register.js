@@ -1,92 +1,70 @@
-import {Link} from "react-router-dom";
+import {useNavigate,Link} from "react-router-dom";
 import {useState, useEffect} from "react";
 import '../styles/Register.css';
 import logo from '../assets/img/logov2.png';
-import axios from "axios";
 import Notiflix from 'notiflix';
 import PasswordChecklist from "react-password-checklist"
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db, storage } from "../firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
+import React, { useReducer } from 'react';
 
 
-function Register(props) {
+const Register = () => {
+    const [err, setErr] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+    const [password, setPassword] = useState("")
 
+    const handleSubmit = async (e) => {
+        setLoading(true);
+        e.preventDefault();
+        const displayName = e.target[0].value;
+        const email = e.target[1].value;
+        const password = e.target[2].value;
+        const file = e.target[3].files[0];
 
-    const [registerForm, setregisterForm] = useState({
-        email: "",
-        username: "",
-        password: "",
-        repassword: ""
-    })
-        const [name, setName] = useState('Hubert')
-        const [isHovered, setIsHovered] = useState(false);
-        const [PasswordIsOk, setPasswordIsOk] = useState(true)
+        try {
+            //Create user
+            const res = await createUserWithEmailAndPassword(auth, email, password);
 
+            //Create a unique image name
+            const date = new Date().getTime();
+            const storageRef = ref(storage, `${displayName + date}`);
 
-        function handleClick(event) {
-            axios({
-                method: "POST",
-                url: "/testowanko",
-                data: {
-                    email: registerForm.email,
-                    username: registerForm.username,
-                    password: registerForm.password,
-                    repassword: registerForm.repassword
-                }
-            })
-                .then((response) => {
-                    props.setToken(response.data.access_token)
-                    Notiflix.Notify.success('Konto zostało utworzone');
+            await uploadBytesResumable(storageRef, file).then(() => {
+                getDownloadURL(storageRef).then(async (downloadURL) => {
+                    try {
+                        //Update profile
+                        await updateProfile(res.user, {
+                            displayName,
+                            photoURL: downloadURL,
+                        });
+                        //create user on firestore
+                        await setDoc(doc(db, "users", res.user.uid), {
+                            uid: res.user.uid,
+                            displayName,
+                            email,
+                            photoURL: downloadURL,
+                        });
 
-                }).catch((error) => {
-                    Notiflix.Notify.failure('Konto nie zostało utworzone');
-                    if (error.response) {
-                        console.log(error.response)
-                        console.log(error.response.status)
-                        console.log(error.response.headers)
+                        //create empty user chats on firestore
+                        await setDoc(doc(db, "userChats", res.user.uid), {});
+                        navigate("/");
+                    } catch (err) {
+                        console.log(err);
+                        setErr(true);
+                        setLoading(false);
                     }
-            })
-
-            setregisterForm(({
-                email: "",
-                username: "",
-                password: "",
-                repassword: ""
-            }))
-
-            event.preventDefault()
-
+                });
+            });
+        } catch (err) {
+            setErr(true);
+            setLoading(false);
         }
+    };
 
-        function handleChange(event) {
-            const {value, name} = event.target
-            setregisterForm(prevNote => ({
-                    ...prevNote, [name]: value
-                })
-            )
-
-
-        }
-
-        const handleHover = () => {
-            setIsHovered(!isHovered);
-        };
-
-
-        const buttonColor = isHovered ? '#fdd852' : '#FDCF28';
-
-
-        useEffect(() => {
-            console.log('validate password')
-            let passw = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/;
-            if (registerForm.password.match(passw) && (registerForm.password === registerForm.repassword)) {
-                setPasswordIsOk(false)
-
-            } else {
-                setPasswordIsOk(true)
-
-            }
-
-
-        }, [registerForm.password, registerForm.repassword])
 
         return (
             <div className="tlo-Register">
@@ -96,108 +74,58 @@ function Register(props) {
                         <img src={logo} alt="Main.js Logo" className="logo_register"/>
                     </a>
                 </nav>
-            <div className="register-background">
+                <div className="register-background">
+                    <div className="register-text">
+                    <span className="title">Zarejestruj się</span>
+                    </div>
+                    <form onSubmit={handleSubmit}>
+                        <div className="username-container-register">
+                        <input required type="text" placeholder="nazwa użytkownika"
+                               className="email-input-register"
+                        />
+                        </div>
+                        <div className="email-container-register">
+                        <input required type="email" placeholder="email"
+                               className="email-input-register"
+                        />
+                        </div>
+                        <div className="password-container">
+                        <input required type="password" placeholder="hasło"
+                               className="password-input-register" onChange={e => setPassword(e.target.value)}
+
+                        />
+                                <PasswordChecklist
+                                rules={["minLength","specialChar","number","capital"]}
+                                minLength={8}
+                                value={password}
+                                messages={{
+                                    minLength: "Hasło ma więcej niż 8 znaków.",
+                                    specialChar: "Hasło posiada znaki specjalne .",
+                                    number: "Hasło zawiera cyfry",
+                                    capital: "Hasło ma wielką literę.",
+                                }}
+                            />
 
 
-                <div className="register-text">
-                    Zarejestruj się
+                        </div>
+                        <input required style={{ display: "none" }} type="file" id="file" />
+                        <label htmlFor="file">
+                        <div className="Add-avatar-register">
+                            <button className="button-add-avatar-register">Dodaj zdjęcie</button>
+                        </div>
+                        </label>
+                        <button className="button-register" disabled={loading}> Zarejestruj się</button>
+                        {loading && "Poczekaj chwilę "}
+                        {err && <span>Coś poszło nie tak</span>}
+
+                    </form>
+                    <p className="text-no-password1">
+                        Masz już konto? <Link to="/login" className="text-no-password">Zaloguj się</Link>
+                    </p>
                 </div>
-
-                <form className="register-form">
-
-                    <div className="email-container-register">
-
-                        <input
-                            onChange={handleChange}
-                            name="email"
-                            type="email"
-                            text={registerForm.email}
-                            className="email-input-register"
-                            placeholder="E-Mail"
-
-                        />
-                    </div>
-                    <div className="username-container-register">
-
-                        <input
-                            onChange={handleChange}
-                            name="username"
-                            type="username"
-                            text={registerForm.username}
-                            className="username-input-register"
-                            placeholder="Nazwa Użytkownika"
-
-                        />
-                    </div>
-
-                    <div className="password-container">
-                        <input
-
-                            onChange={handleChange}
-                            name="password"
-                            type="password"
-                            text={registerForm.password}
-                            className="password-input-register"
-                            placeholder="Podaj hasło"
-                        />
-
-                        { registerForm.password.length > 0 &&
-                            <PasswordChecklist
-                            rules={["minLength","specialChar","number","capital","match"]}
-                            minLength={8}
-                            value={registerForm.password}
-                            valueAgain={registerForm.repassword}
-                            messages={{
-                                minLength: "Hasło ma więcej niż 8 znaków.",
-                                specialChar: "Hasło posiada znaki specjalne .",
-                                number: "Hasło zawiera cyfry",
-                                capital: "Hasło ma wielką literę.",
-                                match: "Hasła są takie same.",
-                            }}
-                        />
-                        }
-
-                    </div>
-                    <div className="repassword-container">
-
-                        <input
-                            onChange={handleChange}
-                            name="repassword"
-                            type="password"
-                            text={registerForm.repassword}
-                            className="repassword-input-register"
-                            placeholder="Powtórz hasło"
-
-                        />
-
-                    </div>
-
-
-                    <button className="button-register"
-                            onMouseEnter={handleHover}
-                            disabled={PasswordIsOk}
-                            onMouseLeave={handleHover}
-                            onClick={handleClick}
-                            style={{backgroundColor: buttonColor}}>
-
-                        Zarejestruj się
-                    </button>
-
-
-                    <a className="text-no-password1">
-                        Masz już konto?
-                    </a>
-
-
-                    <a href="http://localhost:3000/login" className="text-no-password">
-
-                        Zaloguj się
-                    </a>
-                </form>
             </div>
-            </div>
-
         );
-    }
+};
+
 
 export default Register;

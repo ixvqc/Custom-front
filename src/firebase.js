@@ -4,7 +4,7 @@ import {getFirestore} from "@firebase/firestore";
 import {getStorage} from "firebase/storage";
 import { getAuth,GoogleAuthProvider } from "firebase/auth";
 
-
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCdff6-Jm_Tg1w7KPLz4t8sjGoOBWp7V1s",
@@ -16,10 +16,10 @@ const firebaseConfig = {
     appId: "1:602560565295:web:46e1697d3a99602b9d36da",
     measurementId: "G-QQCVYXJ86R"
 };
+const provider = new GoogleAuthProvider();
 
 const provider = new GoogleAuthProvider();
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 export const storage = getStorage(app)
 export const firestore = getFirestore(app);
 export const db = getFirestore(app);
