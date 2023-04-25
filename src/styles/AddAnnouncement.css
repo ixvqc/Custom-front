@@ -1,0 +1,786 @@
+.background-Add{
+    font-family: 'Poppins',sans-serif;
+    scroll-behavior: smooth;
+    position: center;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-color: white;
+}
+.backgournd-Add-In{
+    box-shadow: 6px 5px  35px gray;
+    width:70%;
+    height:100%;
+    margin-left:15%;
+    margin-bottom: 10%;
+
+}
+
+.logo_Add{
+    margin-left: 6vw;
+    margin-top: 10vh;
+    height: 13vh;
+    width: 10vw;
+    filter: blur(3px);
+
+
+}
+
+.Add-text{
+    margin-left: 11vw;
+    margin-top: 10vh;
+    font-size: 150%;
+}
+
+.chooseAddMarka {
+    width: 15vw;
+    height: 10vh;
+    margin-left: 12vw;
+    margin-top: 4vh;
+    position: relative;
+
+
+
+}
+
+.chooseAddModel {
+    margin-left: 30vw;
+    margin-top: -10vh;
+    width: 15vw;
+    height: 10vh;
+    position: relative;
+
+
+}
+
+.SelectAdd{
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+
+.filters-line-Add {
+    border-bottom: 1px solid gray;
+    height: 24%;
+    width: 70%;
+    margin-bottom: 3vh;
+    margin-top: 2vh;
+    margin-left: 14vw;
+
+}
+
+.choices-logo-Add{
+    height:6vh;
+    width:3.5vw;
+    margin-left: 2.7vw;
+    padding-left: 16px;
+    margin-top: 3vh;
+
+}
+.choices-key-Add{
+    height:5vh;
+    width:3.2vw;
+    margin-left: 57px;
+}
+.choices-moto-Add{
+    height:6vh;
+    width:3.5vw;
+    margin-left: 62px;
+}
+
+.text-choices-Add{
+    margin-left: 2.6vw;
+    padding-left:0.8vw;
+}
+
+.titleAdd
+{
+    margin-left: 13vw;
+    font-size: 26px;
+    font-weight: bolder;
+    margin-top: 10vh;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.addtitleAdd {
+    position: relative;
+    margin-left: 12vw;
+    margin-top: 60px;
+    width: 40vw;
+    height: 5vh;
+
+}
+
+.inputAvAdd {
+    font-size: 16px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 22vw;
+    border: none;
+    border-bottom: 1px solid #515151;
+    background: transparent;
+    padding-right: 15vw;
+}
+
+.inputAvAdd:focus {
+    outline: none;
+}
+
+.labelAvAdd {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.inputAvAdd:focus ~ .labelAvAdd,
+.inputAvAdd:valid ~ .labelAvAdd {
+    top: -20px;
+    font-size: 14px;
+    color: #5264AE;
+}
+
+.barAvAdd {
+    position: relative;
+    display: block;
+    width: 37.2vw;
+}
+
+.barAvAdd:before,
+.barAvAdd:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #5264AE;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.barAvAdd:before {
+    left: 50%;
+}
+
+.barAvAdd:after {
+    right: 50%;
+}
+
+.inputAvAdd:focus ~ .barAvAdd:before,
+.inputAvAdd:focus ~ .barAvAdd:after {
+    width: 50%;
+}
+
+.highlightAvAdd {
+    position: absolute;
+    height: 60%;
+    width: 100px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.inputAvAdd:focus ~ .highlightAvAdd {
+    animation: inputHighlighter 0.3s ease;
+}
+
+@keyframes inputHighlighter {
+    from {
+        background: #5264AE;
+    }
+
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+
+.button-AddAdvAdd {
+    background-color: #FDCF28;
+    color: black;
+    margin-left: 12vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    padding: 2vh 3vw;
+    font-size: 20px;
+    font-style: italic;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.button-AddAdvAdd:hover {
+    background-color: #fdd852;
+}
+
+.priceTitleAdd{
+
+    margin-left: 12.4vw;
+    width: 50%;
+    font-size: 26px;
+    font-weight: bolder;
+    margin-top: 10vh;
+    color: rgba(0, 0, 0, 0.4);
+    padding-top: 2vh;
+    padding-left: 1vw;
+    border-top: 1px solid gray;
+}
+
+.PriceAdd {
+    position: relative;
+    margin-left: 12vw;
+    margin-top: 60px;
+    width: 10vw;
+    height: 5vh;
+
+}
+.inputAvAddPrice {
+    font-size: 16px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 10vw;
+    border: none;
+    border-bottom: 1px solid #515151;
+    background: transparent;
+
+}
+
+.inputAvAddPrice:focus {
+    outline: none;
+}
+
+.labelAvAddPrice {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.inputAvAddPrice:focus ~ .labelAvAddPrice,
+.inputAvAddPrice:valid ~ .labelAvAddPrice {
+    top: -20px;
+    font-size: 14px;
+    color: #5264AE;
+}
+
+.barAvAddPrice {
+    position: relative;
+    display: block;
+    width: 10.8vw;
+}
+
+.barAvAddPrice:before,
+.barAvAddPrice:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #5264AE;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.barAvAddPrice:before {
+    left: 50%;
+}
+
+.barAvAddPrice:after {
+    right: 50%;
+}
+
+.inputAvAddPrice:focus ~ .barAvAddPrice:before,
+.inputAvAddPrice:focus ~ .barAvAddPrice:after {
+    width: 50%;
+}
+
+.highlightAvAddPrice {
+    position: absolute;
+    height: 60%;
+    width: 100px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.inputAvAddPrice:focus ~ .highlightAvAddPrice {
+    animation: inputHighlighter 0.3s ease;
+}
+
+@keyframes inputHighlighter {
+    from {
+        background: #5264AE;
+    }
+
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+.technicaldataTitleAdd{
+
+    margin-left: 12.4vw;
+    width: 50%;
+    font-size: 26px;
+    font-weight: bolder;
+    margin-top: 10vh;
+    color: rgba(0, 0, 0, 0.4);
+    padding-top: 2vh;
+    padding-left: 1vw;
+    border-top: 1px solid gray;
+}
+.ProdYearAdd {
+    position: relative;
+    margin-left: 12vw;
+    margin-top: 60px;
+    width: 14vw;
+    height: 5vh;
+}
+
+.MileageAdd {
+    position: relative;
+    margin-left: 26vw;
+    margin-top: -4.9vh;
+    width: 14vw;
+    height: 5vh;
+}
+
+.VinAdd {
+    position: relative;
+    margin-left: 40vw;
+    margin-top: -4.9vh;
+    width: 14vw;
+    height: 5vh;
+}
+
+
+
+
+
+
+.radioinputsNewAdd {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+    padding: 0.25rem;
+    width: 20vw;
+    font-size: 14px;
+
+}
+
+.radioinputsNewAdd .radio {
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.radioinputsNewAdd .radio input {
+    display: none;
+}
+
+.radioinputsNewAdd .radio .name {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    border: none;
+    padding: .5rem 0;
+    color: rgba(51, 65, 85, 1);
+    transition: all .15s ease-in-out;
+    font-size: 16px;
+}
+
+.radioinputsNewAdd .radio input:checked + .name {
+    background-color: #FDCF28;
+    font-weight: 600;
+}
+
+.nameNewAdd {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+    width: 7vw;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    border: none;
+    padding: 1.1rem 0.4rem;
+    color: rgba(51, 65, 85, 1);
+    transition: all .15s ease-in-out;
+    font-size: 16px;
+}
+.ContNewAdd{
+    margin-top: 8vh;
+    margin-left: 12vw;
+}
+
+.ContFuelAdd{
+    margin-top: 8vh;
+    margin-left: 12vw;
+}
+
+.radioinputsFuelAdd {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+    padding: 0.25rem;
+    width: 30vw;
+    font-size: 14px;
+
+}
+
+.radioinputsFuelAdd .radio {
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.radioinputsFuelAdd .radio input {
+    display: none;
+}
+
+.radioinputsFuelAdd .radio .name {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    border: none;
+    padding: .5rem 0;
+    color: rgba(51, 65, 85, 1);
+    transition: all .15s ease-in-out;
+    font-size: 16px;
+}
+
+.radioinputsFuelAdd .radio input:checked + .name {
+    background-color: #FDCF28;
+    font-weight: 600;
+}
+
+.PowerAdd {
+    position: relative;
+    margin-left: 12vw;
+    margin-top: 60px;
+    width: 14vw;
+    height: 5vh;
+}
+
+.EngCapacityAdd {
+    position: relative;
+    margin-left: 30vw;
+    margin-top: -4.9vh;
+    width: 14vw;
+    height: 5vh;
+}
+
+.radioinputsCarBodyAdd {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+    padding: 0.25rem;
+    width: 34vw;
+    font-size: 14px;
+
+}
+
+.radioinputsCarBodyAdd .radio {
+    flex: 1 1 auto;
+    text-align: center;
+    width: 6vw;
+
+}
+
+.radioinputsCarBodyAdd .radio input {
+    display: none;
+
+}
+
+.radioinputsCarBodyAdd .radio .name {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    border: none;
+    padding: .5rem 0;
+    color: rgba(51, 65, 85, 1);
+    transition: all .15s ease-in-out;
+    font-size: 16px;
+
+    height: 50px;
+}
+
+.radioinputsCarBodyAdd .radio input:checked + .name {
+    background-color: #FDCF28;
+    font-weight: 600;
+}
+
+.OriginCountry {
+    margin-left: 30vw;
+    margin-top: -6.7vh;
+    width: 15vw;
+    height: 10vh;
+    position: relative;
+}
+
+.DescriptionAdd {
+    position: relative;
+    margin-left: 15%;
+    margin-top: 60px;
+    width: 70%;
+
+}
+
+.inputAvAddDesc {
+    font-size: 16px;
+    padding: 10px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #515151;
+    background: transparent;
+    line-height: 1.5;
+}
+
+.inputAvAddDesc:focus {
+    outline: none;
+}
+
+.labelAvAddDesc {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 0;
+    top: 10px;
+    transition: 0.2s ease all;
+}
+
+.inputAvAddDesc:focus ~ .labelAvAddDesc,
+.inputAvAddDesc:valid ~ .labelAvAddDesc {
+    top: -20px;
+    font-size: 14px;
+    color: #5264AE;
+}
+
+.barAvAddDesc {
+    position: relative;
+    display: block;
+    width: 101.6%;
+}
+
+.barAvAddDesc:before,
+.barAvAddDesc:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #5264AE;
+    transition: 0.2s ease all;
+}
+
+.barAvAddDesc:before {
+    left: 0;
+}
+
+.barAvAddDesc:after {
+    right: 0;
+}
+
+.inputAvAddDesc:focus ~ .barAvAddDesc:before,
+.inputAvAddDesc:focus ~ .barAvAddDesc:after {
+    width: 50%;
+}
+
+.highlightAvAddDesc {
+    position: absolute;
+    height: 60%;
+    width: 100px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.inputAvAddDesc {
+    line-height: 1.5;
+    padding-left: 5px;
+    border-top: 1px solid #515151;
+    resize: none;
+}
+
+.inputAvAddDesc::placeholder {
+    color: #999;
+}
+
+
+
+
+
+
+
+
+
+
+.AddMultiImgSectionAdd {
+    padding: 2rem 0;
+}
+
+
+.AddMultiImgLabelAdd {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px dotted black;
+    border-radius: 20px;
+    width: 10rem;
+    height: 5rem;
+    cursor: pointer;
+    font-size: large;
+}
+
+
+.AddMultiImgLabelAdd span {
+    font-weight: lighter;
+    font-size: small;
+    padding-top: 0.5rem;
+}
+
+.AddMultiImgInputAdd {
+    display: none;
+}
+
+.AddMultiImgImgAdd {
+    padding: 0;
+    margin: 0;
+}
+
+.AddMultiImgDivImagesAdd {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15%;
+    width: 70%;
+    border-radius: 3vw;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.AddMultiImgButtonImgAdd {
+    margin: 1rem 0.5rem;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+}
+
+.AddMultiImgButtonImgAdd button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+    border: none;
+    color: white;
+    background-color: lightcoral;
+}
+
+.AddMultiImgButtonImgAdd button:hover {
+    background-color: red;
+}
+
+.AddMultiImgButtonImgAdd p {
+    padding: 0 0.5rem;
+    margin: 0;
+}
+
+.AddMultiImgUploadBtnAdd {
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    border: none;
+    border-radius: 20px;
+    width: 10rem;
+    height: 3rem;
+    color: white;
+    background-color: green;
+}
+
+.AddMultiImgLabelAdd:hover,
+.AddMultiImgUploadBtnAdd:hover {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+
+.AddMultiImgErrorAdd {
+    text-align: center;
+}
+
+.AddMultiImgErrorAdd span {
+    color: red;
+}
+.rulesAddAvd{
+
+    display: flex;
+    width: 50vw;
+    height: 20vh;
+    margin-left: 10vw;
+    margin-top: 10vh;
+    border: 1px solid grey;
+}
+
+.rulesTextAddAvd{
+
+    ont-family: Arial, Helvetica, sans-serif;
+    text-justify: inter-word;
+    font-size: 1rem;
+    text-align: justify;
+    line-height: 1.4;
+
+}
+

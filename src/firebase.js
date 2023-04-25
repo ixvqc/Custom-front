@@ -1,9 +1,9 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import {getFirestore} from "@firebase/firestore";
 import {getStorage} from "firebase/storage";
 import { getAuth,GoogleAuthProvider } from "firebase/auth";
+
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const firebaseConfig = {
@@ -18,7 +18,7 @@ const firebaseConfig = {
 };
 const provider = new GoogleAuthProvider();
 
-// Initialize Firebase
+const provider = new GoogleAuthProvider();
 const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app)
 export const firestore = getFirestore(app);

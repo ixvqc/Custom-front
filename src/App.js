@@ -4,6 +4,7 @@ import {BrowserRouter, Routes, Route,Navigate} from 'react-router-dom'
 import Login from './views/Login'
 import Register from "./views/Register";
 import Profile from "./views/Profile";
+import AddAnnouncement from "./views/AddAnnouncement";
 import Messages from "./views/Messages";
 import useToken from './useToken'
 import { auth } from "./firebase";
@@ -41,6 +42,7 @@ function App() {
             <Route path="/login" element = {<Login/>}/>
             <Route path="/Register" element = {<Register/>}/>
             <Route path="/Profile" element = {<Profile/>}/>
+            <Route path="/AddAnnouncement" element = {<AddAnnouncement/>}/>
             <Route path="/Messages" element = {<Messages/>}/>
 
 
