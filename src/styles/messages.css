@@ -91,7 +91,7 @@
     height:100vh;
 }
 .container-msg{
-    border:1px solid black;
+
     border-radius:10px;
     width:65%;
     height:80vh;
@@ -100,7 +100,8 @@
 }
 .sidebar{
     flex:1;
-    border-right:1px solid black;
+    border:1px solid black;
+    margin-right:50px;
 }
 
 .chat-messages {
@@ -206,10 +207,12 @@
     cursor: pointer;
 }
 .Messages-component{
-    background-color: #ffffff;
+    background-color: #f0f0f0;
     padding: 10px;
     height:calc(100% - 210px);
     overflow: scroll;
+
+
 }
 .inputpanel-component{
     height:50px;

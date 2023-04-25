@@ -1,3 +1,4 @@
+import '../styles/messages.css';
 import React, { useContext, useState } from "react";
 import Img from "../assets/img/img.png";
 import Attach from "../assets/img/attach.png";
@@ -13,7 +14,6 @@ import {
 import { db, storage } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import '../styles/messages.css';
 
 const InputPanel = () => {
     const [text, setText] = useState("");
@@ -78,7 +78,7 @@ const InputPanel = () => {
         <div className="inputpanel-component">
             <input
                 type="text"
-                placeholder="Type something..."
+                placeholder="Napisz wiadomość"
                 onChange={(e) => setText(e.target.value)}
                 value={text}
             />
@@ -89,11 +89,14 @@ const InputPanel = () => {
                     style={{ display: "none" }}
                     id="file"
                     onChange={(e) => setImg(e.target.files[0])}
+                    accept="image/png, image/jpg, image/webp"
+
                 />
+
                 <label htmlFor="file">
                     <img src={Img} alt="" />
                 </label>
-                <button onClick={handleSend}>Send</button>
+                <button onClick={handleSend}>Wyślij</button>
             </div>
         </div>
     );
