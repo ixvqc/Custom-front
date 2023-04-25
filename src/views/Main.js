@@ -174,7 +174,7 @@ export default function Main(props){
 
                 <button className="add-adv"
                 >
-                    <Link to={"/AddAnouncement"} className="link">Dodaj ogłoszenie + </Link>
+                    <Link to={"/AddAnnouncement"} className="link">Dodaj ogłoszenie + </Link>
                 </button>
 
             </div>
@@ -266,7 +266,7 @@ export default function Main(props){
                                     <br/>
                                 </div>
 
-                                <Link to={"/login"} className="detailed-search">
+                                <Link to={"/Search"} className="detailed-search">
                                     Szczegółowe wyszukiwanie
                                 </Link>
                                 <button className="search" onClick={popUpOffer}>
