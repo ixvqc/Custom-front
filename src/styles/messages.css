@@ -202,7 +202,6 @@
 .ChatIcons{
     display: flex;
     flex-direction: column;
-    margin-left: 18vw;
     justify-content: center;
 
 }
@@ -273,6 +272,13 @@
     border-radius: 10px 0px 10px 10px;
     max-width: max-content;
 }
+
+.message.false p {
+    background-color: lightgray;
+    border-radius: 10px 0px 10px 10px;
+    max-width: max-content
+}
+
 
 .messageInfo{
     display: flex;
