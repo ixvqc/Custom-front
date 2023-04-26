@@ -17,6 +17,8 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import User from "./views/user";
+
 
 
 
@@ -55,6 +57,7 @@ return (
                 <Route path="/AddAnnouncementOther" element = {<AddAnnouncementOther/>}/>
                 <Route path="/Messages" element = {<Messages/>}/>
                 <Route path="/Search" element = {<Search/>}/>
+                <Route path="/user" element = {<User/>}/>
 
             </Route>
         </Routes>

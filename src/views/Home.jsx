@@ -167,7 +167,7 @@ export default function Home(props){
                 <Link to={"/register"} className="link">
                     Rejestracja
                 </Link>
-                <Link to={"/messages"} className="link">
+                <Link to={"/mess"} className="link">
                     wiadomości
                 </Link>
 
@@ -175,7 +175,7 @@ export default function Home(props){
 
                 <button className="add-adv"
                 >
-                    <Link to={"/AddAnnouncement"} className="link">Dodaj ogłoszenie + </Link>
+                    <a href="/AddAnnouncement" className="link">Dodaj ogłoszenie +</a>
                 </button>
 
             </div>

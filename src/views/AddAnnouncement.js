@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useState, useEffect} from "react";
 import '../styles/AddAnnouncement.css';
 import logo from '../assets/img/logov2.png';
@@ -34,6 +34,7 @@ const AddAnnouncement = () => {
     const storage = getStorage();
     const firestore = getFirestore();
 
+    const navigate = useNavigate();
     const [imageSrc, setImageSrc] = useState(auto);
     function handleClick(src) {
         setImageSrc(src);
@@ -333,6 +334,7 @@ const AddAnnouncement = () => {
                 }
             }
             console.log('Dane zostały dodane do Firestore z ID: ', docRef.id);
+            navigate("/");
         } catch (e) {
             console.error('Błąd dodawania danych do Firestore: ', e);
         }
