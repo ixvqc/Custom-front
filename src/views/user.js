@@ -8,7 +8,7 @@ import {auth, db, storage} from "../firebase";
 import { AuthContext } from '../context/AuthContext'
 
 import 'firebase/auth';
-import { getAuth, updateProfile, updatePassword, updateEmail} from "firebase/auth";
+import { getAuth, updateProfile, updatePassword, updateEmail,} from "firebase/auth";
 
 
 
@@ -21,12 +21,6 @@ import {
     listAll,
     list,
 } from "firebase/storage";
-
-
-
-
-
-
 
 
 
@@ -46,22 +40,24 @@ function User(props) {
 
         updateProfile(auth.currentUser, {
             displayName: nameref.current.value,
-            photoURL: "https://firebasestorage.googleapis.com/v0/b/custom-e30bd.appspot.com/o/hubertkox11682425193730?alt=media&token=e1bc5d83-9e21-412a-9548-9dacd00fd467"
+
         }).then(() => {
             console.log("super");
         }).catch((error) => {
             console.log("zle");
         });
     };
+const handleClick2 = () => {
+    const auth = getAuth();
+    updateEmail(auth.currentUser, "marcinek@jajo.com")
 
-    // const auth = getAuth();
-    // updateEmail(auth.currentUser, "user@example.com").then(() => {
-    //     // Email updated!
-    //     // ...
-    // }).catch((error) => {
-    //     // An error occurred
-    //     // ...
-    // });
+        .then(() => {
+            // Email updated!
+            // ...
+        }).catch((error) => {
+        console.log("ua")
+    });
+};
 
 
 
@@ -168,7 +164,7 @@ function User(props) {
                         <button className="passwordch-button">
                             Zmień Hasło
                         </button>
-                        <button className="emailch-button">
+                        <button className="emailch-button"  onClick={handleClick2}>
                             Zmień E-mail
                         </button>
                         <button className="infoch-button">
