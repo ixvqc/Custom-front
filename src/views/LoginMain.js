@@ -24,8 +24,8 @@ import { AuthContext } from "../context/AuthContext";
 
 
 
-export default function Main(props){
 
+export default function Main(props){
 
     const [registerForm, setregisterForm] = useState({
         marka: "",
@@ -148,6 +148,7 @@ export default function Main(props){
     // function popUpOffer() {
     //     //document.getElementById("place-to-add-offer").style.display = "inline-block"
     // }
+    const {currentUser} = useContext(AuthContext)
 
     return (
 
@@ -159,16 +160,9 @@ export default function Main(props){
                     <img src={logo} className="logo-main"/>
 
                 </div>
-
-                <Link to={"/login"} className="link">
-                    Zaloguj się
-                </Link>
-                <Link to={"/register"} className="link">
-                    Rejestracja
-                </Link>
-                {/*<Link to={"/messages"} className="link">*/}
-                {/*    wiadomości*/}
-                {/*</Link>*/}
+                <img src={currentUser.photoURL} alt="" />
+                <span>{currentUser.displayName}</span>
+                <button onClick={() => signOut(auth)}>logout</button>
 
                 <button className="add-adv"
                 >

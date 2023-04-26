@@ -1,23 +1,89 @@
-.background-search{
+.back-background-search{
     font-family: 'Poppins',sans-serif;
     scroll-behavior: smooth;
     min-height: 100vh;
-    background: url(/src/assets/img/backgroundLogin.png);
     background-size: cover;
     background-position: center;
 }
 
-
-.logo_search{
-    margin-left: 8vw;
-    margin-top: 10vh;
+.nav-search{
     height: 13vh;
-    width: 10vw;
-    filter:blur(2px);
+    width: 100%;
+    text-align: right;
+    box-shadow: 2px 2px 4px gray;
+    position:fixed;
+    background-color: white;
+    top:0;
+    opacity:1;
+    font-size: 22px;
+    z-index: 10000;
 
 }
 
-.car-info{
+.logo-div-search{
+    height: 10%;
+    width: 10%;
+}
+
+.logo-search{
+    position:fixed;
+    height:13vh;
+    width: 10vw;
+    margin-bottom:3vh;
+}
+
+.link-search{
+    padding-left: 1vw ;
+    text-decoration: none;
+    color:black;
+}
+
+.add-adv-search{
+    background-color: #FDCF28;
+    color: black;
+    margin-left: 2vw;
+    margin-top: 2vh;
+    margin-right:1vw;
+    padding: 19px 30px 19px 25px ;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    box-shadow: 2px 2px 4px gray;
+
+
+}
+.add-adv-search:hover{
+    background-color: #fdd852;
+}
+
+.background-search{
+    border-bottom: 2px solid lightgray;
+    top:15%;
+    margin-top: 12vh;
+    margin-bottom: 2vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.foreground-search{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.inputs-search{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.car-info-search{
     margin-left: 20px;
     margin-top: 3vh;
     font-size: 15px;
@@ -27,28 +93,6 @@
     height:4.1vh;
     border-radius: 4px;
     box-shadow: 1.5px 1.5px 3px gray;
-}
-
-.search-background{
-    box-shadow: 6px 5px  35px gray;
-    width:70%;
-    top:15%;
-    margin-top: 12vh;
-    margin-left:15%;
-    display: flex;
-}
-
-.foreground{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.search-inputs{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
 }
 
 #car-year-1{
@@ -81,7 +125,66 @@
     width: 7.9vw;
 }
 
-.search-button{
+.offer-search{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.offer-text-search{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap:30px;
+}
+
+.offer-image-search{
+    margin-right: 4vw;
+
+}
+
+.car-image{
+    width: 15vw;
+    background: rgba(248, 248, 217);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+.price-search{
+    color: #fdd852;
+    font-weight: bold;
+
+}
+.car-name-search{
+    font-size: 30px;
+    font-weight: bold;
+
+}
+
+.offer-data-search{
+    border-radius: 16px;
+    box-shadow: 2px 2px 4px gray;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    width: 70vw;
+    margin-top:10px;
+
+}
+.offer-data-search p {
+    margin-left:3vw;
+}
+
+.text-search{
+    margin-left: 2%;
+    margin-top: 2%;
+    font-size: 150%;
+}
+
+
+.button-search{
     text-decoration: none;
     color:black;
     margin-top: 20px;
@@ -98,52 +201,6 @@
     height: 40px;
     box-shadow: 2px 2px 4px gray;
 }
-
-.search-offer{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-
-}
-.search-offer-image{
-    background-color: #3A7734;
-    margin-right: 5vw;
-}
-
-#car-image{
-    width: 30vw;
-}
-
-.search-offer-data{
-    background-color: #61dafb;
-    border: 2px outset rgba(194,194,194,0.72);
-    border-radius: 7px;
-    width: 30vw;
-}
-
-.nav{
-    height: 13vh;
-    width: 100%;
-    text-align: right;
-    box-shadow: 2px 2px 4px gray;
-    position:fixed;
-    background-color: white;
-    top:0;
-    opacity:1;
-    font-size: 22px;
-
-}
-
-.search-text{
-    margin-left: 2%;
-    margin-top: 2%;
-    font-size: 150%;
-}
-
-
-
 
 
 .email-container-search {
@@ -168,20 +225,9 @@
     font-size: 120%;
 }
 
-.button-search {
-    background-color: #FDCF28;
-    color: black;
-    margin-left: 5vw;
-    padding: 2vh 3vw;
-    font-size: 20px;
-    font-style: italic;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
 
-.button:hover {
+
+.button-search:hover {
     background-color: yellow;
 }
 
@@ -213,13 +259,13 @@
 
 }
 
-.TestFirebase{
+.TestFirebase-search{
     width: 100px;
 
 }
 
 
-.button-google {
+.button-google-search {
     max-width: 320px;
     display: flex;
     padding: 0.5rem 1.4rem;
@@ -241,10 +287,40 @@
     margin-top:3vh;
 }
 
-.button-google svg {
+.button-google-search svg {
     height: 24px;
 }
 
-.button-google:hover {
+.button-google-search:hover {
     transform: scale(1.02);
+}
+.logout-button {
+    text-decoration: none;
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-bottom: 20px;
+    margin-right: 1vw;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 200px;
+    height: 40px;
+    box-shadow: 2px 2px 4px gray;
+    color: rgb(65, 63, 63);
+    background-color: #fff;
+
+
+}
+.info-car{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.info-car-part-two{
+
 }

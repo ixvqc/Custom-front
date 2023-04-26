@@ -7,8 +7,7 @@ import { db } from "../firebase"
 import {getDocs, collection, doc, query, where, limit} from "@firebase/firestore";
 import {signInWithEmailAndPassword, signOut} from "firebase/auth";
 import { auth } from "../firebase";
-import {getWindowFromNode} from "@testing-library/dom/dist/helpers";
-
+import message from "../components/Message";
 
 
 function Search()  {
@@ -16,18 +15,24 @@ function Search()  {
     const carCollectionRef = collection(db, "Search-test");
     const [visibility, setVisibility] = useState(false)
 
-    const handleClick = () => {
-        setVisibility(!visibility);
-    }
+
 
     const [registerForm, setregisterForm] = useState({
-        marka: "",
-        model: "",
-        rokOd: "",
-        rokDo: "",
-        cenaOd: "",
-        cenaDo: "",
-        fuel_type: ""
+        Marka: "",
+        Model: "",
+        RokOd: "",
+        RokDo: "",
+        CenaOd: "",
+        CenaDo: "",
+        Paliwo: "",
+        PrzebiegOd: "",
+        PrzebiegDo: "",
+        Kraj: "",
+        Nadwozie: "",
+        Lokalizacja: "",
+        Stan: "",
+        Silnik: "",
+        Wypos: ""
     })
 
     function handleChange(event) {
@@ -38,91 +43,119 @@ function Search()  {
         )
     }
 
-
+    const HandleClick = () => {
+        setVisibility(!visibility);
+        console.log(registerForm.Marka)
+    }
 
     useEffect(() => {
-
-        const q = query(
-            carCollectionRef,
-            where('Model', '==', 'RX8')
-        );
         const getCarList = async () => {
-            try{
-                const data = await getDocs(q);
-                const filteredData = data.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id,
-                }));
-                console.log(filteredData);
-                setCarList(filteredData);
-            } catch (err) {
-                console.error(err);
-            }
+            const data = await getDocs(carCollectionRef);
+            const filteredData = data.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id,
+            }));
+            console.log("FilteredData: ", filteredData)
+            console.log("?.Rok: ", filteredData.rok)
+            const doubleFilter = filteredData.filter((car) => {
+                const Marka = registerForm.Marka.toLowerCase();
+                const Model = registerForm.Model.toLowerCase();
+                const Paliwo = registerForm.Paliwo.toLowerCase();
+                const Kraj = registerForm.Kraj.toLowerCase();
+                const Lokalizacja = registerForm.Lokalizacja.toLowerCase();
+                const Nadwozie = registerForm.Nadwozie.toLowerCase();
+                const Stan = registerForm.Stan.toLowerCase();
+                const Silnik = registerForm.Silnik.toLowerCase();
+                const Wypos = registerForm.Wypos.toLowerCase();
+                const RokOd = registerForm.RokOd
+                const RokDo = registerForm.RokDo
+                const CenaOd = registerForm.CenaOd
+                const CenaDo = registerForm.CenaDo
+                const PrzebiegOd = registerForm.PrzebiegOd
+                const PrzebiegDo = registerForm.PrzebiegDo
+                const values = Object.values(car).join("").toLowerCase()
+
+
+
+                return(
+                    (Marka === '' || values.includes(Marka)) &&
+                    (Model === '' || values.includes(Model)) &&
+                    (Kraj === '' || values.includes(Kraj)) &&
+                    (Lokalizacja === '' || values.includes(Lokalizacja)) &&
+                    (Nadwozie === '' || values.includes(Nadwozie)) &&
+                    (Stan === '' || values.includes(Stan)) &&
+                    (Silnik === '' || values.includes(Silnik)) &&
+                    (Wypos === '' || values.includes(Wypos)) &&
+                    (Paliwo === '' || values.includes(Paliwo)) &&
+                    (RokOd === '' || car.Rok >= RokOd) &&
+                    (RokDo === '' || car.Rok <= RokDo) &&
+                    (CenaOd === '' || car.Cena >= CenaOd) &&
+                    (CenaDo === '' || car.Cena <= CenaDo) &&
+                    (PrzebiegOd === '' || car.Przebieg >= PrzebiegOd) &&
+                    (PrzebiegDo === '' || car.Przebieg <= PrzebiegDo)
+                    //console.log(filteredData);
+                )
+            });
+            console.log(doubleFilter);
+            setCarList(doubleFilter);
         };
 
         getCarList();
-    },[]);
-
-
+    },[registerForm]);
 
     return (
-        <div className="background-search">
+        <div className="back-background-search">
 
-            <div className="nav">
+            <div className="nav-search">
 
 
-                <div className="logo-div">
+                <div className="logo-div-search">
                     <a href="http://localhost:3000">
-                        <img src={logo} className="logo-main"/>
+                        <img src={logo} className="logo-search"/>
                     </a>
 
                 </div>
 
-                <Link to={"/login"} className="link">
-                    Zaloguj się
+                <Link to={"/user"} className="link-search">
+                    Moje konto
                 </Link>
-                <Link to={"/register"} className="link">
-                    Rejestracja
-                </Link>
-                <Link to={"/messages"} className="link">
+                <Link to={"/messages"} className="link-search">
                     wiadomości
                 </Link>
 
-                <button onClick={() => signOut(auth)}>logout</button>
+                <button className="logout-button" onClick={() => signOut(auth)}>logout</button>
 
-                <button className="add-adv"
-                >
-                    <Link to={"/login"} className="link">Dodaj ogłoszenie + </Link>
+                <button className="add-adv-search">
+                    <Link to={"/login"} className="link-search">Dodaj ogłoszenie + </Link>
                 </button>
 
             </div>
 
 
-            <div className="search-background">
+            <div className="background-search">
 
                 <form>
-                    <div className="foreground">
-                        <div className="search-text">
-                            Wyszukaj ogłoszenie
+                    <div className="foreground-search">
+                        <div className="text-search">
                         </div>
-                        <div className={"search-inputs"}>
-                            <input type="text" className={"car-info"} name="car-brand" placeholder="Dowolna marka"/>
-                            <input type="text" className={"car-info"} name="car-model" placeholder="Dowolny model"/>
+                        <div className={"inputs-search"}>
+                            <input type="text" className={"car-info-search"} name="Marka" placeholder="Dowolna marka" onChange={handleChange}/>
+                            <input type="text" className={"car-info-search"} name="Model" placeholder="Dowolny model" onChange={handleChange}/>
 
                             <div className={"input-float"}>
-                                <input type="number" className={"car-info"} id = "car-year-1" name="car-year-from" placeholder="Rok od"/>
-                                <input type="number" className={"car-info"} id = "car-year-2" name="car-year-to" placeholder="Rok do"/>
+                                <input type="number" className={"car-info-search"} id = "car-year-1" name="RokOd" placeholder="Rok od" onChange={handleChange}/>
+                                <input type="number" className={"car-info-search"} id = "car-year-2" name="RokDo" placeholder="Rok do" onChange={handleChange}/>
                             </div>
 
                             <div className={"input-float"}>
-                                <input type="number" className={"car-info"} id = "car-price-1" name="car-price-from" placeholder="Cena od"/>
-                                <input type="number" className={"car-info"} id = "car-price-2" name="car-price-to" placeholder="Cena do"/>
+                                <input type="number" className={"car-info-search"} id = "car-price-1" name="CenaOd" placeholder="Cena od" onChange={handleChange}/>
+                                <input type="number" className={"car-info-search"} id = "car-price-2" name="CenaDo" placeholder="Cena do" onChange={handleChange}/>
                             </div>
 
-                            <input type="text" className={"car-info"} name="car-country" placeholder="Kraj pochodzenia"/>
+                            <input type="text" className={"car-info-search"} name="Kraj" placeholder="Kraj pochodzenia" onChange={handleChange}/>
 
-                            <select className={"car-info"} name="car-body">
-                                <option value="Dowolne">Dowolne nadwozie</option>
+                            <select className={"car-info-search"} name="Nadwozie" onChange={handleChange}>
+                                <option value="">Dowolne nadwozie</option>
                                 <option value="Hatchback">Hatchback</option>
                                 <option value="Sedan">Sedan</option>
                                 <option value="Liftback">Liftback</option>
@@ -136,61 +169,68 @@ function Search()  {
                             </select>
 
                             <div className={"input-float"}>
-                                <input type="number" className={"car-info"} id = "car-mileage-1" name="car-mileage-from" placeholder="Przebieg od"/>
-                                <input type="number" className={"car-info"} id = "car-mileage-2" name="car-mileage-to" placeholder="Przebieg do"/>
+                                <input type="number" className={"car-info-search"} id = "car-mileage-1" name="PrzebiegOd" placeholder="Przebieg od" onChange={handleChange}/>
+                                <input type="number" className={"car-info-search"} id = "car-mileage-2" name="PrzebiegDo" placeholder="Przebieg do" onChange={handleChange}/>
                             </div>
 
-                            <input type="text" className={"car-info"} name="car-localization" placeholder="Dowolna lokalizacja"/>
-                            <input type="text" className={"car-info"} name="car-repairable" placeholder="Dowolny stan"/>
-                            <input type="text" className={"car-info"} name="car-engine" placeholder="Dowolny silnik"/>
-                            <input type="text" className={"car-info"} name="car-inventory" placeholder="Dowolne wyposażenie"/>
+                            <input type="text" className={"car-info-search"} name="Lokalizacja" placeholder="Dowolna lokalizacja" onChange={handleChange}/>
+                            <input type="text" className={"car-info-search"} name="Stan" placeholder="Dowolny stan" onChange={handleChange}/>
+                            <input type="text" className={"car-info-search"} name="Silnik" placeholder="Dowolny silnik" onChange={handleChange}/>
+                            <input type="text" className={"car-info-search"} name="Wypos" placeholder="Dowolne wyposażenie" onChange={handleChange}/>
 
-                            <select className={"car-info"} name="car-fuel">
-                                <option value="Dowolne">Dowolne paliwo</option>
-                                <option value="Benzyna">Hatchback</option>
-                                <option value="Gaz">Sedan</option>
-                                <option value="Elektryczne">Sedan</option>
-                                <option value="Hybryda">Sedan</option>
-                                <option value="Inne">Sedan</option>
+                            <select className={"car-info-search"} name="Paliwo" onChange={handleChange}>
+                                <option value="">Dowolne paliwo</option>
+                                <option value="Benzyna">Benzyna</option>
+                                <option value="LPG">LPG</option>
+                                <option value="Elektryczne">Elektryczne</option>
+                                <option value="Hybryda">Hybryda</option>
+                                <option value="Inne">Inne</option>
                             </select>
 
 
-                            <button className="search-button" type = "button" onClick={handleClick}>
+                            <button className="button-search" type = "button" onClick={HandleClick} style ={{display: visibility ? 'none' : 'block'}}>
                                 Szukaj
+                            </button>
+
+                            <button className="button-search" type = "button" onClick={HandleClick} style ={{display: visibility ? 'block' : 'none'}}>
+                                Ukryj
                             </button>
 
                             <div style ={{display: visibility ? 'block' : 'none'}}>
                                 {carList.map((car) => (
-                                    <div className={"search-offer"}>
-                                        <div className={"search-offer-image"}>
-                                            <img id = "car-image" src={car.Zdje}/>
+                                    <div className={"offer-search"}>
+                                        <div className={"offer-image-search"}>
+                                            <img className= {"car-image"} src={car.Zdje}/>
                                         </div>
-                                        <div className={"search-offer-data"}>
+                                        <div className={"offer-data-search"}>
                                             <div>
-                                                <h1>{car.Marka}</h1>
-                                                <p>{car.Model}</p>
+                                                <p className="car-name-search">{car.Marka}</p>
+                                                <p><strong>Model: </strong>{car.Model}</p>
                                             </div>
-                                            <div>
-                                                <p>Kraj pochodzenia: {car.Kraj}</p>
-                                                <p>Lokalizacja {car.Lokalizacja}</p>
+                                            <div className={"offer-text-search"}>
+                                                <p><strong>Kraj pochodzenia:</strong> {car.Kraj}</p>
+                                                <p><strong>Lokalizacja:</strong> {car.Lokalizacja}</p>
                                             </div>
-                                            <div>
-                                                <p>Typ nadwozia: {car.Nadwozie}</p>
-                                                <p>Paliwo: {car.Paliwo}</p>
+
+
+                                            <div className={"offer-text-search"}>
+                                                <p><strong>Typ nadwozia:</strong> {car.Nadwozie}</p>
+                                                <p><strong>Paliwo:</strong> {car.Paliwo}</p>
                                             </div>
-                                            <div>
-                                                <p>Rok produkcji: {car.Rok}</p>
-                                                <p>Cena: {car.Cena}</p>
+                                            <div className={"offer-text-search"}>
+                                                <p><strong>Rok produkcji:</strong> {car.Rok}</p>
+                                                <p className="price-search">Cena:{car.Cena}</p>
                                             </div>
-                                            <div>
-                                                <p>Przebieg: {car.Przebieg}</p>
-                                                <p>Stan pojazdu: {car.Stan}</p>
+                                            <div className={"offer-text-search"}>
+                                                <p><strong>Przebieg:</strong> {car.Przebieg}</p>
+                                                <p><strong>Stan pojazdu:</strong> {car.Stan}</p>
                                             </div>
-                                            <div>
-                                                <p>Silnik: {car.Silnik}</p>
-                                                <p>Wyposażenie dodatkowe: {car.Wypos}</p>
+                                            <div className={"offer-text-search"}>
+                                                <p><strong>Silnik:</strong> {car.Silnik}</p>
+                                                <p><strong>Wyposażenie dodatkowe:</strong> {car.Wypos}</p>
                                             </div>
                                         </div>
+
 
 
                                     </div>

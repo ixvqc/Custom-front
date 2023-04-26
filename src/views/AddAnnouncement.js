@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import {useState, useEffect} from "react";
+import {useState, useEffect,useNavigate} from "react";
 import '../styles/AddAnnouncement.css';
 import logo from '../assets/img/logov2.png';
 import axios from "axios";
@@ -42,6 +42,7 @@ const AddAnnouncement = () => {
     const [carsOff, setCarsOff] = useState(false);
     const [motorOff, setMotorOff] = useState(true);
     const [otherOff, setOtherOff] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         hideCarsClick();
@@ -330,6 +331,7 @@ const AddAnnouncement = () => {
                 }
             }
             console.log('Dane zostały dodane do Firestore z ID: ', docRef.id);
+            navigate("/")
         } catch (e) {
             console.error('Błąd dodawania danych do Firestore: ', e);
         }
