@@ -1,4 +1,4 @@
-import React, {useContext,useState, useEffect} from 'react';
+import React, {useContext,useState, useEffect, useRef, } from 'react';
 import {useNavigate,Link} from "react-router-dom";
 import '../styles/user.css';
 import logo from '../assets/img/logov2.png';
@@ -8,7 +8,7 @@ import {auth, db, storage} from "../firebase";
 import { AuthContext } from '../context/AuthContext'
 
 import 'firebase/auth';
-import { getAuth, updateProfile } from "firebase/auth";
+import { getAuth, updateProfile, updatePassword, updateEmail} from "firebase/auth";
 
 
 
@@ -39,12 +39,13 @@ function User(props) {
     // }).catch((error) => {
     //     console.log("zle")
     // });
-
+    const nameref = useRef();
     const handleClick1 = () => {
+
         const auth = getAuth();
 
         updateProfile(auth.currentUser, {
-            displayName: "pablito12345",
+            displayName: nameref.current.value,
             photoURL: "https://firebasestorage.googleapis.com/v0/b/custom-e30bd.appspot.com/o/hubertkox11682425193730?alt=media&token=e1bc5d83-9e21-412a-9548-9dacd00fd467"
         }).then(() => {
             console.log("super");
@@ -52,6 +53,15 @@ function User(props) {
             console.log("zle");
         });
     };
+
+    // const auth = getAuth();
+    // updateEmail(auth.currentUser, "user@example.com").then(() => {
+    //     // Email updated!
+    //     // ...
+    // }).catch((error) => {
+    //     // An error occurred
+    //     // ...
+    // });
 
 
 
@@ -145,12 +155,14 @@ function User(props) {
 
 
                 </div>
+<div>
 
-                <button onClick={handleClick1}>Update Profile</button>
+
+</div>
                 <div className="cos">
                     <div className="button-container">
-                        <button className="usernamech-button">
-
+                        <button className="usernamech-button" onClick={handleClick1}>
+                            <input required="" type="text" className="inputnamech" ref={nameref}/>
                             Zmień Nazwę Użytkownika
                         </button>
                         <button className="passwordch-button">
