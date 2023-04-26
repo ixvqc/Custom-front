@@ -7,6 +7,9 @@ import Profile from "./views/Profile";
 import AddAnnouncement from "./views/AddAnnouncement";
 import Messages from "./views/Messages";
 import useToken from './useToken'
+
+import User from "./views/user";
+
 import { auth } from "./firebase";
 import SignIn from './components/SignIn';
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -16,6 +19,7 @@ import { AuthContext } from "./context/AuthContext";
 import LoginMain from './views/LoginMain'
 // import User from "./views/user";
 import Search from "./views/Search";
+
 
 
 
@@ -46,6 +50,8 @@ function App() {
             <Route path="/Profile" element = {<Profile/>}/>
             <Route path="/AddAnnouncement" element = {<AddAnnouncement/>}/>
             <Route path="/Messages" element = {<Messages/>}/>
+
+            <Route path="/user" element = {<User/>}/>
             {/*<Route path="/user" element = {<User/>}/>*/}
             <Route path="/LoginMain" element = {<LoginMain/>}/>
             <Route path="/Search" element = {<Search/>}/>
