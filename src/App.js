@@ -7,6 +7,8 @@ import Register from "./views/Register";
 import Profile from "./views/Profile";
 import AddAnnouncement from "./views/AddAnnouncement";
 import Messages from "./views/Messages";
+import AddAnnouncementMotor from "./views/AddAnnouncementMotor";
+import AddAnnouncementOther from "./views/AddAnnouncementOther"
 import useToken from './useToken'
 import Search from './views/Search'
 import { auth } from "./firebase";
@@ -49,8 +51,11 @@ return (
                 <Route path="register" element={<Register />} />
                 <Route path="/Profile" element = {<Profile/>}/>
                 <Route path="/AddAnnouncement" element = {<AddAnnouncement/>}/>
+                <Route path="/AddAnnouncementMotor" element = {<AddAnnouncementMotor/>}/>
+                <Route path="/AddAnnouncementOther" element = {<AddAnnouncementOther/>}/>
                 <Route path="/Messages" element = {<Messages/>}/>
                 <Route path="/Search" element = {<Search/>}/>
+
             </Route>
         </Routes>
     </BrowserRouter>
