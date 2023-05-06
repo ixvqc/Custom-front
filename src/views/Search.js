@@ -196,51 +196,52 @@ function Search()  {
                                 Ukryj
                             </button>
 
-                            <div style ={{display: visibility ? 'block' : 'none'}}>
-                                {carList.map((car) => (
-                                    <div className={"offer-search"}>
-                                        <div className={"offer-image-search"}>
-                                            <img className= {"car-image"} src={car.Zdje}/>
-                                        </div>
-                                        <div className={"offer-data-search"}>
-                                            <div>
-                                                <p className="car-name-search">{car.Marka}</p>
-                                                <p><strong>Model: </strong>{car.Model}</p>
-                                            </div>
-                                            <div className={"offer-text-search"}>
-                                                <p><strong>Kraj pochodzenia:</strong> {car.Kraj}</p>
-                                                <p><strong>Lokalizacja:</strong> {car.Lokalizacja}</p>
-                                            </div>
 
-
-                                            <div className={"offer-text-search"}>
-                                                <p><strong>Typ nadwozia:</strong> {car.Nadwozie}</p>
-                                                <p><strong>Paliwo:</strong> {car.Paliwo}</p>
-                                            </div>
-                                            <div className={"offer-text-search"}>
-                                                <p><strong>Rok produkcji:</strong> {car.Rok}</p>
-                                                <p className="price-search">Cena:{car.Cena}</p>
-                                            </div>
-                                            <div className={"offer-text-search"}>
-                                                <p><strong>Przebieg:</strong> {car.Przebieg}</p>
-                                                <p><strong>Stan pojazdu:</strong> {car.Stan}</p>
-                                            </div>
-                                            <div className={"offer-text-search"}>
-                                                <p><strong>Silnik:</strong> {car.Silnik}</p>
-                                                <p><strong>Wyposażenie dodatkowe:</strong> {car.Wypos}</p>
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-                                ))}
-                            </div>
 
                         </div>
+                    </div>
+
+                </form>
+            </div>
+            <div style ={{display: visibility ? 'block' : 'none'}}>
+                {carList.map((car) => (
+                    <div className={"offer-search"}>
+                        <div className={"offer-image-search"}>
+                            <img className= {"car-image"} src={car.Zdje}/>
+                        </div>
+                        <div className={"offer-data-search"}>
+                            <div>
+                                <p className="car-name-search">{car.Marka}</p>
+                                <p><strong>Model: </strong>{car.Model}</p>
+                            </div>
+                            <div className={"offer-text-search"}>
+                                <p><strong>Kraj pochodzenia:</strong> {car.Kraj}</p>
+                                <p><strong>Lokalizacja:</strong> {car.Lokalizacja}</p>
+                            </div>
+
+
+                            <div className={"offer-text-search"}>
+                                <p><strong>Typ nadwozia:</strong> {car.Nadwozie}</p>
+                                <p><strong>Paliwo:</strong> {car.Paliwo}</p>
+                            </div>
+                            <div className={"offer-text-search"}>
+                                <p><strong>Rok produkcji:</strong> {car.Rok}</p>
+                                <p className="price-search">Cena:{car.Cena}</p>
+                            </div>
+                            <div className={"offer-text-search"}>
+                                <p><strong>Przebieg:</strong> {car.Przebieg}</p>
+                                <p><strong>Stan pojazdu:</strong> {car.Stan}</p>
+                            </div>
+                            <div className={"offer-text-search"}>
+                                <p><strong>Silnik:</strong> {car.Silnik}</p>
+                                <p><strong>Wyposażenie dodatkowe:</strong> {car.Wypos}</p>
+                            </div>
+                        </div>
+
+
 
                     </div>
-                </form>
+                ))}
             </div>
         </div>
 

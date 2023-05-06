@@ -41,6 +41,7 @@
 }
 .username-nav-messages img{
     height:40px;
+    width: 40px;
     padding:10px;
     border-radius: 100%;
 }
@@ -273,7 +274,7 @@
     max-width: max-content;
 }
 
-.message.false p {
+.message.false .MessageComponent.owner p {
     background-color: lightgray;
     border-radius: 10px 0px 10px 10px;
     max-width: max-content
