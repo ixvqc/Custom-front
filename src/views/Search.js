@@ -110,7 +110,7 @@ function Search()  {
 
 
                 <div className="logo-div-search">
-                    <a href="http://localhost:3000">
+                    <a href="/">
                         <img src={logo} className="logo-search"/>
                     </a>
 

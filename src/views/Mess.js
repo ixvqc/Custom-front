@@ -30,7 +30,9 @@ function Mess() {
             <div className="nav-bar-messages">
 
                 <div className="logo-messages">
-                    <img src={logo}/>
+                    <a href="/">
+                        <img src={logo}/>
+                    </a>
                 </div>
                 <div className="username-nav-messages">
                     <span>Obserwowane</span>

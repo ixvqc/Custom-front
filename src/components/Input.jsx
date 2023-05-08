@@ -15,6 +15,9 @@ import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 const Input = () => {
+
+
+
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
 
@@ -74,12 +77,20 @@ const Input = () => {
     setText("");
     setImg(null);
   };
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); // Zatrzymuje domyślną akcję naciśnięcia klawisza Enter (np. wysłanie formularza)
+      handleSend();
+    }
+  };
+
   return (
     <div className="inputpanel-component">
       <input
         type="text"
         placeholder="Napisz wiadomość"
         onChange={(e) => setText(e.target.value)}
+        onKeyPress={handleKeyPress}
         value={text}
       />
       <div className="send-button-inputpanel">
