@@ -503,7 +503,7 @@ const AddAnnouncement = () => {
                             </label>
                             <label className="radio">
                                 <input type="radio" name="radioFuel" value="Disel" onChange={handleFuelChange} />
-                                <span className="name">Disel</span>
+                                <span className="name">Diesel</span>
                             </label>
 
                             <label className="radio">

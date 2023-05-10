@@ -187,7 +187,7 @@
 .button-search{
     text-decoration: none;
     color:black;
-    margin-top: 20px;
+    margin-top: 50px;
     margin-left: 40px;
     margin-bottom: 20px;
     background-color: #FDCF28;
@@ -228,7 +228,7 @@
 
 
 .button-search:hover {
-    background-color: yellow;
+    background-color: #ffe16e;
 }
 
 .text-no-password-search{
@@ -323,4 +323,28 @@
 
 .info-car-part-two{
 
+}
+.compare{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.compare-button{
+
+    text-decoration: none;
+    color:black;
+    margin-top: 50px;
+    margin-left: 40px;
+    margin-bottom: 20px;
+    background-color: #dad9d9;
+    margin-right:1vw;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 200px;
+    height: 40px;
+    box-shadow: 2px 2px 4px gray;
 }
