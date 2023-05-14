@@ -10,7 +10,13 @@ import Messages from "./views/Messages";
 import AddAnnouncementMotor from "./views/AddAnnouncementMotor";
 import AddAnnouncementOther from "./views/AddAnnouncementOther"
 import useToken from './useToken'
+
+import Favourites from "./views/favourites";
+import User from "./views/user";
+
+
 import Search from './views/Search'
+
 import { auth } from "./firebase";
 import SignIn from './components/SignIn';
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -18,6 +24,7 @@ import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import User from "./views/user";
+
 
 
 
@@ -39,6 +46,7 @@ function App() {
 return (
     <BrowserRouter>
         <Routes>
+
             <Route path="/">
                 <Route
                     index
@@ -58,8 +66,9 @@ return (
                 <Route path="/Messages" element = {<Messages/>}/>
                 <Route path="/Search" element = {<Search/>}/>
                 <Route path="/user" element = {<User/>}/>
-
+                <Route path="/favourites" element = {<Favourites/>}/>
             </Route>
+
         </Routes>
     </BrowserRouter>
 );

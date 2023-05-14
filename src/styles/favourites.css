@@ -1,0 +1,95 @@
+.mainuser{
+    width: 100%;
+    height:100%;
+    margin: 0;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.navuser{
+
+    height: 13%;
+    width: 100%;
+    text-align: right;
+    box-shadow: 2px 2px 4px gray;
+    position:fixed;
+    background-color: white;
+    top:0;
+    opacity:1;
+    font-size: 22px;
+
+}
+.logo-divuser{
+
+    height: 10%;
+    width: 10%;
+}
+
+.logo-mainuser{
+
+    position:fixed;
+    height:13vh;
+    width: 10vw;
+    margin-bottom:3vh;
+}
+
+
+
+
+.ogloszenie-button {
+
+    margin-top: 3vh;
+    margin-left: 2.5vw;
+    position: relative;
+    background-color: rgb(253, 207, 40);
+    padding: 0.8vh;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    width: 300px;
+    height: 60px;
+    color: #000;
+    border: none;
+    font-size: 20px;
+    transition: all .3s ease-in-out;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.Usernamedisp {
+margin-left:60vw;
+    margin-top: 3.4vh;
+    justify-content: center;
+    align-items: center;
+    width: 15vw;
+    height: 6vh;
+    padding: 1rem 2rem;
+    font-weight: 700;
+    background: rgb(255, 255, 255);
+    color: black;
+    border-radius: .5rem;
+    border-bottom: 2px solid #FCBD07;
+    border-right: 2px solid #FCBD07;
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    overflow: hidden;
+
+}
+.buttongroupus{
+    display: flex;
+
+
+}
+.ogloszenie-button-div{
+
+    flex-direction: row;
+    display: flex;
+}
+
+.Usernamedisp-div{
+
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: row;
+    display: flex;
+}
+
