@@ -8,7 +8,10 @@ import {auth, db, storage} from "../firebase";
 import { AuthContext } from '../context/AuthContext'
 
 import 'firebase/auth';
+
 import { getAuth, updateProfile, updatePassword, updateEmail, sendPasswordResetEmail} from "firebase/auth";
+
+
 
 
 
@@ -24,6 +27,7 @@ import {
 
 
 
+
 function User(props) {
     // const auth = getAuth();
     // updateProfile(auth.currentUser, {
@@ -35,7 +39,10 @@ function User(props) {
     // });
     const nameref = useRef();
 
+
     const {currentUser} = useContext(AuthContext)
+
+
     const handleClick1 = () => {
 
         const auth = getAuth();
@@ -49,6 +56,7 @@ function User(props) {
             console.log("zle");
         });
     };
+
     const refemail = useRef();
     const handleClick2 = () => {
         const auth = getAuth();
@@ -81,6 +89,7 @@ function User(props) {
                 // ..
             });
     }
+
 
 
 
@@ -124,11 +133,13 @@ function User(props) {
 
                     <div className="buttongroupus">
                         <div className="obserwowaneus-div">
+
                             <Link to="/favourites">
                             <button className="obserwowaneus">
                                 Obserwowane ★
                             </button>
                                 </Link>
+
                         </div>
 
                         <div className="Usernamedisp-div">
@@ -181,6 +192,7 @@ function User(props) {
             <div className="cos">
                 <div className="button-container">
 
+
                     <div className="">
                         <button className="usernamech-button" onClick={handleClick1}>
                             Zmień Nazwę Użytkownika
@@ -191,6 +203,7 @@ function User(props) {
                     <button className="passwordch-button" onClick={handleClick3}>
                         Zmień Hasło
                     </button>
+
 
                 </div>
                 <div className="userphotouser">

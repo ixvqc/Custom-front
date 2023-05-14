@@ -1,4 +1,4 @@
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useState, useEffect} from "react";
 import '../styles/AddAnnouncement.css';
 import logo from '../assets/img/logov2.png';
@@ -27,14 +27,13 @@ import { getFirestore } from "firebase/firestore";
 
 
 
-const AddAnnouncement = () => {
+const AddAnnouncementMotor = () => {
 
 
 
     const storage = getStorage();
     const firestore = getFirestore();
 
-    const navigate = useNavigate();
     const [imageSrc, setImageSrc] = useState(auto);
     function handleClick(src) {
         setImageSrc(src);
@@ -92,46 +91,20 @@ const AddAnnouncement = () => {
         // Fetch options from API or any data source
         // Here is an example options array
         const optionsArrayModel = [
-            { value: '3 Series', label: '3 Series' },
-            { value: '5 Series', label: '5 Series' },
-            { value: 'X3', label: 'X3' },
-            { value: '7 Series', label: '7 Series' },
-            { value: 'X5', label: 'X5' },
-            { value: '1 Series', label: '1 Series' },
-            { value: 'X1', label: 'X1' },
-            { value: 'i3', label: 'i3' },
-            { value: 'M2', label: 'M2' },
-            { value: 'M3', label: 'M3' },
-            { value: 'M4', label: 'M4' },
+            { value: 'Corolla', label: 'Corolla' },
+            { value: 'Mustang', label: 'Mustang' },
             { value: 'M5', label: 'M5' },
-            { value: 'X7', label: 'X7' },
+            { value: 'Q5', label: 'Option 4' },
+            { value: 'S-Class', label: 'S-Class' },
+            { value: 'Golf', label: 'Golf' },
+            { value: '911', label: '911' },
+            { value: 'Wrangler', label: 'Wrangler' },
+            { value: 'Model S', label: 'Model S' },
+            { value: 'MX-5', label: 'MX-5' },
         ];
         setOptionsModel(optionsArrayModel);
     }, []);
 
-    const [optionsNaped, setOptionsNapend] = useState([]);
-    useEffect(() => {
-        // Fetch options from API or any data source
-        // Here is an example options array
-        const optionsArrayNapend = [
-            { value: 'FWD (napęd na przednią oś)', label: 'FWD' },
-            { value: 'RWD (napęd na tylną oś) ', label: 'RWD' },
-            { value: '4WD (napęd na cztery koła)', label: '4WD' },
-        ];
-        setOptionsNapend(optionsArrayNapend);
-    }, []);
-
-    const [optionsSkrzynia, setOptionsSkrzynia] = useState([]);
-    useEffect(() => {
-        // Fetch options from API or any data source
-        // Here is an example options array
-        const optionsArraySkrzynia = [
-            { value: 'Skrzynia manualna', label: 'Skrzynia manualna' },
-            { value: 'Skrzynia automatyczna stopniowa ', label: 'Skrzynia automatyczna stopniowa' },
-            { value: 'Skrzynie półautomatyczna stopniowa', label: 'Skrzynie półautomatyczna stopniowa' },
-        ];
-        setOptionsSkrzynia(optionsArraySkrzynia);
-    }, []);
 
     const [optionsOriginCountry, setOptionsOriginCountry] = useState([]);
     useEffect(() => {
@@ -245,23 +218,14 @@ const AddAnnouncement = () => {
     const refFirestore= collection(firestore,"Announcement");
     const [selectedMarka, setSelectedMarka] = useState(null);
     const [selectedModel, setSelectedModel] = useState(null);
-    const [selectedNaped, setSelectedNaped] = useState(null);
-    const [selectedSkrzynia, setSelectedSkrzynia] = useState(null);
     const [selectedOriginCountry, setSelectedOriginCountry] = useState(null);
     const [selectedStanTechniczny, setSelectedStanTechniczny] = useState(null);
-    const [selectedFuel, setSelectedFuel] = useState(null);
-    const [selectedCarBody, setSelectedCarBody] = useState(null);
 
-    const handleFuelChange = (event) => {
-        setSelectedFuel(event.target.value);
-    }
+
     const handleStanTechnicznyChange = (event) => {
         setSelectedStanTechniczny(event.target.value);
     }
 
-    const handleCarBodyChange = (event) => {
-        setSelectedCarBody(event.target.value);
-    }
 
     const handleSave = async (event) => {
         const { uid, photoURL } = auth.currentUser
@@ -280,10 +244,6 @@ const AddAnnouncement = () => {
             PojemnoscSlinika: EngcapRef.current.value,
             VIN: VINRef.current.value,
             stanTechniczny: selectedStanTechniczny,
-            RodzajPaliwa: selectedFuel,
-            RodzajNapedu: selectedNaped,
-            SkrzyniaBiegow: selectedSkrzynia,
-            RodzajNadwozia: selectedCarBody,
             Kolor: ColorRef.current.value,
             DataPierwszejRejestracji: DateRef.current.value,
             KrajPochodzenia: selectedOriginCountry,
@@ -334,7 +294,6 @@ const AddAnnouncement = () => {
                 }
             }
             console.log('Dane zostały dodane do Firestore z ID: ', docRef.id);
-            navigate("/");
         } catch (e) {
             console.error('Błąd dodawania danych do Firestore: ', e);
         }
@@ -397,10 +356,10 @@ const AddAnnouncement = () => {
 
                 <div className="filters-line-Add">
                     <a href="/AddAnnouncement">
-                        <img src={autoHighlights}  className="choices-logo-Add"/>
+                        <img src={auto}  className="choices-logo-Add"/>
                     </a>
                     <a href="/AddAnnouncementMotor">
-                        <img src={moto}  className="choices-moto-Add"/>
+                        <img src={motoHighlights}  className="choices-moto-Add"/>
                     </a>
                     <a href="/AddAnnouncementOther">
                         <img src={key}  className="choices-key-Add"/><br />
@@ -490,47 +449,11 @@ const AddAnnouncement = () => {
                         </div>
                     </div>
 
-                    <div className="ContFuelAdd">
-                        <div className="nameNewAdd">
-                            <label >
-                                <span className="name">Rodzaj paliwa</span>
-                            </label>
-                        </div>
-                        <div className="radioinputsFuelAdd">
-                            <label className="radio">
-                                <input type="radio" name="radioFuel" value="Benzyna" onChange={handleFuelChange} />
-                                <span className="name">Benzyna</span>
-                            </label>
-                            <label className="radio">
-                                <input type="radio" name="radioFuel" value="Disel" onChange={handleFuelChange} />
-                                <span className="name">Disel</span>
-                            </label>
 
-                            <label className="radio">
-                                <input type="radio" name="radioFuel" value={"Elektryczny"} onChange={handleFuelChange} />
-                                <span className="name">Elektryczny</span>
-                            </label>
-                            <label className="radio">
-                                <input type="radio" name="radioFuel" value={"LPG"} onChange={handleFuelChange} />
-                                <span className="name">LPG</span>
-                            </label>
-                            <label className="radio">
-                                <input type="radio" name="radioFuel" value={"Hybrydowe"} onChange={handleFuelChange} />
-                                <span className="name">Hybrydowe</span>
-                            </label>
-                        </div>
-                    </div>
 
 
                     <div className="technicaldataTitleAdd">
                         Szczegółowe dane techniczne
-                    </div>
-                    <div className="chooseAddMarka" >
-                        <Select options={optionsNaped} className="SelectAdd" styles={customStyles} placeholder="Rodzaj napędu" value={selectedNaped} onChange={option => setSelectedNaped(option)}/>
-                    </div>
-
-                    <div className="chooseAddModel" >
-                        <Select options={optionsSkrzynia} className="SelectAdd" styles={customStyles} placeholder="Skrzynia biegów" value={selectedSkrzynia} onChange={option => setSelectedSkrzynia(option)}/>
                     </div>
 
                     <div className="PowerAdd">
@@ -552,52 +475,7 @@ const AddAnnouncement = () => {
                         Nadwozie
                     </div>
 
-                    <div className="ContFuelAdd">
-                        <div className="nameNewAdd">
-                            <label >
-                                <span className="name">Typ nadwozia</span>
-                            </label>
-                        </div>
-                        <div className="radioinputsCarBodyAdd">
-                            <label className="radio">
-                                <input type="radio" name="radioFuel" value="Coupe" onChange={handleCarBodyChange} />
-                                <span className="name">Coupe</span>
-                            </label>
-                            <label className="radio">
-                                <input type="radio" name="radioFuel" value="Hatchback" onChange={handleCarBodyChange} />
-                                <span className="name">Hatchback</span>
-                            </label>
 
-                            <label className="radio">
-                                <input type="radio" name="radioFuel" value={"Pickup"} onChange={handleCarBodyChange} />
-                                <span className="name">Pickup</span>
-                            </label>
-                            <label className="radio">
-                                <input type="radio" name="radioFuel" value={"Sedan"} onChange={handleCarBodyChange} />
-                                <span className="name">Sedan</span>
-                            </label>
-                            <label className="radio">
-                                <input type="radio" name="radioFuel" value={"Terenowy"} onChange={handleCarBodyChange} />
-                                <span className="name">Terenowy</span>
-                            </label>
-                            <label className="radio">
-                                <input type="radio" name="radioFuel" value={"Suv"} onChange={handleCarBodyChange} />
-                                <span className="name">Suv</span>
-                            </label>
-                            <label className="radio">
-                                <input type="radio" name="radioFuel" value={"Kabriolet"} onChange={handleCarBodyChange} />
-                                <span className="name">Kabriolet</span>
-                            </label>
-                            <label className="radio">
-                                <input type="radio" name="radioFuel" value={"Limuzyna"} onChange={handleFuelChange} />
-                                <span className="name">Limuzyna</span>
-                            </label>
-                            <label className="radio">
-                                <input type="radio" name="radioFuel" value={"Inny"} onChange={handleFuelChange} />
-                                <span className="name">Inny</span>
-                            </label>
-                        </div>
-                    </div>
 
                     <div className="PowerAdd">
                         <input required="" type="text" className="inputAvAddPrice" ref={ColorRef}/>
@@ -753,4 +631,4 @@ const AddAnnouncement = () => {
     );
 };
 
-export default AddAnnouncement;
+export default AddAnnouncementMotor;

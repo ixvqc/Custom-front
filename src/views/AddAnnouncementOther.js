@@ -1,4 +1,4 @@
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useState, useEffect} from "react";
 import '../styles/AddAnnouncement.css';
 import logo from '../assets/img/logov2.png';
@@ -27,14 +27,13 @@ import { getFirestore } from "firebase/firestore";
 
 
 
-const AddAnnouncement = () => {
+const AddAnnouncementOther = () => {
 
 
 
     const storage = getStorage();
     const firestore = getFirestore();
 
-    const navigate = useNavigate();
     const [imageSrc, setImageSrc] = useState(auto);
     function handleClick(src) {
         setImageSrc(src);
@@ -92,19 +91,16 @@ const AddAnnouncement = () => {
         // Fetch options from API or any data source
         // Here is an example options array
         const optionsArrayModel = [
-            { value: '3 Series', label: '3 Series' },
-            { value: '5 Series', label: '5 Series' },
-            { value: 'X3', label: 'X3' },
-            { value: '7 Series', label: '7 Series' },
-            { value: 'X5', label: 'X5' },
-            { value: '1 Series', label: '1 Series' },
-            { value: 'X1', label: 'X1' },
-            { value: 'i3', label: 'i3' },
-            { value: 'M2', label: 'M2' },
-            { value: 'M3', label: 'M3' },
-            { value: 'M4', label: 'M4' },
+            { value: 'Corolla', label: 'Corolla' },
+            { value: 'Mustang', label: 'Mustang' },
             { value: 'M5', label: 'M5' },
-            { value: 'X7', label: 'X7' },
+            { value: 'Q5', label: 'Option 4' },
+            { value: 'S-Class', label: 'S-Class' },
+            { value: 'Golf', label: 'Golf' },
+            { value: '911', label: '911' },
+            { value: 'Wrangler', label: 'Wrangler' },
+            { value: 'Model S', label: 'Model S' },
+            { value: 'MX-5', label: 'MX-5' },
         ];
         setOptionsModel(optionsArrayModel);
     }, []);
@@ -334,7 +330,6 @@ const AddAnnouncement = () => {
                 }
             }
             console.log('Dane zostały dodane do Firestore z ID: ', docRef.id);
-            navigate("/");
         } catch (e) {
             console.error('Błąd dodawania danych do Firestore: ', e);
         }
@@ -397,13 +392,13 @@ const AddAnnouncement = () => {
 
                 <div className="filters-line-Add">
                     <a href="/AddAnnouncement">
-                        <img src={autoHighlights}  className="choices-logo-Add"/>
+                        <img src={auto}  className="choices-logo-Add"/>
                     </a>
                     <a href="/AddAnnouncementMotor">
                         <img src={moto}  className="choices-moto-Add"/>
                     </a>
                     <a href="/AddAnnouncementOther">
-                        <img src={key}  className="choices-key-Add"/><br />
+                        <img src={keyHighlights}  className="choices-key-Add"/><br />
                     </a>
                     <text className="text-choices-Add">Osobowe</text>
                     <text className="text-choices-Add">Motocykle</text>
@@ -753,4 +748,4 @@ const AddAnnouncement = () => {
     );
 };
 
-export default AddAnnouncement;
+export default AddAnnouncementOther;

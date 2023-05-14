@@ -20,12 +20,13 @@ import { CSSTransition } from 'react-transition-group';
 import {signOut} from "firebase/auth"
 import { auth } from '../firebase'
 import { AuthContext } from "../context/AuthContext";
+import AddAnnouncement from "./AddAnnouncement";
 
 
 
 
 
-export default function Main(props){
+export default function Home(props){
 
     const [registerForm, setregisterForm] = useState({
         marka: "",
@@ -166,7 +167,7 @@ export default function Main(props){
                 <Link to={"/register"} className="link">
                     Rejestracja
                 </Link>
-                <Link to={"/messages"} className="link">
+                <Link to={"/mess"} className="link">
                     wiadomości
                 </Link>
 
@@ -174,7 +175,7 @@ export default function Main(props){
 
                 <button className="add-adv"
                 >
-                    <Link to={"/AddAnouncement"} className="link">Dodaj ogłoszenie + </Link>
+                    <a href="/AddAnnouncement" className="link">Dodaj ogłoszenie +</a>
                 </button>
 
             </div>
@@ -266,7 +267,7 @@ export default function Main(props){
                                     <br/>
                                 </div>
 
-                                <Link to={"/login"} className="detailed-search">
+                                <Link to={"/Search"} className="detailed-search">
                                     Szczegółowe wyszukiwanie
                                 </Link>
                                 <button className="search" onClick={popUpOffer}>

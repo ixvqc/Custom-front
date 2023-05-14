@@ -40,7 +40,8 @@
     display: flex;
 }
 .username-nav-messages img{
-    height:60px;
+    height:40px;
+    width: 40px;
     padding:10px;
     border-radius: 100%;
 }
@@ -100,12 +101,13 @@
 }
 .sidebar{
     flex:1;
-    border:1px solid black;
     margin-right:50px;
+    background-color: #f2f2f2;
 }
 
 .chat-messages {
     flex: 2;
+    justify-content: space-between;
 
 }
 
@@ -113,10 +115,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: rgba(237, 237, 237, 0.4);
     border-bottom: 1px solid gray;
     height: 100px;
     padding: 10px;
+    background-color: #e5e5e5;
+
 }
 .logo-auta{
     font-weight: bold;
@@ -191,7 +194,6 @@
 }
 .ChatInfo span{
     font-size: 23px;
-    margin-left:3vw;
 
 }
 .ChatInfo img{
@@ -200,14 +202,18 @@
 }
 .ChatIcons{
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+
 }
 .ChatIcons img{
-    height: 24px;
-    cursor: pointer;
+    height:40px;
+    width:50px;
+    border-radius: 100%;
 }
+
 .Messages-component{
-    background-color: #f0f0f0;
+    background-color: #f2f2f2;
     padding: 10px;
     height:calc(100% - 210px);
     overflow: scroll;
@@ -230,7 +236,7 @@
     background-color: #e5e5e5;
 }
 .inputpanel-component input::placeholder{
-    color: lightgray;
+    background-color: #e5e5e5;
 }
 .send-button-inputpanel{
     display: flex;
@@ -243,9 +249,10 @@
 }
 .send-button-inputpanel button{
     border:none;
-    padding:10px 15px;
+    padding:15px 20px;
     background-color: #fdd852;
     margin-left:2vw;
+
 }
 
 .MessageComponent{
@@ -266,6 +273,13 @@
     border-radius: 10px 0px 10px 10px;
     max-width: max-content;
 }
+
+.message.false .MessageComponent.owner p {
+    background-color: lightgray;
+    border-radius: 10px 0px 10px 10px;
+    max-width: max-content
+}
+
 
 .messageInfo{
     display: flex;
