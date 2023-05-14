@@ -50,169 +50,161 @@ function User(props) {
         });
     };
     const refemail = useRef();
-const handleClick2 = () => {
-    const auth = getAuth();
+    const handleClick2 = () => {
+        const auth = getAuth();
 
-    updateEmail(auth.currentUser,    {email: refemail.current.value,
-    })
-
-        .then(() => {
-            console.log("super");
-        }).catch((error) => {
-        console.log("ua");
-        throw error;
-    });
-};
-const handleClick3 = () => {
-    const email = "nko56964@zslsz.com";
-    const emailtest = currentUser.email;
-    console.log(emailtest);
-    const auth = getAuth();
-    sendPasswordResetEmail(auth, email)
-        .then(() => {
-            console.log("udalo sie");
-            console.log(email)
+        updateEmail(auth.currentUser,    {email: refemail.current.value,
         })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log("ups");
+
+            .then(() => {
+                console.log("super");
+            }).catch((error) => {
+            console.log("ua");
             throw error;
-            // ..
         });
-}
+    };
+    const handleClick3 = () => {
+
+        const email = currentUser.email;
+        console.log(email);
+        const auth = getAuth();
+        sendPasswordResetEmail(auth, email)
+            .then(() => {
+                console.log("udalo sie");
+                console.log(email)
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log("ups");
+                throw error;
+                // ..
+            });
+    }
 
 
 
-        const [imageUpload, setImageUpload] = useState(null);
-        const [imageUrls, setImageUrls] = useState([]);
-        // const {displayName} = auth.currentUser
+    const [imageUpload, setImageUpload] = useState(null);
+    const [imageUrls, setImageUrls] = useState([]);
+    // const {displayName} = auth.currentUser
 
 
 
-        const imagesListRef = ref(storage, "images/");
-        const uploadFile = () => {
-            if (imageUpload == null) return;
-            const imageRef = ref(storage, `images/${imageUpload.name}`);
-            uploadBytes(imageRef, imageUpload).then((snapshot) => {
-                getDownloadURL(snapshot.ref).then((url) => {
+    const imagesListRef = ref(storage, "images/");
+    const uploadFile = () => {
+        if (imageUpload == null) return;
+        const imageRef = ref(storage, `images/${imageUpload.name}`);
+        uploadBytes(imageRef, imageUpload).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url) => {
+                setImageUrls((prev) => [...prev, url]);
+            });
+        });
+    };
+
+    useEffect(() => {
+        listAll(imagesListRef).then((response) => {
+            response.items.forEach((item) => {
+                getDownloadURL(item).then((url) => {
                     setImageUrls((prev) => [...prev, url]);
                 });
             });
-        };
-
-        useEffect(() => {
-            listAll(imagesListRef).then((response) => {
-                response.items.forEach((item) => {
-                    getDownloadURL(item).then((url) => {
-                        setImageUrls((prev) => [...prev, url]);
-                    });
-                });
-            });
-        }, []);
+        });
+    }, []);
 
 
-        return (
-            <div className="mainuser">
+    return (
+        <div className="mainuser">
 
-                <div className="navuser">
+            <div className="navuser">
 
-                    <div className="logo-divuser">
-                        <a href="http://localhost:3000">
-                            <img src={logo} alt="Main.js Logo" className="logo-mainuser"/>
-                        </a>
+                <div className="logo-divuser">
+                    <a href="http://localhost:3000">
+                        <img src={logo} alt="Main.js Logo" className="logo-mainuser"/>
+                    </a>
 
-                        <div className="buttongroupus">
-                            <div className="obserwowaneus-div">
-                                <button className="obserwowaneus">
-                                    Obserwowane ★
-                                </button>
-                            </div>
-
-                            <div className="Usernamedisp-div">
-                                <button className="Usernamedisp">
-
-                                    <span>{currentUser.displayName}</span>
-
-                                </button>
-                            </div>
-                            <div className="ogloszenie-button-div">
-                                <Link to="/AddAnnouncement">
-                                    <button className="ogloszenie-button">
-                                        Dodaj Ogłoszenie
-                                    </button>
+                    <div className="buttongroupus">
+                        <div className="obserwowaneus-div">
+                            <Link to="/favourites">
+                            <button className="obserwowaneus">
+                                Obserwowane ★
+                            </button>
                                 </Link>
-                            </div>
-
-
                         </div>
 
-                    </div>
-                </div>
-                <div className="image-backgrounduser">
-                    <div>
-                        <button className="button1user">
-                            Konto
-                        </button>
+                        <div className="Usernamedisp-div">
+                            <button className="Usernamedisp">
 
-                        <button className="button2user">
-                            Ogłoszenia
-                        </button>
-                        <Link to="/messages">
-                            <button className="button3user">
-                                Wiadomości
+                                <span>{currentUser.displayName}</span>
+
                             </button>
-                        </Link>
-                        <button className="button4user">
-                            Płatności
-                        </button>
-                    </div>
-                </div>
-                <div className="user">
-
-
-                </div>
-<div>
-
-
-</div>
-                <div className="cos">
-                    <div className="button-container">
-
-                        <div className="">
-                            <button className="usernamech-button" onClick={handleClick1}>
-                            Zmień Nazwę Użytkownika
-                            </button>
-                            <input required="" type="text" className="inputnamech" ref={nameref}/>
+                        </div>
+                        <div className="ogloszenie-button-div">
+                            <Link to="/AddAnnouncement">
+                                <button className="ogloszenie-button">
+                                    Dodaj Ogłoszenie
+                                </button>
+                            </Link>
                         </div>
 
-                        <button className="passwordch-button" onClick={handleClick3}>
-                            Zmień Hasło
-                        </button>
-                        <div>
-                        <button className="emailch-button"  onClick={handleClick2}>
-                            Zmień E-mail
 
+                    </div>
 
-                        </button>
-                            <input required="" type="text" className="inputemailch" ref={refemail}/>
-                        </div>
-                        <button className="infoch-button">
-                            Zaktualizuj informacje
-                        </button>
-                    </div>
-                    <div className="userphotouser">
-                        <img src={currentUser.photoURL} alt=""/>
-                    </div>
                 </div>
+            </div>
+            <div className="image-backgrounduser">
                 <div>
+                    <button className="button1user">
+                        Konto
+                    </button>
+
+                    <button className="button2user">
+                        Ogłoszenia
+                    </button>
+                    <Link to="/messages">
+                        <button className="button3user">
+                            Wiadomości
+                        </button>
+                    </Link>
+                    <button className="button4user">
+                        Płatności
+                    </button>
+                </div>
+            </div>
+            <div className="user">
+
+
+            </div>
+            <div>
+
+
+            </div>
+            <div className="cos">
+                <div className="button-container">
+
+                    <div className="">
+                        <button className="usernamech-button" onClick={handleClick1}>
+                            Zmień Nazwę Użytkownika
+                        </button>
+                        <input required="" type="text" className="inputnamech" ref={nameref}/>
+                    </div>
+
+                    <button className="passwordch-button" onClick={handleClick3}>
+                        Zmień Hasło
+                    </button>
 
                 </div>
+                <div className="userphotouser">
+                    <img src={currentUser.photoURL} alt=""/>
+                </div>
+            </div>
+            <div>
 
             </div>
 
+        </div>
 
-        );
+
+    );
 
 
 }

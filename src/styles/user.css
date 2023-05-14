@@ -272,7 +272,7 @@
 
 .ogloszenie-button {
     margin-top: 3vh;
-margin-left: 2.5vw;
+    margin-left: 2.5vw;
     position: relative;
     background-color: rgb(253, 207, 40);
     padding: 0.8vh;
@@ -346,7 +346,7 @@ margin-left: 2.5vw;
 }
 
 .userphotouser{
-/*background-color: blue;*/
+    /*background-color: blue;*/
     justify-content: center;
     display: flex;
     align-items: center;
@@ -355,7 +355,7 @@ margin-left: 2.5vw;
 
 }
 .userphotouser img{
-border: 1px solid black;
+    border: 1px solid black;
 
     width: 30vh;
     height: 30vh;
@@ -374,7 +374,7 @@ border: 1px solid black;
 .button-container{
 
     flex-direction: column;
-width: 50%;
+    width: 50%;
 
 
 }

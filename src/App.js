@@ -7,7 +7,7 @@ import Profile from "./views/Profile";
 import AddAnnouncement from "./views/AddAnnouncement";
 import Messages from "./views/Messages";
 import useToken from './useToken'
-
+import Favourites from "./views/favourites";
 import User from "./views/user";
 
 import { auth } from "./firebase";
@@ -49,7 +49,7 @@ function App() {
             <Route path="/AddAnnouncement" element = {<AddAnnouncement/>}/>
             <Route path="/Messages" element = {<Messages/>}/>
             <Route path="/user" element = {<User/>}/>
-
+            <Route path="/favourites" element = {<Favourites/>}/>
         </Routes>
 
 
