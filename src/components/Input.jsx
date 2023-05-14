@@ -104,7 +104,7 @@ const Input = () => {
         <label htmlFor="file">
           <img src={Img} alt="" />
         </label>
-        <button onClick={handleSend}>Wyślij</button>
+        <button onClick={handleSend} className="add-adv-button-send-mess">Wyślij</button>
       </div>
     </div>
   );

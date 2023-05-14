@@ -12,6 +12,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from '../firebase'
 import { AuthContext } from '../context/AuthContext'
 import Cookies from "universal-cookie";
+import AddAnnouncement from "./AddAnnouncement";
 
 const cookies = new Cookies();
 
@@ -43,7 +44,9 @@ function Mess() {
                 </div>
                 <div className="button-add-adv-messages">
                     <button className="add-adv-button">
-                       {/*<Link to={"/login"} className="link-messages">Dodaj ogłoszenie + </Link>*/}
+                        <a href="/AddAnnouncement" className="link-messages">
+                            Dodaj ogłoszenie
+                        </a>
                     </button>
                 </div>
 

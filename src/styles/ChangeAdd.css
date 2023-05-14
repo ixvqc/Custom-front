@@ -1,0 +1,466 @@
+.mainChangeAdd{
+    width: 100%;
+    height:100%;
+    margin: 0;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.containerNavChangeAdd{
+    height: 13%;
+    width: 100%;
+    text-align: right;
+    box-shadow: 2px 2px 4px gray;
+    position: fixed;
+    background-color: white;
+    top: 0;
+    opacity: 1;
+    font-size: 22px;
+    pointer-events: none;
+    z-index: 9999;
+
+}
+.logo-div-ChangeAdd{
+
+    height: 10%;
+    width: 10%;
+}
+
+.logo-main-ChangeAdd{
+
+    position:fixed;
+    height:13vh;
+    width: 10vw;
+    margin-bottom:3vh;
+}
+.buttongroupus-ChangeAdd{
+    display: flex;
+
+}
+
+.image-backgroundChangeAdd {
+    background-image: url(/src/assets/img/tlo-user2.png);
+    width: 100%;
+    height: 40vh;
+    background-size: cover;
+    background-position: center;
+    margin-top: 10vh;
+    padding-top: 3vh;
+    margin-bottom: 10vh;
+}
+
+.button1user-ChangeAdd {
+    position: relative;
+    margin-top: 10vh;
+    margin-left: 15vw;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    box-shadow: rgb(162, 162, 162) 0px 4px 0px 0px;
+    padding: 15px;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    width: 190px;
+    height: 49px;
+    color: #000;
+    border: none;
+    font-size: 20px;
+    transition: all .3s ease-in-out;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.button1user-ChangeAdd::before {
+    content: "";
+    background-color: rgb(228, 228, 228);
+    width: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: width 700ms ease-in-out;
+    display: inline-block;
+}
+
+.button1user-ChangeAdd:hover::before {
+    width: 100%;
+}
+
+.button2user-ChangeAdd {
+    position: relative;
+    margin-left: 10vw;
+    background-color: rgb(253, 207, 40);
+    border-radius: 5px;
+    box-shadow: rgb(121, 104, 36) 0px 4px 0px 0px;
+    padding: 15px;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    width: 190px;
+    height: 49px;
+    color: #000;
+    border: none;
+    font-size: 20px;
+    transition: all .3s ease-in-out;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.button2user-ChangeAdd::before {
+    content: "";
+    background-color: rgb(259, 216, 46);
+    width: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: width 700ms ease-in-out;
+    display: inline-block;
+}
+
+.button2user-ChangeAdd:hover::before {
+    width: 100%;
+}
+
+.button3user-ChangeAdd {
+    position: relative;
+    margin-left: 10vw;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    box-shadow: rgb(162, 162, 162) 0px 4px 0px 0px;
+    padding: 15px;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    width: 190px;
+    height: 49px;
+    color: #000;
+    border: none;
+    font-size: 20px;
+    transition: all .3s ease-in-out;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.button3user-ChangeAdd::before {
+    content: "";
+    background-color: rgb(228, 228, 228);
+    width: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: width 700ms ease-in-out;
+    display: inline-block;
+}
+
+.button3user-ChangeAdd:hover::before {
+    width: 100%;
+}
+
+.button4user-ChangeAdd {
+    margin-left: 10vw;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    box-shadow: rgb(162, 162, 162) 0px 4px 0px 0px;
+    padding: 15px;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    width: 190px;
+    height: 49px;
+    color: #000;
+    border: none;
+    font-size: 20px;
+    transition: all .3s ease-in-out;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.button4user-ChangeAdd::before {
+    content: "";
+    background-color: rgb(228, 228, 228);
+    width: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: width 700ms ease-in-out;
+    display: inline-block;
+}
+
+.button4user-ChangeAdd:hover::before {
+    width: 100%;
+}
+
+.ogloszenie-button-ChangeAdd {
+    margin-top: 3vh;
+    margin-left: 2.5vw;
+    position: relative;
+    background-color: rgb(253, 207, 40);
+    padding: 0.8vh;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    width: 300px;
+    height: 60px;
+    color: #000;
+    border: none;
+    font-size: 20px;
+    transition: all .3s ease-in-out;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.Usernamedisp-ChangeAdd {
+    margin-top: 3.4vh;
+    justify-content: center;
+    align-items: center;
+    width: 15vw;
+    height: 6vh;
+    padding: 1rem 2rem;
+    font-weight: 700;
+    background: rgb(255, 255, 255);
+    color: black;
+    border-radius: .5rem;
+    border-bottom: 2px solid #FCBD07;
+    border-right: 2px solid #FCBD07;
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    overflow: hidden;
+
+}
+
+.ogloszenie-button-div-ChangeAdd{
+    flex-direction: row;
+    display: flex;
+}
+.ogloszenie-text-ChangeAdd{
+    text-decoration: none;
+    color: black;
+}
+
+.Usernamedisp-div-ChangeAdd{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: row;
+    display: flex;
+}
+
+.obserwowane-ChangeAdd {
+    margin-right: 2.5vw;
+    margin-left: 45vw;
+    margin-top: 3.4vh;
+    justify-content: center;
+    align-items: center;
+    width: 15vw;
+    height: 6vh;
+    padding: 1rem 2rem;
+    font-weight: 700;
+    background: rgb(255, 255, 255);
+    color: black;
+    border-radius: .5rem;
+    border-bottom: 2px solid #FCBD07;
+    border-right: 2px solid #FCBD07;
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    overflow: hidden;
+
+}
+
+.containerChangeAdd{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    width: 100vw;
+    height: 80vh;
+}
+.containerChangeAdd div{
+
+
+}
+
+
+.containerInChangeAdd{
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+
+
+}
+.infoAddChangeAdd{
+
+    width: 90%;
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+}
+
+.divChangeAddChangeAdd{
+
+    width: 90%;
+    height: 70% ;
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+
+}
+.divChoseAddChangeAdd{
+    width: 45%;
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+
+}
+
+.inputChangeAdd__group {
+    position: relative;
+    padding: 20px 0 0;
+    width: 100%;
+    max-width: 180px;
+    margin-left: 10%;
+}
+
+.inputChangeAdd__field {
+    font-family: inherit;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    font-size: 17px;
+    color: #000000;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+.inputChangeAdd__field::placeholder {
+    color: transparent;
+}
+
+.inputChangeAdd__field:placeholder-shown ~ .inputChangeAdd__label {
+    font-size: 17px;
+    cursor: text;
+    top: 20px;
+}
+
+.inputChangeAdd__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 17px;
+    color: #9b9b9b;
+    pointer-events: none;
+}
+
+.inputChangeAdd__field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #FDCF28, yellow);
+    border-image-slice: 1;
+}
+
+.inputChangeAdd__field:focus ~ .inputChangeAdd__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 17px;
+    color: #FDCF28;
+    font-weight: 700;
+}
+
+/* reset input */
+.inputChangeAdd__field:required, .inputChangeAdd__field:invalid {
+    box-shadow: none;
+}
+
+.inputChangeAddLong__group {
+    position: relative;
+    padding: 20px 0 0;
+    width: 150%;
+    max-width: 300px;
+    margin-left: 10%;
+}
+
+.inputChangeAddLong__field {
+    font-family: inherit;
+    width: 150%;
+    border: none;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    font-size: 17px;
+    color: #000000;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+.inputChangeAddLong__field::placeholder {
+    color: transparent;
+}
+
+.inputChangeAddLong__field:placeholder-shown ~ .inputChangeAddLong__label {
+    font-size: 17px;
+    cursor: text;
+    top: 20px;
+}
+
+.inputChangeAddLong__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 17px;
+    color: #9b9b9b;
+    pointer-events: none;
+}
+
+.inputChangeAddLong__field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #FDCF28, yellow);
+    border-image-slice: 1;
+}
+
+.inputChangeAddLong__field:focus ~ .inputChangeAddLong__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 17px;
+    color: #FDCF28;
+    font-weight: 700;
+}
+
+/* reset input */
+.inputChangeAddLong__field:required,
+.inputChangeAddLong__field:invalid {
+    box-shadow: none;
+}
+
+.button-AddAChangeAdd {
+    background-color: #FDCF28;
+    color: black;
+    margin-left: 12vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    padding: 2vh 3vw;
+    font-size: 20px;
+    font-style: italic;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}

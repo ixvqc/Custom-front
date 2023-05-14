@@ -5,6 +5,7 @@ import Mess from "./views/Mess";
 import Login from "./views/Login";
 import Register from "./views/Register";
 import Profile from "./views/Profile";
+import ChangeAdd from "./views/ChangeAdd";
 import AddAnnouncement from "./views/AddAnnouncement";
 import Messages from "./views/Messages";
 import AddAnnouncementMotor from "./views/AddAnnouncementMotor";
@@ -58,6 +59,7 @@ return (
                 <Route path="/Messages" element = {<Messages/>}/>
                 <Route path="/Search" element = {<Search/>}/>
                 <Route path="/user" element = {<User/>}/>
+                <Route path="/ChangeAdd" element = {<ChangeAdd/>}/>
 
             </Route>
         </Routes>
