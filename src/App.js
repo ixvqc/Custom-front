@@ -12,7 +12,7 @@ import AddAnnouncementOther from "./views/AddAnnouncementOther"
 import useToken from './useToken'
 
 import Favourites from "./views/favourites";
-import User from "./views/user";
+
 
 
 import Search from './views/Search'

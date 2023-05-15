@@ -8,9 +8,43 @@ import {getDocs, collection, doc, query, where, limit} from "@firebase/firestore
 import {signInWithEmailAndPassword, signOut} from "firebase/auth";
 import { auth } from "../firebase";
 import message from "../components/Message";
-
-
+import axios from 'axios';
+import { getFirestore, updateDoc,getDoc } from "firebase/firestore";
 function Search()  {
+    const [isTrue, setIsTrue] = useState(false);
+
+
+    const ChangeRokRef = useRef();
+
+
+    const [isFavourite, setIsFavourite] = useState(false);
+
+    const handleButtonClick = async (carId) => {
+        const docRef = doc(db, "Search-test", carId);
+        try {
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                const currentData = docSnap.data();
+                let newData;
+                if (currentData.ulubione === "tak") {
+                    newData = { ulubione: "nie" };
+                    setIsFavourite(false);
+                } else {
+                    newData = { ulubione: "tak" };
+                    setIsFavourite(true);
+                }
+                await updateDoc(docRef, newData);
+                console.log("Document successfully updated!");
+            } else {
+                console.log("No such document!");
+            }
+        } catch (error) {
+            console.error("Error updating document: ", error);
+        }
+    };
+
+
+
     const [carList,setCarList] = useState([]);
     const carCollectionRef = collection(db, "Search-test");
     const [visibility, setVisibility] = useState(false)
@@ -18,6 +52,7 @@ function Search()  {
 
 
     const [registerForm, setregisterForm] = useState({
+
         Marka: "",
         Model: "",
         RokOd: "",
@@ -77,6 +112,7 @@ function Search()  {
 
 
 
+
                 return(
                     (Marka === '' || values.includes(Marka)) &&
                     (Model === '' || values.includes(Model)) &&
@@ -102,6 +138,16 @@ function Search()  {
 
         getCarList();
     },[registerForm]);
+
+
+
+
+
+
+
+
+
+
 
     return (
         <div className="back-background-search">
@@ -211,8 +257,13 @@ function Search()  {
                         </div>
                         <div className={"offer-data-search"}>
                             <div>
-                                <p className="car-name-search">{car.Marka}</p>
+                                <p className="car-name-search">{car.Marka}
+                                    <button className="favourite" onClick={() => { handleButtonClick(car.id);  }}>Dodaj do ulubionych</button>
+
+                                    </p>
+
                                 <p><strong>Model: </strong>{car.Model}</p>
+
                             </div>
                             <div className={"offer-text-search"}>
                                 <p><strong>Kraj pochodzenia:</strong> {car.Kraj}</p>
