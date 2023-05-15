@@ -61,6 +61,7 @@ const Compare = () => {
                                 <td>Paliwo:{car.Paliwo}</td>
                                 <td> Rok: {car.Rok}</td>
                                 <td>Cena: {car.Cena}</td>
+                                <td>Przebieg: {car.Przebieg}</td>
 
                                 <button
                                     onClick={()=> delateCompare(car)}
