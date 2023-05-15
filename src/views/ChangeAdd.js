@@ -18,9 +18,9 @@ function ChangeAdd(props) {
 
 
     const [carList,setCarList] = useState([]);
-    const carCollectionRef = collection(db, "Announcement");
+    const carCollectionRef = collection(db, "Search-test");
     const [visibility, setVisibility] = useState(false)
-
+    const myUidIsHere = "swx3NTpFhtZA21NWyAPLsRRkxUC3"
 
 
     const [registerForm, setregisterForm] = useState({
@@ -38,7 +38,9 @@ function ChangeAdd(props) {
         Lokalizacja: "",
         Stan: "",
         Silnik: "",
-        Wypos: ""
+        Wypos: "",
+        uid: myUidIsHere,
+        Opis: ""
     })
 
     function handleChange(event) {
@@ -49,10 +51,7 @@ function ChangeAdd(props) {
         )
     }
 
-    const HandleClick = () => {
-        setVisibility(!visibility);
-        console.log(registerForm.Marka)
-    }
+
 
     useEffect(() => {
         const getCarList = async () => {
@@ -79,6 +78,8 @@ function ChangeAdd(props) {
                 const CenaDo = registerForm.CenaDo
                 const PrzebiegOd = registerForm.PrzebiegOd
                 const PrzebiegDo = registerForm.PrzebiegDo
+                const uid = registerForm.uid.toLowerCase();
+                const Opis = registerForm.uid.toLowerCase();
                 const values = Object.values(car).join("").toLowerCase()
 
 
@@ -93,6 +94,8 @@ function ChangeAdd(props) {
                     (Silnik === '' || values.includes(Silnik)) &&
                     (Wypos === '' || values.includes(Wypos)) &&
                     (Paliwo === '' || values.includes(Paliwo)) &&
+                    (uid === '' || values.includes(uid)) &&
+                    (Opis === '' || values.includes(Opis)) &&
                     (RokOd === '' || car.Rok >= RokOd) &&
                     (RokDo === '' || car.Rok <= RokDo) &&
                     (CenaOd === '' || car.Cena >= CenaOd) &&
@@ -128,7 +131,7 @@ function ChangeAdd(props) {
     const ChangeRokRef = useRef();
 
 
-    const docRef = doc(db, "Announcement", "yjDiuZm1Ismi6u1C4uX9");
+    const docRef = doc(db, "Search-test", "HGNWbVjpvcrgIL8dnLLr");
 
     const handleSendChangeAdd = async (event) => {
         const data = {
@@ -136,7 +139,7 @@ function ChangeAdd(props) {
             Model: ChangeModelRef.current.value,
             Cena: ChangeCenaRef.current.value,
             Opis: ChangeOpisRef.current.value,
-            RokProdukcji: ChangeRokRef.current.value
+            Rok: ChangeRokRef.current.value
         };
         updateDoc(docRef, data)
             .then(docRef => {
@@ -210,13 +213,6 @@ function ChangeAdd(props) {
             <div className="containerChangeAdd">
                 <div className="containerInChangeAdd">
                     <div className="infoAddChangeAdd">
-                        <button className="button-search" type = "button" onClick={HandleClick} style ={{display: visibility ? 'none' : 'block'}}>
-                            Szukaj
-                        </button>
-
-                        <button className="button-search" type = "button" onClick={HandleClick} style ={{display: visibility ? 'block' : 'none'}}>
-                            Ukryj
-                        </button>
                         Zaktualizuj swoje ogłoszenie
                     </div>
 
@@ -259,40 +255,37 @@ function ChangeAdd(props) {
 
 
                 <div className="divChoseAddChangeAdd">
-a
-                    <div style ={{display: visibility ? 'block' : 'none'}}>
+
+                    <div >
                         {carList.map((car) => (
-                            <div className={"offer-search"}>
-                                <div className={"offer-image-search"}>
-                                    <img className= {"car-image"} src={car.tutaj}/>
-                                </div>
-                                <div className={"offer-data-search"}>
-                                    <div>
-                                        <p className="car-name-search">{car.Marka}</p>
+                            <div className={"offer-search-ChangeAdd"}>
+                                <div className={"offer-data-search-ChangeAdd"}>
+                                    <div className={"offer-image-ChangeAdd"}>
+                                        <img className= {"car-image-ChangeAdd"} src={car.Zdje}/>
+                                    </div>
+                                    <div className={"offer-text-search-ChangeAdd"}>
+                                        <p><strong>Marka: </strong>{car.Marka}</p>
                                         <p><strong>Model: </strong>{car.Model}</p>
                                     </div>
-                                    <div className={"offer-text-search"}>
+                                    <div className={"offer-text-search-ChangeAdd"}>
                                         <p><strong>Kraj pochodzenia:</strong> {car.Kraj}</p>
-                                        <p><strong>Lokalizacja:</strong> {car.Lokalizacja}</p>
+                                        <p><strong>Przebieg:</strong> {car.Przebieg}Km</p>
                                     </div>
 
 
-                                    <div className={"offer-text-search"}>
+                                    <div className={"offer-text-search-ChangeAdd"}>
                                         <p><strong>Typ nadwozia:</strong> {car.Nadwozie}</p>
                                         <p><strong>Paliwo:</strong> {car.Paliwo}</p>
                                     </div>
-                                    <div className={"offer-text-search"}>
+                                    <div className={"offer-text-search-ChangeAdd"}>
                                         <p><strong>Rok produkcji:</strong> {car.Rok}</p>
-                                        <p className="price-search">Cena:{car.Cena}</p>
+                                        <p className="price-search-ChangeAdd">Cena:{car.Cena}zł</p>
                                     </div>
-                                    <div className={"offer-text-search"}>
-                                        <p><strong>Przebieg:</strong> {car.Przebieg}</p>
-                                        <p><strong>Stan pojazdu:</strong> {car.Stan}</p>
+                                    <div className={"offer-text-search-ChangeAdd"}>
+                                        <p><strong>Opis:</strong> {car.Opis}</p>
                                     </div>
-                                    <div className={"offer-text-search"}>
-                                        <p><strong>Silnik:</strong> {car.Silnik}</p>
-                                        <p><strong>Wyposażenie dodatkowe:</strong> {car.Wypos}</p>
-                                    </div>
+
+
                                 </div>
 
 
@@ -304,7 +297,6 @@ a
                 </div>
 
             </div>
-
 
         </div>
 

@@ -313,11 +313,19 @@
 
 }
 .divChoseAddChangeAdd{
+    display: flex;
     width: 45%;
     margin: 10px;
     text-align: center;
-    line-height: 75px;
-    font-size: 30px;
+    font-size: 0.9vw;
+    flex-direction: row;
+    order: 2;
+    align-items: flex-start;
+
+}
+
+.divChoseAddChangeAdd div{
+    width: 20vw;
 
 }
 
@@ -464,3 +472,49 @@
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
+
+.offer-search-ChangeAdd{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 20%;
+    height: 40%;
+}
+.offer-image-ChangeAdd{
+    display: flex;
+    justify-content: center;
+}
+.offer-text-search-ChangeAdd{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap:1vw;
+    justify-content:space-around;
+}
+.car-image-ChangeAdd{
+    width: 20vw;
+    background: rgba(248, 248, 217);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+}
+.price-search-ChangeAdd{
+    color: #fdd852;
+    font-weight: bold;
+
+}
+
+.offer-data-search-ChangeAdd{
+    border-radius: 16px;
+    box-shadow: 2px 2px 4px gray;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    width: 70vw;
+    margin-top:10px;
+
+}
+
