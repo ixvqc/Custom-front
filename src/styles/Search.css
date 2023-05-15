@@ -348,3 +348,17 @@
     height: 40px;
     box-shadow: 2px 2px 4px gray;
 }
+.button-compare-adv{
+    text-decoration: none;
+    color:black;
+    background-color: #dad9d9;
+    margin-right:1vw;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100px;
+    height: 20px;
+    box-shadow: 2px 2px 4px gray;
+}

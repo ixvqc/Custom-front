@@ -7,8 +7,6 @@ import { db } from "../firebase"
 import {getDocs, collection, doc, query, where, limit} from "@firebase/firestore";
 import {signInWithEmailAndPassword, signOut} from "firebase/auth";
 import { auth } from "../firebase";
-import Compare from "../components/Compare";
-import {stringify} from "uuid";
 
 
 function Search()  {
@@ -48,6 +46,7 @@ function Search()  {
     const goToCompare = () =>{
         navigate("/Compare")
     }
+
     const HandleClick = () => {
         setVisibility(!visibility);
         console.log(registerForm.Marka)
@@ -123,7 +122,6 @@ function Search()  {
             localStorage.setItem("compare", JSON.stringify(tempArray));
         } else {
             console.log("jest");
-
             let tempArray = JSON.parse(data); // Przekształć dane z localStorage na tablicę
             tempArray.push(obj); // Dodaj obj do tablicy
             console.log(tempArray);
@@ -251,7 +249,7 @@ function Search()  {
                                 <p className="car-name-search">{car.Marka}</p>
 
                                     <div className='compare-component'>
-                                        <button
+                                        <button className="button-compare-adv"
                                             onClick={()=> addCompare(car)}
                                         >
                                             Porównaj
