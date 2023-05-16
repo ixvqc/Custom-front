@@ -300,6 +300,11 @@
     text-align: center;
     line-height: 75px;
     font-size: 30px;
+    font-weight: bolder;
+    color: rgba(0, 0, 0, 0.4);
+    padding-top: 2vh;
+    padding-left: 1vw;
+    border-bottom: 1px solid gray
 }
 
 .divChangeAddChangeAdd{
@@ -320,14 +325,11 @@
     font-size: 0.9vw;
     flex-direction: row;
     order: 2;
-    align-items: flex-start;
+    align-content: flex-start
 
 }
 
-.divChoseAddChangeAdd div{
-    width: 20vw;
 
-}
 
 .inputChangeAdd__group {
     position: relative;
@@ -476,11 +478,10 @@
 .offer-search-ChangeAdd{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
     align-items: center;
     width: 20%;
-    height: 40%;
+
+
 }
 .offer-image-ChangeAdd{
     display: flex;
@@ -509,6 +510,9 @@
 }
 
 .offer-data-search-ChangeAdd{
+    display: flex;
+    flex-direction:column;
+    order:2;
     border-radius: 16px;
     box-shadow: 2px 2px 4px gray;
     backdrop-filter: blur(20px);
@@ -516,5 +520,54 @@
     width: 70vw;
     margin-top:10px;
 
+}
+.btnHeartChangeAdd {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color: #FDCF28;
+    position: relative;
+    margin-left: 82%;
+    margin-bottom: 5%;
+}
+
+.btnHeartChangeAdd::after {
+    content: 'Zmien ogłoszenie';
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    font-size: 15px;
+    color: #FDCF28;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    opacity: 0;
+    visibility: hidden;
+    transition: .2s linear;
+    top: 115%;
+}
+.iconHeartChangeAdd {
+    width: 30px;
+    height: 30px;
+    transition: .2s linear;
+}
+.iconHeartChangeAdd path {
+    fill: white;
+    transition: .2s linear;
+}
+
+.btnHeartChangeAdd:hover > .iconHeartChangeAdd {
+    transform: scale(1.2);
+}
+.btnHeartChangeAdd:hover > .iconHeartChangeAdd path {
+    fill: yellow;
+}
+
+.btnHeartChangeAdd:hover::after {
+    visibility: visible;
+    opacity: 1;
+    top: 105%;
 }
 

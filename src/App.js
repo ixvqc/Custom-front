@@ -9,7 +9,8 @@ import ChangeAdd from "./views/ChangeAdd";
 import AddAnnouncement from "./views/AddAnnouncement";
 import Messages from "./views/Messages";
 import AddAnnouncementMotor from "./views/AddAnnouncementMotor";
-import AddAnnouncementOther from "./views/AddAnnouncementOther"
+import AddAnnouncementOther from "./views/AddAnnouncementOther";
+import Contact from "./views/Contact";
 import useToken from './useToken'
 import Search from './views/Search'
 import { auth } from "./firebase";
@@ -60,6 +61,7 @@ return (
                 <Route path="/Search" element = {<Search/>}/>
                 <Route path="/user" element = {<User/>}/>
                 <Route path="/ChangeAdd" element = {<ChangeAdd/>}/>
+                <Route path="/Contact" element = {<Contact/>}/>
 
             </Route>
         </Routes>
