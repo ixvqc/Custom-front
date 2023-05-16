@@ -362,7 +362,7 @@
 
 .favourite:hover::before {
     width: 9em;
-
+}
 .compare{
     display: flex;
     flex-direction: row;
