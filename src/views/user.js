@@ -118,7 +118,7 @@ function User(props) {
             <div className="navuser">
 
                 <div className="logo-divuser">
-                    <a href="http://localhost:3000">
+                    <a href="/">
                         <img src={logo} alt="Main.js Logo" className="logo-mainuser"/>
                     </a>
 

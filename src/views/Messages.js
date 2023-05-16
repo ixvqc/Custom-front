@@ -32,7 +32,9 @@ function Messages() {
         <div className="nav-bar-messages">
 
             <div className="logo-messages">
-                <img src={logo}/>
+                <a href="http://localhost:3000">
+                    <img src={logo}/>
+                </a>
             </div>
             <div className="username-nav-messages">
                 <span>Obserwowane</span>

@@ -4,14 +4,17 @@ import { ChatContext } from "../context/ChatContext";
 import '../styles/messages.css';
 
 const Message = ({ message }) => {
+  const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
   const ref = useRef();
 
+
   useEffect(() => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   }, [message]);
+
 
   return (
     <div
@@ -28,7 +31,7 @@ const Message = ({ message }) => {
           }
           alt=""
         />
-        <span>just now</span>
+        <span>{currentTime}</span>
       </div>
       <div className="messageContent">
         <p>{message.text}</p>

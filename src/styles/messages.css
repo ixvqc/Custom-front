@@ -78,6 +78,22 @@
     background-color: #fdd852;
 }
 
+.add-adv-button-send-mess{
+    background-color: #FDCF28;
+    color: black;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    box-shadow: 2px 2px 4px gray;
+
+
+}
+.add-adv-button-send-mess:hover{
+    background-color: #fdd852;
+}
+
 .link-messages{
     padding-left: 1vw ;
     text-decoration: none;
@@ -207,9 +223,10 @@
 
 }
 .ChatIcons img{
-    height:40px;
-    width:50px;
-    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .Messages-component{
@@ -262,6 +279,10 @@
 }
 .MessageComponent.owner{
     flex-direction: row-reverse;
+
+}
+.message.false .MessageComponent.owner{
+    flex-direction: row;
 
 }
  .owner .messageContent{

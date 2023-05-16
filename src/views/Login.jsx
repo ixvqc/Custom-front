@@ -31,7 +31,7 @@ const Login = () => {
       <div className="background-login">
 
         <nav className="logo-container">
-          <a href="http://localhost:3000">
+          <a href="/">
             <img src={logo} alt="Main.js Logo" className="logo_login" />
           </a>
         </nav>
