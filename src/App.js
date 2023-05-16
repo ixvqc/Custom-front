@@ -12,7 +12,13 @@ import AddAnnouncementMotor from "./views/AddAnnouncementMotor";
 import AddAnnouncementOther from "./views/AddAnnouncementOther";
 import Contact from "./views/Contact";
 import useToken from './useToken'
+
+import Favourites from "./views/favourites";
+
+
+
 import Search from './views/Search'
+
 import { auth } from "./firebase";
 import SignIn from './components/SignIn';
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -20,6 +26,8 @@ import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import User from "./views/user";
+import Compare from "./components/Compare";
+
 
 
 
@@ -31,9 +39,7 @@ function App() {
     const [room, setRoom] = useState("");
     const { currentUser } = useContext(AuthContext);
     const ProtectedRoute = ({ children }) => {
-        if (!currentUser) {
-            return <Navigate to="/login" />;
-        }
+
 
         return children
     };
@@ -41,6 +47,7 @@ function App() {
 return (
     <BrowserRouter>
         <Routes>
+
             <Route path="/">
                 <Route
                     index
@@ -62,8 +69,12 @@ return (
                 <Route path="/user" element = {<User/>}/>
                 <Route path="/ChangeAdd" element = {<ChangeAdd/>}/>
                 <Route path="/Contact" element = {<Contact/>}/>
+                <Route path="/favourites" element = {<Favourites/>}/>
+                <Route path="/compare" element = {<Compare/>}/>
+
 
             </Route>
+
         </Routes>
     </BrowserRouter>
 );

@@ -4,20 +4,83 @@ import '../styles/Search.css';
 import logo from '../assets/img/logov2.png';
 import React, { useRef } from "react";
 import { db } from "../firebase"
-import {getDocs, collection, doc, query, where, limit} from "@firebase/firestore";
+import {getDocs, collection, doc, query, where, limit, addDoc} from "@firebase/firestore";
 import {signInWithEmailAndPassword, signOut} from "firebase/auth";
 import { auth } from "../firebase";
 import message from "../components/Message";
+import firebase from "firebase/compat/app";
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import Notiflix from 'notiflix';
+import axios from 'axios';
+import { getFirestore, updateDoc,getDoc } from "firebase/firestore";
 
 
 function Search()  {
+    const [isTrue, setIsTrue] = useState(false);
+
+
+    const ChangeRokRef = useRef();
+
+
+    const [isFavourite, setIsFavourite] = useState(false);
+
+    const handleButtonClick = async (carId) => {
+        const docRef = doc(db, "Search-test", carId);
+        try {
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                const currentData = docSnap.data();
+                let newData;
+                if (currentData.ulubione === "tak") {
+                    newData = { ulubione: "nie" };
+                    setIsFavourite(false);
+                } else {
+                    newData = { ulubione: "tak" };
+                    setIsFavourite(true);
+                }
+                await updateDoc(docRef, newData);
+                console.log("Document successfully updated!");
+            } else {
+                console.log("No such document!");
+            }
+        } catch (error) {
+            console.error("Error updating document: ", error);
+        }
+    };
+
+
+
+
     const [carList,setCarList] = useState([]);
     const carCollectionRef = collection(db, "Search-test");
-    const [visibility, setVisibility] = useState(false)
+    const [visibility, setVisibility] = useState(false);
+    const [visibility2, setVisibility2] = useState(false);
+    const [carID, setCarID] = useState('');
+    const [reviewText, setReviewText] = useState("");
+    const navigate = useNavigate();
+    const addField = async (event, carID) => {
+        event.preventDefault();
+        setCarID(carID)
+        try {
+            const docRef = await addDoc(collection(db, 'Review'), {
+                carID: carID,
+                review: reviewText,
+            });
+            console.log('Document written with ID: ', docRef.id);
+            setCarID('');
+            setReviewText('');
+        } catch (error) {
+            console.error('Error adding document: ', error);
+        }
+    };
+   
+
 
 
 
     const [registerForm, setregisterForm] = useState({
+
         Marka: "",
         Model: "",
         RokOd: "",
@@ -43,9 +106,21 @@ function Search()  {
         )
     }
 
-    const HandleClick = () => {
+
+    const goToCompare = () =>{
+        navigate("/Compare")
+    }
+
+   const HandleClick = () => {
         setVisibility(!visibility);
         console.log(registerForm.Marka)
+    }
+    const ZmianaPrzycisku1 = () => {
+        setVisibility(!visibility);
+        console.log(registerForm.Marka)
+    }
+    const ZmianaPrzycisku2 = () => {
+        setVisibility2(!visibility2);
     }
 
     useEffect(() => {
@@ -77,6 +152,7 @@ function Search()  {
 
 
 
+
                 return(
                     (Marka === '' || values.includes(Marka)) &&
                     (Model === '' || values.includes(Model)) &&
@@ -102,6 +178,36 @@ function Search()  {
 
         getCarList();
     },[registerForm]);
+
+
+
+    console.log(carList)
+
+
+    function addCompare(obj) {
+        const data = localStorage.getItem("compare");
+
+        if (data === null) {
+            console.log("pusta");
+            let tempArray = [];
+            tempArray.push(obj);
+            console.log(tempArray);
+            localStorage.setItem("compare", JSON.stringify(tempArray));
+            Notiflix.Notify.success('Dodano do porównania');
+
+        } else {
+            console.log("jest");
+            let tempArray = JSON.parse(data); // Przekształć dane z localStorage na tablicę
+            tempArray.push(obj); // Dodaj obj do tablicy
+            console.log(tempArray);
+            localStorage.setItem("compare", JSON.stringify(tempArray)); // Zapisz zaktualizowaną tablicę w localStorage
+            Notiflix.Notify.success('Dodano do porównania');
+
+        }
+
+    }
+
+
 
     return (
         <div className="back-background-search">
@@ -188,14 +294,18 @@ function Search()  {
                             </select>
 
 
-                            <button className="button-search" type = "button" onClick={HandleClick} style ={{display: visibility ? 'none' : 'block'}}>
+                            <button className="button-search" type = "button" onClick={ZmianaPrzycisku1} style ={{display: visibility ? 'none' : 'block'}}>
                                 Szukaj
                             </button>
 
-                            <button className="button-search" type = "button" onClick={HandleClick} style ={{display: visibility ? 'block' : 'none'}}>
+                            <button className="button-search" type = "button" onClick={ZmianaPrzycisku1} style ={{display: visibility ? 'block' : 'none'}}>
                                 Ukryj
                             </button>
-
+                            <button className="compare-button"
+                                    onClick={goToCompare}
+                            >
+                                Porównaj
+                            </button>
 
 
                         </div>
@@ -205,21 +315,45 @@ function Search()  {
             </div>
             <div style ={{display: visibility ? 'block' : 'none'}}>
                 {carList.map((car) => (
-                    <div className={"offer-search"}>
+                    <div className={"offer-search"} key={car.id}> {/* Added key attribute */}
                         <div className={"offer-image-search"}>
                             <img className= {"car-image"} src={car.Zdje}/>
                         </div>
+
                         <div className={"offer-data-search"}>
+
                             <div>
+
+                                <p className="car-name-search">{car.Marka}
+                                    <button className="favourite" onClick={() => { handleButtonClick(car.id);  }}>Dodaj do ulubionych</button>
+
+                                    </p>
+
+
+                                <div className="compare">
+
                                 <p className="car-name-search">{car.Marka}</p>
+
+                                    <div className='compare-component'>
+                                        <button className="button-compare-adv"
+                                            onClick={()=> addCompare(car)}
+                                        >
+                                            Porównaj
+                                        </button>
+
+                                    </div>
+
+
+                                </div>
+
                                 <p><strong>Model: </strong>{car.Model}</p>
+
                             </div>
+
                             <div className={"offer-text-search"}>
                                 <p><strong>Kraj pochodzenia:</strong> {car.Kraj}</p>
                                 <p><strong>Lokalizacja:</strong> {car.Lokalizacja}</p>
                             </div>
-
-
                             <div className={"offer-text-search"}>
                                 <p><strong>Typ nadwozia:</strong> {car.Nadwozie}</p>
                                 <p><strong>Paliwo:</strong> {car.Paliwo}</p>
@@ -227,6 +361,9 @@ function Search()  {
                             <div className={"offer-text-search"}>
                                 <p><strong>Rok produkcji:</strong> {car.Rok}</p>
                                 <p className="price-search">Cena:{car.Cena}</p>
+                                <div className={"offer-text-search"} id ={"offer-review-search"} style ={{display: visibility2 ? 'block' : 'none'}}>
+                                    <textarea id = {"offer-review-text-search"} value={reviewText} onChange={(e) => setReviewText(e.target.value)}>Napisz swoją recenzję tutaj</textarea>
+                                </div>
                             </div>
                             <div className={"offer-text-search"}>
                                 <p><strong>Przebieg:</strong> {car.Przebieg}</p>
@@ -236,14 +373,30 @@ function Search()  {
                                 <p><strong>Silnik:</strong> {car.Silnik}</p>
                                 <p><strong>Wyposażenie dodatkowe:</strong> {car.Wypos}</p>
                             </div>
+
+                            <div className={"offer-text-search"}>
+                                <button id={"review-button-search"} className="button-search" type = "button" onClick={(event) => addField(event, car.id)} style ={{display: visibility2 ? 'block' : 'none'}}>
+                                    Wyślij recenzję
+                                </button>
+                                <button className="button-search" type = "button" onClick={ZmianaPrzycisku2} style ={{display: visibility2 ? 'none' : 'block'}}>
+                                    Napisz recenzję
+                                </button>
+                            </div>
                         </div>
 
 
 
+                        
+
+
                     </div>
+
                 ))}
+
             </div>
+
         </div>
+
 
     );
 }

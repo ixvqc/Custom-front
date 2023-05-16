@@ -17,6 +17,23 @@
     font-size: 22px;
 
 }
+
+.logout {
+    background-color: #dad9d9;
+    color: black;
+    margin-left: 2vw;
+    margin-top: 2vh;
+    margin-right:1vw;
+    padding: 15px;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    box-shadow: 2px 2px 4px gray;
+
+
+}
 .logo-div{
     height: 10%;
     width: 10%;
@@ -157,6 +174,8 @@
 .input{
     position: static;
     margin-top: 15px;
+    accent-color: black;
+
 }
 
 .radioMain{
@@ -280,6 +299,7 @@
     font-size: 18px;
     margin-top:3vh;
     margin-left:1vw;
+
 
 
 }
