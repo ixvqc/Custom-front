@@ -12,10 +12,46 @@ import firebase from "firebase/compat/app";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import Notiflix from 'notiflix';
-
+import axios from 'axios';
+import { getFirestore, updateDoc,getDoc } from "firebase/firestore";
 
 
 function Search()  {
+    const [isTrue, setIsTrue] = useState(false);
+
+
+    const ChangeRokRef = useRef();
+
+
+    const [isFavourite, setIsFavourite] = useState(false);
+
+    const handleButtonClick = async (carId) => {
+        const docRef = doc(db, "Search-test", carId);
+        try {
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                const currentData = docSnap.data();
+                let newData;
+                if (currentData.ulubione === "tak") {
+                    newData = { ulubione: "nie" };
+                    setIsFavourite(false);
+                } else {
+                    newData = { ulubione: "tak" };
+                    setIsFavourite(true);
+                }
+                await updateDoc(docRef, newData);
+                console.log("Document successfully updated!");
+            } else {
+                console.log("No such document!");
+            }
+        } catch (error) {
+            console.error("Error updating document: ", error);
+        }
+    };
+
+
+
+
     const [carList,setCarList] = useState([]);
     const carCollectionRef = collection(db, "Search-test");
     const [visibility, setVisibility] = useState(false);
@@ -44,6 +80,7 @@ function Search()  {
 
 
     const [registerForm, setregisterForm] = useState({
+
         Marka: "",
         Model: "",
         RokOd: "",
@@ -115,6 +152,7 @@ function Search()  {
 
 
 
+
                 return(
                     (Marka === '' || values.includes(Marka)) &&
                     (Model === '' || values.includes(Model)) &&
@@ -142,6 +180,7 @@ function Search()  {
     },[registerForm]);
 
 
+
     console.log(carList)
 
 
@@ -167,6 +206,7 @@ function Search()  {
         }
 
     }
+
 
 
     return (
@@ -283,6 +323,13 @@ function Search()  {
                         <div className={"offer-data-search"}>
 
                             <div>
+
+                                <p className="car-name-search">{car.Marka}
+                                    <button className="favourite" onClick={() => { handleButtonClick(car.id);  }}>Dodaj do ulubionych</button>
+
+                                    </p>
+
+
                                 <div className="compare">
 
                                 <p className="car-name-search">{car.Marka}</p>
@@ -298,7 +345,9 @@ function Search()  {
 
 
                                 </div>
+
                                 <p><strong>Model: </strong>{car.Model}</p>
+
                             </div>
 
                             <div className={"offer-text-search"}>

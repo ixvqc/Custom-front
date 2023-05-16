@@ -211,6 +211,7 @@
 }
 
 .passwordch-button {
+    justify-content: center;
     margin-top: 2.5vh;
     margin-left: 10vw;
     position: relative;
@@ -230,47 +231,10 @@
     overflow: hidden;
 }
 
-.emailch-button {
-    margin-top: 2.5vh;
-    margin-left: 10vw;
-    position: relative;
-    background-color: rgb(168, 168, 168);
-    border-radius: 5px;
 
-    padding: 0.8vh;
-    background-repeat: no-repeat;
-    box-sizing: border-box;
-    width: 500px;
-    height: 60px;
-    color: #000;
-    border: none;
-    font-size: 20px;
-    transition: all .3s ease-in-out;
-    z-index: 1;
-    overflow: hidden;
-}
-
-.infoch-button {
-    margin-top: 2.5vh;
-    margin-left: 10vw;
-    position: relative;
-    background-color: rgb(168, 168, 168);
-    border-radius: 5px;
-
-    padding: 0.8vh;
-    background-repeat: no-repeat;
-    box-sizing: border-box;
-    width: 500px;
-    height: 60px;
-    color: #000;
-    border: none;
-    font-size: 20px;
-    transition: all .3s ease-in-out;
-    z-index: 1;
-    overflow: hidden;
-}
 
 .ogloszenie-button {
+
     margin-top: 3vh;
     margin-left: 2.5vw;
     position: relative;
@@ -343,6 +307,11 @@
     border-left: 2px solid white;
     overflow: hidden;
 
+
+}
+.favlink{
+    text-decoration: none;
+    color: black;
 }
 
 .userphotouser{
@@ -377,4 +346,21 @@
     width: 50%;
 
 
+}
+.inputnamech{
+
+    display: grid;
+    column-count: 1;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.inputemailch{
+
+    display: grid;
+    column-count: 1;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
 }
