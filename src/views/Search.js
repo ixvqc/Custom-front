@@ -4,17 +4,42 @@ import '../styles/Search.css';
 import logo from '../assets/img/logov2.png';
 import React, { useRef } from "react";
 import { db } from "../firebase"
-import {getDocs, collection, doc, query, where, limit} from "@firebase/firestore";
+import {getDocs, collection, doc, query, where, limit, addDoc} from "@firebase/firestore";
 import {signInWithEmailAndPassword, signOut} from "firebase/auth";
 import { auth } from "../firebase";
+import message from "../components/Message";
+import firebase from "firebase/compat/app";
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 import Notiflix from 'notiflix';
+
 
 
 function Search()  {
     const [carList,setCarList] = useState([]);
     const carCollectionRef = collection(db, "Search-test");
-    const [visibility, setVisibility] = useState(false)
+    const [visibility, setVisibility] = useState(false);
+    const [visibility2, setVisibility2] = useState(false);
+    const [carID, setCarID] = useState('');
+    const [reviewText, setReviewText] = useState("");
     const navigate = useNavigate();
+    const addField = async (event, carID) => {
+        event.preventDefault();
+        setCarID(carID)
+        try {
+            const docRef = await addDoc(collection(db, 'Review'), {
+                carID: carID,
+                review: reviewText,
+            });
+            console.log('Document written with ID: ', docRef.id);
+            setCarID('');
+            setReviewText('');
+        } catch (error) {
+            console.error('Error adding document: ', error);
+        }
+    };
+   
+
 
 
 
@@ -44,13 +69,21 @@ function Search()  {
         )
     }
 
+
     const goToCompare = () =>{
         navigate("/Compare")
     }
 
-    const HandleClick = () => {
+   const HandleClick = () => {
         setVisibility(!visibility);
         console.log(registerForm.Marka)
+    }
+    const ZmianaPrzycisku1 = () => {
+        setVisibility(!visibility);
+        console.log(registerForm.Marka)
+    }
+    const ZmianaPrzycisku2 = () => {
+        setVisibility2(!visibility2);
     }
 
     useEffect(() => {
@@ -221,11 +254,11 @@ function Search()  {
                             </select>
 
 
-                            <button className="button-search" type = "button" onClick={HandleClick} style ={{display: visibility ? 'none' : 'block'}}>
+                            <button className="button-search" type = "button" onClick={ZmianaPrzycisku1} style ={{display: visibility ? 'none' : 'block'}}>
                                 Szukaj
                             </button>
 
-                            <button className="button-search" type = "button" onClick={HandleClick} style ={{display: visibility ? 'block' : 'none'}}>
+                            <button className="button-search" type = "button" onClick={ZmianaPrzycisku1} style ={{display: visibility ? 'block' : 'none'}}>
                                 Ukryj
                             </button>
                             <button className="compare-button"
@@ -242,7 +275,7 @@ function Search()  {
             </div>
             <div style ={{display: visibility ? 'block' : 'none'}}>
                 {carList.map((car) => (
-                    <div className={"offer-search"}>
+                    <div className={"offer-search"} key={car.id}> {/* Added key attribute */}
                         <div className={"offer-image-search"}>
                             <img className= {"car-image"} src={car.Zdje}/>
                         </div>
@@ -272,8 +305,6 @@ function Search()  {
                                 <p><strong>Kraj pochodzenia:</strong> {car.Kraj}</p>
                                 <p><strong>Lokalizacja:</strong> {car.Lokalizacja}</p>
                             </div>
-
-
                             <div className={"offer-text-search"}>
                                 <p><strong>Typ nadwozia:</strong> {car.Nadwozie}</p>
                                 <p><strong>Paliwo:</strong> {car.Paliwo}</p>
@@ -281,6 +312,9 @@ function Search()  {
                             <div className={"offer-text-search"}>
                                 <p><strong>Rok produkcji:</strong> {car.Rok}</p>
                                 <p className="price-search">Cena:{car.Cena}</p>
+                                <div className={"offer-text-search"} id ={"offer-review-search"} style ={{display: visibility2 ? 'block' : 'none'}}>
+                                    <textarea id = {"offer-review-text-search"} value={reviewText} onChange={(e) => setReviewText(e.target.value)}>Napisz swoją recenzję tutaj</textarea>
+                                </div>
                             </div>
                             <div className={"offer-text-search"}>
                                 <p><strong>Przebieg:</strong> {car.Przebieg}</p>
@@ -291,8 +325,20 @@ function Search()  {
                                 <p><strong>Wyposażenie dodatkowe:</strong> {car.Wypos}</p>
                             </div>
 
-
+                            <div className={"offer-text-search"}>
+                                <button id={"review-button-search"} className="button-search" type = "button" onClick={(event) => addField(event, car.id)} style ={{display: visibility2 ? 'block' : 'none'}}>
+                                    Wyślij recenzję
+                                </button>
+                                <button className="button-search" type = "button" onClick={ZmianaPrzycisku2} style ={{display: visibility2 ? 'none' : 'block'}}>
+                                    Napisz recenzję
+                                </button>
+                            </div>
                         </div>
+
+
+
+                        
+
 
                     </div>
 
