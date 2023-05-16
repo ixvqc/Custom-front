@@ -153,13 +153,16 @@ function User(props) {
             </div>
             <div className="image-backgrounduser">
                 <div>
+                    <Link to="/user">
                     <button className="button1user">
                         Konto
                     </button>
-
+                    </Link>
+                    <Link to="/changeadd">
                     <button className="button2user">
                         Ogłoszenia
                     </button>
+                    </Link>
                     <Link to="/messages">
                         <button className="button3user">
                             Wiadomości
