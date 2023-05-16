@@ -7,13 +7,14 @@ import { db } from "../firebase"
 import {getDocs, collection, doc, query, where, limit} from "@firebase/firestore";
 import {signInWithEmailAndPassword, signOut} from "firebase/auth";
 import { auth } from "../firebase";
-import message from "../components/Message";
+import Notiflix from 'notiflix';
 
 
 function Search()  {
     const [carList,setCarList] = useState([]);
     const carCollectionRef = collection(db, "Search-test");
     const [visibility, setVisibility] = useState(false)
+    const navigate = useNavigate();
 
 
 
@@ -41,6 +42,10 @@ function Search()  {
                 ...prevNote, [name]: value
             })
         )
+    }
+
+    const goToCompare = () =>{
+        navigate("/Compare")
     }
 
     const HandleClick = () => {
@@ -102,6 +107,34 @@ function Search()  {
 
         getCarList();
     },[registerForm]);
+
+
+    console.log(carList)
+
+
+    function addCompare(obj) {
+        const data = localStorage.getItem("compare");
+
+        if (data === null) {
+            console.log("pusta");
+            let tempArray = [];
+            tempArray.push(obj);
+            console.log(tempArray);
+            localStorage.setItem("compare", JSON.stringify(tempArray));
+            Notiflix.Notify.success('Dodano do porównania');
+
+        } else {
+            console.log("jest");
+            let tempArray = JSON.parse(data); // Przekształć dane z localStorage na tablicę
+            tempArray.push(obj); // Dodaj obj do tablicy
+            console.log(tempArray);
+            localStorage.setItem("compare", JSON.stringify(tempArray)); // Zapisz zaktualizowaną tablicę w localStorage
+            Notiflix.Notify.success('Dodano do porównania');
+
+        }
+
+    }
+
 
     return (
         <div className="back-background-search">
@@ -195,7 +228,11 @@ function Search()  {
                             <button className="button-search" type = "button" onClick={HandleClick} style ={{display: visibility ? 'block' : 'none'}}>
                                 Ukryj
                             </button>
-
+                            <button className="compare-button"
+                                    onClick={goToCompare}
+                            >
+                                Porównaj
+                            </button>
 
 
                         </div>
@@ -209,11 +246,28 @@ function Search()  {
                         <div className={"offer-image-search"}>
                             <img className= {"car-image"} src={car.Zdje}/>
                         </div>
+
                         <div className={"offer-data-search"}>
+
                             <div>
+                                <div className="compare">
+
                                 <p className="car-name-search">{car.Marka}</p>
+
+                                    <div className='compare-component'>
+                                        <button className="button-compare-adv"
+                                            onClick={()=> addCompare(car)}
+                                        >
+                                            Porównaj
+                                        </button>
+
+                                    </div>
+
+
+                                </div>
                                 <p><strong>Model: </strong>{car.Model}</p>
                             </div>
+
                             <div className={"offer-text-search"}>
                                 <p><strong>Kraj pochodzenia:</strong> {car.Kraj}</p>
                                 <p><strong>Lokalizacja:</strong> {car.Lokalizacja}</p>
@@ -236,14 +290,18 @@ function Search()  {
                                 <p><strong>Silnik:</strong> {car.Silnik}</p>
                                 <p><strong>Wyposażenie dodatkowe:</strong> {car.Wypos}</p>
                             </div>
+
+
                         </div>
 
-
-
                     </div>
+
                 ))}
+
             </div>
+
         </div>
+
 
     );
 }
