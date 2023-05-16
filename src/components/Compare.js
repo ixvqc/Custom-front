@@ -14,10 +14,17 @@ const Compare = () => {
     }, []);
 
 
-
-    function delateCompare(obj) {
-        localStorage.removeItem('compare');
+    function deleteCompare(index) {
+        if (cars.length === 1) {
+            localStorage.removeItem("compare");
+            setCars([]);
+        } else {
+            const temp = cars.splice(index, 1)[0]; // pobierz pierwszy element zwrócony przez splice()
+            localStorage.setItem("compare", JSON.stringify(cars));
+            setCars([...cars]); // przekaz nową tablicę do setCars(), aby wyzwolić ponowne renderowanie
+        }
     }
+
 
     return (
 
@@ -64,7 +71,7 @@ const Compare = () => {
                                 <td>Przebieg: {car.Przebieg}</td>
 
                                 <button
-                                    onClick={()=> delateCompare(car)}
+                                    onClick={()=> deleteCompare(index)}
                                 >
                                     <p>Usuń</p>
                                 </button>

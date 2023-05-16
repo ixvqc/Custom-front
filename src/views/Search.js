@@ -7,6 +7,7 @@ import { db } from "../firebase"
 import {getDocs, collection, doc, query, where, limit} from "@firebase/firestore";
 import {signInWithEmailAndPassword, signOut} from "firebase/auth";
 import { auth } from "../firebase";
+import Notiflix from 'notiflix';
 
 
 function Search()  {
@@ -120,13 +121,18 @@ function Search()  {
             tempArray.push(obj);
             console.log(tempArray);
             localStorage.setItem("compare", JSON.stringify(tempArray));
+            Notiflix.Notify.success('Dodano do porównania');
+
         } else {
             console.log("jest");
             let tempArray = JSON.parse(data); // Przekształć dane z localStorage na tablicę
             tempArray.push(obj); // Dodaj obj do tablicy
             console.log(tempArray);
             localStorage.setItem("compare", JSON.stringify(tempArray)); // Zapisz zaktualizowaną tablicę w localStorage
+            Notiflix.Notify.success('Dodano do porównania');
+
         }
+
     }
 
 
