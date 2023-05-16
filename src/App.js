@@ -18,6 +18,7 @@ import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import User from "./views/user";
+import Compare from "./components/Compare";
 
 
 
@@ -29,9 +30,7 @@ function App() {
     const [room, setRoom] = useState("");
     const { currentUser } = useContext(AuthContext);
     const ProtectedRoute = ({ children }) => {
-        if (!currentUser) {
-            return <Navigate to="/login" />;
-        }
+
 
         return children
     };
@@ -58,6 +57,7 @@ return (
                 <Route path="/Messages" element = {<Messages/>}/>
                 <Route path="/Search" element = {<Search/>}/>
                 <Route path="/user" element = {<User/>}/>
+                <Route path="/compare" element = {<Compare/>}/>
 
             </Route>
         </Routes>
