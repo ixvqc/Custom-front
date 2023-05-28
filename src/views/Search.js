@@ -3,12 +3,14 @@ import {useState, useEffect} from "react";
 import '../styles/Search.css';
 import logo from '../assets/img/logov2.png';
 import React, { useRef } from "react";
-import { db } from "../firebase"
-import {getDocs, collection, doc, query, where, limit, addDoc} from "@firebase/firestore";
-import {signInWithEmailAndPassword, signOut} from "firebase/auth";
-import { auth } from "../firebase";
-import message from "../components/Message";
 import firebase from "firebase/compat/app";
+import { db, messaging} from "../firebase"
+import {getDocs, collection,addDoc, doc, query, where, limit, addDo, onSnapshot} from "@firebase/firestore";
+import {signInWithEmailAndPassword, signOut} from "firebase/auth";
+import {getToken, onMessage } from "firebase/messaging";
+import { auth, firestore } from "../firebase";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
@@ -16,10 +18,12 @@ import 'firebase/compat/firestore';
 function Search()  {
     const [carList,setCarList] = useState([]);
     const carCollectionRef = collection(db, "Search-test");
+    const userChatsTestRef = collection(db, "userChatsTest");
     const [visibility, setVisibility] = useState(false);
     const [visibility2, setVisibility2] = useState(false);
     const [carID, setCarID] = useState('');
     const [reviewText, setReviewText] = useState("");
+    const [data, setData] = useState(null);
 
     const addField = async (event, carID) => {
         event.preventDefault();
@@ -37,7 +41,33 @@ function Search()  {
         }
     };
 
+    localStorage.setItem("CurrentTime", Date())
 
+    const notify = () => {
+        if (localStorage.getItem("CurrentTime")+5<Date()){
+            toast("Masz wiadomość!") ;
+        }
+        localStorage.setItem("CurrentTime", Date())
+    }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            //const querySnapshot = await getDocs(userChatsTestRef);
+            const q = query(collection(db, "userChats"));
+            const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                const chat = [];
+                querySnapshot.forEach((doc) => {
+                    chat.push(doc.data().Kto);
+                });
+                console.log("Current users: ", chat.join(", "));
+                notify()
+            });
+            // Cleanup the snapshot listener when the component unmounts
+            return () => unsubscribe();
+        };
+
+        fetchData();
+    }, []);
 
 
     const [registerForm, setregisterForm] = useState({
@@ -130,6 +160,7 @@ function Search()  {
         getCarList();
     },[registerForm]);
 
+
     return (
         <div className="back-background-search">
 
@@ -141,6 +172,11 @@ function Search()  {
                         <img src={logo} className="logo-search"/>
                     </a>
 
+                </div>
+
+                <div>
+                    <button onClick={notify}>Notify!</button>
+                    <ToastContainer />
                 </div>
 
                 <Link to={"/user"} className="link-search">
@@ -230,6 +266,8 @@ function Search()  {
 
                 </form>
             </div>
+
+
             <div style ={{display: visibility ? 'block' : 'none'}}>
                 {carList.map((car) => (
                     <div className={"offer-search"} key={car.id}> {/* Added key attribute */}

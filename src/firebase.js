@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import {getFirestore} from "@firebase/firestore";
 import {getStorage} from "firebase/storage";
+import { getMessaging} from "firebase/messaging";
 import { getAuth,GoogleAuthProvider } from "firebase/auth";
 
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -23,5 +24,6 @@ export const storage = getStorage(app)
 export const firestore = getFirestore(app);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+export const messaging = getMessaging(app);
 
 export {provider}
