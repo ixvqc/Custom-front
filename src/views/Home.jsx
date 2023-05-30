@@ -1,5 +1,5 @@
-import {Link} from "react-router-dom";
-import React, {useEffect, useState,useContext} from "react";
+import {Link, useNavigate} from "react-router-dom";
+import React, {useEffect, useState, useContext, useRef} from "react";
 import '../styles/Main.css';
 import auto from "../assets/img/car.png";
 import key from "../assets/img/car-key.png";
@@ -26,21 +26,40 @@ import {collection, onSnapshot, query, getDocs, addDoc} from "@firebase/firestor
 import 'react-toastify/dist/ReactToastify.css';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+import NavbarMain from "../components/NavBarMain";
+import NavbarLogin from "../components/NavBarLogin";
+import {addDoc, collection, doc, getDocs} from "@firebase/firestore";
+import {getDoc, updateDoc} from "firebase/firestore";
 
 
 
 
 
 export default function Home(props){
-
+    const {currentUser} = useContext(AuthContext)
+    const [carList,setCarList] = useState([]);
+    const carCollectionRef = collection(db, "Search-test");
+    const [offerCars, setOfferCars] = useState([]);
+    const [visibility, setVisibility] = useState(false);
+    const [visibility2, setVisibility2] = useState(false);
+    const carListRef = useRef(carList);
     const [registerForm, setregisterForm] = useState({
-        marka: "",
-        model: "",
-        rokOd: "",
-        rokDo: "",
-        cenaOd: "",
-        cenaDo: "",
-        fuel_type: ""
+
+        Marka: "",
+        Model: "",
+        RokOd: "",
+        RokDo: "",
+        CenaOd: "",
+        CenaDo: "",
+        Paliwo: "",
+        PrzebiegOd: "",
+        PrzebiegDo: "",
+        Kraj: "",
+        Nadwozie: "",
+        Lokalizacja: "",
+        Stan: "",
+        Silnik: "",
+        Wypos: ""
     })
 
     function handleChange(event) {
@@ -76,12 +95,20 @@ export default function Home(props){
         setMotorOff(true);
         setOtherOff(false);
     };
+    const ZmianaPrzycisku1 = () => {
+        setVisibility(!visibility);
+        console.log(registerForm.Marka)
+    }
+    const ZmianaPrzycisku2 = () => {
+        setVisibility2(!visibility2);
+    }
 
     const hideOtherClick = () => {
         setCarsOff(false);
         setMotorOff(false);
         setOtherOff(true);
     };
+
 
     const [marka, setMarka] = React.useState(null);
     const [cena, setCena] = React.useState(null);
@@ -165,34 +192,69 @@ export default function Home(props){
     }, []);
 
 
-    const offerData = async (event) => {
-        // try {
-        //     const res = await axios.get("/offerData")
-        //     console.log(res);
-        // }
-        // catch (error){
-        //     console.log(error)
-        // }
-        //document.getElementById("place-to-add-offer").style.display = "inline-block"
-    };
+
 
     useEffect(() => {
-        offerData();
-    }, []);
-    // function popUpOffer() {
-    //     //document.getElementById("place-to-add-offer").style.display = "inline-block"
-    // }
+        const getCarList = async () => {
+            const data = await getDocs(carCollectionRef);
+            const filteredData = data.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id,
+            }));
+            const doubleFilter = filteredData.filter((car) => {
+                const Marka = registerForm.Marka.toLowerCase();
+                const Model = registerForm.Model.toLowerCase();
+                const Paliwo = registerForm.Paliwo.toLowerCase();
+                const Kraj = registerForm.Kraj.toLowerCase();
+                const Lokalizacja = registerForm.Lokalizacja.toLowerCase();
+                const Nadwozie = registerForm.Nadwozie.toLowerCase();
+                const Stan = registerForm.Stan.toLowerCase();
+                const Silnik = registerForm.Silnik.toLowerCase();
+                const Wypos = registerForm.Wypos.toLowerCase();
+                const RokOd = registerForm.RokOd
+                const RokDo = registerForm.RokDo
+                const CenaOd = registerForm.CenaOd
+                const CenaDo = registerForm.CenaDo
+                const PrzebiegOd = registerForm.PrzebiegOd
+                const PrzebiegDo = registerForm.PrzebiegDo
+                const values = Object.values(car).join("").toLowerCase()
 
-    return (
+                return(
+                    (Marka === '' || values.includes(Marka)) &&
+                    (Model === '' || values.includes(Model)) &&
+                    (Kraj === '' || values.includes(Kraj)) &&
+                    (Lokalizacja === '' || values.includes(Lokalizacja)) &&
+                    (Nadwozie === '' || values.includes(Nadwozie)) &&
+                    (Stan === '' || values.includes(Stan)) &&
+                    (Silnik === '' || values.includes(Silnik)) &&
+                    (Wypos === '' || values.includes(Wypos)) &&
+                    (Paliwo === '' || values.includes(Paliwo)) &&
+                    (RokOd === '' || car.Rok >= RokOd) &&
+                    (RokDo === '' || car.Rok <= RokDo) &&
+                    (CenaOd === '' || car.Cena >= CenaOd) &&
+                    (CenaDo === '' || car.Cena <= CenaDo) &&
+                    (PrzebiegOd === '' || car.Przebieg >= PrzebiegOd) &&
+                    (PrzebiegDo === '' || car.Przebieg <= PrzebiegDo)
+                    //console.log(filteredData);
+                )
+            });
+            setCarList(doubleFilter);
+        };
 
-        <div className="main">
+        getCarList();
+    },[registerForm]);
 
-            <div className="nav">
+    useEffect(() => {
+        if (carListRef.current !== carList && carList.length > 0) {
+            setOfferCars(carList);
+            console.log("Działa");
+            console.log("carList: ", carList)
+            carListRef.current = carList;
+        }
+    }, [carList]);
 
-                <div className="logo-div">
-                    <img src={logo} className="logo-main"/>
 
-                </div>
+
 
                 <div>
                     <ToastContainer />
@@ -208,14 +270,13 @@ export default function Home(props){
                     wiadomości
                 </Link>
 
-                <button onClick={() => signOut(auth)}>logout</button>
 
-                <button className="add-adv"
-                >
-                    <a href="/AddAnnouncement" className="link">Dodaj ogłoszenie +</a>
-                </button>
+    return (
 
-            </div>
+        <div className="main">
+
+            {currentUser && <NavbarLogin/>}
+            {!currentUser && <NavbarMain/>}
 
             <form>
                 <div className="image-background">
@@ -246,214 +307,97 @@ export default function Home(props){
                             classNames="fade-main"
                             unmountOnExit
                         >
+
+
                             <div>
+
+                                <input type="text" className={"car-info-search"}
+                                       name="Marka" placeholder="Dowolna marka" onChange={handleChange}/>
+
+                                <input type="text" className={"car-info-search"}
+                                       name="Model" placeholder="Dowolny model" onChange={handleChange}/>
+
+                                <input type="number" className={"car-info-search"}
+                                       id = "car-year-1" name="RokOd" placeholder="Rok od" onChange={handleChange}/>
+
+                                <input type="number" className={"car-info-search"}
+                                       id = "car-year-2" name="RokDo" placeholder="Rok do" onChange={handleChange}/>
+
+                                <input type="number" className={"car-price"}
+                                       id = "car-price-1" name="CenaOd" placeholder="Cena od" onChange={handleChange}/>
+
+                                <input type="number" className={"car-price"}
+                                       id = "car-price-2" name="CenaDo" placeholder="Cena do" onChange={handleChange}/>
+
                                 <div className="input">
-                                    <label className="radio">
-                                        <input onChange={handleChange} type="radio" value="new"
-                                               name="criteria-is.new"/> Nowe
-                                    </label>
-                                    <label className="radio">
-                                        <input onChange={handleChange} type="radio" value="used"
-                                               name="criteria-is.new"/> Używane
-                                    </label>
-                                    <label className="radio">
+
+                                    <label className="radioMain"  onChange={handleChange}>
                                         <input
-                                            onChange={handleChange}
                                             type="radio"
-                                            value="all-cars"
-                                            name="criteria-is.new"
+                                            value="BENZYNA"
+                                            name="Paliwo"
+                                        /> Benzyna
+
+                                        <input
+                                            type="radio"
+                                            value="LPG"
+                                            name="Paliwo"
+                                        /> LPG
+
+                                        <input
+                                            type="radio"
+                                            value=""
+                                            name="Paliwo"
                                             defaultChecked={true}
                                         />{" "}
+
                                         Wszystkie
                                     </label>
+
+
+
                                     <br/>
                                 </div>
 
-                                <input onChange={handleChange} type="text" className="car-information"
-                                       placeholder="Dowolne auto" name="marka"/>
-                                <input onChange={handleChange} type="text" className="car-information"
-                                       placeholder="Dowolny model" name="model"/>
-                                <input onChange={handleChange} type="text" className="car-year"
-                                       placeholder="Rok od"/>
-                                <input onChange={handleChange} type="text" className="car-year"
-                                       placeholder="Rok do"/>
-                                <input onChange={handleChange} type="text" className="car-price"
-                                       placeholder="Cena od"/>
-                                <input onChange={handleChange} type="text" className="car-price"
-                                       placeholder="Cena do"/>
 
-                                <div className="input">
-                                    <label className="radio">
-                                        <input onChange={handleChange} type="radio" value="fuel"
-                                               name="fuel_type"/> Benzyna
-                                    </label>
-                                    <label className="radio">
-                                        <input onChange={handleChange} type="radio" value="diesel"
-                                               name="fuel_type"/> Diesel
-                                    </label>
-                                    <label className="radio">
-                                        <input
-                                            onChange={handleChange}
-                                            type="radio"
-                                            value="%"
-                                            name="fuel_type"
-                                            defaultChecked={true}
-                                        />{" "}
-                                        Wszystkie
-                                    </label>
-                                    <br/>
-                                </div>
+
 
                                 <Link to={"/Search"} className="detailed-search">
                                     Szczegółowe wyszukiwanie
                                 </Link>
-                                <button className="search" onClick={popUpOffer}>
+                                <button className="button-search" type = "button" onClick={ZmianaPrzycisku1} style ={{display: visibility ? 'none' : 'block'}}>
                                     Szukaj
                                 </button>
-                            </div>
-                        </CSSTransition>
 
-                        <CSSTransition
-                            in={motorOff}
-                            appear={true}
-                            timeout={500}
-                            classNames="fade-main"
-                            unmountOnExit
-                        >
-                            <div>
-                                <div className="input">
-                                    <label className="radio">
-                                        <input type="radio" value="new" name="criteria-is.new"/> Nowe
-                                    </label>
-                                    <label className="radio">
-                                        <input type="radio" value="used" name="criteria-is.new"/> Używane
-                                    </label>
-                                    <label className="radio">
-                                        <input
-                                            type="radio"
-                                            value="all-cars"
-                                            name="criteria-is.new"
-                                            defaultChecked={true}
-                                        />{" "}
-                                        Wszystkie
-                                    </label>
-                                    <br/>
-                                </div>
-
-                                <input type="text" className="car-information" placeholder="Dowolna motor"/>
-                                <input type="text" className="car-information" placeholder="Dowolny model"/>
-                                <input type="text" className="car-year" placeholder="Rok od"/>
-                                <input type="text" className="car-year" placeholder="Rok do"/>
-                                <input type="text" className="car-price" placeholder="Cena od"/>
-                                <input type="text" className="car-price" placeholder="Cena do"/>
-
-                                <div className="input">
-                                    <label className="radio">
-                                        <input type="radio" value="fuel" name="fuel_type"/> Benzyna
-                                    </label>
-                                    <label className="radio">
-                                        <input type="radio" value="diesel" name="fuel_type"/> Diesel
-                                    </label>
-                                    <label className="radio">
-                                        <input
-                                            type="radio"
-                                            value="all_type"
-                                            name="fuel_type"
-                                            defaultChecked={true}
-                                        />{" "}
-                                        Wszystkie
-                                    </label>
-                                    <br/>
-                                </div>
-
-                                <Link to={"/login"} className="detailed-search">
-                                    Szczegółowe wyszukiwanie
-                                </Link>
-                                <button className="search">
-                                    <Link to={"/login"} className="link">
-                                        Szukaj
-                                    </Link>
+                                <button className="button-search" type = "button" onClick={ZmianaPrzycisku1} style ={{display: visibility ? 'block' : 'none'}}>
+                                    Ukryj
                                 </button>
-                            </div>
-                        </CSSTransition>
 
-                        <CSSTransition
-                            in={otherOff}
-                            appear={true}
-                            timeout={500}
-                            classNames="fade-main"
-                            unmountOnExit
-                        >
-                            <div>
-                                <div className="input">
-                                    <label className="radio">
-                                        <input type="radio" value="new" name="criteria-is.new"/> Nowe
-                                    </label>
-                                    <label className="radio">
-                                        <input type="radio" value="used" name="criteria-is.new"/> Używane
-                                    </label>
-                                    <label className="radio">
-                                        <input
-                                            type="radio"
-                                            value="all-cars"
-                                            name="criteria-is.new"
-                                            defaultChecked={true}
-                                        />{" "}
-                                        Wszystkie
-                                    </label>
-                                    <br/>
-                                </div>
 
-                                <input type="text" className="car-information" placeholder="Dowolne inne cos"/>
-                                <input type="text" className="car-information" placeholder="Dowolny model"/>
-                                <input type="text" className="car-year" placeholder="Rok od"/>
-                                <input type="text" className="car-year" placeholder="Rok do"/>
-                                <input type="text" className="car-price" placeholder="Cena od"/>
-                                <input type="text" className="car-price" placeholder="Cena do"/>
 
-                                <div className="input">
-                                    <label className="radio">
-                                        <input type="radio" value="fuel" name="fuel_type"/> Benzyna
-                                    </label>
-                                    <label className="radio">
-                                        <input type="radio" value="diesel" name="fuel_type"/> Diesel
-                                    </label>
-                                    <label className="radio">
-                                        <input
-                                            type="radio"
-                                            value="all_type"
-                                            name="fuel_type"
-                                            defaultChecked={true}
-                                        />{" "}
-                                        Wszystkie
-                                    </label>
-                                    <br/>
-                                </div>
-
-                                <Link to={"/login"} className="detailed-search">
-                                    Szczegółowe wyszukiwanie
-                                </Link>
-                                <button className="search">
-                                    <Link to={"/login"} className="link">
-                                        Szukaj
-                                    </Link>
-                                </button>
                             </div>
                         </CSSTransition>
 
                     </div>
                 </div>
             </form>
-            <div style={{display: !isActive ? 'none' : "inline-block"}} className="popular-offers-text-div"
+
+
+
+
+
+            <div style={{display: !visibility ? "none" : "inline-block"}} className="popular-offers-text-div"
                  id="place-to-add-offer">
-                <CarCard id="offerCard"
-                         ImageCar={image}
-                         CarBrand={marka}
-                         CarPrice={cena}
-                         ProductionDate={rok}
-                         CarMileage={przebieg}
-                         FuelType={paliwo}
-                />
+                {carList.length > 0 && (
+                    <CarCard
+                        ImageCar={carList[0].Zdje}
+                        CarBrand={carList[0].Marka}
+                        CarPrice={carList[0].Cena}
+                        ProductionDate={carList[0].Rok}
+                        CarMileage={carList[0].Przebieg}
+                        FuelType={carList[0].Paliwo}
+                    />
+                )}
             </div>
             <div className="popular-offers-text-div">
                 <text className="popular-offers-text">Najpopularniejsze oferty</text>
@@ -461,77 +405,70 @@ export default function Home(props){
             </div>
 
 
+
+
+
             <div className="popular-offers-homepage">
-                <CarCard
-                    ImageCar={car1}
-                    CarBrand={"Volvo"}
-                    CarPrice={"99 876 zł"}
-                    ProductionDate={"2023"}
-                    CarMileage={"193 tys"}
-                    FuelType={"diesel"}
-
-                />
-                <CarCard
-                    ImageCar={car2}
-                    CarBrand={"Mitshubishi"}
-                    CarPrice={"51 999 zł"}
-                    ProductionDate={"2011"}
-                    CarMileage={"193 tys"}
-                    FuelType={"benzyna"}
-
-                />
-                <CarCard
-                    ImageCar={car3}
-                    CarBrand={"Hyundai"}
-                    CarPrice={"132 382 zł"}
-                    ProductionDate={"2021"}
-                    CarMileage={"23 tys"}
-                    FuelType={"diesel"}
-
-                />
-                <CarCard
-                    ImageCar={car3}
-                    CarBrand={"Opel"}
-                    CarPrice={"132 382 zł"}
-                    ProductionDate={"2012"}
-                    CarMileage={"193 tys"}
-                    FuelType={"diesel"}
-
-                />
-                <CarCard
-                    ImageCar={car1}
-                    CarBrand={"Mazda"}
-                    CarPrice={"132 382 zł"}
-                    ProductionDate={"2012"}
-                    CarMileage={"193 tys"}
-                    FuelType={"diesel"}
-
-                />
-                <CarCard
-                    ImageCar={car2}
-                    CarBrand={"Fiat"}
-                    CarPrice={"132 382 zł"}
-                    ProductionDate={"2012"}
-                    CarMileage={"193 tys"}
-                    FuelType={"diesel"}
-
-                />
-
-                {/*{*/}
-                {/*    data.forEach((i) => {*/}
-                {/*        return (*/}
-                {/*            <CarCard*/}
-                {/*                ImageCar={i.image}*/}
-                {/*                CarBrand={i.name}*/}
-                {/*                CarPrice={i.price}*/}
-                {/*                ProductionDate={"2012"}*/}
-                {/*                CarMileage={"193 tys"}*/}
-                {/*                FuelType={"diesel"}*/}
-
-                {/*            />*/}
-                {/*        )*/}
-                {/*    })*/}
-                {/*}*/}
+                {offerCars.length > 0 && (
+                    <CarCard
+                        ImageCar={offerCars[0].Zdje}
+                        CarBrand={offerCars[0].Marka}
+                        CarPrice={offerCars[0].Cena + " zł"}
+                        ProductionDate={offerCars[0].Rok}
+                        CarMileage={offerCars[0].Przebieg}
+                        FuelType={offerCars[0].Paliwo}
+                    />
+                )}
+                {offerCars.length > 0 && (
+                    <CarCard
+                        ImageCar={offerCars[1].Zdje}
+                        CarBrand={offerCars[1].Marka}
+                        CarPrice={offerCars[1].Cena + " zł"}
+                        ProductionDate={offerCars[1].Rok}
+                        CarMileage={offerCars[1].Przebieg}
+                        FuelType={offerCars[1].Paliwo}
+                    />
+                )}
+                {offerCars.length > 0 && (
+                    <CarCard
+                        ImageCar={offerCars[2].Zdje}
+                        CarBrand={offerCars[2].Marka}
+                        CarPrice={offerCars[2].Cena + " zł"}
+                        ProductionDate={offerCars[2].Rok}
+                        CarMileage={offerCars[2].Przebieg}
+                        FuelType={offerCars[2].Paliwo}
+                    />
+                )}
+                {offerCars.length > 0 && (
+                    <CarCard
+                        ImageCar={offerCars[3].Zdje}
+                        CarBrand={offerCars[3].Marka}
+                        CarPrice={offerCars[3].Cena + " zł"}
+                        ProductionDate={offerCars[3].Rok}
+                        CarMileage={offerCars[3].Przebieg}
+                        FuelType={offerCars[3].Paliwo}
+                    />
+                )}
+                {offerCars.length > 0 && (
+                    <CarCard
+                        ImageCar={offerCars[4].Zdje}
+                        CarBrand={offerCars[4].Marka}
+                        CarPrice={offerCars[4].Cena + " zł"}
+                        ProductionDate={offerCars[4].Rok}
+                        CarMileage={offerCars[4].Przebieg}
+                        FuelType={offerCars[4].Paliwo}
+                    />
+                )}
+                {offerCars.length > 0 && (
+                    <CarCard
+                        ImageCar={offerCars[5].Zdje}
+                        CarBrand={offerCars[5].Marka}
+                        CarPrice={offerCars[5].Cena + " zł"}
+                        ProductionDate={offerCars[5].Rok}
+                        CarMileage={offerCars[5].Przebieg}
+                        FuelType={offerCars[5].Paliwo}
+                    />
+                )}
 
 
             </div>

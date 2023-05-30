@@ -11,11 +11,18 @@ import {getToken, onMessage } from "firebase/messaging";
 import { auth, firestore } from "../firebase";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Contact from "../components/Contact";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+import Notiflix from 'notiflix';
+import axios from 'axios';
+import { getFirestore, updateDoc,getDoc } from "firebase/firestore";
 
 
 function Search()  {
+    const [isTrue, setIsTrue] = useState(false);
+    const ChangeRokRef = useRef();
+    const [isFavourite, setIsFavourite] = useState(false);
     const [carList,setCarList] = useState([]);
     const carCollectionRef = collection(db, "Search-test");
     const userChatsTestRef = collection(db, "userChatsTest");
@@ -23,7 +30,72 @@ function Search()  {
     const [visibility2, setVisibility2] = useState(false);
     const [carID, setCarID] = useState('');
     const [reviewText, setReviewText] = useState("");
+
     const [data, setData] = useState(null);
+
+    const navigate = useNavigate();
+    const [registerForm, setregisterForm] = useState({
+
+        Marka: "",
+        Model: "",
+        RokOd: "",
+        RokDo: "",
+        CenaOd: "",
+        CenaDo: "",
+        Paliwo: "",
+        PrzebiegOd: "",
+        PrzebiegDo: "",
+        Kraj: "",
+        Nadwozie: "",
+        Lokalizacja: "",
+        Stan: "",
+        Silnik: "",
+        Wypos: ""
+    })
+    const goToCompare = () =>{
+        navigate("/Compare")
+    }
+
+    const HandleClick = () => {
+        setVisibility(!visibility);
+        console.log(registerForm.Marka)
+    }
+    const ZmianaPrzycisku1 = () => {
+        setVisibility(!visibility);
+        console.log(registerForm.Marka)
+    }
+    const ZmianaPrzycisku2 = () => {
+        setVisibility2(!visibility2);
+    }
+
+//////ULUBIONE
+    const handleButtonClick = async (carId) => {
+        const docRef = doc(db, "Search-test", carId);
+        try {
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                const currentData = docSnap.data();
+                let newData;
+                if (currentData.ulubione === "tak") {
+                    newData = { ulubione: "nie" };
+                    setIsFavourite(false);
+                } else {
+                    newData = { ulubione: "tak" };
+                    setIsFavourite(true);
+                }
+                await updateDoc(docRef, newData);
+                console.log("Document successfully updated!");
+            } else {
+                console.log("No such document!");
+            }
+        } catch (error) {
+            console.error("Error updating document: ", error);
+        }
+    };
+
+
+
+
 
     const addField = async (event, carID) => {
         event.preventDefault();
@@ -40,6 +112,7 @@ function Search()  {
             console.error('Error adding document: ', error);
         }
     };
+   
 
     localStorage.setItem("CurrentTime", Date())
 
@@ -70,24 +143,6 @@ function Search()  {
     }, []);
 
 
-    const [registerForm, setregisterForm] = useState({
-        Marka: "",
-        Model: "",
-        RokOd: "",
-        RokDo: "",
-        CenaOd: "",
-        CenaDo: "",
-        Paliwo: "",
-        PrzebiegOd: "",
-        PrzebiegDo: "",
-        Kraj: "",
-        Nadwozie: "",
-        Lokalizacja: "",
-        Stan: "",
-        Silnik: "",
-        Wypos: ""
-    })
-
     function handleChange(event) {
         const {value, name} = event.target
         setregisterForm(prevNote => ({
@@ -96,14 +151,9 @@ function Search()  {
         )
     }
 
-    const ZmianaPrzycisku1 = () => {
-        setVisibility(!visibility);
-        console.log(registerForm.Marka)
-    }
 
-    const ZmianaPrzycisku2 = () => {
-        setVisibility2(!visibility2);
-    }
+
+
 
     useEffect(() => {
         const getCarList = async () => {
@@ -134,6 +184,7 @@ function Search()  {
 
 
 
+
                 return(
                     (Marka === '' || values.includes(Marka)) &&
                     (Model === '' || values.includes(Model)) &&
@@ -161,6 +212,37 @@ function Search()  {
     },[registerForm]);
 
 
+
+
+    console.log(carList)
+
+///PORÓWNYWARKA
+    function addCompare(obj) {
+        const data = localStorage.getItem("compare");
+
+        if (data === null) {
+            console.log("pusta");
+            let tempArray = [];
+            tempArray.push(obj);
+            console.log(tempArray);
+            localStorage.setItem("compare", JSON.stringify(tempArray));
+            Notiflix.Notify.success('Dodano do porównania');
+
+        } else {
+            console.log("jest");
+            let tempArray = JSON.parse(data); // Przekształć dane z localStorage na tablicę
+            tempArray.push(obj); // Dodaj obj do tablicy
+            console.log(tempArray);
+            localStorage.setItem("compare", JSON.stringify(tempArray)); // Zapisz zaktualizowaną tablicę w localStorage
+            Notiflix.Notify.success('Dodano do porównania');
+
+        }
+
+    }
+
+
+
+
     return (
         <div className="back-background-search">
 
@@ -168,7 +250,7 @@ function Search()  {
 
 
                 <div className="logo-div-search">
-                    <a href="http://localhost:3000">
+                    <a href="/">
                         <img src={logo} className="logo-search"/>
                     </a>
 
@@ -213,7 +295,6 @@ function Search()  {
                                 <input type="number" className={"car-info-search"} id = "car-price-1" name="CenaOd" placeholder="Cena od" onChange={handleChange}/>
                                 <input type="number" className={"car-info-search"} id = "car-price-2" name="CenaDo" placeholder="Cena do" onChange={handleChange}/>
                             </div>
-
                             <input type="text" className={"car-info-search"} name="Kraj" placeholder="Kraj pochodzenia" onChange={handleChange}/>
 
                             <select className={"car-info-search"} name="Nadwozie" onChange={handleChange}>
@@ -258,6 +339,11 @@ function Search()  {
                                 Ukryj
                             </button>
 
+                            <button className="compare-button"
+                                    onClick={goToCompare}
+                            >
+                                Porównaj
+                            </button>
 
 
                         </div>
@@ -273,11 +359,35 @@ function Search()  {
                         <div className={"offer-image-search"}>
                             <img className= {"car-image"} src={car.Zdje}/>
                         </div>
+
                         <div className={"offer-data-search"}>
+
                             <div>
+
+
+                                <div className="compare">
+
                                 <p className="car-name-search">{car.Marka}</p>
+
+                                        <Contact />
+
+                                        <button className="button-fav-adv" onClick={() => { handleButtonClick(car.id);  }}>Dodaj do ulubionych</button>
+
+                                        <button className="button-compare-adv"
+                                            onClick={()=> addCompare(car)}
+                                        >
+                                            Porównaj
+                                        </button>
+
+
+
+
+                                </div>
+
                                 <p><strong>Model: </strong>{car.Model}</p>
+
                             </div>
+
                             <div className={"offer-text-search"}>
                                 <p><strong>Kraj pochodzenia:</strong> {car.Kraj}</p>
                                 <p><strong>Lokalizacja:</strong> {car.Lokalizacja}</p>
@@ -301,19 +411,34 @@ function Search()  {
                                 <p><strong>Silnik:</strong> {car.Silnik}</p>
                                 <p><strong>Wyposażenie dodatkowe:</strong> {car.Wypos}</p>
                             </div>
+
                             <div className={"offer-text-search"}>
+
+
                                 <button id={"review-button-search"} className="button-search" type = "button" onClick={(event) => addField(event, car.id)} style ={{display: visibility2 ? 'block' : 'none'}}>
                                     Wyślij recenzję
                                 </button>
                                 <button className="button-search" type = "button" onClick={ZmianaPrzycisku2} style ={{display: visibility2 ? 'none' : 'block'}}>
                                     Napisz recenzję
                                 </button>
+
+
                             </div>
                         </div>
+
+
+
+                        
+
+
                     </div>
+
                 ))}
+
             </div>
+
         </div>
+
 
     );
 }

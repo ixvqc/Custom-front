@@ -5,7 +5,9 @@ import {getStorage} from "firebase/storage";
 import { getMessaging} from "firebase/messaging";
 import { getAuth,GoogleAuthProvider } from "firebase/auth";
 
+
 import { useAuthState } from "react-firebase-hooks/auth";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyCdff6-Jm_Tg1w7KPLz4t8sjGoOBWp7V1s",
@@ -22,8 +24,13 @@ const provider = new GoogleAuthProvider();
 const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app)
 export const firestore = getFirestore(app);
+
+
+
+
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const messaging = getMessaging(app);
 
 export {provider}
+

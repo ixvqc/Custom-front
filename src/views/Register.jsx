@@ -70,7 +70,7 @@ const Register = () => {
       <div className="tlo-Register">
 
         <nav className="logo-container">
-          <a href="http://localhost:3000">
+          <a href="/">
             <img src={logo} alt="Main.js Logo" className="logo_register"/>
           </a>
         </nav>
