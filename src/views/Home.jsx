@@ -30,20 +30,12 @@ import {getDoc, updateDoc} from "firebase/firestore";
 
 export default function Home(props){
     const {currentUser} = useContext(AuthContext)
-    const [marka, setMarka] = React.useState(null);
-    const [cena, setCena] = React.useState(null);
-    const [rok, setRok] = React.useState(null);
-    const [przebieg, setPrzebieg] = React.useState(null);
-    const [paliwo, setPaliwo] = React.useState(null);
-    const [image, setImage] = React.useState(null);
     const [carList,setCarList] = useState([]);
-    const [isActive, setIsActive] = useState(false);
     const carCollectionRef = collection(db, "Search-test");
-    const [carID, setCarID] = useState('');
-    const [reviewText, setReviewText] = useState("");
+    const [offerCars, setOfferCars] = useState([]);
     const [visibility, setVisibility] = useState(false);
     const [visibility2, setVisibility2] = useState(false);
-
+    const carListRef = useRef(carList);
     const [registerForm, setregisterForm] = useState({
 
         Marka: "",
@@ -111,69 +103,6 @@ export default function Home(props){
     };
 
 
-    // const addField = async (event, carID) => {
-    //     event.preventDefault();
-    //     setCarID(carID)
-    //     try {
-    //         const docRef = await addDoc(collection(db, 'Review'), {
-    //             carID: carID,
-    //             review: reviewText,
-    //         });
-    //         console.log('Document written with ID: ', docRef.id);
-    //         setCarID('');
-    //         setReviewText('');
-    //     } catch (error) {
-    //         console.error('Error adding document: ', error);
-    //     }
-    // };
-
-
-
-    // function popUpOffer(event) {
-    //     axios({
-    //         method: "GET",
-    //         url: "/offerData",
-    //         data: {
-    //             marka: registerForm.marka,
-    //             model: registerForm.model,
-    //             rokOd: registerForm.rokOd,
-    //             rokDo: registerForm.rokDo,
-    //             cenaOd: registerForm.cenaOd,
-    //             cenaDo: registerForm.cenaDo,
-    //             fuel_type: registerForm.fuel_type
-    //         }
-    //     })
-    //         .then((response) => {
-    //             sessionStorage.setItem("brand", response.data.brand)
-    //             setMarka(sessionStorage.getItem("brand"))
-    //             sessionStorage.setItem("year", response.data.year)
-    //             setRok(sessionStorage.getItem("year"))
-    //             sessionStorage.setItem("mileage", response.data.mileage)
-    //             setPrzebieg(sessionStorage.getItem("mileage") / 1000 + " tys")
-    //             sessionStorage.setItem("fuel_type", response.data.fuel_type)
-    //             setPaliwo(sessionStorage.getItem("fuel_type"))
-    //             sessionStorage.setItem("price", response.data.price)
-    //             setCena(sessionStorage.getItem("price") + " zł")
-    //             let imageURL;
-    //             imageURL = URL.createObjectURL(response.data.fimag)
-    //             sessionStorage.setItem("image", imageURL)
-    //             setImage(sessionStorage.getItem("image"))
-    //         }).catch((error) => {
-    //         if (error.response) {
-    //             console.log(error.response)
-    //             console.log(error.response.status)
-    //             console.log(error.response.headers)
-    //         }
-    //     })
-    //     event.preventDefault()
-    //
-    //     sessionStorage.setItem("offerImage", 'https://www.wyborkierowcow.pl/wp-content/uploads/2022/09/bmw-serii-3-e36-cennik-1.jpg');
-    //     var offerImage = sessionStorage.getItem("offerImage")
-    //     setImage(offerImage)
-    //     setIsActive(true)
-    // }
-
-
 
     useEffect(() => {
         const getCarList = async () => {
@@ -182,70 +111,6 @@ export default function Home(props){
                 ...doc.data(),
                 id: doc.id,
             }));
-            console.log("FilteredData: ", filteredData)
-            console.log("?.Rok: ", filteredData.rok)
-            const doubleFilter = filteredData.filter((car) => {
-                const Marka = registerForm.Marka.toLowerCase();
-                const Model = registerForm.Model.toLowerCase();
-                const Paliwo = registerForm.Paliwo.toLowerCase();
-                const Kraj = registerForm.Kraj.toLowerCase();
-                const Lokalizacja = registerForm.Lokalizacja.toLowerCase();
-                const Nadwozie = registerForm.Nadwozie.toLowerCase();
-                const Stan = registerForm.Stan.toLowerCase();
-                const Silnik = registerForm.Silnik.toLowerCase();
-                const Wypos = registerForm.Wypos.toLowerCase();
-                const RokOd = registerForm.RokOd
-                const RokDo = registerForm.RokDo
-                const CenaOd = registerForm.CenaOd
-                const CenaDo = registerForm.CenaDo
-                const PrzebiegOd = registerForm.PrzebiegOd
-                const PrzebiegDo = registerForm.PrzebiegDo
-                const values = Object.values(car).join("").toLowerCase()
-
-
-
-
-                return(
-                    (Marka === '' || values.includes(Marka)) &&
-                    (Model === '' || values.includes(Model)) &&
-                    (Kraj === '' || values.includes(Kraj)) &&
-                    (Lokalizacja === '' || values.includes(Lokalizacja)) &&
-                    (Nadwozie === '' || values.includes(Nadwozie)) &&
-                    (Stan === '' || values.includes(Stan)) &&
-                    (Silnik === '' || values.includes(Silnik)) &&
-                    (Wypos === '' || values.includes(Wypos)) &&
-                    (Paliwo === '' || values.includes(Paliwo)) &&
-                    (RokOd === '' || car.Rok >= RokOd) &&
-                    (RokDo === '' || car.Rok <= RokDo) &&
-                    (CenaOd === '' || car.Cena >= CenaOd) &&
-                    (CenaDo === '' || car.Cena <= CenaDo) &&
-                    (PrzebiegOd === '' || car.Przebieg >= PrzebiegOd) &&
-                    (PrzebiegDo === '' || car.Przebieg <= PrzebiegDo)
-                    //console.log(filteredData);
-                )
-            });
-            console.log(doubleFilter);
-            setCarList(doubleFilter);
-        };
-
-        getCarList();
-    },[registerForm]);
-
-
-
-    console.log(carList)
-
-
-
-    useEffect(() => {
-        const getCarList = async () => {
-            const data = await getDocs(carCollectionRef);
-            const filteredData = data.docs.map((doc) => ({
-                ...doc.data(),
-                id: doc.id,
-            }));
-            console.log("FilteredData: ", filteredData)
-            console.log("?.Rok: ", filteredData.rok)
             const doubleFilter = filteredData.filter((car) => {
                 const Marka = registerForm.Marka.toLowerCase();
                 const Model = registerForm.Model.toLowerCase();
@@ -283,18 +148,20 @@ export default function Home(props){
                     //console.log(filteredData);
                 )
             });
-            console.log(doubleFilter);
             setCarList(doubleFilter);
         };
 
         getCarList();
-        console.log("Wynik = ", (carList.Marka))
     },[registerForm]);
 
-
-
-    console.log(carList)
-
+    useEffect(() => {
+        if (carListRef.current !== carList && carList.length > 0) {
+            setOfferCars(carList);
+            console.log("Działa");
+            console.log("carList: ", carList)
+            carListRef.current = carList;
+        }
+    }, [carList]);
 
 
 
@@ -361,16 +228,16 @@ export default function Home(props){
 
                                     <label className="radioMain"  onChange={handleChange}>
                                         <input
-                                               type="radio"
-                                               value="BENZYNA"
-                                               name="Paliwo"
-                                               /> Benzyna
+                                            type="radio"
+                                            value="BENZYNA"
+                                            name="Paliwo"
+                                        /> Benzyna
 
                                         <input
-                                               type="radio"
-                                               value="LPG"
-                                               name="Paliwo"
-                                               /> LPG
+                                            type="radio"
+                                            value="LPG"
+                                            name="Paliwo"
+                                        /> LPG
 
                                         <input
                                             type="radio"
@@ -406,137 +273,6 @@ export default function Home(props){
                             </div>
                         </CSSTransition>
 
-                        {/*<CSSTransition*/}
-                        {/*    in={motorOff}*/}
-                        {/*    appear={true}*/}
-                        {/*    timeout={500}*/}
-                        {/*    classNames="fade-main"*/}
-                        {/*    unmountOnExit*/}
-                        {/*>*/}
-                        {/*    <div>*/}
-                        {/*        <div className="input">*/}
-                        {/*            <label className="radioMain">*/}
-                        {/*                <input type="radio" value="new" name="criteria-is.new"/> Nowe*/}
-                        {/*            </label>*/}
-                        {/*            <label className="radio">*/}
-                        {/*                <input type="radio" value="used" name="criteria-is.new"/> Używane*/}
-                        {/*            </label>*/}
-                        {/*            <label className="radio">*/}
-                        {/*                <input*/}
-                        {/*                    type="radio"*/}
-                        {/*                    value="all-cars"*/}
-                        {/*                    name="criteria-is.new"*/}
-                        {/*                    defaultChecked={true}*/}
-                        {/*                />{" "}*/}
-                        {/*                Wszystkie*/}
-                        {/*            </label>*/}
-                        {/*            <br/>*/}
-                        {/*        </div>*/}
-
-                        {/*        <input type="text" className="car-information" placeholder="Dowolna motor"/>*/}
-                        {/*        <input type="text" className="car-information" placeholder="Dowolny model"/>*/}
-                        {/*        <input type="text" className="car-year" placeholder="Rok od"/>*/}
-                        {/*        <input type="text" className="car-year" placeholder="Rok do"/>*/}
-                        {/*        <input type="text" className="car-price" placeholder="Cena od"/>*/}
-                        {/*        <input type="text" className="car-price" placeholder="Cena do"/>*/}
-
-                        {/*        <div className="input">*/}
-                        {/*            <label className="radio">*/}
-                        {/*                <input type="radio" value="fuel" name="fuel_type"/> Benzyna*/}
-                        {/*            </label>*/}
-                        {/*            <label className="radio">*/}
-                        {/*                <input type="radio" value="diesel" name="fuel_type"/> Diesel*/}
-                        {/*            </label>*/}
-                        {/*            <label className="radio">*/}
-                        {/*                <input*/}
-                        {/*                    type="radio"*/}
-                        {/*                    value="all_type"*/}
-                        {/*                    name="fuel_type"*/}
-                        {/*                    defaultChecked={true}*/}
-                        {/*                />{" "}*/}
-                        {/*                Wszystkie*/}
-                        {/*            </label>*/}
-                        {/*            <br/>*/}
-                        {/*        </div>*/}
-
-                        {/*        <Link to={"/login"} className="detailed-search">*/}
-                        {/*            Szczegółowe wyszukiwanie*/}
-                        {/*        </Link>*/}
-                        {/*        <button className="search">*/}
-                        {/*            <Link to={"/login"} className="link">*/}
-                        {/*                Szukaj*/}
-                        {/*            </Link>*/}
-                        {/*        </button>*/}
-                        {/*    </div>*/}
-                        {/*</CSSTransition>*/}
-
-                        {/*<CSSTransition*/}
-                        {/*    in={otherOff}*/}
-                        {/*    appear={true}*/}
-                        {/*    timeout={500}*/}
-                        {/*    classNames="fade-main"*/}
-                        {/*    unmountOnExit*/}
-                        {/*>*/}
-                        {/*    <div>*/}
-                        {/*        <div className="input">*/}
-                        {/*            <label className="radio">*/}
-                        {/*                <input type="radio" value="new" name="criteria-is.new"/> Nowe*/}
-                        {/*            </label>*/}
-                        {/*            <label className="radio">*/}
-                        {/*                <input type="radio" value="used" name="criteria-is.new"/> Używane*/}
-                        {/*            </label>*/}
-                        {/*            <label className="radio">*/}
-                        {/*                <input*/}
-                        {/*                    type="radio"*/}
-                        {/*                    value="all-cars"*/}
-                        {/*                    name="criteria-is.new"*/}
-                        {/*                    defaultChecked={true}*/}
-                        {/*                />{" "}*/}
-                        {/*                Wszystkie*/}
-                        {/*            </label>*/}
-                        {/*            <br/>*/}
-                        {/*        </div>*/}
-
-                        {/*        <input type="text" className="car-information" placeholder="Dowolne inne cos"/>*/}
-                        {/*        <input type="text" className="car-information" placeholder="Dowolny model"/>*/}
-                        {/*        <input type="text" className="car-year" placeholder="Rok od"/>*/}
-                        {/*        <input type="text" className="car-year" placeholder="Rok do"/>*/}
-                        {/*        <input type="text" className="car-price" placeholder="Cena od"/>*/}
-                        {/*        <input type="text" className="car-price" placeholder="Cena do"/>*/}
-
-                        {/*        <div className="radio">*/}
-                        {/*            <label className="radio">*/}
-                        {/*                <input type="radio"*/}
-                        {/*                       value="fuel"*/}
-                        {/*                       name="fuel_type"/> Benzyna*/}
-
-
-                        {/*                <input type="radio"*/}
-                        {/*                       value="diesel"*/}
-                        {/*                       name="fuel_type"/> Diesel*/}
-
-                        {/*                <input*/}
-                        {/*                    type="radio"*/}
-                        {/*                    value="all_type"*/}
-                        {/*                    name="paliwo"*/}
-                        {/*                    defaultChecked={true}*/}
-                        {/*                />{" "}*/}
-                        {/*                Wszystkie*/}
-                        {/*            </label>*/}
-                        {/*            <br/>*/}
-                        {/*        </div>*/}
-
-                        {/*        <Link to={"/login"} className="detailed-search">*/}
-                        {/*            Szczegółowe wyszukiwanie*/}
-                        {/*        </Link>*/}
-                        {/*        <button className="search">*/}
-                        {/*            <Link to={"/login"} className="link">*/}
-                        {/*                Szukaj*/}
-                        {/*            </Link>*/}
-                        {/*        </button>*/}
-                        {/*    </div>*/}
-                        {/*</CSSTransition>*/}
-
                     </div>
                 </div>
             </form>
@@ -547,14 +283,16 @@ export default function Home(props){
 
             <div style={{display: !visibility ? "none" : "inline-block"}} className="popular-offers-text-div"
                  id="place-to-add-offer">
-                <CarCard id="offerCard"
-                         ImageCar={carList[0].Zdje}
-                         CarBrand={carList[0].Marka}
-                         CarPrice={carList[0].Cena}
-                         ProductionDate={carList[0].Rok}
-                         CarMileage={carList[0].Przebieg}
-                         FuelType={carList[0].Paliwo}
-                />
+                {carList.length > 0 && (
+                    <CarCard
+                        ImageCar={carList[0].Zdje}
+                        CarBrand={carList[0].Marka}
+                        CarPrice={carList[0].Cena}
+                        ProductionDate={carList[0].Rok}
+                        CarMileage={carList[0].Przebieg}
+                        FuelType={carList[0].Paliwo}
+                    />
+                )}
             </div>
             <div className="popular-offers-text-div">
                 <text className="popular-offers-text">Najpopularniejsze oferty</text>
@@ -563,60 +301,66 @@ export default function Home(props){
 
 
             <div className="popular-offers-homepage">
-                <CarCard
-                    ImageCar={car1}
-                    CarBrand={"Volvo"}
-                    CarPrice={"99 876 zł"}
-                    ProductionDate={"2023"}
-                    CarMileage={"193 tys"}
-                    FuelType={"diesel"}
-
-                />
-                <CarCard
-                    ImageCar={car2}
-                    CarBrand={"Mitshubishi"}
-                    CarPrice={"51 999 zł"}
-                    ProductionDate={"2011"}
-                    CarMileage={"193 tys"}
-                    FuelType={"benzyna"}
-
-                />
-                <CarCard
-                    ImageCar={car3}
-                    CarBrand={"Hyundai"}
-                    CarPrice={"132 382 zł"}
-                    ProductionDate={"2021"}
-                    CarMileage={"23 tys"}
-                    FuelType={"diesel"}
-
-                />
-                <CarCard
-                    ImageCar={car3}
-                    CarBrand={"Opel"}
-                    CarPrice={"132 382 zł"}
-                    ProductionDate={"2012"}
-                    CarMileage={"193 tys"}
-                    FuelType={"diesel"}
-
-                />
-                <CarCard
-                    ImageCar={car1}
-                    CarBrand={"Mazda"}
-                    CarPrice={"132 382 zł"}
-                    ProductionDate={"2012"}
-                    CarMileage={"193 tys"}
-                    FuelType={"diesel"}
-
-                />
-                <CarCard
-                    ImageCar={car2}
-                    CarBrand={"Fiat"}
-                    CarPrice={"132 382 zł"}
-                    ProductionDate={"2012"}
-                    CarMileage={"193 tys"}
-                    FuelType={"diesel"}
-
-                />
+                {offerCars.length > 0 && (
+                    <CarCard
+                        ImageCar={offerCars[0].Zdje}
+                        CarBrand={offerCars[0].Marka}
+                        CarPrice={offerCars[0].Cena + " zł"}
+                        ProductionDate={offerCars[0].Rok}
+                        CarMileage={offerCars[0].Przebieg}
+                        FuelType={offerCars[0].Paliwo}
+                    />
+                )}
+                {offerCars.length > 0 && (
+                    <CarCard
+                        ImageCar={offerCars[1].Zdje}
+                        CarBrand={offerCars[1].Marka}
+                        CarPrice={offerCars[1].Cena + " zł"}
+                        ProductionDate={offerCars[1].Rok}
+                        CarMileage={offerCars[1].Przebieg}
+                        FuelType={offerCars[1].Paliwo}
+                    />
+                )}
+                {offerCars.length > 0 && (
+                    <CarCard
+                        ImageCar={offerCars[2].Zdje}
+                        CarBrand={offerCars[2].Marka}
+                        CarPrice={offerCars[2].Cena + " zł"}
+                        ProductionDate={offerCars[2].Rok}
+                        CarMileage={offerCars[2].Przebieg}
+                        FuelType={offerCars[2].Paliwo}
+                    />
+                )}
+                {offerCars.length > 0 && (
+                    <CarCard
+                        ImageCar={offerCars[3].Zdje}
+                        CarBrand={offerCars[3].Marka}
+                        CarPrice={offerCars[3].Cena + " zł"}
+                        ProductionDate={offerCars[3].Rok}
+                        CarMileage={offerCars[3].Przebieg}
+                        FuelType={offerCars[3].Paliwo}
+                    />
+                )}
+                {offerCars.length > 0 && (
+                    <CarCard
+                        ImageCar={offerCars[4].Zdje}
+                        CarBrand={offerCars[4].Marka}
+                        CarPrice={offerCars[4].Cena + " zł"}
+                        ProductionDate={offerCars[4].Rok}
+                        CarMileage={offerCars[4].Przebieg}
+                        FuelType={offerCars[4].Paliwo}
+                    />
+                )}
+                {offerCars.length > 0 && (
+                    <CarCard
+                        ImageCar={offerCars[5].Zdje}
+                        CarBrand={offerCars[5].Marka}
+                        CarPrice={offerCars[5].Cena + " zł"}
+                        ProductionDate={offerCars[5].Rok}
+                        CarMileage={offerCars[5].Przebieg}
+                        FuelType={offerCars[5].Paliwo}
+                    />
+                )}
 
 
             </div>
