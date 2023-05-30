@@ -24,7 +24,7 @@ function ChangeAdd(props) {
 
 
     const [registerForm, setregisterForm] = useState({
-        Marka: "",
+        Marka: "Mazda",
         Model: "",
         RokOd: "",
         RokDo: "",

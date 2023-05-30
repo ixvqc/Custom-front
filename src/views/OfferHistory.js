@@ -263,9 +263,7 @@ function OfferHistory(props) {
 
 
             </div>
-            <div>
 
-            </div>
 
         </div>
 
