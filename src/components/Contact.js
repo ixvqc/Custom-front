@@ -17,6 +17,7 @@ export default function Contact() {
             });
         e.target.reset()
     }
+
     const handleClick = () => {
         setShowContact(true);
     };

@@ -491,6 +491,9 @@ export default function Home(props){
             </div>
 
 
+
+
+
             <div className="popular-offers-homepage">
                 <CarCard
                     ImageCar={car1}

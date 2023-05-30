@@ -371,12 +371,16 @@ function Search()  {
                             </div>
 
                             <div className={"offer-text-search"}>
+
+
                                 <button id={"review-button-search"} className="button-search" type = "button" onClick={(event) => addField(event, car.id)} style ={{display: visibility2 ? 'block' : 'none'}}>
                                     Wyślij recenzję
                                 </button>
                                 <button className="button-search" type = "button" onClick={ZmianaPrzycisku2} style ={{display: visibility2 ? 'none' : 'block'}}>
                                     Napisz recenzję
                                 </button>
+
+
                             </div>
                         </div>
 

@@ -202,12 +202,6 @@
     box-shadow: 2px 2px 4px gray;
 }
 
-#offer-review-search{
-    justify-content: flex-end;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 
 .email-container-search {
     margin-left: 5vw;
@@ -420,4 +414,17 @@
     width: 200px;
     height: 40px;
     box-shadow: 2px 2px 4px gray;
+}
+
+
+.offer-review-search-window{
+    display: flex;
+    width:30vw;
+    height:20vh;
+    background-color: #FDCF28;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15vw;
+
 }
