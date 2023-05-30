@@ -22,6 +22,7 @@
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
     "react-select": "^5.7.2",
+    "react-switch": "^7.0.0",
     "styled-components": "^5.3.9",
     "universal-cookie": "^4.0.4",
     "uuid": "^9.0.0",

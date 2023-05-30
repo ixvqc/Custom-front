@@ -2,13 +2,14 @@ import React, {useContext,useState, useEffect, useRef, } from 'react';
 import {useNavigate,Link} from "react-router-dom";
 import '../styles/user.css';
 import logo from '../assets/img/logov2.png';
-
+import ReactSwitch from "react-switch";
 import {auth, db, storage} from "../firebase";
 
 import { AuthContext } from '../context/AuthContext'
 
 import 'firebase/auth';
 import { getAuth, updateProfile, updatePassword, updateEmail, sendPasswordResetEmail} from "firebase/auth";
+import{createContext} from "react"
 
 
 
@@ -22,7 +23,7 @@ import {
     list,
 } from "firebase/storage";
 
-
+export const ThemeContext = createContext(null);
 
 function User(props) {
     // const auth = getAuth();
@@ -111,8 +112,13 @@ function User(props) {
         });
     }, []);
 
-
+    const [theme, setTheme] = useState("light");
+    const toggleTheme = () => {
+        setTheme((curr) => (curr === "light" ? "dark" : "light"));
+    }
     return (
+        <ThemeContext.Provider value={{theme, toggleTheme}}>
+       <div classname="mode" id={theme}>
         <div className="mainuser">
 
             <div className="navuser">
@@ -123,6 +129,13 @@ function User(props) {
                     </a>
 
                     <div className="buttongroupus">
+
+                            <div>
+                            <label className="swithcmodelabel"> {theme === "light" ? "☼" : "☾"}</label>
+                            </div>
+                        <div className="modebutton">
+                        <ReactSwitch onChange={toggleTheme} checked={theme === "dark"}/>
+                        </div>
                         <div className="obserwowaneus-div">
                             <button className="obserwowaneus">
                                 <Link className="favlink" to="/favourites">
@@ -202,8 +215,8 @@ function User(props) {
             </div>
 
         </div>
-
-
+       </div>
+        </ThemeContext.Provider>
     );
 
 
