@@ -45,13 +45,22 @@ export default function Home(props){
     const [visibility2, setVisibility2] = useState(false);
 
     const [registerForm, setregisterForm] = useState({
-        marka: "",
-        model: "",
-        rokOd: "",
-        rokDo: "",
-        cenaOd: "",
-        cenaDo: "",
-        fuel_type: ""
+
+        Marka: "",
+        Model: "",
+        RokOd: "",
+        RokDo: "",
+        CenaOd: "",
+        CenaDo: "",
+        Paliwo: "",
+        PrzebiegOd: "",
+        PrzebiegDo: "",
+        Kraj: "",
+        Nadwozie: "",
+        Lokalizacja: "",
+        Stan: "",
+        Silnik: "",
+        Wypos: ""
     })
 
     function handleChange(event) {
@@ -102,68 +111,129 @@ export default function Home(props){
     };
 
 
-    const addField = async (event, carID) => {
-        event.preventDefault();
-        setCarID(carID)
-        try {
-            const docRef = await addDoc(collection(db, 'Review'), {
-                carID: carID,
-                review: reviewText,
+    // const addField = async (event, carID) => {
+    //     event.preventDefault();
+    //     setCarID(carID)
+    //     try {
+    //         const docRef = await addDoc(collection(db, 'Review'), {
+    //             carID: carID,
+    //             review: reviewText,
+    //         });
+    //         console.log('Document written with ID: ', docRef.id);
+    //         setCarID('');
+    //         setReviewText('');
+    //     } catch (error) {
+    //         console.error('Error adding document: ', error);
+    //     }
+    // };
+
+
+
+    // function popUpOffer(event) {
+    //     axios({
+    //         method: "GET",
+    //         url: "/offerData",
+    //         data: {
+    //             marka: registerForm.marka,
+    //             model: registerForm.model,
+    //             rokOd: registerForm.rokOd,
+    //             rokDo: registerForm.rokDo,
+    //             cenaOd: registerForm.cenaOd,
+    //             cenaDo: registerForm.cenaDo,
+    //             fuel_type: registerForm.fuel_type
+    //         }
+    //     })
+    //         .then((response) => {
+    //             sessionStorage.setItem("brand", response.data.brand)
+    //             setMarka(sessionStorage.getItem("brand"))
+    //             sessionStorage.setItem("year", response.data.year)
+    //             setRok(sessionStorage.getItem("year"))
+    //             sessionStorage.setItem("mileage", response.data.mileage)
+    //             setPrzebieg(sessionStorage.getItem("mileage") / 1000 + " tys")
+    //             sessionStorage.setItem("fuel_type", response.data.fuel_type)
+    //             setPaliwo(sessionStorage.getItem("fuel_type"))
+    //             sessionStorage.setItem("price", response.data.price)
+    //             setCena(sessionStorage.getItem("price") + " zł")
+    //             let imageURL;
+    //             imageURL = URL.createObjectURL(response.data.fimag)
+    //             sessionStorage.setItem("image", imageURL)
+    //             setImage(sessionStorage.getItem("image"))
+    //         }).catch((error) => {
+    //         if (error.response) {
+    //             console.log(error.response)
+    //             console.log(error.response.status)
+    //             console.log(error.response.headers)
+    //         }
+    //     })
+    //     event.preventDefault()
+    //
+    //     sessionStorage.setItem("offerImage", 'https://www.wyborkierowcow.pl/wp-content/uploads/2022/09/bmw-serii-3-e36-cennik-1.jpg');
+    //     var offerImage = sessionStorage.getItem("offerImage")
+    //     setImage(offerImage)
+    //     setIsActive(true)
+    // }
+
+
+
+    useEffect(() => {
+        const getCarList = async () => {
+            const data = await getDocs(carCollectionRef);
+            const filteredData = data.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id,
+            }));
+            console.log("FilteredData: ", filteredData)
+            console.log("?.Rok: ", filteredData.rok)
+            const doubleFilter = filteredData.filter((car) => {
+                const Marka = registerForm.Marka.toLowerCase();
+                const Model = registerForm.Model.toLowerCase();
+                const Paliwo = registerForm.Paliwo.toLowerCase();
+                const Kraj = registerForm.Kraj.toLowerCase();
+                const Lokalizacja = registerForm.Lokalizacja.toLowerCase();
+                const Nadwozie = registerForm.Nadwozie.toLowerCase();
+                const Stan = registerForm.Stan.toLowerCase();
+                const Silnik = registerForm.Silnik.toLowerCase();
+                const Wypos = registerForm.Wypos.toLowerCase();
+                const RokOd = registerForm.RokOd
+                const RokDo = registerForm.RokDo
+                const CenaOd = registerForm.CenaOd
+                const CenaDo = registerForm.CenaDo
+                const PrzebiegOd = registerForm.PrzebiegOd
+                const PrzebiegDo = registerForm.PrzebiegDo
+                const values = Object.values(car).join("").toLowerCase()
+
+
+
+
+                return(
+                    (Marka === '' || values.includes(Marka)) &&
+                    (Model === '' || values.includes(Model)) &&
+                    (Kraj === '' || values.includes(Kraj)) &&
+                    (Lokalizacja === '' || values.includes(Lokalizacja)) &&
+                    (Nadwozie === '' || values.includes(Nadwozie)) &&
+                    (Stan === '' || values.includes(Stan)) &&
+                    (Silnik === '' || values.includes(Silnik)) &&
+                    (Wypos === '' || values.includes(Wypos)) &&
+                    (Paliwo === '' || values.includes(Paliwo)) &&
+                    (RokOd === '' || car.Rok >= RokOd) &&
+                    (RokDo === '' || car.Rok <= RokDo) &&
+                    (CenaOd === '' || car.Cena >= CenaOd) &&
+                    (CenaDo === '' || car.Cena <= CenaDo) &&
+                    (PrzebiegOd === '' || car.Przebieg >= PrzebiegOd) &&
+                    (PrzebiegDo === '' || car.Przebieg <= PrzebiegDo)
+                    //console.log(filteredData);
+                )
             });
-            console.log('Document written with ID: ', docRef.id);
-            setCarID('');
-            setReviewText('');
-        } catch (error) {
-            console.error('Error adding document: ', error);
-        }
-    };
+            console.log(doubleFilter);
+            setCarList(doubleFilter);
+        };
+
+        getCarList();
+    },[registerForm]);
 
 
 
-    function popUpOffer(event) {
-        axios({
-            method: "GET",
-            url: "/offerData",
-            data: {
-                marka: registerForm.marka,
-                model: registerForm.model,
-                rokOd: registerForm.rokOd,
-                rokDo: registerForm.rokDo,
-                cenaOd: registerForm.cenaOd,
-                cenaDo: registerForm.cenaDo,
-                fuel_type: registerForm.fuel_type
-            }
-        })
-            .then((response) => {
-                sessionStorage.setItem("brand", response.data.brand)
-                setMarka(sessionStorage.getItem("brand"))
-                sessionStorage.setItem("year", response.data.year)
-                setRok(sessionStorage.getItem("year"))
-                sessionStorage.setItem("mileage", response.data.mileage)
-                setPrzebieg(sessionStorage.getItem("mileage") / 1000 + " tys")
-                sessionStorage.setItem("fuel_type", response.data.fuel_type)
-                setPaliwo(sessionStorage.getItem("fuel_type"))
-                sessionStorage.setItem("price", response.data.price)
-                setCena(sessionStorage.getItem("price") + " zł")
-                let imageURL;
-                imageURL = URL.createObjectURL(response.data.fimag)
-                sessionStorage.setItem("image", imageURL)
-                setImage(sessionStorage.getItem("image"))
-            }).catch((error) => {
-            if (error.response) {
-                console.log(error.response)
-                console.log(error.response.status)
-                console.log(error.response.headers)
-            }
-        })
-        event.preventDefault()
-
-        sessionStorage.setItem("offerImage", 'https://www.wyborkierowcow.pl/wp-content/uploads/2022/09/bmw-serii-3-e36-cennik-1.jpg');
-        var offerImage = sessionStorage.getItem("offerImage")
-        setImage(offerImage)
-        setIsActive(true)
-    }
-
+    console.log(carList)
 
 
 
@@ -218,6 +288,7 @@ export default function Home(props){
         };
 
         getCarList();
+        console.log("Wynik = ", (carList.Marka))
     },[registerForm]);
 
 
@@ -474,15 +545,15 @@ export default function Home(props){
 
 
 
-            <div style={{display: !isActive ? 'none' : "inline-block"}} className="popular-offers-text-div"
+            <div style={{display: !visibility ? "none" : "inline-block"}} className="popular-offers-text-div"
                  id="place-to-add-offer">
                 <CarCard id="offerCard"
-                         ImageCar={image}
-                         CarBrand={marka}
-                         CarPrice={cena}
-                         ProductionDate={rok}
-                         CarMileage={przebieg}
-                         FuelType={paliwo}
+                         ImageCar={carList[0].Zdje}
+                         CarBrand={carList[0].Marka}
+                         CarPrice={carList[0].Cena}
+                         ProductionDate={carList[0].Rok}
+                         CarMileage={carList[0].Przebieg}
+                         FuelType={carList[0].Paliwo}
                 />
             </div>
             <div className="popular-offers-text-div">
