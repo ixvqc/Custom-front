@@ -210,9 +210,11 @@ function ChangeAdd(props) {
                             Wiadomości
                         </button>
                     </Link>
-                    <button className="button4user-ChangeAdd">
-                        Płatności
-                    </button>
+                    <Link to="/offerHistory">
+                        <button className="button4user-ChangeAdd">
+                            Historia
+                        </button>
+                    </Link>
                 </div>
             </div>
 

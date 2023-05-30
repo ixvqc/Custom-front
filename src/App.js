@@ -11,6 +11,7 @@ import Messages from "./views/Messages";
 import AddAnnouncementMotor from "./views/AddAnnouncementMotor";
 import AddAnnouncementOther from "./views/AddAnnouncementOther";
 import Contact from "./views/Contact";
+import OfferHistory from "./views/OfferHistory";
 import useToken from './useToken'
 
 import Favourites from "./views/favourites";
@@ -71,6 +72,7 @@ return (
                 <Route path="/Contact" element = {<Contact/>}/>
                 <Route path="/favourites" element = {<Favourites/>}/>
                 <Route path="/compare" element = {<Compare/>}/>
+                <Route path="/OfferHistory" element = {<OfferHistory/>}/>
 
 
             </Route>

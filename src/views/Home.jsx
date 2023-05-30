@@ -231,7 +231,7 @@ export default function Home(props){
                                 </div>
 
                                 <Link to={"/Search"} className="detailed-search">
-                                    Szczegółowe wyszukiwanie
+                                    Dupa 123
                                 </Link>
                                 <button className="search" onClick={popUpOffer}>
                                     Szukaj

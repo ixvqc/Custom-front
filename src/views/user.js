@@ -168,9 +168,11 @@ function User(props) {
                             Wiadomości
                         </button>
                     </Link>
-                    <button className="button4user">
-                        Płatności
-                    </button>
+                    <Link to="/offerHistory">
+                        <button className="button4user">
+                            Historia
+                        </button>
+                    </Link>
                 </div>
             </div>
             <div className="user">
