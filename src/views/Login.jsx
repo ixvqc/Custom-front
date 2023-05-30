@@ -31,7 +31,7 @@ const Login = () => {
       <div className="background-login">
 
         <nav className="logo-container">
-          <a href="http://localhost:3000">
+          <a href="/">
             <img src={logo} alt="Main.js Logo" className="logo_login" />
           </a>
         </nav>
@@ -85,21 +85,6 @@ const Login = () => {
 
 
           </form>
-          {/*<form onSubmit={handleSave}>*/}
-          {/*    <label>Tu cos</label>*/}
-          {/*    <input type="text" ref={messageRef} />*/}
-          {/*    <button type="submit" >Send</button>*/}
-          {/*</form>*/}
-          {/*<input type="file" onChange={(event) => {*/}
-          {/*    setImageUpload(event.target.files[0]);*/}
-          {/*}}/>*/}
-          {/*<button onClick={uploadImage} > Upload Image </button>*/}
-
-          {/*{imageList.map((url)=>{*/}
-          {/*    return <img src={url} className="TestFirebase"/>*/}
-          {/*})}*/}
-
-
           <SignIn />
         </div>
       </div>
