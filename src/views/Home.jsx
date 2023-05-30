@@ -20,10 +20,17 @@ import { CSSTransition } from 'react-transition-group';
 import {signOut} from "firebase/auth"
 import {auth, db} from '../firebase'
 import { AuthContext } from "../context/AuthContext";
+import AddAnnouncement from "./AddAnnouncement";
+import {toast, ToastContainer} from "react-toastify";
+import {collection, onSnapshot, query, getDocs, addDoc} from "@firebase/firestore";
+import 'react-toastify/dist/ReactToastify.css';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 import NavbarMain from "../components/NavBarMain";
 import NavbarLogin from "../components/NavBarLogin";
 import {addDoc, collection, doc, getDocs} from "@firebase/firestore";
 import {getDoc, updateDoc} from "firebase/firestore";
+
 
 
 
@@ -103,6 +110,89 @@ export default function Home(props){
     };
 
 
+    const [marka, setMarka] = React.useState(null);
+    const [cena, setCena] = React.useState(null);
+    const [rok, setRok] = React.useState(null);
+    const [przebieg, setPrzebieg] = React.useState(null);
+    const [paliwo, setPaliwo] = React.useState(null);
+    const [image, setImage] = React.useState(null);
+
+    const [isActive, setIsActive] = useState(false);
+
+    function popUpOffer(event) {
+        axios({
+            method: "GET",
+            url: "/offerData",
+            data: {
+                marka: registerForm.marka,
+                model: registerForm.model,
+                rokOd: registerForm.rokOd,
+                rokDo: registerForm.rokDo,
+                cenaOd: registerForm.cenaOd,
+                cenaDo: registerForm.cenaDo,
+                fuel_type: registerForm.fuel_type
+            }
+        })
+            .then((response) => {
+                sessionStorage.setItem("brand", response.data.brand)
+                setMarka(sessionStorage.getItem("brand"))
+                sessionStorage.setItem("year", response.data.year)
+                setRok(sessionStorage.getItem("year"))
+                sessionStorage.setItem("mileage", response.data.mileage)
+                setPrzebieg(sessionStorage.getItem("mileage") / 1000 + " tys")
+                sessionStorage.setItem("fuel_type", response.data.fuel_type)
+                setPaliwo(sessionStorage.getItem("fuel_type"))
+                sessionStorage.setItem("price", response.data.price)
+                setCena(sessionStorage.getItem("price") + " zł")
+                let imageURL;
+                imageURL = URL.createObjectURL(response.data.fimag)
+                sessionStorage.setItem("image", imageURL)
+                setImage(sessionStorage.getItem("image"))
+            }).catch((error) => {
+            if (error.response) {
+                console.log(error.response)
+                console.log(error.response.status)
+                console.log(error.response.headers)
+            }
+        })
+        event.preventDefault()
+
+        sessionStorage.setItem("offerImage", 'https://www.wyborkierowcow.pl/wp-content/uploads/2022/09/bmw-serii-3-e36-cennik-1.jpg');
+        var offerImage = sessionStorage.getItem("offerImage")
+        setImage(offerImage)
+        setIsActive(true)
+    }
+
+    localStorage.setItem("CurrentTime", Date())
+
+    const notify = () => {
+        if (localStorage.getItem("CurrentTime")+5<Date()){
+            toast("Masz wiadomość!") ;
+        }
+        localStorage.setItem("CurrentTime", Date())
+    }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            //const querySnapshot = await getDocs(userChatsTestRef);
+            const q = query(collection(db, "userChats"));
+            const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                const chat = [];
+                querySnapshot.forEach((doc) => {
+                    chat.push(doc.data().Kto);
+                });
+                console.log("Current users: ", chat.join(", "));
+                notify()
+            });
+            // Cleanup the snapshot listener when the component unmounts
+            return () => unsubscribe();
+        };
+
+        fetchData();
+    }, []);
+
+
+
 
     useEffect(() => {
         const getCarList = async () => {
@@ -164,6 +254,21 @@ export default function Home(props){
     }, [carList]);
 
 
+
+
+                <div>
+                    <ToastContainer />
+                </div>
+
+                <Link to={"/login"} className="link">
+                    Zaloguj się
+                </Link>
+                <Link to={"/register"} className="link">
+                    Rejestracja
+                </Link>
+                <Link to={"/mess"} className="link">
+                    wiadomości
+                </Link>
 
 
     return (
