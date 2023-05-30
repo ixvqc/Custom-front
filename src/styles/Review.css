@@ -1,0 +1,23 @@
+.button-review{
+    text-decoration: none;
+    color:black;
+    background-color: #FDCF28;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 200px;
+    height: 40px;
+    box-shadow: 2px 2px 4px gray;
+}
+
+.review-main {
+    display: flex;
+    width: 30vw;
+    height: 30vh;
+    background-color: #FDCF28;
+    position: absolute;
+    top: 15vh;
+    right: 15vw;
+}

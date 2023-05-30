@@ -7,8 +7,7 @@ import { db } from "../firebase"
 import {getDocs, collection, doc, query, where, limit, addDoc} from "@firebase/firestore";
 import {signInWithEmailAndPassword, signOut} from "firebase/auth";
 import { auth } from "../firebase";
-import message from "../components/Message";
-import firebase from "firebase/compat/app";
+import Contact from "../components/Contact";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import Notiflix from 'notiflix';
@@ -18,13 +17,50 @@ import { getFirestore, updateDoc,getDoc } from "firebase/firestore";
 
 function Search()  {
     const [isTrue, setIsTrue] = useState(false);
-
-
     const ChangeRokRef = useRef();
-
-
     const [isFavourite, setIsFavourite] = useState(false);
+    const [carList,setCarList] = useState([]);
+    const carCollectionRef = collection(db, "Search-test");
+    const [visibility, setVisibility] = useState(false);
+    const [visibility2, setVisibility2] = useState(false);
+    const [carID, setCarID] = useState('');
+    const [reviewText, setReviewText] = useState("");
+    const navigate = useNavigate();
+    const [registerForm, setregisterForm] = useState({
 
+        Marka: "",
+        Model: "",
+        RokOd: "",
+        RokDo: "",
+        CenaOd: "",
+        CenaDo: "",
+        Paliwo: "",
+        PrzebiegOd: "",
+        PrzebiegDo: "",
+        Kraj: "",
+        Nadwozie: "",
+        Lokalizacja: "",
+        Stan: "",
+        Silnik: "",
+        Wypos: ""
+    })
+    const goToCompare = () =>{
+        navigate("/Compare")
+    }
+
+    const HandleClick = () => {
+        setVisibility(!visibility);
+        console.log(registerForm.Marka)
+    }
+    const ZmianaPrzycisku1 = () => {
+        setVisibility(!visibility);
+        console.log(registerForm.Marka)
+    }
+    const ZmianaPrzycisku2 = () => {
+        setVisibility2(!visibility2);
+    }
+
+//////ULUBIONE
     const handleButtonClick = async (carId) => {
         const docRef = doc(db, "Search-test", carId);
         try {
@@ -52,13 +88,6 @@ function Search()  {
 
 
 
-    const [carList,setCarList] = useState([]);
-    const carCollectionRef = collection(db, "Search-test");
-    const [visibility, setVisibility] = useState(false);
-    const [visibility2, setVisibility2] = useState(false);
-    const [carID, setCarID] = useState('');
-    const [reviewText, setReviewText] = useState("");
-    const navigate = useNavigate();
     const addField = async (event, carID) => {
         event.preventDefault();
         setCarID(carID)
@@ -79,25 +108,6 @@ function Search()  {
 
 
 
-    const [registerForm, setregisterForm] = useState({
-
-        Marka: "",
-        Model: "",
-        RokOd: "",
-        RokDo: "",
-        CenaOd: "",
-        CenaDo: "",
-        Paliwo: "",
-        PrzebiegOd: "",
-        PrzebiegDo: "",
-        Kraj: "",
-        Nadwozie: "",
-        Lokalizacja: "",
-        Stan: "",
-        Silnik: "",
-        Wypos: ""
-    })
-
     function handleChange(event) {
         const {value, name} = event.target
         setregisterForm(prevNote => ({
@@ -107,21 +117,8 @@ function Search()  {
     }
 
 
-    const goToCompare = () =>{
-        navigate("/Compare")
-    }
 
-   const HandleClick = () => {
-        setVisibility(!visibility);
-        console.log(registerForm.Marka)
-    }
-    const ZmianaPrzycisku1 = () => {
-        setVisibility(!visibility);
-        console.log(registerForm.Marka)
-    }
-    const ZmianaPrzycisku2 = () => {
-        setVisibility2(!visibility2);
-    }
+
 
     useEffect(() => {
         const getCarList = async () => {
@@ -183,7 +180,7 @@ function Search()  {
 
     console.log(carList)
 
-
+///PORÓWNYWARKA
     function addCompare(obj) {
         const data = localStorage.getItem("compare");
 
@@ -257,7 +254,6 @@ function Search()  {
                                 <input type="number" className={"car-info-search"} id = "car-price-1" name="CenaOd" placeholder="Cena od" onChange={handleChange}/>
                                 <input type="number" className={"car-info-search"} id = "car-price-2" name="CenaDo" placeholder="Cena do" onChange={handleChange}/>
                             </div>
-
                             <input type="text" className={"car-info-search"} name="Kraj" placeholder="Kraj pochodzenia" onChange={handleChange}/>
 
                             <select className={"car-info-search"} name="Nadwozie" onChange={handleChange}>
@@ -301,6 +297,7 @@ function Search()  {
                             <button className="button-search" type = "button" onClick={ZmianaPrzycisku1} style ={{display: visibility ? 'block' : 'none'}}>
                                 Ukryj
                             </button>
+
                             <button className="compare-button"
                                     onClick={goToCompare}
                             >
@@ -313,6 +310,7 @@ function Search()  {
 
                 </form>
             </div>
+
             <div style ={{display: visibility ? 'block' : 'none'}}>
                 {carList.map((car) => (
                     <div className={"offer-search"} key={car.id}> {/* Added key attribute */}
@@ -324,24 +322,22 @@ function Search()  {
 
                             <div>
 
-                                <p className="car-name-search">{car.Marka}
-                                    <button className="favourite" onClick={() => { handleButtonClick(car.id);  }}>Dodaj do ulubionych</button>
-
-                                    </p>
-
 
                                 <div className="compare">
 
                                 <p className="car-name-search">{car.Marka}</p>
 
-                                    <div className='compare-component'>
+                                        <Contact />
+
+                                        <button className="button-fav-adv" onClick={() => { handleButtonClick(car.id);  }}>Dodaj do ulubionych</button>
+
                                         <button className="button-compare-adv"
                                             onClick={()=> addCompare(car)}
                                         >
                                             Porównaj
                                         </button>
 
-                                    </div>
+
 
 
                                 </div>
@@ -375,12 +371,16 @@ function Search()  {
                             </div>
 
                             <div className={"offer-text-search"}>
+
+
                                 <button id={"review-button-search"} className="button-search" type = "button" onClick={(event) => addField(event, car.id)} style ={{display: visibility2 ? 'block' : 'none'}}>
                                     Wyślij recenzję
                                 </button>
                                 <button className="button-search" type = "button" onClick={ZmianaPrzycisku2} style ={{display: visibility2 ? 'none' : 'block'}}>
                                     Napisz recenzję
                                 </button>
+
+
                             </div>
                         </div>
 
