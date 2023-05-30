@@ -18,9 +18,14 @@ import SearchFormMotorcycles from "../components/SearchFormMotorcycles";
 import SearchFormOther from "../components/SearchFormOther";
 import { CSSTransition } from 'react-transition-group';
 import {signOut} from "firebase/auth"
-import { auth } from '../firebase'
+import {auth, db} from '../firebase'
 import { AuthContext } from "../context/AuthContext";
 import AddAnnouncement from "./AddAnnouncement";
+import {toast, ToastContainer} from "react-toastify";
+import {collection, onSnapshot, query, getDocs, addDoc} from "@firebase/firestore";
+import 'react-toastify/dist/ReactToastify.css';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 
 
@@ -131,6 +136,34 @@ export default function Home(props){
         setIsActive(true)
     }
 
+    localStorage.setItem("CurrentTime", Date())
+
+    const notify = () => {
+        if (localStorage.getItem("CurrentTime")+5<Date()){
+            toast("Masz wiadomość!") ;
+        }
+        localStorage.setItem("CurrentTime", Date())
+    }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            //const querySnapshot = await getDocs(userChatsTestRef);
+            const q = query(collection(db, "userChats"));
+            const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                const chat = [];
+                querySnapshot.forEach((doc) => {
+                    chat.push(doc.data().Kto);
+                });
+                console.log("Current users: ", chat.join(", "));
+                notify()
+            });
+            // Cleanup the snapshot listener when the component unmounts
+            return () => unsubscribe();
+        };
+
+        fetchData();
+    }, []);
+
 
     const offerData = async (event) => {
         // try {
@@ -159,6 +192,10 @@ export default function Home(props){
                 <div className="logo-div">
                     <img src={logo} className="logo-main"/>
 
+                </div>
+
+                <div>
+                    <ToastContainer />
                 </div>
 
                 <Link to={"/login"} className="link">

@@ -175,7 +175,6 @@ function Search()  {
                 </div>
 
                 <div>
-                    <button onClick={notify}>Notify!</button>
                     <ToastContainer />
                 </div>
 
