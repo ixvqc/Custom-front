@@ -1,4 +1,4 @@
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useState, useEffect} from "react";
 import '../styles/AddAnnouncement.css';
 import logo from '../assets/img/logov2.png';
@@ -27,14 +27,13 @@ import { getFirestore } from "firebase/firestore";
 
 
 
-const AddAnnouncement = () => {
+const AddAnnouncementOther = () => {
 
 
 
     const storage = getStorage();
     const firestore = getFirestore();
 
-    const navigate = useNavigate();
     const [imageSrc, setImageSrc] = useState(auto);
     function handleClick(src) {
         setImageSrc(src);
@@ -92,19 +91,16 @@ const AddAnnouncement = () => {
         // Fetch options from API or any data source
         // Here is an example options array
         const optionsArrayModel = [
-            { value: '3 Series', label: '3 Series' },
-            { value: '5 Series', label: '5 Series' },
-            { value: 'X3', label: 'X3' },
-            { value: '7 Series', label: '7 Series' },
-            { value: 'X5', label: 'X5' },
-            { value: '1 Series', label: '1 Series' },
-            { value: 'X1', label: 'X1' },
-            { value: 'i3', label: 'i3' },
-            { value: 'M2', label: 'M2' },
-            { value: 'M3', label: 'M3' },
-            { value: 'M4', label: 'M4' },
+            { value: 'Corolla', label: 'Corolla' },
+            { value: 'Mustang', label: 'Mustang' },
             { value: 'M5', label: 'M5' },
-            { value: 'X7', label: 'X7' },
+            { value: 'Q5', label: 'Option 4' },
+            { value: 'S-Class', label: 'S-Class' },
+            { value: 'Golf', label: 'Golf' },
+            { value: '911', label: '911' },
+            { value: 'Wrangler', label: 'Wrangler' },
+            { value: 'Model S', label: 'Model S' },
+            { value: 'MX-5', label: 'MX-5' },
         ];
         setOptionsModel(optionsArrayModel);
     }, []);
@@ -232,21 +228,17 @@ const AddAnnouncement = () => {
     const messageRef = useRef();
     const priceRef = useRef();
     const prodYearRef = useRef();
-    const markaRef = useRef();
-    const modelRef = useRef();
     const mileageRef = useRef();
     const VINRef = useRef();
     const powerRef = useRef();
-    const dodWypRef = useRef();
     const EngcapRef = useRef();
     const ColorRef = useRef();
     const DateRef = useRef();
-    const KrajRef = useRef();
     const DescRef = useRef();
     const NameRef = useRef();
     const PhoneRef = useRef();
     const emailRef = useRef();
-    const refFirestore= collection(firestore,"Search-test");
+    const refFirestore= collection(firestore,"Announcement");
     const [selectedMarka, setSelectedMarka] = useState(null);
     const [selectedModel, setSelectedModel] = useState(null);
     const [selectedNaped, setSelectedNaped] = useState(null);
@@ -267,59 +259,44 @@ const AddAnnouncement = () => {
         setSelectedCarBody(event.target.value);
     }
 
-
     const handleSave = async (event) => {
         const { uid, photoURL } = auth.currentUser
         event.preventDefault();
 
         const formData = {
-            Cena: priceRef.current.value,
-            Kraj: KrajRef.current.value,
-            Lokalizacja: emailRef.current.value,
-            Marka: markaRef.current.value,
-            Model: modelRef.current.value,
-            Nadwozie: selectedCarBody,
-            Opis: DescRef.current.value,
-            Paliwo: selectedFuel,
-            Przebieg: mileageRef.current.value,
-            Rok: prodYearRef.current.value,
-            Silnik: EngcapRef.current.value,
-            Stan: selectedStanTechniczny,
-            Wypos: dodWypRef.current.value,
             uid: uid,
             photoURL: photoURL,
+            marka: selectedMarka,
+            model: selectedModel,
+            tytul: messageRef.current.value,
+            cena: priceRef.current.value,
+            RokProdukcji: prodYearRef.current.value,
+            Przebieg: mileageRef.current.value,
+            Moc: powerRef.current.value,
+            PojemnoscSlinika: EngcapRef.current.value,
+            VIN: VINRef.current.value,
+            stanTechniczny: selectedStanTechniczny,
+            RodzajPaliwa: selectedFuel,
+            RodzajNapedu: selectedNaped,
+            SkrzyniaBiegow: selectedSkrzynia,
+            RodzajNadwozia: selectedCarBody,
+            Kolor: ColorRef.current.value,
+            DataPierwszejRejestracji: DateRef.current.value,
+            KrajPochodzenia: selectedOriginCountry,
+            Opis: DescRef.current.value,
+            Imie: NameRef.current.value,
+            NrTelefonu: PhoneRef.current.value,
+            Email: emailRef.current.value,
 
         };
 
         try {
             const docRef = await addDoc(refFirestore, formData);
-            let Zdje = '';
-
-            // Upload zeroth image to Firebase Storage
-            if (selectedImages.length > 0) {
-                const zerothImageFile = selectedImages[0];
-                const zerothImageRef = storageRef(storage, `images/${docRef.id}/image_0.jpg`);
-
-                if (typeof zerothImageFile === 'string' && zerothImageFile.startsWith('blob:')) {
-                    const response = await fetch(zerothImageFile);
-                    const blob = await response.blob();
-                    const file = new File([blob], 'image_0.jpg', { type: blob.type });
-                    await uploadBytes(zerothImageRef, file);
-                    const imageUrl = await getDownloadURL(zerothImageRef);
-                    await setDoc(doc(firestore, 'Search-test', docRef.id), { Zdje:  imageUrl  }, { merge: true });
-                    Zdje = imageUrl;
-                } else {
-                    await uploadBytes(zerothImageRef, zerothImageFile);
-                    const imageUrl = await getDownloadURL(zerothImageRef);
-                    await setDoc(doc(firestore, 'Search-test', docRef.id), { Zdje:  imageUrl  }, { merge: true });
-                    Zdje = imageUrl;
-                }
-            }
-
-            // Upload remaining images to Firebase Storage
-            for (let i = 1; i < selectedImages.length; i++) {
+            // Upload images to Firebase Storage
+            for (let i = 0; i < selectedImages.length; i++) {
                 const imageFile = selectedImages[i];
                 const imageRef = storageRef(storage, `images/${docRef.id}/image_${i}.jpg`);
+                console.log(imageFile);
 
                 if (typeof imageFile === 'string' && imageFile.startsWith('blob:')) {
                     const response = await fetch(imageFile);
@@ -327,11 +304,11 @@ const AddAnnouncement = () => {
                     const file = new File([blob], `image_${i}.jpg`, { type: blob.type });
                     await uploadBytes(imageRef, file);
                     const imageUrl = await getDownloadURL(imageRef);
-                    await setDoc(doc(firestore, 'Search-test', docRef.id), { images: { [i]: imageUrl } }, { merge: true });
+                    await setDoc(doc(firestore, "Announcement", docRef.id), { images: { [i]: imageUrl } }, { merge: true });
                 } else {
                     await uploadBytes(imageRef, imageFile);
                     const imageUrl = await getDownloadURL(imageRef);
-                    await setDoc(doc(firestore, 'Search-test', docRef.id), { images: { [i]: imageUrl } }, { merge: true });
+                    await setDoc(doc(firestore, "Announcement", docRef.id), { images: { [i]: imageUrl } }, { merge: true });
                 }
             }
             for (let i = 0; i < selectedImagesAkt.length; i++) {
@@ -353,7 +330,6 @@ const AddAnnouncement = () => {
                 }
             }
             console.log('Dane zostały dodane do Firestore z ID: ', docRef.id);
-            navigate("/");
         } catch (e) {
             console.error('Błąd dodawania danych do Firestore: ', e);
         }
@@ -405,9 +381,6 @@ const AddAnnouncement = () => {
     }
 
 
-
-
-
     return (
         <div className="background-Add">
             <nav >
@@ -419,13 +392,13 @@ const AddAnnouncement = () => {
 
                 <div className="filters-line-Add">
                     <a href="/AddAnnouncement">
-                        <img src={autoHighlights}  className="choices-logo-Add"/>
+                        <img src={auto}  className="choices-logo-Add"/>
                     </a>
                     <a href="/AddAnnouncementMotor">
                         <img src={moto}  className="choices-moto-Add"/>
                     </a>
                     <a href="/AddAnnouncementOther">
-                        <img src={key}  className="choices-key-Add"/><br />
+                        <img src={keyHighlights}  className="choices-key-Add"/><br />
                     </a>
                     <text className="text-choices-Add">Osobowe</text>
                     <text className="text-choices-Add">Motocykle</text>
@@ -436,23 +409,17 @@ const AddAnnouncement = () => {
                         Tytuł Ogłoszenia
                     </div>
 
-                    <div className="ProdYearAdd">
-                        <input required="" type="text" className="inputAvAddPrice" ref={prodYearRef}/>
-                        <span className="highlightAvAddPrice"></span>
-                        <span className="barAvAddPrice"></span>
-                        <label className="labelAvAddPrice" >Marka</label>
+                    <div className="chooseAddMarka" >
+                        <Select options={optionsMarka} className="SelectAdd" styles={customStyles} placeholder="Marka" value={selectedMarka} onChange={option => setSelectedMarka(option)}/>
                     </div>
 
-                    <div className="MileageAdd">
-                        <input required="" type="text" className="inputAvAddPrice" ref={modelRef}/>
-                        <span className="highlightAvAddPrice"></span>
-                        <span className="barAvAddPrice"></span>
-                        <label className="labelAvAddPrice" >Model</label>
+                    <div className="chooseAddModel" >
+                        <Select options={optionsModel} className="SelectAdd" styles={customStyles} placeholder="Model" value={selectedModel} onChange={option => setSelectedModel(option)}/>
                     </div>
 
 
                     <div className="addtitleAdd">
-                        <input required="" type="text" className="inputAvAdd" ref={markaRef}/>
+                        <input required="" type="text" className="inputAvAdd" ref={messageRef}/>
                         <span className="highlightAvAdd"></span>
                         <span className="barAvAdd"></span>
                         <label className="labelAvAdd" >Tytuł Ogłoszenia</label>
@@ -531,7 +498,7 @@ const AddAnnouncement = () => {
                             </label>
                             <label className="radio">
                                 <input type="radio" name="radioFuel" value="Disel" onChange={handleFuelChange} />
-                                <span className="name">Diesel</span>
+                                <span className="name">Disel</span>
                             </label>
 
                             <label className="radio">
@@ -573,13 +540,6 @@ const AddAnnouncement = () => {
                         <span className="highlightAvAddPrice"></span>
                         <span className="barAvAddPrice"></span>
                         <label className="labelAvAddPrice" >Pojemność silnika</label>
-                    </div>
-
-                    <div className="PowerAdd">
-                        <input required="" type="text" className="inputAvAddPrice" ref={dodWypRef}/>
-                        <span className="highlightAvAddPrice"></span>
-                        <span className="barAvAddPrice"></span>
-                        <label className="labelAvAddPrice" >Dodatkowe wyposarzenie</label>
                     </div>
 
 
@@ -652,11 +612,8 @@ const AddAnnouncement = () => {
                         <label className="labelAvAddPrice" >Data pierwszej rejestracji</label>
                     </div>
 
-                    <div className="PowerAdd">
-                        <input required="" type="text" className="inputAvAddPrice" ref={KrajRef}/>
-                        <span className="highlightAvAddPrice"></span>
-                        <span className="barAvAddPrice"></span>
-                        <label className="labelAvAddPrice" >Kraj pochodzenia</label>
+                    <div className="OriginCountry" >
+                        <Select options={optionsOriginCountry} className="SelectAdd" styles={customStyles} placeholder="Kraj pochodzenia" value={selectedOriginCountry} onChange={option => setSelectedOriginCountry(option)}/>
                     </div>
 
 
@@ -673,9 +630,6 @@ const AddAnnouncement = () => {
                     <div className="technicaldataTitleAdd">
                         Zdjęcia
                     </div>
-
-
-
 
                     <section className="AddMultiImgSectionAdd">
                         <label className="AddMultiImgLabelAdd">
@@ -732,7 +686,7 @@ const AddAnnouncement = () => {
                         <input required="" type="text" className="inputAvAddPrice" ref={emailRef}/>
                         <span className="highlightAvAddPrice"></span>
                         <span className="barAvAddPrice"></span>
-                        <label className="labelAvAddPrice" >Lokalizacja</label>
+                        <label className="labelAvAddPrice" >Email</label>
                     </div>
 
 
@@ -794,4 +748,4 @@ const AddAnnouncement = () => {
     );
 };
 
-export default AddAnnouncement;
+export default AddAnnouncementOther;

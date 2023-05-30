@@ -41,6 +41,7 @@
 }
 .username-nav-messages img{
     height:40px;
+    width: 40px;
     padding:10px;
     border-radius: 100%;
 }
@@ -74,6 +75,22 @@
 
 }
 .add-adv-button:hover{
+    background-color: #fdd852;
+}
+
+.add-adv-button-send-mess{
+    background-color: #FDCF28;
+    color: black;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    box-shadow: 2px 2px 4px gray;
+
+
+}
+.add-adv-button-send-mess:hover{
     background-color: #fdd852;
 }
 
@@ -202,14 +219,14 @@
 .ChatIcons{
     display: flex;
     flex-direction: column;
-    margin-left: 18vw;
     justify-content: center;
 
 }
 .ChatIcons img{
-    height:40px;
-    width:50px;
-    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .Messages-component{
@@ -264,6 +281,10 @@
     flex-direction: row-reverse;
 
 }
+.message.false .MessageComponent.owner{
+    flex-direction: row;
+
+}
  .owner .messageContent{
     align-items: flex-end;
 }
@@ -273,6 +294,13 @@
     border-radius: 10px 0px 10px 10px;
     max-width: max-content;
 }
+
+.message.false .MessageComponent.owner p {
+    background-color: lightgray;
+    border-radius: 10px 0px 10px 10px;
+    max-width: max-content
+}
+
 
 .messageInfo{
     display: flex;

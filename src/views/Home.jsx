@@ -20,11 +20,14 @@ import { CSSTransition } from 'react-transition-group';
 import {signOut} from "firebase/auth"
 import { auth } from '../firebase'
 import { AuthContext } from "../context/AuthContext";
+import NavbarMain from "../components/NavBarMain";
+import NavbarLogin from "../components/NavBarLogin";
 
 
 
 
-export default function Main(props){
+export default function Home(props){
+    const {currentUser} = useContext(AuthContext)
 
 
     const [registerForm, setregisterForm] = useState({
@@ -131,51 +134,14 @@ export default function Main(props){
     }
 
 
-    const offerData = async (event) => {
-        // try {
-        //     const res = await axios.get("/offerData")
-        //     console.log(res);
-        // }
-        // catch (error){
-        //     console.log(error)
-        // }
-        //document.getElementById("place-to-add-offer").style.display = "inline-block"
-    };
 
-    useEffect(() => {
-        offerData();
-    }, []);
-    // function popUpOffer() {
-    //     //document.getElementById("place-to-add-offer").style.display = "inline-block"
-    // }
 
     return (
 
         <div className="main">
 
-            <div className="nav">
-
-                <div className="logo-div">
-                    <img src={logo} className="logo-main"/>
-
-                </div>
-
-                <Link to={"/login"} className="link">
-                    Zaloguj się
-                </Link>
-                <Link to={"/register"} className="link">
-                    Rejestracja
-                </Link>
-                {/*<Link to={"/messages"} className="link">*/}
-                {/*    wiadomości*/}
-                {/*</Link>*/}
-
-                <button className="add-adv"
-                >
-                    <Link to={"/AddAnnouncement"} className="link">Dodaj ogłoszenie + </Link>
-                </button>
-
-            </div>
+            {currentUser && <NavbarLogin/>}
+            {!currentUser && <NavbarMain/>}
 
             <form>
                 <div className="image-background">
@@ -208,15 +174,15 @@ export default function Main(props){
                         >
                             <div>
                                 <div className="input">
-                                    <label className="radio">
+                                    <label className="radioMain">
                                         <input onChange={handleChange} type="radio" value="new"
                                                name="criteria-is.new"/> Nowe
                                     </label>
-                                    <label className="radio">
+                                    <label className="radioMain">
                                         <input onChange={handleChange} type="radio" value="used"
                                                name="criteria-is.new"/> Używane
                                     </label>
-                                    <label className="radio">
+                                    <label className="radioMain">
                                         <input
                                             onChange={handleChange}
                                             type="radio"
@@ -243,15 +209,15 @@ export default function Main(props){
                                        placeholder="Cena do"/>
 
                                 <div className="input">
-                                    <label className="radio">
+                                    <label className="radioMain">
                                         <input onChange={handleChange} type="radio" value="fuel"
                                                name="fuel_type"/> Benzyna
                                     </label>
-                                    <label className="radio">
+                                    <label className="radioMain">
                                         <input onChange={handleChange} type="radio" value="diesel"
                                                name="fuel_type"/> Diesel
                                     </label>
-                                    <label className="radio">
+                                    <label className="radioMain">
                                         <input
                                             onChange={handleChange}
                                             type="radio"
@@ -282,7 +248,7 @@ export default function Main(props){
                         >
                             <div>
                                 <div className="input">
-                                    <label className="radio">
+                                    <label className="radioMain">
                                         <input type="radio" value="new" name="criteria-is.new"/> Nowe
                                     </label>
                                     <label className="radio">
