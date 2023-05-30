@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useState, useEffect} from "react";
 import '../styles/AddAnnouncement.css';
 import logo from '../assets/img/logov2.png';
@@ -34,6 +34,7 @@ const AddAnnouncementMotor = () => {
     const storage = getStorage();
     const firestore = getFirestore();
 
+    const navigate = useNavigate();
     const [imageSrc, setImageSrc] = useState(auto);
     function handleClick(src) {
         setImageSrc(src);
@@ -91,20 +92,46 @@ const AddAnnouncementMotor = () => {
         // Fetch options from API or any data source
         // Here is an example options array
         const optionsArrayModel = [
-            { value: 'Corolla', label: 'Corolla' },
-            { value: 'Mustang', label: 'Mustang' },
+            { value: '3 Series', label: '3 Series' },
+            { value: '5 Series', label: '5 Series' },
+            { value: 'X3', label: 'X3' },
+            { value: '7 Series', label: '7 Series' },
+            { value: 'X5', label: 'X5' },
+            { value: '1 Series', label: '1 Series' },
+            { value: 'X1', label: 'X1' },
+            { value: 'i3', label: 'i3' },
+            { value: 'M2', label: 'M2' },
+            { value: 'M3', label: 'M3' },
+            { value: 'M4', label: 'M4' },
             { value: 'M5', label: 'M5' },
-            { value: 'Q5', label: 'Option 4' },
-            { value: 'S-Class', label: 'S-Class' },
-            { value: 'Golf', label: 'Golf' },
-            { value: '911', label: '911' },
-            { value: 'Wrangler', label: 'Wrangler' },
-            { value: 'Model S', label: 'Model S' },
-            { value: 'MX-5', label: 'MX-5' },
+            { value: 'X7', label: 'X7' },
         ];
         setOptionsModel(optionsArrayModel);
     }, []);
 
+    const [optionsNaped, setOptionsNapend] = useState([]);
+    useEffect(() => {
+        // Fetch options from API or any data source
+        // Here is an example options array
+        const optionsArrayNapend = [
+            { value: 'FWD (napęd na przednią oś)', label: 'FWD' },
+            { value: 'RWD (napęd na tylną oś) ', label: 'RWD' },
+            { value: '4WD (napęd na cztery koła)', label: '4WD' },
+        ];
+        setOptionsNapend(optionsArrayNapend);
+    }, []);
+
+    const [optionsSkrzynia, setOptionsSkrzynia] = useState([]);
+    useEffect(() => {
+        // Fetch options from API or any data source
+        // Here is an example options array
+        const optionsArraySkrzynia = [
+            { value: 'Skrzynia manualna', label: 'Skrzynia manualna' },
+            { value: 'Skrzynia automatyczna stopniowa ', label: 'Skrzynia automatyczna stopniowa' },
+            { value: 'Skrzynie półautomatyczna stopniowa', label: 'Skrzynie półautomatyczna stopniowa' },
+        ];
+        setOptionsSkrzynia(optionsArraySkrzynia);
+    }, []);
 
     const [optionsOriginCountry, setOptionsOriginCountry] = useState([]);
     useEffect(() => {
@@ -205,25 +232,39 @@ const AddAnnouncementMotor = () => {
     const messageRef = useRef();
     const priceRef = useRef();
     const prodYearRef = useRef();
+    const markaRef = useRef();
+    const modelRef = useRef();
     const mileageRef = useRef();
     const VINRef = useRef();
     const powerRef = useRef();
+    const dodWypRef = useRef();
     const EngcapRef = useRef();
     const ColorRef = useRef();
     const DateRef = useRef();
+    const KrajRef = useRef();
     const DescRef = useRef();
     const NameRef = useRef();
     const PhoneRef = useRef();
     const emailRef = useRef();
-    const refFirestore= collection(firestore,"Announcement");
+    const refFirestore= collection(firestore,"Search-test");
     const [selectedMarka, setSelectedMarka] = useState(null);
     const [selectedModel, setSelectedModel] = useState(null);
+    const [selectedNaped, setSelectedNaped] = useState(null);
+    const [selectedSkrzynia, setSelectedSkrzynia] = useState(null);
     const [selectedOriginCountry, setSelectedOriginCountry] = useState(null);
     const [selectedStanTechniczny, setSelectedStanTechniczny] = useState(null);
+    const [selectedFuel, setSelectedFuel] = useState(null);
+    const [selectedCarBody, setSelectedCarBody] = useState(null);
 
-
+    const handleFuelChange = (event) => {
+        setSelectedFuel(event.target.value);
+    }
     const handleStanTechnicznyChange = (event) => {
         setSelectedStanTechniczny(event.target.value);
+    }
+
+    const handleCarBodyChange = (event) => {
+        setSelectedCarBody(event.target.value);
     }
 
 
@@ -232,35 +273,53 @@ const AddAnnouncementMotor = () => {
         event.preventDefault();
 
         const formData = {
+            Cena: priceRef.current.value,
+            Kraj: KrajRef.current.value,
+            Lokalizacja: emailRef.current.value,
+            Marka: markaRef.current.value,
+            Model: modelRef.current.value,
+            Nadwozie: selectedCarBody,
+            Opis: DescRef.current.value,
+            Paliwo: selectedFuel,
+            Przebieg: mileageRef.current.value,
+            Rok: prodYearRef.current.value,
+            Silnik: EngcapRef.current.value,
+            Stan: selectedStanTechniczny,
+            Wypos: dodWypRef.current.value,
             uid: uid,
             photoURL: photoURL,
-            marka: selectedMarka,
-            model: selectedModel,
-            tytul: messageRef.current.value,
-            cena: priceRef.current.value,
-            RokProdukcji: prodYearRef.current.value,
-            Przebieg: mileageRef.current.value,
-            Moc: powerRef.current.value,
-            PojemnoscSlinika: EngcapRef.current.value,
-            VIN: VINRef.current.value,
-            stanTechniczny: selectedStanTechniczny,
-            Kolor: ColorRef.current.value,
-            DataPierwszejRejestracji: DateRef.current.value,
-            KrajPochodzenia: selectedOriginCountry,
-            Opis: DescRef.current.value,
-            Imie: NameRef.current.value,
-            NrTelefonu: PhoneRef.current.value,
-            Email: emailRef.current.value,
 
         };
 
         try {
             const docRef = await addDoc(refFirestore, formData);
-            // Upload images to Firebase Storage
-            for (let i = 0; i < selectedImages.length; i++) {
+            let Zdje = '';
+
+            // Upload zeroth image to Firebase Storage
+            if (selectedImages.length > 0) {
+                const zerothImageFile = selectedImages[0];
+                const zerothImageRef = storageRef(storage, `images/${docRef.id}/image_0.jpg`);
+
+                if (typeof zerothImageFile === 'string' && zerothImageFile.startsWith('blob:')) {
+                    const response = await fetch(zerothImageFile);
+                    const blob = await response.blob();
+                    const file = new File([blob], 'image_0.jpg', { type: blob.type });
+                    await uploadBytes(zerothImageRef, file);
+                    const imageUrl = await getDownloadURL(zerothImageRef);
+                    await setDoc(doc(firestore, 'Search-test', docRef.id), { Zdje:  imageUrl  }, { merge: true });
+                    Zdje = imageUrl;
+                } else {
+                    await uploadBytes(zerothImageRef, zerothImageFile);
+                    const imageUrl = await getDownloadURL(zerothImageRef);
+                    await setDoc(doc(firestore, 'Search-test', docRef.id), { Zdje:  imageUrl  }, { merge: true });
+                    Zdje = imageUrl;
+                }
+            }
+
+            // Upload remaining images to Firebase Storage
+            for (let i = 1; i < selectedImages.length; i++) {
                 const imageFile = selectedImages[i];
                 const imageRef = storageRef(storage, `images/${docRef.id}/image_${i}.jpg`);
-                console.log(imageFile);
 
                 if (typeof imageFile === 'string' && imageFile.startsWith('blob:')) {
                     const response = await fetch(imageFile);
@@ -268,11 +327,11 @@ const AddAnnouncementMotor = () => {
                     const file = new File([blob], `image_${i}.jpg`, { type: blob.type });
                     await uploadBytes(imageRef, file);
                     const imageUrl = await getDownloadURL(imageRef);
-                    await setDoc(doc(firestore, "Announcement", docRef.id), { images: { [i]: imageUrl } }, { merge: true });
+                    await setDoc(doc(firestore, 'Search-test', docRef.id), { images: { [i]: imageUrl } }, { merge: true });
                 } else {
                     await uploadBytes(imageRef, imageFile);
                     const imageUrl = await getDownloadURL(imageRef);
-                    await setDoc(doc(firestore, "Announcement", docRef.id), { images: { [i]: imageUrl } }, { merge: true });
+                    await setDoc(doc(firestore, 'Search-test', docRef.id), { images: { [i]: imageUrl } }, { merge: true });
                 }
             }
             for (let i = 0; i < selectedImagesAkt.length; i++) {
@@ -294,6 +353,7 @@ const AddAnnouncementMotor = () => {
                 }
             }
             console.log('Dane zostały dodane do Firestore z ID: ', docRef.id);
+            navigate("/");
         } catch (e) {
             console.error('Błąd dodawania danych do Firestore: ', e);
         }
@@ -345,6 +405,9 @@ const AddAnnouncementMotor = () => {
     }
 
 
+
+
+
     return (
         <div className="background-Add">
             <nav >
@@ -373,17 +436,23 @@ const AddAnnouncementMotor = () => {
                         Tytuł Ogłoszenia
                     </div>
 
-                    <div className="chooseAddMarka" >
-                        <Select options={optionsMarka} className="SelectAdd" styles={customStyles} placeholder="Marka" value={selectedMarka} onChange={option => setSelectedMarka(option)}/>
+                    <div className="ProdYearAdd">
+                        <input required="" type="text" className="inputAvAddPrice" ref={prodYearRef}/>
+                        <span className="highlightAvAddPrice"></span>
+                        <span className="barAvAddPrice"></span>
+                        <label className="labelAvAddPrice" >Marka</label>
                     </div>
 
-                    <div className="chooseAddModel" >
-                        <Select options={optionsModel} className="SelectAdd" styles={customStyles} placeholder="Model" value={selectedModel} onChange={option => setSelectedModel(option)}/>
+                    <div className="MileageAdd">
+                        <input required="" type="text" className="inputAvAddPrice" ref={modelRef}/>
+                        <span className="highlightAvAddPrice"></span>
+                        <span className="barAvAddPrice"></span>
+                        <label className="labelAvAddPrice" >Model</label>
                     </div>
 
 
                     <div className="addtitleAdd">
-                        <input required="" type="text" className="inputAvAdd" ref={messageRef}/>
+                        <input required="" type="text" className="inputAvAdd" ref={markaRef}/>
                         <span className="highlightAvAdd"></span>
                         <span className="barAvAdd"></span>
                         <label className="labelAvAdd" >Tytuł Ogłoszenia</label>
@@ -449,11 +518,47 @@ const AddAnnouncementMotor = () => {
                         </div>
                     </div>
 
+                    <div className="ContFuelAdd">
+                        <div className="nameNewAdd">
+                            <label >
+                                <span className="name">Rodzaj paliwa</span>
+                            </label>
+                        </div>
+                        <div className="radioinputsFuelAdd">
+                            <label className="radio">
+                                <input type="radio" name="radioFuel" value="Benzyna" onChange={handleFuelChange} />
+                                <span className="name">Benzyna</span>
+                            </label>
+                            <label className="radio">
+                                <input type="radio" name="radioFuel" value="Disel" onChange={handleFuelChange} />
+                                <span className="name">Diesel</span>
+                            </label>
 
+                            <label className="radio">
+                                <input type="radio" name="radioFuel" value={"Elektryczny"} onChange={handleFuelChange} />
+                                <span className="name">Elektryczny</span>
+                            </label>
+                            <label className="radio">
+                                <input type="radio" name="radioFuel" value={"LPG"} onChange={handleFuelChange} />
+                                <span className="name">LPG</span>
+                            </label>
+                            <label className="radio">
+                                <input type="radio" name="radioFuel" value={"Hybrydowe"} onChange={handleFuelChange} />
+                                <span className="name">Hybrydowe</span>
+                            </label>
+                        </div>
+                    </div>
 
 
                     <div className="technicaldataTitleAdd">
                         Szczegółowe dane techniczne
+                    </div>
+                    <div className="chooseAddMarka" >
+                        <Select options={optionsNaped} className="SelectAdd" styles={customStyles} placeholder="Rodzaj napędu" value={selectedNaped} onChange={option => setSelectedNaped(option)}/>
+                    </div>
+
+                    <div className="chooseAddModel" >
+                        <Select options={optionsSkrzynia} className="SelectAdd" styles={customStyles} placeholder="Skrzynia biegów" value={selectedSkrzynia} onChange={option => setSelectedSkrzynia(option)}/>
                     </div>
 
                     <div className="PowerAdd">
@@ -470,12 +575,64 @@ const AddAnnouncementMotor = () => {
                         <label className="labelAvAddPrice" >Pojemność silnika</label>
                     </div>
 
+                    <div className="PowerAdd">
+                        <input required="" type="text" className="inputAvAddPrice" ref={dodWypRef}/>
+                        <span className="highlightAvAddPrice"></span>
+                        <span className="barAvAddPrice"></span>
+                        <label className="labelAvAddPrice" >Dodatkowe wyposarzenie</label>
+                    </div>
+
 
                     <div className="technicaldataTitleAdd">
                         Nadwozie
                     </div>
 
+                    <div className="ContFuelAdd">
+                        <div className="nameNewAdd">
+                            <label >
+                                <span className="name">Typ nadwozia</span>
+                            </label>
+                        </div>
+                        <div className="radioinputsCarBodyAdd">
+                            <label className="radio">
+                                <input type="radio" name="radioFuel" value="Coupe" onChange={handleCarBodyChange} />
+                                <span className="name">Coupe</span>
+                            </label>
+                            <label className="radio">
+                                <input type="radio" name="radioFuel" value="Hatchback" onChange={handleCarBodyChange} />
+                                <span className="name">Hatchback</span>
+                            </label>
 
+                            <label className="radio">
+                                <input type="radio" name="radioFuel" value={"Pickup"} onChange={handleCarBodyChange} />
+                                <span className="name">Pickup</span>
+                            </label>
+                            <label className="radio">
+                                <input type="radio" name="radioFuel" value={"Sedan"} onChange={handleCarBodyChange} />
+                                <span className="name">Sedan</span>
+                            </label>
+                            <label className="radio">
+                                <input type="radio" name="radioFuel" value={"Terenowy"} onChange={handleCarBodyChange} />
+                                <span className="name">Terenowy</span>
+                            </label>
+                            <label className="radio">
+                                <input type="radio" name="radioFuel" value={"Suv"} onChange={handleCarBodyChange} />
+                                <span className="name">Suv</span>
+                            </label>
+                            <label className="radio">
+                                <input type="radio" name="radioFuel" value={"Kabriolet"} onChange={handleCarBodyChange} />
+                                <span className="name">Kabriolet</span>
+                            </label>
+                            <label className="radio">
+                                <input type="radio" name="radioFuel" value={"Limuzyna"} onChange={handleFuelChange} />
+                                <span className="name">Limuzyna</span>
+                            </label>
+                            <label className="radio">
+                                <input type="radio" name="radioFuel" value={"Inny"} onChange={handleFuelChange} />
+                                <span className="name">Inny</span>
+                            </label>
+                        </div>
+                    </div>
 
                     <div className="PowerAdd">
                         <input required="" type="text" className="inputAvAddPrice" ref={ColorRef}/>
@@ -495,8 +652,11 @@ const AddAnnouncementMotor = () => {
                         <label className="labelAvAddPrice" >Data pierwszej rejestracji</label>
                     </div>
 
-                    <div className="OriginCountry" >
-                        <Select options={optionsOriginCountry} className="SelectAdd" styles={customStyles} placeholder="Kraj pochodzenia" value={selectedOriginCountry} onChange={option => setSelectedOriginCountry(option)}/>
+                    <div className="PowerAdd">
+                        <input required="" type="text" className="inputAvAddPrice" ref={KrajRef}/>
+                        <span className="highlightAvAddPrice"></span>
+                        <span className="barAvAddPrice"></span>
+                        <label className="labelAvAddPrice" >Kraj pochodzenia</label>
                     </div>
 
 
@@ -513,6 +673,9 @@ const AddAnnouncementMotor = () => {
                     <div className="technicaldataTitleAdd">
                         Zdjęcia
                     </div>
+
+
+
 
                     <section className="AddMultiImgSectionAdd">
                         <label className="AddMultiImgLabelAdd">
@@ -569,7 +732,7 @@ const AddAnnouncementMotor = () => {
                         <input required="" type="text" className="inputAvAddPrice" ref={emailRef}/>
                         <span className="highlightAvAddPrice"></span>
                         <span className="barAvAddPrice"></span>
-                        <label className="labelAvAddPrice" >Email</label>
+                        <label className="labelAvAddPrice" >Lokalizacja</label>
                     </div>
 
 
@@ -630,5 +793,4 @@ const AddAnnouncementMotor = () => {
         </div>
     );
 };
-
 export default AddAnnouncementMotor;

@@ -270,7 +270,7 @@ function Search()  {
                 <button className="logout-button" onClick={() => signOut(auth)}>logout</button>
 
                 <button className="add-adv-search">
-                    <Link to={"/login"} className="link-search">Dodaj ogłoszenie + </Link>
+                    <Link to={"/AddAnnouncement"} className="link-search">Dodaj ogłoszenie + </Link>
                 </button>
 
             </div>

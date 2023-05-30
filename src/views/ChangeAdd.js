@@ -156,62 +156,58 @@ function ChangeAdd(props) {
     return (
         <div className="mainChangeAdd">
 
-            <div className="containerNavChangeAdd">
-
-                <div className="logo-div-ChangeAdd">
+            <div className="cointainerNavOfferHistory">
+                <div className="logo-div-OfferHistory">
                     <a href="/">
-                        <img src={logo} alt="Main.js Logo" className="logo-main-ChangeAdd"/>
+                        <img src={logo} alt="Main.js Logo" className="logo-main-OfferHistory"/>
                     </a>
                 </div>
-                <div className="buttongroupus-ChangeAdd">
-                    <div className="obserwowaneus-div-ChangeAdd">
-                        <button className="obserwowane-ChangeAdd">
+                <div className="buttongroupus-OfferHistory">
+                    <div className="obserwowaneus-div-OfferHistory">
+                        <button className="obserwowane-OfferHistory">
                             <Link className="favlink" to="/favourites">
                                 Obserwowane ★
                             </Link>
                         </button>
                     </div>
 
-                    <div className="Usernamedisp-div-ChangeAdd">
-                        <button className="Usernamedisp-ChangeAdd">
+                    <div className="Usernamedisp-div-OfferHistory">
+                        <button className="Usernamedisp-OfferHistory">
 
                             <span>{currentUser.displayName}</span>
 
                         </button>
                     </div>
-                    <div className="ogloszenie-button-div-ChangeAdd">
+                    <div className="ogloszenie-button-div-OfferHistory">
 
-                        <button className="ogloszenie-button-ChangeAdd">
-                            <a href="/AddAnnouncement" className="ogloszenie-text-ChangeAdd">
+                        <button className="ogloszenie-button-OfferHistory">
+                            <a href="/AddAnnouncement" className="ogloszenie-text-OfferHistory">
                                 Dodaj Ogłoszenie
                             </a>
                         </button>
 
                     </div>
-
+                </div>
             </div>
-
-
-            </div>
-            <div className="image-backgroundChangeAdd">
+            <div className="cointainerMidNavOfferHistory">
                 <div>
                     <Link to="/user">
-                    <button className="button1user-ChangeAdd">
-                        Konto
-                    </button>
+                        <button className="button1user-OfferHistory">
+                            Konto
+                        </button>
                     </Link>
                     <Link to="/changeadd">
-                    <button className="button2user-ChangeAdd">
-                        Ogłoszenia
-                    </button>
+                        <button className="button2user-OfferHistory">
+                            Ogłoszenia
+                        </button>
                     </Link>
                     <Link to="/messages">
-                        <button className="button3user-ChangeAdd">
+                        <button className="button3user-OfferHistory">
                             Wiadomości
                         </button>
                     </Link>
                     <Link to="/offerHistory">
-                        <button className="button4user-ChangeAdd">
+                        <button className="button4user-OfferHistory">
                             Historia
                         </button>
                     </Link>

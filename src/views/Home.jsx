@@ -28,7 +28,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import NavbarMain from "../components/NavBarMain";
 import NavbarLogin from "../components/NavBarLogin";
-import {addDoc, collection, doc, getDocs} from "@firebase/firestore";
+import { doc} from "@firebase/firestore";
 import {getDoc, updateDoc} from "firebase/firestore";
 
 
@@ -256,19 +256,9 @@ export default function Home(props){
 
 
 
-                <div>
-                    <ToastContainer />
-                </div>
 
-                <Link to={"/login"} className="link">
-                    Zaloguj się
-                </Link>
-                <Link to={"/register"} className="link">
-                    Rejestracja
-                </Link>
-                <Link to={"/mess"} className="link">
-                    wiadomości
-                </Link>
+
+
 
 
     return (
@@ -277,7 +267,9 @@ export default function Home(props){
 
             {currentUser && <NavbarLogin/>}
             {!currentUser && <NavbarMain/>}
-
+            <div>
+                <ToastContainer />
+            </div>
             <form>
                 <div className="image-background">
                     <div className="filters">

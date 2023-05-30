@@ -10,7 +10,7 @@
     display: flex;
     width: 100%;
     height: 13vh;
-    flex-direction: column;
+    flex-direction: row;
     box-shadow: 2px 2px 4px gray;
     font-size: 22px;
     z-index: 9999;
@@ -44,8 +44,9 @@
 
 .logo-div-OfferHistory{
 
-    height: 10%;
+    height: 100%;
     width: 10%;
+    margin-left: 20vh;
 }
 
 .logo-main-OfferHistory{
@@ -53,11 +54,13 @@
     height:13vh;
     width: 10vw;
     margin-bottom:3vh;
-    margin-left: 10vw;
+
 }
 .buttongroupus-OfferHistory{
     display: flex;
-
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
 }
 
 .image-backgroundOfferHistory {
@@ -254,8 +257,7 @@
 }
 
 .ogloszenie-button-div-OfferHistory{
-    flex-direction: row;
-    display: flex;
+
 }
 .ogloszenie-text-OfferHistory{
     text-decoration: none;
@@ -272,7 +274,7 @@
 
 .obserwowane-OfferHistory {
     margin-right: 2.5vw;
-    margin-left: 45vw;
+    margin-left: 25vw;
     margin-top: 3.4vh;
     justify-content: center;
     align-items: center;

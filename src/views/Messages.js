@@ -45,7 +45,7 @@ function Messages() {
             </div>
             <div className="button-add-adv-messages">
                 <button className="add-adv-button">
-                    <Link to={"/login"} className="link-messages">Dodaj ogłoszenie + </Link>
+                    <Link to={"/AddAnnouncement"} className="link-messages">Dodaj ogłoszenie + </Link>
                 </button>
             </div>
 
