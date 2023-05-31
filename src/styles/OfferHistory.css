@@ -114,9 +114,9 @@
 .button2user-OfferHistory {
     position: relative;
     margin-left: 10vw;
-    background-color: rgb(253, 207, 40);
+    background-color: rgb(255, 255, 255);
     border-radius: 5px;
-    box-shadow: rgb(121, 104, 36) 0px 4px 0px 0px;
+    box-shadow: rgb(162, 162, 162) 0px 4px 0px 0px;
     padding: 15px;
     background-repeat: no-repeat;
     box-sizing: border-box;
@@ -132,7 +132,7 @@
 
 .button2user-OfferHistory::before {
     content: "";
-    background-color: rgb(259, 216, 46);
+    background-color: rgb(228, 228, 228);
     width: 0;
     height: 100%;
     position: absolute;
@@ -184,11 +184,11 @@
 }
 
 .button4user-OfferHistory {
-    margin-left: 10vw;
     position: relative;
-    background-color: rgb(255, 255, 255);
+    margin-left: 10vw;
+    background-color: rgb(253, 207, 40);
     border-radius: 5px;
-    box-shadow: rgb(162, 162, 162) 0px 4px 0px 0px;
+    box-shadow: rgb(121, 104, 36) 0px 4px 0px 0px;
     padding: 15px;
     background-repeat: no-repeat;
     box-sizing: border-box;
@@ -204,7 +204,7 @@
 
 .button4user-OfferHistory::before {
     content: "";
-    background-color: rgb(228, 228, 228);
+    background-color: rgb(259, 216, 46);
     width: 0;
     height: 100%;
     position: absolute;

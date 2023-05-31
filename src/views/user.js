@@ -2,13 +2,14 @@ import React, {useContext,useState, useEffect, useRef, } from 'react';
 import {useNavigate,Link} from "react-router-dom";
 import '../styles/user.css';
 import logo from '../assets/img/logov2.png';
-
+import ReactSwitch from "react-switch";
 import {auth, db, storage} from "../firebase";
 
 import { AuthContext } from '../context/AuthContext'
 
 import 'firebase/auth';
 import { getAuth, updateProfile, updatePassword, updateEmail, sendPasswordResetEmail} from "firebase/auth";
+import{createContext} from "react"
 
 
 
@@ -22,7 +23,7 @@ import {
     list,
 } from "firebase/storage";
 
-
+export const ThemeContext = createContext(null);
 
 function User(props) {
     // const auth = getAuth();
@@ -111,104 +112,115 @@ function User(props) {
         });
     }, []);
 
-
+    const [theme, setTheme] = useState("light");
+    const toggleTheme = () => {
+        setTheme((curr) => (curr === "light" ? "dark" : "light"));
+    }
     return (
-        <div className="mainuser">
+        <ThemeContext.Provider value={{theme, toggleTheme}}>
+            <div classname="mode" id={theme}>
+                <div className="mainuser">
 
-            <div className="navuser">
+                    <div className="navuser">
 
-                <div className="logo-divuser">
-                    <a href="/">
-                        <img src={logo} alt="Main.js Logo" className="logo-mainuser"/>
-                    </a>
+                        <div className="logo-divuser">
+                            <a href="http://localhost:3000">
+                                <img src={logo} alt="Main.js Logo" className="logo-mainuser"/>
+                            </a>
 
-                    <div className="buttongroupus">
-                        <div className="obserwowaneus-div">
-                            <button className="obserwowaneus">
-                                <Link className="favlink" to="/favourites">
-                                Obserwowane ★
+                            <div className="buttongroupus">
+
+                                <div>
+                                    <label className="swithcmodelabel"> {theme === "light" ? "☼" : "☾"}</label>
+                                </div>
+                                <div className="modebutton">
+                                    <ReactSwitch onChange={toggleTheme} checked={theme === "dark"}/>
+                                </div>
+                                <div className="obserwowaneus-div">
+                                    <button className="obserwowaneus">
+                                        <Link className="favlink" to="/favourites">
+                                            Obserwowane ★
+                                        </Link>
+                                    </button>
+                                </div>
+
+                                <div className="Usernamedisp-div">
+                                    <button className="Usernamedisp">
+
+                                        <span>{currentUser.displayName}</span>
+
+                                    </button>
+                                </div>
+                                <div className="ogloszenie-button-div">
+                                    <Link to="/AddAnnouncement">
+                                        <button className="ogloszenie-button">
+                                            Dodaj Ogłoszenie
+                                        </button>
+                                    </Link>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div className="image-backgrounduser">
+                        <div>
+
+                            <button className="button1user">
+                                Konto
+                            </button>
+                            <Link to="/changeadd">
+                            <button className="button2user">
+                                Ogłoszenia
+                            </button>
                             </Link>
-                            </button>
-                        </div>
-
-                        <div className="Usernamedisp-div">
-                            <button className="Usernamedisp">
-
-                                <span>{currentUser.displayName}</span>
-
-                            </button>
-                        </div>
-                        <div className="ogloszenie-button-div">
-                            <Link to="/AddAnnouncement">
-                                <button className="ogloszenie-button">
-                                    Dodaj Ogłoszenie
+                            <Link to="/messages">
+                                <button className="button3user">
+                                    Wiadomości
                                 </button>
                             </Link>
+                            <Link to="/OfferHistory">
+                            <button className="button4user">
+                                Historia
+                            </button>
+                            </Link>
                         </div>
+                    </div>
+                    <div className="user">
 
+
+                    </div>
+                    <div>
+
+
+                    </div>
+                    <div className="cos">
+                        <div className="button-container">
+
+                            <div className="">
+                                <button className="usernamech-button" onClick={handleClick1}>
+                                    Zmień Nazwę Użytkownika
+                                </button>
+                                <input required="" type="text" className="inputnamech" ref={nameref}/>
+                            </div>
+
+                            <button className="passwordch-button" onClick={handleClick3}>
+                                Zmień Hasło
+                            </button>
+
+                        </div>
+                        <div className="userphotouser">
+                            <img src={currentUser.photoURL} alt=""/>
+                        </div>
+                    </div>
+                    <div>
 
                     </div>
 
                 </div>
             </div>
-            <div className="image-backgrounduser">
-                <div>
-                    <Link to="/user">
-                    <button className="button1user">
-                        Konto
-                    </button>
-                    </Link>
-                    <Link to="/changeadd">
-                    <button className="button2user">
-                        Ogłoszenia
-                    </button>
-                    </Link>
-                    <Link to="/messages">
-                        <button className="button3user">
-                            Wiadomości
-                        </button>
-                    </Link>
-                    <Link to="/offerHistory">
-                        <button className="button4user">
-                            Historia
-                        </button>
-                    </Link>
-                </div>
-            </div>
-            <div className="user">
-
-
-            </div>
-            <div>
-
-
-            </div>
-            <div className="cos">
-                <div className="button-container">
-
-                    <div className="">
-                        <button className="usernamech-button" onClick={handleClick1}>
-                            Zmień Nazwę Użytkownika
-                        </button>
-                        <input required="" type="text" className="inputnamech" ref={nameref}/>
-                    </div>
-
-                    <button className="passwordch-button" onClick={handleClick3}>
-                        Zmień Hasło
-                    </button>
-
-                </div>
-                <div className="userphotouser">
-                    <img src={currentUser.photoURL} alt=""/>
-                </div>
-            </div>
-            <div>
-
-            </div>
-
-        </div>
-
-
+        </ThemeContext.Provider>
     );
 
 
