@@ -1,22 +1,17 @@
-import {useNavigate,Link} from "react-router-dom";
-import {useState, useEffect} from "react";
+import {Link, useNavigate} from "react-router-dom";
+import React, {useEffect, useRef, useState} from "react";
 import '../styles/Search.css';
 import logo from '../assets/img/logov2.png';
-import React, { useRef } from "react";
-import firebase from "firebase/compat/app";
-import { db, messaging} from "../firebase"
-import {getDocs, collection,addDoc, doc, query, where, limit, addDo, onSnapshot} from "@firebase/firestore";
-import {signInWithEmailAndPassword, signOut} from "firebase/auth";
-import {getToken, onMessage } from "firebase/messaging";
-import { auth, firestore } from "../firebase";
-import { ToastContainer, toast } from 'react-toastify';
+import {auth, db} from "../firebase"
+import {addDoc, collection, doc, getDocs, onSnapshot, query} from "@firebase/firestore";
+import {signOut} from "firebase/auth";
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Contact from "../components/Contact";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import Notiflix from 'notiflix';
-import axios from 'axios';
-import { getFirestore, updateDoc,getDoc } from "firebase/firestore";
+import {getDoc, updateDoc} from "firebase/firestore";
 
 
 function Search()  {
@@ -219,6 +214,7 @@ function Search()  {
 ///PORÓWNYWARKA
     function addCompare(obj) {
         const data = localStorage.getItem("compare");
+        let notiTest = false;
 
         if (data === null) {
             console.log("pusta");
@@ -232,9 +228,39 @@ function Search()  {
             console.log("jest");
             let tempArray = JSON.parse(data); // Przekształć dane z localStorage na tablicę
             tempArray.push(obj); // Dodaj obj do tablicy
+            tempArray = tempArray.reduce((accumulator, currentObject, index) => {
+                // Check if the index is less than or equal to 3
+                if (index > 2){
+                    Notiflix.Notify.failure('Maksymalnie 3 pojazdy');
+                    notiTest = false;
+                }
+                if (index <= 2) {
+                    const duplicateObject = accumulator.find(
+                        (obj) => obj.id === currentObject.id
+                    );
+
+                    if (!duplicateObject) {
+                        notiTest = true;
+                        return [...accumulator, currentObject];
+                    }
+
+                    if (duplicateObject) {
+                        notiTest = false;
+                        Notiflix.Notify.failure('Pojazd już dodany do porównania');
+                        return accumulator;
+                    }
+                }
+                return accumulator;
+            }, []);
+            console.log("notiTest = ", notiTest)
+
+            if (notiTest){
+                Notiflix.Notify.success('Dodano do porównania');
+                notiTest = false;
+            }
+
             console.log(tempArray);
             localStorage.setItem("compare", JSON.stringify(tempArray)); // Zapisz zaktualizowaną tablicę w localStorage
-            Notiflix.Notify.success('Dodano do porównania');
 
         }
 
@@ -329,8 +355,6 @@ function Search()  {
                                 <option value="Hybryda">Hybryda</option>
                                 <option value="Inne">Inne</option>
                             </select>
-
-
                             <button className="button-search" type = "button" onClick={ZmianaPrzycisku1} style ={{display: visibility ? 'none' : 'block'}}>
                                 Szukaj
                             </button>
@@ -344,11 +368,8 @@ function Search()  {
                             >
                                 Porównaj
                             </button>
-
-
                         </div>
                     </div>
-
                 </form>
             </div>
 
@@ -378,10 +399,6 @@ function Search()  {
                                         >
                                             Porównaj
                                         </button>
-
-
-
-
                                 </div>
 
                                 <p><strong>Model: </strong>{car.Model}</p>

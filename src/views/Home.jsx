@@ -249,16 +249,10 @@ export default function Home(props){
             setOfferCars(carList);
             console.log("Działa");
             console.log("carList: ", carList)
+            console.log("offerCars: ", offerCars)
             carListRef.current = carList;
         }
     }, [carList]);
-
-
-
-
-
-
-
 
 
     return (
@@ -411,7 +405,7 @@ export default function Home(props){
                         FuelType={offerCars[0].Paliwo}
                     />
                 )}
-                {offerCars.length > 0 && (
+                {offerCars.length > 1 && (
                     <CarCard
                         ImageCar={offerCars[1].Zdje}
                         CarBrand={offerCars[1].Marka}
@@ -421,7 +415,7 @@ export default function Home(props){
                         FuelType={offerCars[1].Paliwo}
                     />
                 )}
-                {offerCars.length > 0 && (
+                {offerCars.length > 2 && (
                     <CarCard
                         ImageCar={offerCars[2].Zdje}
                         CarBrand={offerCars[2].Marka}
@@ -431,7 +425,7 @@ export default function Home(props){
                         FuelType={offerCars[2].Paliwo}
                     />
                 )}
-                {offerCars.length > 0 && (
+                {offerCars.length > 3 && (
                     <CarCard
                         ImageCar={offerCars[3].Zdje}
                         CarBrand={offerCars[3].Marka}
@@ -441,7 +435,7 @@ export default function Home(props){
                         FuelType={offerCars[3].Paliwo}
                     />
                 )}
-                {offerCars.length > 0 && (
+                {offerCars.length > 4 && (
                     <CarCard
                         ImageCar={offerCars[4].Zdje}
                         CarBrand={offerCars[4].Marka}
@@ -451,7 +445,7 @@ export default function Home(props){
                         FuelType={offerCars[4].Paliwo}
                     />
                 )}
-                {offerCars.length > 0 && (
+                {offerCars.length > 5 && (
                     <CarCard
                         ImageCar={offerCars[5].Zdje}
                         CarBrand={offerCars[5].Marka}
