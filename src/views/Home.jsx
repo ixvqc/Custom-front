@@ -244,15 +244,20 @@ export default function Home(props){
         getCarList();
     },[registerForm]);
 
+    const [testForOffer, setTestForOffer] = useState(true);
+
     useEffect(() => {
-        if (carListRef.current !== carList && carList.length > 0) {
+        if (carListRef.current !== carList && carList.length > 0 && testForOffer) {
             setOfferCars(carList);
             console.log("Działa");
-            console.log("carList: ", carList)
-            console.log("offerCars: ", offerCars)
+            console.log("carList: ", carList);
+            console.log("offerCars: ", offerCars);
             carListRef.current = carList;
+            setTestForOffer(false); // Update the state of testForOffer to false
+            console.log(testForOffer);
         }
-    }, [carList]);
+    }, [carList, testForOffer]);
+
 
 
     return (
