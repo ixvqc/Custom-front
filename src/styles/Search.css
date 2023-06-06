@@ -145,8 +145,11 @@
 
 }
 
-.car-image{
-    width: 15vw;
+.car-image-search{
+    width: 30vw;
+    max-height: 30vw;
+    margin-top: 1vw;
+    margin-left: 2vw;
     background: rgba(248, 248, 217);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
