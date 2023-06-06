@@ -63,12 +63,12 @@ const Compare = () => {
                             <tr key={index}>
 
                                 <img className="img-compare" src={car.Zdje}/>
-                                <td>Marka:{car.Marka}</td>
-                                <td>Model:{car.Model}</td>
-                                <td>Paliwo:{car.Paliwo}</td>
-                                <td> Rok: {car.Rok}</td>
-                                <td>Cena: {car.Cena}</td>
-                                <td>Przebieg: {car.Przebieg}</td>
+                                <p><strong>Marka: </strong>{car.Marka}</p>
+                                <p><strong>Model: </strong>{car.Model}</p>
+                                <p><strong>Paliwo:</strong> {car.Paliwo}</p>
+                                <p><strong>Rok: </strong>{car.Rok}r.</p>
+                                <p><strong>Cena: </strong>{car.Cena}zł</p>
+                                <p><strong>Przebieg: </strong>{car.Przebieg}km</p>
 
                                 <button
                                     onClick={()=> deleteCompare(index)}

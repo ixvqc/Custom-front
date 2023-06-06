@@ -146,12 +146,13 @@
 }
 
 .car-image{
-    width: 15vw;
+    width: 20vw;
     background: rgba(248, 248, 217);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    margin-left: 2vw;
 }
 .price-search{
     color: #fdd852;

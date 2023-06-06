@@ -42,8 +42,9 @@ export default function Review() {
         setVisibility2(!visibility2);
     }
 
-function onClicks() {
-    ZmianaPrzycisku2()
+
+
+    function onClicks() {
     setShowReview(true)
 
 
@@ -72,42 +73,43 @@ function onClicks() {
             {showReview ? (<>
                 <div className="review-main">
 
-                    <div className={"review-window"} id ={"offer-review-search"} style ={{display: visibility2 ? 'block' : 'none'}}>
-                        <textarea id = {"offer-review-text-search"} value={reviewText} onChange={(e) => setReviewText(e.target.value)}>
+
+                    <div className={"review-window"} id ={"offer-review-search"} >
+                        <textarea id = {"offer-review-text-search"}
+                                  value={reviewText}
+                                  onChange={(e) => setReviewText(e.target.value)}>
+
                             Napisz swoją recenzję tutaj
                         </textarea>
                     </div>
 
-                    <button className="button-x" onClick={()=> setShowReview(false)}>
+
+                {carList.map((car) => (
+
+                    <div className={"review"} key={car.id}> {/* Added key attribute */}
+                        <button id={"review-button-search"} className="button-review" type = "button"
+                                onClick={(event) => addField(event, car.id)}
+                               >
+                        </button>
+                    </div>
+
+
+                ))}
+                    <button className="button-contact-x" onClick={()=> setShowReview(false)}>
                         X
                     </button>
+
                 </div>
 
 
             </>) : (<>
-
-                {carList.map((car) => (
-                    <div className={"review"} key={car.id}> {/* Added key attribute */}
-
-
-                    <button id={"review-button-search"} className="button-review" type = "button"
-                            onClick={(event) => addField(event, car.id)}
-                            style ={{display: visibility2 ? 'block' : 'none'}}>
-
-                    Wyślij recenzję
-                </button>
-                        <button>elo</button>
-                    </div>
-                        ))}
+                <div>
                 <button className="button-review"
-                        type = "button" onClick={()=> onClicks()}
-                        style ={{display: visibility2 ? 'none' : 'block'}}>
-
+                        type = "button" onClick={()=> setShowReview(true)}>
                     Napisz recenzję
                 </button>
 
-
-
+                </div>
             </>)}
 
         </div>
