@@ -72,8 +72,6 @@ export default function Review() {
         <div>
             {showReview ? (<>
                 <div className="review-main">
-
-
                     <div className={"review-window"} id ={"offer-review-search"} >
                         <textarea id = {"offer-review-text-search"}
                                   value={reviewText}
@@ -82,7 +80,6 @@ export default function Review() {
                             Napisz swoją recenzję tutaj
                         </textarea>
                     </div>
-
 
                 {carList.map((car) => (
 
