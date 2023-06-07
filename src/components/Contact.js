@@ -1,6 +1,7 @@
 import React, {useContext, useRef, useState} from 'react'
 import '../styles/ContactRzeczoznawca.css';
 import emailjs from "emailjs-com";
+import Notiflix from 'notiflix';
 
 
 export default function Contact() {
@@ -12,8 +13,11 @@ export default function Contact() {
         emailjs.sendForm('gmail', 'template', e.target, 'axUsEV1FeXaVWVlLb')
             .then((result) => {
                 console.log(result.text);
+                Notiflix.Notify.success('Wysłano');
             }, (error) => {
                 console.log(error.text);
+                Notiflix.Notify.failure('Coś poszło nie tak');
+
             });
         e.target.reset()
     }

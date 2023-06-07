@@ -12,6 +12,7 @@ import { auth, firestore } from "../firebase";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Contact from "../components/Contact";
+import Review from "../components/Review";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import Notiflix from 'notiflix';
@@ -398,13 +399,18 @@ function Search()  {
                             </div>
                             <div className={"offer-text-search"}>
                                 <p><strong>Rok produkcji:</strong> {car.Rok}</p>
-                                <p className="price-search">Cena:{car.Cena}</p>
-                                <div className={"offer-text-search"} id ={"offer-review-search"} style ={{display: visibility2 ? 'block' : 'none'}}>
-                                    <textarea id = {"offer-review-text-search"} value={reviewText} onChange={(e) => setReviewText(e.target.value)}>Napisz swoją recenzję tutaj</textarea>
-                                </div>
+                                <p className="price-search">Cena:{car.Cena}zł</p>
+
+
+                                {/*<div className={"offer-text-search"} id ={"offer-review-search"} style ={{display: visibility2 ? 'block' : 'none'}}>*/}
+                                {/*    <textarea id = {"offer-review-text-search"} value={reviewText} onChange={(e) => setReviewText(e.target.value)}>Napisz swoją recenzję tutaj</textarea>*/}
+                                {/*</div>*/}
+
+
+
                             </div>
                             <div className={"offer-text-search"}>
-                                <p><strong>Przebieg:</strong> {car.Przebieg}</p>
+                                <p><strong>Przebieg:</strong> {car.Przebieg}km</p>
                                 <p><strong>Stan pojazdu:</strong> {car.Stan}</p>
                             </div>
                             <div className={"offer-text-search"}>
@@ -413,14 +419,14 @@ function Search()  {
                             </div>
 
                             <div className={"offer-text-search"}>
+                                    <Review/>
 
-
-                                <button id={"review-button-search"} className="button-search" type = "button" onClick={(event) => addField(event, car.id)} style ={{display: visibility2 ? 'block' : 'none'}}>
-                                    Wyślij recenzję
-                                </button>
-                                <button className="button-search" type = "button" onClick={ZmianaPrzycisku2} style ={{display: visibility2 ? 'none' : 'block'}}>
-                                    Napisz recenzję
-                                </button>
+                                {/*<button id={"review-button-search"} className="button-search" type = "button" onClick={(event) => addField(event, car.id)} style ={{display: visibility2 ? 'block' : 'none'}}>*/}
+                                {/*    Wyślij recenzję*/}
+                                {/*</button>*/}
+                                {/*<button className="button-search" type = "button" onClick={ZmianaPrzycisku2} style ={{display: visibility2 ? 'none' : 'block'}}>*/}
+                                {/*    Napisz recenzję*/}
+                                {/*</button>*/}
 
 
                             </div>
