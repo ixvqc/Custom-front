@@ -146,11 +146,12 @@
 }
 
 
-.car-image-search{
+.car-image-search {
     width: 30vw;
     max-height: 30vw;
     margin-top: 1vw;
     margin-left: 2vw;
+}
 
 .car-image{
     width: 20vw;

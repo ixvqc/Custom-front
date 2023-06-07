@@ -319,6 +319,9 @@ function Search()  {
                 <Link to={"/messages"} className="link-search">
                     wiadomości
                 </Link>
+                <Link to={"/favourites"} className="link-search">
+                    Ulubione
+                </Link>
 
                 <button className="logout-button" onClick={() => signOut(auth)}>logout</button>
 
@@ -480,7 +483,7 @@ function Search()  {
                            
 
                             
-                                    <Review/>
+
 
                                 {/*<button id={"review-button-search"} className="button-search" type = "button" onClick={(event) => addField(event, car.id)} style ={{display: visibility2 ? 'block' : 'none'}}>*/}
                                 {/*    Wyślij recenzję*/}

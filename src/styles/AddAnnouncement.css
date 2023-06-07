@@ -82,6 +82,7 @@
     margin-left: 2.7vw;
     padding-left: 16px;
     margin-top: 3vh;
+    margin-bottom: 1vh;
 
 }
 .choices-key-Add{
@@ -96,8 +97,8 @@
 }
 
 .text-choices-Add{
-    margin-left: 2.6vw;
-    padding-left:0.8vw;
+
+    margin-left: -3.6vw;
 }
 
 .titleAdd

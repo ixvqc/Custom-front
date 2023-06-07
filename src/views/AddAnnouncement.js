@@ -465,15 +465,9 @@ const AddAnnouncement = () => {
                     <a href="/AddAnnouncement">
                         <img src={autoHighlights}  className="choices-logo-Add"/>
                     </a>
-                    <a href="/AddAnnouncementMotor">
-                        <img src={moto}  className="choices-moto-Add"/>
-                    </a>
-                    <a href="/AddAnnouncementOther">
-                        <img src={key}  className="choices-key-Add"/><br />
-                    </a>
+
                     <text className="text-choices-Add">Osobowe</text>
-                    <text className="text-choices-Add">Motocykle</text>
-                    <text className="text-choices-Add">Inne</text>
+
                 </div>
                 <form onSubmit={handleSave}>
                     <div className="titleAdd">
