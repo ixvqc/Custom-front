@@ -17,15 +17,14 @@ const NavbarMain = () => {
 
             </div>
 
-            <Link to={"/login"} className="link">
-                Zaloguj się
-            </Link>
+
             <Link to={"/register"} className="link">
                 Rejestracja
             </Link>
+
             <button className="add-adv"
             >
-                <a href="/AddAnnouncement" className="link">Dodaj ogłoszenie +</a>
+                <a href="/Login" className="link">Zaloguj się</a>
             </button>
 
         </div>

@@ -8,6 +8,7 @@ import {signOut} from "firebase/auth";
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Contact from "../components/Contact";
+import Review from "../components/Review";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import Notiflix from 'notiflix';
@@ -461,6 +462,7 @@ function Search()  {
                                 <div className={"offer-text-search"}>
 
 
+
                                     <button id={"review-button-search"} className="button-search" type = "button" onClick={(event) => addField(event, car.id)} style ={{display: visibility2 ? 'block' : 'none'}}>
                                         Wyślij recenzję
                                     </button>
@@ -474,6 +476,18 @@ function Search()  {
 
 
                                 </div>
+
+                           
+
+                            
+                                    <Review/>
+
+                                {/*<button id={"review-button-search"} className="button-search" type = "button" onClick={(event) => addField(event, car.id)} style ={{display: visibility2 ? 'block' : 'none'}}>*/}
+                                {/*    Wyślij recenzję*/}
+                                {/*</button>*/}
+                                {/*<button className="button-search" type = "button" onClick={ZmianaPrzycisku2} style ={{display: visibility2 ? 'none' : 'block'}}>*/}
+                                {/*    Napisz recenzję*/}
+                                {/*</button>*/}
 
                                 {/*<div className={"offer-text-search"} style ={{display: reviewVis ? 'block' : 'none'}}>*/}
                                 {/*    {matchingReview && (*/}

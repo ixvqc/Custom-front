@@ -24,6 +24,9 @@ const NavbarLogin = () => {
             <Link to={"/user"} className="link">
                 Mój profil
             </Link>
+            <Link to={"/Contact"} className="link-search-compare">
+                Kontakt
+            </Link>
 
             <button className="logout" onClick={() => signOut(auth)}>logout</button>
 

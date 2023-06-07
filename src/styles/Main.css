@@ -101,30 +101,22 @@
     width:100%;
     margin-bottom: 3vh;
     margin-top:2vh;
-
+    display: flex;
+    flex-direction: column;
 
 }
 .choices-logo{
     height:5vh;
     width:4vw;
-    margin-left: 2.7vw;
-    padding-left: 16px;
     margin-top: 3vh;
+    margin-left: 2vw;
+
 
 }
-.choices-key{
-    height:4.2vh;
-    width:3.3vw;
-    margin-left: 57px;
-}
-.choices-moto{
-    height:5vh;
-    width:4vw;
-    margin-left: 62px;
-}
 .text-choices{
-    margin-left: 2.6vw;
-    padding-left:1vw;
+margin-bottom:2vh;
+margin-left: 1.8vw;
+
 }
 
 
@@ -209,12 +201,13 @@
 }
 
 .detailed-search{
-    padding-left: 10px ;
     color:black;
-    margin-top: 50px;
-    margin-left: 20px;
 
 }
+.detailed-search p {
+    margin-left:20px;
+}
+
 .popular-offers-text{
     margin-left: 70px;
     font-size: 30px;

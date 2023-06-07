@@ -59,7 +59,8 @@ export default function Home(props){
         Lokalizacja: "",
         Stan: "",
         Silnik: "",
-        Wypos: ""
+        Wypos: "",
+        Zdje: ""
     })
 
     function handleChange(event) {
@@ -277,17 +278,8 @@ export default function Home(props){
                                 handleClick(auto);
                                 hideCarsClick();
                             }} className="choices-logo"/>
-                            <img src={imageSrc === moto ? motoHighlights : moto} onClick={() => {
-                                handleClick(moto);
-                                hideMotorClick();
-                            }} className="choices-moto"/>
-                            <img src={imageSrc === key ? keyHighlights : key} onClick={() => {
-                                handleClick(key);
-                                hideOtherClick();
-                            }} className="choices-key"/><br/>
-                            <text className="text-choices">Osobowe</text>
-                            <text className="text-choices">Motocykle</text>
-                            <text className="text-choices">Inne</text>
+                            <p className="text-choices">Osobowe</p>
+
                         </div>
 
 
@@ -354,13 +346,14 @@ export default function Home(props){
 
 
                                 <Link to={"/Search"} className="detailed-search">
-                                    Szczegółowe wyszukiwanie
+                                    <p>Szczegółowe wyszukiwanie</p>
                                 </Link>
-                                <button className="button-search" type = "button" onClick={ZmianaPrzycisku1} style ={{display: visibility ? 'none' : 'block'}}>
+
+                                <button className="search" type = "button" onClick={ZmianaPrzycisku1} style ={{display: visibility ? 'none' : 'block'}}>
                                     Szukaj
                                 </button>
 
-                                <button className="button-search" type = "button" onClick={ZmianaPrzycisku1} style ={{display: visibility ? 'block' : 'none'}}>
+                                <button className="search" type = "button" onClick={ZmianaPrzycisku1} style ={{display: visibility ? 'block' : 'none'}}>
                                     Ukryj
                                 </button>
 

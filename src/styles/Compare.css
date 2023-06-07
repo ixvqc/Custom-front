@@ -59,6 +59,7 @@
     margin-top: 20vh;
     align-items: center;
     flex-direction: column;
+
 }
 
 .compare-window-first{
@@ -70,13 +71,16 @@
     margin-bottom:5vh;
 
 }
-.compare-window-first td{
-    display:flex;
-    flex-direction: column;
+.compare-window-first p {
+    display: flex;
     align-items: center;
-    margin-top:3vh;
-    border-bottom: 1px solid black;
+    margin-top: 3vh;
     font-size: 20px;
+
+
+}
+.compare-window-first strong{
+    margin-right:10px;
 }
 
 .compare-window-first button{
@@ -95,6 +99,7 @@
 
 }
 .img-compare{
-    width:30vw;
-    height:18vh;
+    width:23vw;
+    height:23vh;
+    margin-right:3vw;
 }

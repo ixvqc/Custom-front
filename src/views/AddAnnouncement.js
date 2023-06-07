@@ -352,6 +352,8 @@ const AddAnnouncement = () => {
                     await setDoc(doc(firestore, "Announcement", docRef.id), { act: { [i]: imageUrl } }, { merge: true });
                 }
             }
+
+
             console.log('Dane zostały dodane do Firestore z ID: ', docRef.id);
             navigate("/");
         } catch (e) {
@@ -408,6 +410,48 @@ const AddAnnouncement = () => {
 
 
 
+
+
+    const [prodYearError, setProdYearError] = useState('');
+
+
+    const validateForm = () => {
+        // Pobierz wartość z pola input
+        const prodYear = parseInt(prodYearRef.current.value);
+
+
+        let isValid = true;
+
+        if (prodYear < 1900 || prodYear > 2023) {
+            setProdYearError('Rok produkcji powinien być między 1900 a 2023');
+            isValid = false;
+        } else {
+            setProdYearError('');
+        }
+
+
+
+
+
+        return isValid;
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // Wykonaj walidację formularza przed wysłaniem
+        const isFormValid = validateForm();
+
+        if (isFormValid) {
+            // Przetwarzaj dane formularza
+        }
+    };
+
+
+
+
+
+
     return (
         <div className="background-Add">
             <nav >
@@ -437,22 +481,24 @@ const AddAnnouncement = () => {
                     </div>
 
                     <div className="ProdYearAdd">
-                        <input required="" type="text" className="inputAvAddPrice" ref={prodYearRef}/>
+                        <input required type="text" className="inputAvAddPrice" ref={markaRef}/>
                         <span className="highlightAvAddPrice"></span>
                         <span className="barAvAddPrice"></span>
                         <label className="labelAvAddPrice" >Marka</label>
+
                     </div>
 
                     <div className="MileageAdd">
-                        <input required="" type="text" className="inputAvAddPrice" ref={modelRef}/>
+                        <input required type="text" className="inputAvAddPrice" ref={modelRef}/>
                         <span className="highlightAvAddPrice"></span>
                         <span className="barAvAddPrice"></span>
                         <label className="labelAvAddPrice" >Model</label>
+
                     </div>
 
 
                     <div className="addtitleAdd">
-                        <input required="" type="text" className="inputAvAdd" ref={markaRef}/>
+                        <input required type="text" className="inputAvAdd" />
                         <span className="highlightAvAdd"></span>
                         <span className="barAvAdd"></span>
                         <label className="labelAvAdd" >Tytuł Ogłoszenia</label>
@@ -462,7 +508,7 @@ const AddAnnouncement = () => {
                         Cena
                     </div>
                     <div className="PriceAdd">
-                        <input required="" type="text" className="inputAvAddPrice" ref={priceRef}/>
+                        <input required type="number" className="inputAvAddPrice" ref={priceRef}/>
                         <span className="highlightAvAddPrice"></span>
                         <span className="barAvAddPrice"></span>
                         <label className="labelAvAddPrice" >Cena</label>
@@ -475,21 +521,30 @@ const AddAnnouncement = () => {
 
 
                     <div className="ProdYearAdd">
-                        <input required="" type="text" className="inputAvAddPrice" ref={prodYearRef}/>
+                        <input
+                            required
+                            type="number"
+                            min="1900"
+                            max="2030"
+                            className="inputAvAddPrice"
+                            ref={prodYearRef}
+                        />
                         <span className="highlightAvAddPrice"></span>
                         <span className="barAvAddPrice"></span>
-                        <label className="labelAvAddPrice" >Rok produkcji</label>
+                        <label className="labelAvAddPrice">Rok produkcji</label>
+                        {prodYearError && <p className="error">{prodYearError}</p>}
                     </div>
 
                     <div className="MileageAdd">
-                        <input required="" type="text" className="inputAvAddPrice" ref={mileageRef}/>
+                        <input required type="number" className="inputAvAddPrice" ref={mileageRef}/>
                         <span className="highlightAvAddPrice"></span>
                         <span className="barAvAddPrice"></span>
                         <label className="labelAvAddPrice" >Przebieg</label>
+
                     </div>
 
                     <div className="VinAdd">
-                        <input required="" type="text" className="inputAvAddPrice" ref={VINRef}/>
+                        <input required="" type="number" className="inputAvAddPrice" ref={VINRef}/>
                         <span className="highlightAvAddPrice"></span>
                         <span className="barAvAddPrice"></span>
                         <label className="labelAvAddPrice" >VIN</label>
@@ -562,7 +617,7 @@ const AddAnnouncement = () => {
                     </div>
 
                     <div className="PowerAdd">
-                        <input required="" type="text" className="inputAvAddPrice" ref={powerRef}/>
+                        <input required type="number" className="inputAvAddPrice" ref={powerRef}/>
                         <span className="highlightAvAddPrice"></span>
                         <span className="barAvAddPrice"></span>
                         <label className="labelAvAddPrice" >Moc</label>
@@ -647,13 +702,13 @@ const AddAnnouncement = () => {
                     </div>
 
                     <div className="PowerAdd">
-                        <input required="" type="date" className="inputAvAddPrice" ref={DateRef}/>
+                        <input required type="date" className="inputAvAddPrice" ref={DateRef}/>
                         <span className="barAvAddPrice"></span>
                         <label className="labelAvAddPrice" >Data pierwszej rejestracji</label>
                     </div>
 
                     <div className="PowerAdd">
-                        <input required="" type="text" className="inputAvAddPrice" ref={KrajRef}/>
+                        <input required type="text" className="inputAvAddPrice" ref={KrajRef}/>
                         <span className="highlightAvAddPrice"></span>
                         <span className="barAvAddPrice"></span>
                         <label className="labelAvAddPrice" >Kraj pochodzenia</label>
@@ -715,21 +770,21 @@ const AddAnnouncement = () => {
                     </div>
 
                     <div className="ProdYearAdd">
-                        <input required="" type="text" className="inputAvAddPrice" ref={NameRef}/>
+                        <input required type="text" className="inputAvAddPrice" ref={NameRef}/>
                         <span className="highlightAvAddPrice"></span>
                         <span className="barAvAddPrice"></span>
                         <label className="labelAvAddPrice" >Imie</label>
                     </div>
 
                     <div className="MileageAdd">
-                        <input required="" type="number" className="inputAvAddPrice" ref={PhoneRef}/>
+                        <input required type="number" className="inputAvAddPrice" ref={PhoneRef}/>
                         <span className="highlightAvAddPrice"></span>
                         <span className="barAvAddPrice"></span>
                         <label className="labelAvAddPrice" >Nr telefonu</label>
                     </div>
 
                     <div className="VinAdd">
-                        <input required="" type="text" className="inputAvAddPrice" ref={emailRef}/>
+                        <input required type="text" className="inputAvAddPrice" ref={emailRef}/>
                         <span className="highlightAvAddPrice"></span>
                         <span className="barAvAddPrice"></span>
                         <label className="labelAvAddPrice" >Lokalizacja</label>
@@ -782,7 +837,7 @@ const AddAnnouncement = () => {
                         </div>
                     </div>
 
-                    <button className="button-AddAdvAdd" type="submit" >
+                    <button className="button-AddAdvAdd" type="submit" onSubmit="handleSave"  >
                         Dodaj ogłoszenie
                     </button>
 
