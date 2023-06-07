@@ -46,6 +46,10 @@ const Compare = () => {
                 <Link to={"/messages"} className="link-search-compare">
                     wiadomości
                 </Link>
+                <Link to={"/Contact"} className="link-search-compare">
+                    Kontakt
+                </Link>
+
 
                 <button className="logout-button" onClick={() => signOut(auth)}>logout</button>
 

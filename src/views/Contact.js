@@ -27,23 +27,21 @@ function Contact(props) {
                         </Link>
                     </div>
 
-                    <Link to={"/login"} className="link-Contact">
-                        Zaloguj się
+                    <Link to={"/user"} className="link-search-compare">
+                        Moje konto
                     </Link>
-                    <Link to={"/register"} className="link-Contact">
-                        Rejestracja
-                    </Link>
-                    <Link to={"/mess"} className="link-Contact">
+                    <Link to={"/messages"} className="link-search-compare">
                         wiadomości
                     </Link>
-                    <Link to={"/contact"} className="link-Contact">
+                    <Link to={"/Contact"} className="link-search-compare">
                         Kontakt
                     </Link>
 
-                    <button onClick={() => signOut(auth)}>logout</button>
 
-                    <button className="add-adv-Contact">
-                        <a href="/AddAnnouncement" className="link-Contact">Dodaj ogłoszenie +</a>
+                    <Link to="/"><button className="logout-button" onClick={() => signOut(auth)}>logout</button></Link>
+
+                    <button className="add-adv-search-compare">
+                        <Link to={"/AddAnnouncement"} className="link-search-compare">Dodaj ogłoszenie + </Link>
                     </button>
 
                 </div>

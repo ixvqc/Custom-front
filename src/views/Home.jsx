@@ -59,7 +59,8 @@ export default function Home(props){
         Lokalizacja: "",
         Stan: "",
         Silnik: "",
-        Wypos: ""
+        Wypos: "",
+        Zdje: ""
     })
 
     function handleChange(event) {

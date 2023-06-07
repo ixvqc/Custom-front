@@ -13,9 +13,8 @@ import AddAnnouncementOther from "./views/AddAnnouncementOther";
 import Contact from "./views/Contact";
 import OfferHistory from "./views/OfferHistory";
 import useToken from './useToken'
-
 import Favourites from "./views/favourites";
-
+import ForgotPassword from "./views/ForgotPassword";
 
 
 import Search from './views/Search'
@@ -73,6 +72,8 @@ return (
                 <Route path="/favourites" element = {<Favourites/>}/>
                 <Route path="/compare" element = {<Compare/>}/>
                 <Route path="/OfferHistory" element = {<OfferHistory/>}/>
+                <Route path="ForgotPassword" element={<ForgotPassword />} />
+
 
 
             </Route>

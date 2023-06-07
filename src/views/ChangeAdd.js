@@ -197,7 +197,7 @@ function ChangeAdd(props) {
                         </button>
                     </Link>
                     <Link to="/changeadd">
-                        <button className="button2user-OfferHistory">
+                        <button className="button4user-OfferHistory">
                             Ogłoszenia
                         </button>
                     </Link>
@@ -207,7 +207,7 @@ function ChangeAdd(props) {
                         </button>
                     </Link>
                     <Link to="/offerHistory">
-                        <button className="button4user-OfferHistory">
+                        <button className="button2user-OfferHistory">
                             Historia
                         </button>
                     </Link>
