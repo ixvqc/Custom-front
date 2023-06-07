@@ -1,23 +1,18 @@
-import {useNavigate,Link} from "react-router-dom";
-import {useState, useEffect} from "react";
+import {Link, useNavigate} from "react-router-dom";
+import React, {useEffect, useRef, useState} from "react";
 import '../styles/Search.css';
 import logo from '../assets/img/logov2.png';
-import React, { useRef } from "react";
-import firebase from "firebase/compat/app";
-import { db, messaging} from "../firebase"
-import {getDocs, collection,addDoc, doc, query, where, limit, addDo, onSnapshot} from "@firebase/firestore";
-import {signInWithEmailAndPassword, signOut} from "firebase/auth";
-import {getToken, onMessage } from "firebase/messaging";
-import { auth, firestore } from "../firebase";
-import { ToastContainer, toast } from 'react-toastify';
+import {auth, db} from "../firebase"
+import {addDoc, collection, doc, getDocs, onSnapshot, query} from "@firebase/firestore";
+import {signOut} from "firebase/auth";
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Contact from "../components/Contact";
 import Review from "../components/Review";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import Notiflix from 'notiflix';
-import axios from 'axios';
-import { getFirestore, updateDoc,getDoc } from "firebase/firestore";
+import {getDoc, updateDoc} from "firebase/firestore";
 
 
 function Search()  {
@@ -25,10 +20,14 @@ function Search()  {
     const ChangeRokRef = useRef();
     const [isFavourite, setIsFavourite] = useState(false);
     const [carList,setCarList] = useState([]);
+    const [reviewList, setReviewList] = useState([]);
     const carCollectionRef = collection(db, "Search-test");
     const userChatsTestRef = collection(db, "userChatsTest");
+    const reviewRef = collection(db, "Review");
+    const [documents, setDocuments] = useState([]);
     const [visibility, setVisibility] = useState(false);
     const [visibility2, setVisibility2] = useState(false);
+    const [reviewVis, setReviewVis] = useState(false);
     const [carID, setCarID] = useState('');
     const [reviewText, setReviewText] = useState("");
 
@@ -67,6 +66,10 @@ function Search()  {
     }
     const ZmianaPrzycisku2 = () => {
         setVisibility2(!visibility2);
+    }
+
+    const ViewReview = () => {
+        setReviewVis(!reviewVis);
     }
 
 //////ULUBIONE
@@ -113,7 +116,7 @@ function Search()  {
             console.error('Error adding document: ', error);
         }
     };
-   
+
 
     localStorage.setItem("CurrentTime", Date())
 
@@ -217,9 +220,28 @@ function Search()  {
 
     console.log(carList)
 
+    ///WYŚWIETLANIE RECENZJI
+
+
+    useEffect(() => {
+        const getReviewList = async () => {
+            const refData = await getDocs(reviewRef);
+            const refFilteredData = refData.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id,
+            }));
+            console.log("refFilteredData = ", refFilteredData)
+            setReviewList(refFilteredData)
+        }
+        getReviewList()
+    },[]);
+
+
+
 ///PORÓWNYWARKA
     function addCompare(obj) {
         const data = localStorage.getItem("compare");
+        let notiTest = false;
 
         if (data === null) {
             console.log("pusta");
@@ -233,9 +255,39 @@ function Search()  {
             console.log("jest");
             let tempArray = JSON.parse(data); // Przekształć dane z localStorage na tablicę
             tempArray.push(obj); // Dodaj obj do tablicy
+            tempArray = tempArray.reduce((accumulator, currentObject, index) => {
+                // Check if the index is less than or equal to 3
+                if (index > 2){
+                    Notiflix.Notify.failure('Maksymalnie 3 pojazdy');
+                    notiTest = false;
+                }
+                if (index <= 2) {
+                    const duplicateObject = accumulator.find(
+                        (obj) => obj.id === currentObject.id
+                    );
+
+                    if (!duplicateObject) {
+                        notiTest = true;
+                        return [...accumulator, currentObject];
+                    }
+
+                    if (duplicateObject) {
+                        notiTest = false;
+                        Notiflix.Notify.failure('Pojazd już dodany do porównania');
+                        return accumulator;
+                    }
+                }
+                return accumulator;
+            }, []);
+            console.log("notiTest = ", notiTest)
+
+            if (notiTest){
+                Notiflix.Notify.success('Dodano do porównania');
+                notiTest = false;
+            }
+
             console.log(tempArray);
             localStorage.setItem("compare", JSON.stringify(tempArray)); // Zapisz zaktualizowaną tablicę w localStorage
-            Notiflix.Notify.success('Dodano do porównania');
 
         }
 
@@ -330,8 +382,6 @@ function Search()  {
                                 <option value="Hybryda">Hybryda</option>
                                 <option value="Inne">Inne</option>
                             </select>
-
-
                             <button className="button-search" type = "button" onClick={ZmianaPrzycisku1} style ={{display: visibility ? 'none' : 'block'}}>
                                 Szukaj
                             </button>
@@ -345,80 +395,91 @@ function Search()  {
                             >
                                 Porównaj
                             </button>
-
-
                         </div>
                     </div>
-
                 </form>
             </div>
 
 
             <div style ={{display: visibility ? 'block' : 'none'}}>
-                {carList.map((car) => (
-                    <div className={"offer-search"} key={car.id}> {/* Added key attribute */}
-                        <div className={"offer-image-search"}>
-                            <img className= {"car-image"} src={car.Zdje}/>
-                        </div>
+                {carList.map((car) => {
+                    const matchingReview = reviewList.find((review) => review.carID === car.id);
 
-                        <div className={"offer-data-search"}>
+                    return (
+                        <div className={"offer-text-search"} key={car.id}>
+                            <div className={"offer-image-search"}>
+                                <img className= {"car-image-search"} src={car.Zdje}/>
+                            </div>
 
-                            <div>
+                            <div className={"offer-data-search"}>
 
-
-                                <div className="compare">
-
-                                <p className="car-name-search">{car.Marka}</p>
-
-                                        <Contact />
-
-                                        <button className="button-fav-adv" onClick={() => { handleButtonClick(car.id);  }}>Dodaj do ulubionych</button>
-
-                                        <button className="button-compare-adv"
-                                            onClick={()=> addCompare(car)}
-                                        >
-                                            Porównaj
-                                        </button>
+                                <div>
 
 
+                                    <div className="compare">
+
+                                    <p className="car-name-search">{car.Marka}</p>
+
+                                            <Contact />
+
+                                            <button className="button-fav-adv" onClick={() => { handleButtonClick(car.id);  }}>Dodaj do ulubionych</button>
+
+                                            <button className="button-compare-adv"
+                                                onClick={()=> addCompare(car)}
+                                            >
+                                                Porównaj
+                                            </button>
+                                    </div>
+
+                                    <p><strong>Model: </strong>{car.Model}</p>
+
+                                </div>
+
+                                <div className={"offer-text-search"}>
+                                    <p><strong>Kraj pochodzenia:</strong> {car.Kraj}</p>
+                                    <p><strong>Lokalizacja:</strong> {car.Lokalizacja}</p>
+                                </div>
+                                <div className={"offer-text-search"}>
+                                    <p><strong>Typ nadwozia:</strong> {car.Nadwozie}</p>
+                                    <p><strong>Paliwo:</strong> {car.Paliwo}</p>
+                                </div>
+                                <div className={"offer-text-search"}>
+                                    <p><strong>Rok produkcji:</strong> {car.Rok}</p>
+                                    <p className="price-search">Cena:{car.Cena}</p>
+                                    <div className={"offer-text-search"} id ={"offer-review-search"} style ={{display: visibility2 ? 'block' : 'none'}}>
+                                        <textarea id = {"offer-review-text-search"} value={reviewText} onChange={(e) => setReviewText(e.target.value)}>Napisz swoją recenzję tutaj</textarea>
+                                    </div>
+                                </div>
+                                <div className={"offer-text-search"}>
+                                    <p><strong>Przebieg:</strong> {car.Przebieg}</p>
+                                    <p><strong>Stan pojazdu:</strong> {car.Stan}</p>
+                                </div>
+                                <div className={"offer-text-search"}>
+                                    <p><strong>Silnik:</strong> {car.Silnik}</p>
+                                    <p><strong>Wyposażenie dodatkowe:</strong> {car.Wypos}</p>
+                                </div>
+
+                                <div className={"offer-text-search"}>
+
+
+
+                                    <button id={"review-button-search"} className="button-search" type = "button" onClick={(event) => addField(event, car.id)} style ={{display: visibility2 ? 'block' : 'none'}}>
+                                        Wyślij recenzję
+                                    </button>
+                                    <button className="button-search" type = "button" onClick={ZmianaPrzycisku2} style ={{display: visibility2 ? 'none' : 'block'}}>
+                                        Napisz recenzję
+                                    </button>
+
+                                    <button className="button-search" type = "button" onClick={ViewReview}>
+                                        Zobacz recenzje
+                                    </button>
 
 
                                 </div>
 
-                                <p><strong>Model: </strong>{car.Model}</p>
+                           
 
-                            </div>
-
-                            <div className={"offer-text-search"}>
-                                <p><strong>Kraj pochodzenia:</strong> {car.Kraj}</p>
-                                <p><strong>Lokalizacja:</strong> {car.Lokalizacja}</p>
-                            </div>
-                            <div className={"offer-text-search"}>
-                                <p><strong>Typ nadwozia:</strong> {car.Nadwozie}</p>
-                                <p><strong>Paliwo:</strong> {car.Paliwo}</p>
-                            </div>
-                            <div className={"offer-text-search"}>
-                                <p><strong>Rok produkcji:</strong> {car.Rok}</p>
-                                <p className="price-search">Cena:{car.Cena}zł</p>
-
-
-                                {/*<div className={"offer-text-search"} id ={"offer-review-search"} style ={{display: visibility2 ? 'block' : 'none'}}>*/}
-                                {/*    <textarea id = {"offer-review-text-search"} value={reviewText} onChange={(e) => setReviewText(e.target.value)}>Napisz swoją recenzję tutaj</textarea>*/}
-                                {/*</div>*/}
-
-
-
-                            </div>
-                            <div className={"offer-text-search"}>
-                                <p><strong>Przebieg:</strong> {car.Przebieg}km</p>
-                                <p><strong>Stan pojazdu:</strong> {car.Stan}</p>
-                            </div>
-                            <div className={"offer-text-search"}>
-                                <p><strong>Silnik:</strong> {car.Silnik}</p>
-                                <p><strong>Wyposażenie dodatkowe:</strong> {car.Wypos}</p>
-                            </div>
-
-                            <div className={"offer-text-search"}>
+                            
                                     <Review/>
 
                                 {/*<button id={"review-button-search"} className="button-search" type = "button" onClick={(event) => addField(event, car.id)} style ={{display: visibility2 ? 'block' : 'none'}}>*/}
@@ -428,18 +489,29 @@ function Search()  {
                                 {/*    Napisz recenzję*/}
                                 {/*</button>*/}
 
+                                {/*<div className={"offer-text-search"} style ={{display: reviewVis ? 'block' : 'none'}}>*/}
+                                {/*    {matchingReview && (*/}
+                                {/*        <div className={"offer-text-search"}>*/}
+                                {/*            <p><strong>Recenzja: </strong> {matchingReview.review}</p>*/}
+                                {/*        </div>*/}
+                                {/*    )}*/}
+                                {/*</div>*/}
+
+                                <div className={"offer-text-search"} style ={{display: reviewVis ? 'block' : 'none'}}>
+                                    {reviewList
+                                        .filter((review) => review.carID === car.id)
+                                        .map((matchingReview) => (
+                                            <div key={matchingReview.id} className={"offer-text-search"}>
+
+                                                <p><strong>Recenzja: </strong>{matchingReview.review}</p>
+                                            </div>
+                                        ))}
+                                </div>
 
                             </div>
                         </div>
-
-
-
-                        
-
-
-                    </div>
-
-                ))}
+                    );
+                })}
 
             </div>
 
