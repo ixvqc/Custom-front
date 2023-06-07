@@ -5,18 +5,24 @@ import Add from "../img/addAvatar.png";
 import logo from '../assets/img/logov2.png';
 import Notiflix from 'notiflix';
 import PasswordChecklist from "react-password-checklist"
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, updateProfile} from "firebase/auth";
 import { auth, db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 import { useReducer } from 'react';
+import {NotificationContainer, NotificationManager} from "react-notifications";
+import 'react-notifications/lib/notifications.css';
 
 const Register = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [password, setPassword] = useState("")
+  const [success, setSuccess] = useState(false);
+  const [email, setEmail] = useState("");
+
+
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -25,6 +31,13 @@ const Register = () => {
     const email = e.target[1].value;
     const password = e.target[2].value;
     const file = e.target[3].files[0];
+
+    if (!file) {
+      setErr(true);
+      setLoading(false);
+      NotificationManager.error('Proszę dodać zdjęcie', 'Błąd');
+      return;
+    }
 
     try {
       //Create user
@@ -52,17 +65,23 @@ const Register = () => {
 
             //create empty user chats on firestore
             await setDoc(doc(db, "userChats", res.user.uid), {});
+
+            setSuccess(true);
+            NotificationManager.success('Pomyślnie zakończono rejestrację', 'Sukces');
+
             navigate("/");
           } catch (err) {
             console.log(err);
             setErr(true);
             setLoading(false);
+            NotificationManager.error('Coś poszło nie tak', 'Błąd');
           }
         });
       });
     } catch (err) {
       setErr(true);
       setLoading(false);
+      NotificationManager.error('Taki adres email jest już używany', 'Błąd');
     }
   };
 
@@ -82,6 +101,7 @@ const Register = () => {
             <div className="username-container-register">
               <input required type="text" placeholder="nazwa użytkownika"
                      className="email-input-register"
+                     onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="email-container-register">
@@ -115,14 +135,14 @@ const Register = () => {
               </div>
             </label>
             <button className="button-register" disabled={loading}> Zarejestruj się</button>
-            {loading && "Poczekaj chwilę "}
-            {err && <span>Coś poszło nie tak</span>}
+
 
           </form>
           <p className="text-no-password1">
             Masz już konto? <Link to="/login" className="text-no-password">Zaloguj się</Link>
           </p>
         </div>
+        <NotificationContainer />
       </div>
   );
 };
