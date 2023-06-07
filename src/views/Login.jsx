@@ -59,7 +59,7 @@ const Login = () => {
               Zaloguj się
             </button>
 
-            <a href="http://localhost:3000" className="text-no-password-login">
+            <a href="/ForgotPassword" className="text-no-password-login">
               Nie pamiętam hasła
             </a>
             <div className="for-register-login">
